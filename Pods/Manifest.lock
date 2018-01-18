@@ -1,0 +1,43 @@
+PODS:
+  - Alamofire (4.5.1)
+  - AlamofireImage (3.3.0):
+    - Alamofire (~> 4.5)
+  - Arrow (4.0.0)
+  - Digger (0.0.5)
+  - Hue (3.0.0)
+  - KRActivityIndicatorView (2.1.1)
+  - MKSpinner (1.4)
+  - SnapKit (4.0.0)
+  - SwiftMessages (4.1.0)
+  - SwiftyJSON (4.0.0)
+  - VGPlayer (0.2.0):
+    - SnapKit (~> 4.0.0)
+
+DEPENDENCIES:
+  - Alamofire
+  - AlamofireImage
+  - Arrow
+  - Digger
+  - Hue
+  - KRActivityIndicatorView
+  - MKSpinner
+  - SwiftMessages
+  - SwiftyJSON
+  - VGPlayer
+
+SPEC CHECKSUMS:
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  AlamofireImage: 2e784dc5d00f04903a52c1d169181469c805c3df
+  Arrow: cc300fcca7dc409e0d47c27df1be7c0bcc909f9f
+  Digger: c474bde76a91e0a36f12101c5dfe7e86774b15d3
+  Hue: b8fe1e43eef13631331eebecb2198b68e2622f95
+  KRActivityIndicatorView: fa5df9f4cf039651ad8b0f9c11c3159d1e19299f
+  MKSpinner: 342cc7f8fbb365dd139a8ad28a0a987cca440a3a
+  SnapKit: a42d492c16e80209130a3379f73596c3454b7694
+  SwiftMessages: 1bacc783c8f10bdfdc57c14860cae8a1f1fa6591
+  SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
+  VGPlayer: a1787135559aa3b9201ebdc733ee283315492289
+
+PODFILE CHECKSUM: 1bcd50841a9974e63a4b1a4a6e3e5b2ecb91e9a4
+
+COCOAPODS: 1.3.1

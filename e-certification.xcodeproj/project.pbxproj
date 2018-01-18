@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1345768E2010F03800B0E2C6 /* UISideMenuNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1345768B2010F03700B0E2C6 /* UISideMenuNavigationController.swift */; };
+		1345768F2010F03800B0E2C6 /* SideMenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1345768C2010F03700B0E2C6 /* SideMenuManager.swift */; };
+		134576902010F03800B0E2C6 /* SideMenuTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1345768D2010F03700B0E2C6 /* SideMenuTransition.swift */; };
+		134576922010F49100B0E2C6 /* RSlideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134576912010F49100B0E2C6 /* RSlideMenu.swift */; };
+		134576942011025300B0E2C6 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134576932011025300B0E2C6 /* MenuCell.swift */; };
+		1345769620110F5C00B0E2C6 /* LatihanListSoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1345769520110F5C00B0E2C6 /* LatihanListSoalVC.swift */; };
 		1347F4DD200F99D10023B3B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347F4DC200F99D10023B3B8 /* AppDelegate.swift */; };
 		1347F4DF200F99D10023B3B8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347F4DE200F99D10023B3B8 /* ViewController.swift */; };
 		1347F4E2200F99D20023B3B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1347F4E0200F99D20023B3B8 /* Main.storyboard */; };
@@ -46,6 +52,12 @@
 
 /* Begin PBXFileReference section */
 		00752B244310665ED3A92153 /* Pods-e-certification.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-e-certification.release.xcconfig"; path = "Pods/Target Support Files/Pods-e-certification/Pods-e-certification.release.xcconfig"; sourceTree = "<group>"; };
+		1345768B2010F03700B0E2C6 /* UISideMenuNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UISideMenuNavigationController.swift; sourceTree = "<group>"; };
+		1345768C2010F03700B0E2C6 /* SideMenuManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuManager.swift; sourceTree = "<group>"; };
+		1345768D2010F03700B0E2C6 /* SideMenuTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuTransition.swift; sourceTree = "<group>"; };
+		134576912010F49100B0E2C6 /* RSlideMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSlideMenu.swift; sourceTree = "<group>"; };
+		134576932011025300B0E2C6 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
+		1345769520110F5C00B0E2C6 /* LatihanListSoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatihanListSoalVC.swift; sourceTree = "<group>"; };
 		1347F4D9200F99D10023B3B8 /* e-certification.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "e-certification.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1347F4DC200F99D10023B3B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1347F4DE200F99D10023B3B8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -98,6 +110,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		134576832010EFFF00B0E2C6 /* SliderMenu */ = {
+			isa = PBXGroup;
+			children = (
+				134576912010F49100B0E2C6 /* RSlideMenu.swift */,
+				1345768C2010F03700B0E2C6 /* SideMenuManager.swift */,
+				1345768D2010F03700B0E2C6 /* SideMenuTransition.swift */,
+				1345768B2010F03700B0E2C6 /* UISideMenuNavigationController.swift */,
+			);
+			path = SliderMenu;
+			sourceTree = "<group>";
+		};
 		1347F4D0200F99D10023B3B8 = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +225,7 @@
 		1347F501200F9A8E0023B3B8 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				134576832010EFFF00B0E2C6 /* SliderMenu */,
 				1347F502200F9A8E0023B3B8 /* DesignableUITextField */,
 				1347F504200F9A8E0023B3B8 /* ExternalView */,
 			);
@@ -236,6 +260,7 @@
 				1347F51E200F9B590023B3B8 /* DetailMateriVideoVC.swift */,
 				1347F51C200F9B590023B3B8 /* LatihanVC.swift */,
 				13F1B523200FC80D005EC232 /* LatihanInfoVC.swift */,
+				1345769520110F5C00B0E2C6 /* LatihanListSoalVC.swift */,
 				1347F51B200F9B590023B3B8 /* MenuLatihanVC.swift */,
 			);
 			path = Controller;
@@ -257,6 +282,7 @@
 				1347F522200F9B590023B3B8 /* NotifCell.swift */,
 				1347F523200F9B590023B3B8 /* JadwalCell.swift */,
 				13F1B521200FC65E005EC232 /* LatihanCell.swift */,
+				134576932011025300B0E2C6 /* MenuCell.swift */,
 			);
 			path = TableView;
 			sourceTree = "<group>";
@@ -458,12 +484,18 @@
 				1347F52E200F9B590023B3B8 /* LatihanVC.swift in Sources */,
 				1347F507200F9A8E0023B3B8 /* Config.swift in Sources */,
 				1347F534200F9B590023B3B8 /* MenuCVCell.swift in Sources */,
+				1345769620110F5C00B0E2C6 /* LatihanListSoalVC.swift in Sources */,
+				134576922010F49100B0E2C6 /* RSlideMenu.swift in Sources */,
+				134576902010F03800B0E2C6 /* SideMenuTransition.swift in Sources */,
 				1347F537200F9B590023B3B8 /* SignInVC.swift in Sources */,
 				1347F531200F9B590023B3B8 /* MateriCell.swift in Sources */,
 				1347F532200F9B590023B3B8 /* NotifCell.swift in Sources */,
 				13F1B522200FC65F005EC232 /* LatihanCell.swift in Sources */,
+				1345768E2010F03800B0E2C6 /* UISideMenuNavigationController.swift in Sources */,
 				1347F508200F9A8E0023B3B8 /* Helper.swift in Sources */,
+				1345768F2010F03800B0E2C6 /* SideMenuManager.swift in Sources */,
 				1347F52A200F9B590023B3B8 /* NewsDetailVC.swift in Sources */,
+				134576942011025300B0E2C6 /* MenuCell.swift in Sources */,
 				1347F52D200F9B590023B3B8 /* MenuLatihanVC.swift in Sources */,
 				13F1B524200FC80D005EC232 /* LatihanInfoVC.swift in Sources */,
 				1347F515200F9A8E0023B3B8 /* AlertDialogView.swift in Sources */,

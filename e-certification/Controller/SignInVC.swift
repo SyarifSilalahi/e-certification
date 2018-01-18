@@ -18,6 +18,10 @@ class SignInVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
+        //statusbar
+        let app = UIApplication.shared
+        app.isStatusBarHidden = false
+        app.statusBarStyle = .lightContent
         // Do any additional setup after loading the view.
         self.imagesBackground()
     }

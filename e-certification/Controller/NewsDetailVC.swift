@@ -22,6 +22,9 @@ class NewsDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //statusbar
+        let app = UIApplication.shared
+        app.statusBarStyle = .lightContent
         webContent.loadHTMLString("<html><body><p>\(content)</p></body></html>", baseURL: nil)
         // Do any additional setup after loading the view.
     }

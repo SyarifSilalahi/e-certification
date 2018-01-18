@@ -1,21 +1,15 @@
 //
-//  MenuLatihanVC.swift
+//  LatihanListSoalVC.swift
 //  e-certification
 //
-//  Created by Syarif on 1/13/18.
+//  Created by Syarif on 1/19/18.
 //  Copyright © 2018 infovesta. All rights reserved.
 //
 
-/*
- buat backup
- soalnya di ganti jadi class "LatihanListSoalVC"
- nanti delete aja
- */
-
 import UIKit
 
-class MenuLatihanVC: UIViewController {
-    
+class LatihanListSoalVC: UIViewController {
+
     @IBOutlet weak var collectionMenu: UICollectionView!
     @IBOutlet weak var btnSelesai: UIButton!
     
@@ -47,7 +41,6 @@ class MenuLatihanVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     /*
     // MARK: - Navigation
@@ -61,7 +54,7 @@ class MenuLatihanVC: UIViewController {
 
 }
 
-extension MenuLatihanVC: UICollectionViewDelegate, UICollectionViewDataSource {
+extension LatihanListSoalVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 20

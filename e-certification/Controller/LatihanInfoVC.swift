@@ -12,7 +12,9 @@ class LatihanInfoVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        //statusbar
+        let app = UIApplication.shared
+        app.statusBarStyle = .lightContent
         // Do any additional setup after loading the view.
     }
     

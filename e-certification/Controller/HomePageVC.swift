@@ -16,10 +16,20 @@ class HomePageVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //statusbar
+        let app = UIApplication.shared
+        app.statusBarStyle = .lightContent
         setTblNotif()
         setNewsCollection()
     }
-
+    
+    @IBAction func setting(_ sender: AnyObject) {
+        print("setting")
+        //statusbar
+        let app = UIApplication.shared
+        app.isStatusBarHidden = true
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

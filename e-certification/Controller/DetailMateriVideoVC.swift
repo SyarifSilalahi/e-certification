@@ -24,6 +24,9 @@ class DetailMateriVideoVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //statusbar
+        let app = UIApplication.shared
+        app.statusBarStyle = .lightContent
         // Do any additional setup after loading the view.
         self.lblTitle.text = title_
         let appDelegate = UIApplication.shared.delegate as! AppDelegate

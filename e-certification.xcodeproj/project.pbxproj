@@ -45,6 +45,10 @@
 		1347F534200F9B590023B3B8 /* MenuCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347F525200F9B590023B3B8 /* MenuCVCell.swift */; };
 		1347F535200F9B590023B3B8 /* NewsCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347F526200F9B590023B3B8 /* NewsCVCell.swift */; };
 		1347F537200F9B590023B3B8 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347F528200F9B590023B3B8 /* SignInVC.swift */; };
+		13D6B77F20127D3E00C4637B /* NotifikasiVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D6B77E20127D3E00C4637B /* NotifikasiVC.swift */; };
+		13D6B78120127D8000C4637B /* NotifikasiDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D6B78020127D8000C4637B /* NotifikasiDetailVC.swift */; };
+		13D6B7832012842100C4637B /* UjianVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D6B7822012842100C4637B /* UjianVC.swift */; };
+		13D6B7852012843D00C4637B /* UjianListSoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D6B7842012843D00C4637B /* UjianListSoalVC.swift */; };
 		13F1B522200FC65F005EC232 /* LatihanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F1B521200FC65E005EC232 /* LatihanCell.swift */; };
 		13F1B524200FC80D005EC232 /* LatihanInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F1B523200FC80D005EC232 /* LatihanInfoVC.swift */; };
 		17EE18FDCA671C684A6414A5 /* Pods_e_certification.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA2AB0B2B0EB425F298D3D18 /* Pods_e_certification.framework */; };
@@ -92,6 +96,10 @@
 		1347F525200F9B590023B3B8 /* MenuCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCVCell.swift; sourceTree = "<group>"; };
 		1347F526200F9B590023B3B8 /* NewsCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsCVCell.swift; sourceTree = "<group>"; };
 		1347F528200F9B590023B3B8 /* SignInVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
+		13D6B77E20127D3E00C4637B /* NotifikasiVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifikasiVC.swift; sourceTree = "<group>"; };
+		13D6B78020127D8000C4637B /* NotifikasiDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifikasiDetailVC.swift; sourceTree = "<group>"; };
+		13D6B7822012842100C4637B /* UjianVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UjianVC.swift; sourceTree = "<group>"; };
+		13D6B7842012843D00C4637B /* UjianListSoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UjianListSoalVC.swift; sourceTree = "<group>"; };
 		13F1B521200FC65E005EC232 /* LatihanCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatihanCell.swift; sourceTree = "<group>"; };
 		13F1B523200FC80D005EC232 /* LatihanInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatihanInfoVC.swift; sourceTree = "<group>"; };
 		4104E80E865DF24274608FB7 /* Pods-e-certification.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-e-certification.debug.xcconfig"; path = "Pods/Target Support Files/Pods-e-certification/Pods-e-certification.debug.xcconfig"; sourceTree = "<group>"; };
@@ -256,12 +264,16 @@
 				1347F528200F9B590023B3B8 /* SignInVC.swift */,
 				1347F51A200F9B580023B3B8 /* HomePageVC.swift */,
 				1347F518200F9B580023B3B8 /* NewsDetailVC.swift */,
+				13D6B77E20127D3E00C4637B /* NotifikasiVC.swift */,
+				13D6B78020127D8000C4637B /* NotifikasiDetailVC.swift */,
 				1347F51D200F9B590023B3B8 /* MateriPageVC.swift */,
 				1347F51E200F9B590023B3B8 /* DetailMateriVideoVC.swift */,
 				1347F51C200F9B590023B3B8 /* LatihanVC.swift */,
 				13F1B523200FC80D005EC232 /* LatihanInfoVC.swift */,
 				1345769520110F5C00B0E2C6 /* LatihanListSoalVC.swift */,
 				1347F51B200F9B590023B3B8 /* MenuLatihanVC.swift */,
+				13D6B7822012842100C4637B /* UjianVC.swift */,
+				13D6B7842012843D00C4637B /* UjianListSoalVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -474,6 +486,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1347F52C200F9B590023B3B8 /* HomePageVC.swift in Sources */,
+				13D6B7852012843D00C4637B /* UjianListSoalVC.swift in Sources */,
 				1347F535200F9B590023B3B8 /* NewsCVCell.swift in Sources */,
 				1347F513200F9A8E0023B3B8 /* DesignableUITextField.swift in Sources */,
 				1347F533200F9B590023B3B8 /* JadwalCell.swift in Sources */,
@@ -482,6 +495,7 @@
 				1347F4DD200F99D10023B3B8 /* AppDelegate.swift in Sources */,
 				1347F530200F9B590023B3B8 /* DetailMateriVideoVC.swift in Sources */,
 				1347F52E200F9B590023B3B8 /* LatihanVC.swift in Sources */,
+				13D6B77F20127D3E00C4637B /* NotifikasiVC.swift in Sources */,
 				1347F507200F9A8E0023B3B8 /* Config.swift in Sources */,
 				1347F534200F9B590023B3B8 /* MenuCVCell.swift in Sources */,
 				1345769620110F5C00B0E2C6 /* LatihanListSoalVC.swift in Sources */,
@@ -491,7 +505,9 @@
 				1347F531200F9B590023B3B8 /* MateriCell.swift in Sources */,
 				1347F532200F9B590023B3B8 /* NotifCell.swift in Sources */,
 				13F1B522200FC65F005EC232 /* LatihanCell.swift in Sources */,
+				13D6B7832012842100C4637B /* UjianVC.swift in Sources */,
 				1345768E2010F03800B0E2C6 /* UISideMenuNavigationController.swift in Sources */,
+				13D6B78120127D8000C4637B /* NotifikasiDetailVC.swift in Sources */,
 				1347F508200F9A8E0023B3B8 /* Helper.swift in Sources */,
 				1345768F2010F03800B0E2C6 /* SideMenuManager.swift in Sources */,
 				1347F52A200F9B590023B3B8 /* NewsDetailVC.swift in Sources */,

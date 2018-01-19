@@ -11,15 +11,12 @@ import UIKit
 class HomePageVC: UIViewController {
     
     @IBOutlet weak var collectionNews: UICollectionView!
-    @IBOutlet weak var tblNotif: UITableView!
-    @IBOutlet weak var txtSearch: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //statusbar
         let app = UIApplication.shared
         app.statusBarStyle = .lightContent
-        setTblNotif()
         setNewsCollection()
     }
     
@@ -33,12 +30,6 @@ class HomePageVC: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func setTblNotif(){
-        self.tblNotif.delegate = self
-        self.tblNotif.dataSource = self
-        self.tblNotif.reloadData()
     }
     
     func setNewsCollection(){
@@ -61,27 +52,6 @@ class HomePageVC: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-}
-
-extension HomePageVC:UITableViewDelegate,UITableViewDataSource{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 43
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell:NotifCell = tableView.dequeueReusableCell(withIdentifier: "NotifCellIdentifier", for: indexPath) as! NotifCell
-        cell.selectionStyle = .none
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
 }
 
 extension HomePageVC: UICollectionViewDelegate, UICollectionViewDataSource {

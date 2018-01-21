@@ -35,7 +35,6 @@
 		1347F515200F9A8E0023B3B8 /* AlertDialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347F506200F9A8E0023B3B8 /* AlertDialogView.swift */; };
 		1347F52A200F9B590023B3B8 /* NewsDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347F518200F9B580023B3B8 /* NewsDetailVC.swift */; };
 		1347F52C200F9B590023B3B8 /* HomePageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347F51A200F9B580023B3B8 /* HomePageVC.swift */; };
-		1347F52D200F9B590023B3B8 /* MenuLatihanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347F51B200F9B590023B3B8 /* MenuLatihanVC.swift */; };
 		1347F52E200F9B590023B3B8 /* LatihanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347F51C200F9B590023B3B8 /* LatihanVC.swift */; };
 		1347F52F200F9B590023B3B8 /* MateriPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347F51D200F9B590023B3B8 /* MateriPageVC.swift */; };
 		1347F530200F9B590023B3B8 /* DetailMateriVideoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347F51E200F9B590023B3B8 /* DetailMateriVideoVC.swift */; };
@@ -86,7 +85,6 @@
 		1347F506200F9A8E0023B3B8 /* AlertDialogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertDialogView.swift; sourceTree = "<group>"; };
 		1347F518200F9B580023B3B8 /* NewsDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsDetailVC.swift; sourceTree = "<group>"; };
 		1347F51A200F9B580023B3B8 /* HomePageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageVC.swift; sourceTree = "<group>"; };
-		1347F51B200F9B590023B3B8 /* MenuLatihanVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuLatihanVC.swift; sourceTree = "<group>"; };
 		1347F51C200F9B590023B3B8 /* LatihanVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LatihanVC.swift; sourceTree = "<group>"; };
 		1347F51D200F9B590023B3B8 /* MateriPageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MateriPageVC.swift; sourceTree = "<group>"; };
 		1347F51E200F9B590023B3B8 /* DetailMateriVideoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailMateriVideoVC.swift; sourceTree = "<group>"; };
@@ -271,7 +269,6 @@
 				1347F51C200F9B590023B3B8 /* LatihanVC.swift */,
 				13F1B523200FC80D005EC232 /* LatihanInfoVC.swift */,
 				1345769520110F5C00B0E2C6 /* LatihanListSoalVC.swift */,
-				1347F51B200F9B590023B3B8 /* MenuLatihanVC.swift */,
 				13D6B7822012842100C4637B /* UjianVC.swift */,
 				13D6B7842012843D00C4637B /* UjianListSoalVC.swift */,
 			);
@@ -439,6 +436,7 @@
 				"${BUILT_PRODUCTS_DIR}/Hue/Hue.framework",
 				"${BUILT_PRODUCTS_DIR}/KRActivityIndicatorView/KRActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/MKSpinner/MKSpinner.framework",
+				"${BUILT_PRODUCTS_DIR}/PDFReader/PDFReader.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftMessages/SwiftMessages.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -453,6 +451,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hue.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KRActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MKSpinner.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PDFReader.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftMessages.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -512,7 +511,6 @@
 				1345768F2010F03800B0E2C6 /* SideMenuManager.swift in Sources */,
 				1347F52A200F9B590023B3B8 /* NewsDetailVC.swift in Sources */,
 				134576942011025300B0E2C6 /* MenuCell.swift in Sources */,
-				1347F52D200F9B590023B3B8 /* MenuLatihanVC.swift in Sources */,
 				13F1B524200FC80D005EC232 /* LatihanInfoVC.swift in Sources */,
 				1347F515200F9A8E0023B3B8 /* AlertDialogView.swift in Sources */,
 			);

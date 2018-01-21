@@ -15,6 +15,7 @@ target 'e-certification' do
   pod 'SwiftMessages'
   pod 'KRActivityIndicatorView'
   pod 'VGPlayer'
+  pod 'PDFReader'
 
   #Downloader
   pod 'Digger'

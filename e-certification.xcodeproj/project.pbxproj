@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1307A7C72016617200A7EF45 /* LatihanDetailSoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1307A7C62016617200A7EF45 /* LatihanDetailSoalVC.swift */; };
+		1307A7C92016619900A7EF45 /* UjianDetailSoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1307A7C82016619900A7EF45 /* UjianDetailSoalVC.swift */; };
 		1345768E2010F03800B0E2C6 /* UISideMenuNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1345768B2010F03700B0E2C6 /* UISideMenuNavigationController.swift */; };
 		1345768F2010F03800B0E2C6 /* SideMenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1345768C2010F03700B0E2C6 /* SideMenuManager.swift */; };
 		134576902010F03800B0E2C6 /* SideMenuTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1345768D2010F03700B0E2C6 /* SideMenuTransition.swift */; };
@@ -55,6 +57,8 @@
 
 /* Begin PBXFileReference section */
 		00752B244310665ED3A92153 /* Pods-e-certification.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-e-certification.release.xcconfig"; path = "Pods/Target Support Files/Pods-e-certification/Pods-e-certification.release.xcconfig"; sourceTree = "<group>"; };
+		1307A7C62016617200A7EF45 /* LatihanDetailSoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatihanDetailSoalVC.swift; sourceTree = "<group>"; };
+		1307A7C82016619900A7EF45 /* UjianDetailSoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UjianDetailSoalVC.swift; sourceTree = "<group>"; };
 		1345768B2010F03700B0E2C6 /* UISideMenuNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UISideMenuNavigationController.swift; sourceTree = "<group>"; };
 		1345768C2010F03700B0E2C6 /* SideMenuManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuManager.swift; sourceTree = "<group>"; };
 		1345768D2010F03700B0E2C6 /* SideMenuTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuTransition.swift; sourceTree = "<group>"; };
@@ -269,8 +273,10 @@
 				1347F51C200F9B590023B3B8 /* LatihanVC.swift */,
 				13F1B523200FC80D005EC232 /* LatihanInfoVC.swift */,
 				1345769520110F5C00B0E2C6 /* LatihanListSoalVC.swift */,
+				1307A7C62016617200A7EF45 /* LatihanDetailSoalVC.swift */,
 				13D6B7822012842100C4637B /* UjianVC.swift */,
 				13D6B7842012843D00C4637B /* UjianListSoalVC.swift */,
+				1307A7C82016619900A7EF45 /* UjianDetailSoalVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -511,6 +517,8 @@
 				1345768F2010F03800B0E2C6 /* SideMenuManager.swift in Sources */,
 				1347F52A200F9B590023B3B8 /* NewsDetailVC.swift in Sources */,
 				134576942011025300B0E2C6 /* MenuCell.swift in Sources */,
+				1307A7C92016619900A7EF45 /* UjianDetailSoalVC.swift in Sources */,
+				1307A7C72016617200A7EF45 /* LatihanDetailSoalVC.swift in Sources */,
 				13F1B524200FC80D005EC232 /* LatihanInfoVC.swift in Sources */,
 				1347F515200F9A8E0023B3B8 /* AlertDialogView.swift in Sources */,
 			);

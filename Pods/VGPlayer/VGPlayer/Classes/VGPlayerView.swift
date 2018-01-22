@@ -66,6 +66,7 @@ open class VGPlayerView: UIView {
     open var topView : UIView = {
         let view = UIView()
         view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
+        view.alpha = 0
         return view
     }()
     open var titleLabel : UILabel = {
@@ -311,11 +312,12 @@ extension VGPlayerView {
     
     internal func displayControlAnimation() {
         bottomView.isHidden = false
-        topView.isHidden = false
+        topView.isHidden = true //false
         isDisplayControl = true
         UIView.animate(withDuration: 0.5, animations: {
             self.bottomView.alpha = 1
-            self.topView.alpha = 1
+//            self.topView.alpha = 1
+            self.topView.alpha = 0
         }) { (completion) in
             self.setupTimer()
         }

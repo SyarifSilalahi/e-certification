@@ -46,6 +46,7 @@
 		1347F534200F9B590023B3B8 /* MenuCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347F525200F9B590023B3B8 /* MenuCVCell.swift */; };
 		1347F535200F9B590023B3B8 /* NewsCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347F526200F9B590023B3B8 /* NewsCVCell.swift */; };
 		1347F537200F9B590023B3B8 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347F528200F9B590023B3B8 /* SignInVC.swift */; };
+		13CDA0F0201798830079B61C /* DetailMateriPDFVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CDA0EF201798830079B61C /* DetailMateriPDFVC.swift */; };
 		13D6B77F20127D3E00C4637B /* NotifikasiVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D6B77E20127D3E00C4637B /* NotifikasiVC.swift */; };
 		13D6B78120127D8000C4637B /* NotifikasiDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D6B78020127D8000C4637B /* NotifikasiDetailVC.swift */; };
 		13D6B7832012842100C4637B /* UjianVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D6B7822012842100C4637B /* UjianVC.swift */; };
@@ -98,6 +99,7 @@
 		1347F525200F9B590023B3B8 /* MenuCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCVCell.swift; sourceTree = "<group>"; };
 		1347F526200F9B590023B3B8 /* NewsCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsCVCell.swift; sourceTree = "<group>"; };
 		1347F528200F9B590023B3B8 /* SignInVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
+		13CDA0EF201798830079B61C /* DetailMateriPDFVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMateriPDFVC.swift; sourceTree = "<group>"; };
 		13D6B77E20127D3E00C4637B /* NotifikasiVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifikasiVC.swift; sourceTree = "<group>"; };
 		13D6B78020127D8000C4637B /* NotifikasiDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifikasiDetailVC.swift; sourceTree = "<group>"; };
 		13D6B7822012842100C4637B /* UjianVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UjianVC.swift; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 				13D6B78020127D8000C4637B /* NotifikasiDetailVC.swift */,
 				1347F51D200F9B590023B3B8 /* MateriPageVC.swift */,
 				1347F51E200F9B590023B3B8 /* DetailMateriVideoVC.swift */,
+				13CDA0EF201798830079B61C /* DetailMateriPDFVC.swift */,
 				1347F51C200F9B590023B3B8 /* LatihanVC.swift */,
 				13F1B523200FC80D005EC232 /* LatihanInfoVC.swift */,
 				1345769520110F5C00B0E2C6 /* LatihanListSoalVC.swift */,
@@ -516,6 +519,7 @@
 				1347F508200F9A8E0023B3B8 /* Helper.swift in Sources */,
 				1345768F2010F03800B0E2C6 /* SideMenuManager.swift in Sources */,
 				1347F52A200F9B590023B3B8 /* NewsDetailVC.swift in Sources */,
+				13CDA0F0201798830079B61C /* DetailMateriPDFVC.swift in Sources */,
 				134576942011025300B0E2C6 /* MenuCell.swift in Sources */,
 				1307A7C92016619900A7EF45 /* UjianDetailSoalVC.swift in Sources */,
 				1307A7C72016617200A7EF45 /* LatihanDetailSoalVC.swift in Sources */,

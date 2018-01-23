@@ -14,7 +14,7 @@ protocol PDFPageCollectionViewCellDelegate: class {
 }
 
 /// A cell housing the interactable pdf page view
-internal final class PDFPageCollectionViewCell: UICollectionViewCell {
+ public class PDFPageCollectionViewCell: UICollectionViewCell {
     /// Index of the page
     var pageIndex: Int?
     
@@ -40,6 +40,13 @@ internal final class PDFPageCollectionViewCell: UICollectionViewCell {
     /// - parameter pageCollectionViewCellDelegate: delegate informed of important events
     func setup(_ indexPathRow: Int, collectionViewBounds: CGRect, document: PDFDocument, pageCollectionViewCellDelegate: PDFPageCollectionViewCellDelegate?) {
         self.pageCollectionViewCellDelegate = pageCollectionViewCellDelegate
+        document.pdfPageImage(at: indexPathRow + 1) { (backgroundImage) in
+            pageView = PDFPageView(frame: bounds, document: document, pageNumber: indexPathRow, backgroundImage: backgroundImage, pageViewDelegate: self)
+            pageIndex = indexPathRow
+        }
+    }
+    
+    public func setup(_ indexPathRow: Int, collectionViewBounds: CGRect, document: PDFDocument) {
         document.pdfPageImage(at: indexPathRow + 1) { (backgroundImage) in
             pageView = PDFPageView(frame: bounds, document: document, pageNumber: indexPathRow, backgroundImage: backgroundImage, pageViewDelegate: self)
             pageIndex = indexPathRow

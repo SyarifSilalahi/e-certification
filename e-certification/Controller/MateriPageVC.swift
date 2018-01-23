@@ -59,7 +59,8 @@ extension MateriPageVC:UITableViewDelegate,UITableViewDataSource{
         let cell:MateriCell = tableView.dequeueReusableCell(withIdentifier: "MateriCellIdentifier", for: indexPath) as! MateriCell
         cell.selectionStyle = .none
         cell.setImageTitle(text: "Bab \(indexPath.row + 1)", isNew: true)
-        cell.setActions(urlPdf: "http://kmmc.in/wp-content/uploads/2014/01/lesson2.pdf", urlVideo: "http://www.sample-videos.com/video/mp4/480/big_buck_bunny_480p_30mb.mp4")
+        cell.setActions(urlPdf: "http://devstreaming.apple.com/videos/wwdc/2016/201h1g4asm31ti2l9n1/201/201_internationalization_best_practices.pdf", urlVideo: "http://www.sample-videos.com/video/mp4/480/big_buck_bunny_480p_30mb.mp4")
+        
         cell.delegate = self
         return cell
     }
@@ -71,7 +72,10 @@ extension MateriPageVC:UITableViewDelegate,UITableViewDataSource{
 
 extension MateriPageVC: MateriCellDelegate {
     func proccessPDF(name: String, title: String) {
-        
+        let detailMateriVideoVC = storyboard?.instantiateViewController(withIdentifier: "DetailMateriPDFVC") as! DetailMateriPDFVC
+        detailMateriVideoVC.title_ = title
+        detailMateriVideoVC.fileName = name
+        self.navigationController?.pushViewController(detailMateriVideoVC, animated: true)
     }
     
     func proccessVideo(name: String, title: String) {

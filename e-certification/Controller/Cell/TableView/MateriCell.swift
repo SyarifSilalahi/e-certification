@@ -55,7 +55,7 @@ class MateriCell: UITableViewCell {
         self.urlVideo = urlVideo
         
         if FileHelper().isFileExist(name: FileHelper().getNameFromUrl(url: urlPdf)) {
-            self.btnVideo.setImage(#imageLiteral(resourceName: "ico-pdf-enable"), for: .normal)
+            self.btnPdf.setImage(#imageLiteral(resourceName: "ico-pdf-enable"), for: .normal)
         }
         
         if FileHelper().isFileExist(name: FileHelper().getNameFromUrl(url: urlVideo)) {
@@ -85,13 +85,13 @@ class MateriCell: UITableViewCell {
         Digger.download(urlPdf).completion { (result) in
             switch result {
             case .success(let url):
-                self.btnPdf.setImage(#imageLiteral(resourceName: "ico-video-enable"), for: .normal)
+                self.btnPdf.setImage(#imageLiteral(resourceName: "ico-pdf-enable"), for: .normal)
                 DiggerManager.shared.stopTask(for: self.urlPdf)
                 self.pdfIndicator.animating = false
                 self.pdfIndicator.stopAnimating()
                 self.pdfIndicator.alpha = 0
                 self.btnPdf.alpha = 1
-                print("url video \(url)")
+                print("url pdf \(url)")
                 diggerLog(url)
             case .failure(let error):
                 self.pdfIndicator.animating = false

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Arrow
 
 class SignInVC: UIViewController {
     
@@ -52,7 +53,38 @@ class SignInVC: UIViewController {
     }
     
     @IBAction func doSignIn(_ sender: AnyObject) {
+        self.view.endEditing(true)
         
+        let param = [
+            "email" : "\(txtUsername.text!)",
+            "password" : "\(txtPassword.text!)",
+            "device_id" : "1"
+        ]
+        ApiManager().userAuth(param) { (response,failure, error) in
+            if error != nil{
+                print("error signIn \(String(describing: error))")
+                return
+            }
+            if failure != nil{
+                var fail = Failure()
+                fail.deserialize(failure!)
+                print("failure message \(fail.message)")
+                CustomAlert().Error(message: fail.message)
+                //do action failure here
+                return
+            }
+            
+            //session user
+//            let userAuth = response?.object(forKey: "data") as! NSDictionary
+//            Session.userChace.set(userAuth, forKey: Session.KEY_AUTH)
+            
+            //json data model
+            var dataUser = UserAuthData()
+            dataUser.deserialize(JSON(response?.object(forKey: "data") as AnyObject)!)
+            print("data User \(dataUser)")
+            //go to homepage
+            self.performSegue(withIdentifier: "showHomePage", sender: self)
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

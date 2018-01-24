@@ -15,12 +15,12 @@ struct Domain {
     //        static let URL_BASE = "http://a64f6017.ngrok.io/api" //for chat
     
     // BASE URL DEVELOPMENT
-    static let URL_BASE = "http://mtgapps.marthatilaargroup.com/v1" //dev
+    static let URL_BASE = "http://159.89.195.22:8080" //dev
     
     //url product status
-    static let URL_STATUS_APPS = "http://api.invoker.pistarlabs.id/product-status"
+//    static let URL_STATUS_APPS = "http://api.invoker.pistarlabs.id/product-status"
     
-    static let URL_SIGNIN = "\(URL_BASE)/auth/login"
+    static let URL_SIGNIN = "\(URL_BASE)/login"
     static let URL_CHANGE_PASS = "\(URL_BASE)/auth/password/change"
     static let URL_FORGOT_PASS = "\(URL_BASE)/auth/password/forgot"
     static let URL_VERIFY_TOKEN = "\(URL_BASE)/auth/password/token"
@@ -51,7 +51,6 @@ struct Session {
     static let KEY_UDID = "UDID" //IMEI
     static let KEY_AUTH = "KEY_AUTH"
     static let OLD_PASS = "OLD_PASS"
-    static let RECENT = "RECENT"
 }
 
 struct FONT {

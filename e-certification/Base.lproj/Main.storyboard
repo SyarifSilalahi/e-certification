@@ -165,7 +165,6 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="doSignIn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hM0-yG-dH0"/>
-                                            <segue destination="1aL-fb-EB7" kind="show" id="8N1-Dx-04f"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -181,6 +180,7 @@
                         <outlet property="txtPassword" destination="ePP-fN-e6O" id="RPi-3z-OSM"/>
                         <outlet property="txtUsername" destination="VGr-zJ-eQc" id="8aN-jb-jCW"/>
                         <outlet property="viewBgSignIn" destination="zu4-h4-XKf" id="8gA-qc-QVf"/>
+                        <segue destination="1aL-fb-EB7" kind="show" identifier="showHomePage" id="MQ6-0Q-dm5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -1806,7 +1806,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.1529411765" green="0.2156862745" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.15294117647058825" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ico-gradient-bg" translatesAutoresizingMaskIntoConstraints="NO" id="eKn-o2-EUl">
                                 <rect key="frame" x="0.0" y="49" width="375" height="569"/>
@@ -1818,38 +1818,38 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MateriCellIdentifier" rowHeight="53" id="KRq-mI-IhO" customClass="MateriCell" customModule="e_certification" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="53"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MateriCellIdentifier" rowHeight="66" id="KRq-mI-IhO" customClass="MateriCell" customModule="e_certification" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="66"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KRq-mI-IhO" id="q5I-j2-zRU">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="52.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="65.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="contoh" translatesAutoresizingMaskIntoConstraints="NO" id="f6m-be-y8e">
-                                                    <rect key="frame" x="0.0" y="0.0" width="80" height="53"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="contoh" translatesAutoresizingMaskIntoConstraints="NO" id="f6m-be-y8e">
+                                                    <rect key="frame" x="31" y="7" width="80" height="53"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bab I" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTJ-Xe-eZl">
-                                                    <rect key="frame" x="85" y="10" width="140" height="13"/>
+                                                    <rect key="frame" x="119" y="10" width="161" height="13"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                                     <color key="textColor" red="0.30196078430000001" green="0.30588235289999999" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Prinsip Dasar Asuransi" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="iVp-Mg-Per">
-                                                    <rect key="frame" x="85" y="28" width="195" height="17"/>
+                                                    <rect key="frame" x="119" y="25" width="161" height="26"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11.5"/>
                                                     <color key="textColor" red="0.42745098040000001" green="0.43137254899999999" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XoZ-V3-BCn">
-                                                    <rect key="frame" x="326" y="6" width="38" height="38"/>
+                                                    <rect key="frame" x="326" y="11" width="38" height="38"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" image="ico-video-disable"/>
                                                 </button>
                                                 <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tbz-IE-Inw" customClass="KRActivityIndicatorView" customModule="KRActivityIndicatorView">
-                                                    <rect key="frame" x="326" y="6" width="38" height="38"/>
+                                                    <rect key="frame" x="326" y="11" width="38" height="38"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <userDefinedRuntimeAttributes>
@@ -1865,12 +1865,12 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gxU-pz-R4Z">
-                                                    <rect key="frame" x="288" y="6" width="38" height="38"/>
+                                                    <rect key="frame" x="288" y="11" width="38" height="38"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" image="ico-pdf-disable"/>
                                                 </button>
                                                 <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZHm-fa-Ner" customClass="KRActivityIndicatorView" customModule="KRActivityIndicatorView">
-                                                    <rect key="frame" x="288" y="6" width="38" height="38"/>
+                                                    <rect key="frame" x="288" y="11" width="38" height="38"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <userDefinedRuntimeAttributes>
@@ -1911,7 +1911,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3lA-PK-aju" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2809" y="-300"/>
+            <point key="canvasLocation" x="2808.8000000000002" y="-300"/>
         </scene>
         <!--Detail Materi VideoVC-->
         <scene sceneID="0oc-nl-Hc9">

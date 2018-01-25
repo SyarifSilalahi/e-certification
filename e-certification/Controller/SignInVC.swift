@@ -23,8 +23,16 @@ class SignInVC: UIViewController {
         let app = UIApplication.shared
         app.isStatusBarHidden = false
         app.statusBarStyle = .lightContent
-        // Do any additional setup after loading the view.
+        
+        //check if session is active, open homepage directly
+        if Session.userChace.value(forKey: Session.KEY_AUTH) != nil {
+            //go to homepage
+            self.performSegue(withIdentifier: "showDirectHomePage", sender: self)
+            return
+        }
+        
         self.imagesBackground()
+        
     }
     
     func imagesBackground(){
@@ -74,14 +82,14 @@ class SignInVC: UIViewController {
                 return
             }
             
-            //session user
-//            let userAuth = response?.object(forKey: "data") as! NSDictionary
-//            Session.userChace.set(userAuth, forKey: Session.KEY_AUTH)
-            
             //json data model
             var dataUser = UserAuthData()
             dataUser.deserialize(JSON(response?.object(forKey: "data") as AnyObject)!)
-            print("data User \(dataUser)")
+            
+            //session user
+            let userAuth = dataUser.dictionary! as NSDictionary
+            Session.userChace.set(userAuth, forKey: Session.KEY_AUTH)
+//            print("usercache \(Session.userChace.value(forKey: Session.KEY_AUTH))")
             //go to homepage
             self.performSegue(withIdentifier: "showHomePage", sender: self)
         }

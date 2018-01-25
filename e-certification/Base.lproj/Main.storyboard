@@ -181,6 +181,7 @@
                         <outlet property="txtUsername" destination="VGr-zJ-eQc" id="8aN-jb-jCW"/>
                         <outlet property="viewBgSignIn" destination="zu4-h4-XKf" id="8gA-qc-QVf"/>
                         <segue destination="1aL-fb-EB7" kind="show" identifier="showHomePage" id="MQ6-0Q-dm5"/>
+                        <segue destination="1aL-fb-EB7" kind="show" identifier="showDirectHomePage" animates="NO" id="vQg-5L-Oat"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -2008,6 +2009,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                         <viewLayoutGuide key="safeArea" id="2UH-Xg-Pcy"/>
                     </view>
                     <connections>
+                        <outlet property="lblDescription" destination="xRC-8T-dmK" id="B64-Zp-PPj"/>
                         <outlet property="lblDetail" destination="Hhs-AD-Z7M" id="2rq-xx-EAS"/>
                         <outlet property="lblTitle" destination="Y6e-aD-NC4" id="Lyz-b1-s0H"/>
                         <outlet property="viewPlayer" destination="9JD-08-q51" id="lEA-lf-Z98"/>
@@ -2147,6 +2149,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                     </view>
                     <connections>
                         <outlet property="collectionPdf" destination="TfN-q1-fCh" id="CNN-0u-WJe"/>
+                        <outlet property="lblDescription" destination="XIZ-qG-Eo0" id="VMl-a8-Es2"/>
                         <outlet property="lblDetail" destination="BIV-gR-yzM" id="XJf-fJ-Rpq"/>
                         <outlet property="lblTitle" destination="GT9-MH-Kaq" id="rtU-zc-J8F"/>
                         <outlet property="viewPdf" destination="m02-gj-VK2" id="6Zb-5u-nz4"/>
@@ -2400,6 +2403,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
         <image name="splashscreen" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="vQg-5L-Oat"/>
         <segue reference="MxL-dh-dPj"/>
     </inferredMetricsTieBreakers>
 </document>

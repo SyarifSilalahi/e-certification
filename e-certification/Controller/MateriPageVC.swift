@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import Arrow
 
 class MateriPageVC: UIViewController {
     
     @IBOutlet weak var tblMateri: UITableView!
+    var dataMateri = ListMateri()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,8 +20,30 @@ class MateriPageVC: UIViewController {
         let app = UIApplication.shared
         app.statusBarStyle = .lightContent
         // Do any additional setup after loading the view.
-        self.setTblMateri()
-        
+        self.loadMateri()
+    }
+    
+    func loadMateri(){
+        ApiManager().getMateri { (response,failure, error) in
+            if error != nil{
+                print("error load Materi \(String(describing: error))")
+                return
+            }
+            if failure != nil{
+                var fail = Failure()
+                fail.deserialize(failure!)
+                print("failure message \(fail.message)")
+                CustomAlert().Error(message: fail.message)
+                //do action failure here
+                return
+            }
+            
+            
+            //json data model
+            self.dataMateri.deserialize(response!)
+//            print("data materi \(self.dataMateri)")
+            self.setTblMateri()
+        }
     }
     
     func setTblMateri(){
@@ -48,19 +72,21 @@ class MateriPageVC: UIViewController {
 
 extension MateriPageVC:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return self.dataMateri.data.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 53
+        return 68
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:MateriCell = tableView.dequeueReusableCell(withIdentifier: "MateriCellIdentifier", for: indexPath) as! MateriCell
         cell.selectionStyle = .none
-        cell.setImageTitle(text: "Bab \(indexPath.row + 1)", isNew: true)
-        cell.setActions(urlPdf: "http://devstreaming.apple.com/videos/wwdc/2016/201h1g4asm31ti2l9n1/201/201_internationalization_best_practices.pdf", urlVideo: "http://www.sample-videos.com/video/mp4/480/big_buck_bunny_480p_30mb.mp4")
-        
+        cell.setTitle(text: "\(dataMateri.data[indexPath.row].title)", isNew: true)
+        cell.lblDetail.text = dataMateri.data[indexPath.row].sub_module_title
+        cell.description_ = dataMateri.data[indexPath.row].description
+        cell.setActions(urlPdf: "\(dataMateri.data[indexPath.row].host_file)\(dataMateri.data[indexPath.row].document)", urlVideo: "\(dataMateri.data[indexPath.row].host_file)\(dataMateri.data[indexPath.row].video)")
+        cell.videoTimeFlag = dataMateri.data[indexPath.row].video_next
         cell.delegate = self
         return cell
     }
@@ -71,17 +97,22 @@ extension MateriPageVC:UITableViewDelegate,UITableViewDataSource{
 }
 
 extension MateriPageVC: MateriCellDelegate {
-    func proccessPDF(name: String, title: String) {
+    func proccessPDF(name: String, title: String, detail: String, description: String) {
         let detailMateriVideoVC = storyboard?.instantiateViewController(withIdentifier: "DetailMateriPDFVC") as! DetailMateriPDFVC
         detailMateriVideoVC.title_ = title
+        detailMateriVideoVC.detail = detail
+        detailMateriVideoVC.description_ = description
         detailMateriVideoVC.fileName = name
         self.navigationController?.pushViewController(detailMateriVideoVC, animated: true)
     }
     
-    func proccessVideo(name: String, title: String) {
+    func proccessVideo(name: String, title: String, detail: String, description: String, timeFlag: String) {
         let detailMateriVideoVC = storyboard?.instantiateViewController(withIdentifier: "DetailMateriVideoVC") as! DetailMateriVideoVC
         detailMateriVideoVC.title_ = title
+        detailMateriVideoVC.detail = detail
+        detailMateriVideoVC.description_ = description
         detailMateriVideoVC.fileName = name
+        detailMateriVideoVC.videoTimeFlag = timeFlag
         self.navigationController?.pushViewController(detailMateriVideoVC, animated: true)
     }
 }

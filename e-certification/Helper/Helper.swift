@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import MKSpinner
 import SwiftMessages
+import Arrow
 
 class Helper {
     

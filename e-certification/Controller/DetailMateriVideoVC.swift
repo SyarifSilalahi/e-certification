@@ -15,12 +15,16 @@ class DetailMateriVideoVC: UIViewController {
     @IBOutlet weak var viewPlayer: UIView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblDetail: UILabel!
+    @IBOutlet weak var lblDescription: UILabel!
     
     var player = VGPlayer()
     var urlVideo : URL?
     
     var title_ = ""
+    var detail = ""
     var fileName = ""
+    var description_ = ""
+    var videoTimeFlag = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +36,14 @@ class DetailMateriVideoVC: UIViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.shouldRotate = true // or false to disable rotation
         
+        self.lblTitle.text = title_
+        self.lblDetail.text = detail
+        self.lblDescription.text = description_
+        
+        self.setVideoPlayer()
+    }
+    
+    func setVideoPlayer(){
         self.urlVideo = URL(fileURLWithPath: FileHelper().getFilePath(name: "\(fileName)"))
         
         self.player.replaceVideo(urlVideo!)
@@ -49,8 +61,6 @@ class DetailMateriVideoVC: UIViewController {
             make.right.equalTo(strongSelf.self.viewPlayer.snp.right)
             make.height.equalTo(strongSelf.self.viewPlayer.snp.height)
         }
-        
-        
     }
     
     @IBAction func back(_ sender: AnyObject) {

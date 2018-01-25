@@ -21,7 +21,7 @@ struct Domain {
 //    static let URL_STATUS_APPS = "http://api.invoker.pistarlabs.id/product-status"
     
     static let URL_SIGNIN = "\(URL_BASE)/login"
-    static let URL_CHANGE_PASS = "\(URL_BASE)/auth/password/change"
+    static let URL_MATERI = "\(URL_BASE)/user/material"
     static let URL_FORGOT_PASS = "\(URL_BASE)/auth/password/forgot"
     static let URL_VERIFY_TOKEN = "\(URL_BASE)/auth/password/token"
     static let URL_RESET_PASS = "\(URL_BASE)/auth/password/reset"

@@ -12,9 +12,9 @@ import KRActivityIndicatorView
 
 protocol MateriCellDelegate {
     // Indicates that the edit process has begun for the given cell
-    func proccessPDF(name: String,title:String)
+    func proccessPDF(name: String, title: String, detail: String, description: String)
     // Indicates that the edit process has committed for the given cell
-    func proccessVideo(name: String,title:String)
+    func proccessVideo(name: String, title: String, detail: String, description: String,timeFlag: String)
 }
 
 class MateriCell: UITableViewCell {
@@ -28,16 +28,17 @@ class MateriCell: UITableViewCell {
     @IBOutlet weak var pdfIndicator: KRActivityIndicatorView!
     
     var delegate: MateriCellDelegate?
-    
+    var description_ = ""
     var urlPdf = ""
     var urlVideo = ""
+    var videoTimeFlag = ""
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    func setImageTitle(text:String,isNew:Bool){
+    func setTitle(text:String,isNew:Bool){
         let title = NSMutableAttributedString(string: "\(text)")
         let imageAttachment = NSTextAttachment()
         imageAttachment.image = UIImage(named: "ico-dot-new")
@@ -77,7 +78,7 @@ class MateriCell: UITableViewCell {
 //        self.btnPdf.setImage(#imageLiteral(resourceName: "ico-pdf-enable"), for: .normal)
 //        getNameFromUrl(url: urlPdf)
         if FileHelper().isFileExist(name: FileHelper().getNameFromUrl(url: urlPdf)) {
-            self.delegate?.proccessPDF(name: FileHelper().getNameFromUrl(url: urlPdf), title: self.lblTitle.text!)
+            self.delegate?.proccessPDF(name: FileHelper().getNameFromUrl(url: urlPdf), title: self.lblTitle.text!, detail: self.lblDetail.text!, description: self.description_)
             return
         }
         btnPdf.alpha = 0
@@ -127,7 +128,7 @@ class MateriCell: UITableViewCell {
     
     @objc func openVideo(sender:UIButton!) {
         if FileHelper().isFileExist(name: FileHelper().getNameFromUrl(url: urlVideo)) {
-            self.delegate?.proccessVideo(name: FileHelper().getNameFromUrl(url: urlVideo), title: self.lblTitle.text!)
+            self.delegate?.proccessVideo(name: FileHelper().getNameFromUrl(url: urlVideo), title: self.lblTitle.text!, detail: self.lblDetail.text!, description: self.description_,timeFlag: self.videoTimeFlag)
             return
         }
         btnVideo.alpha = 0

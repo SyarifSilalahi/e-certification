@@ -10,7 +10,7 @@ import Foundation
 import Arrow
 
 struct UserAuth {
-    var code = ""
+    var code :Int = 0
     var status = ""
     var message = ""
     var data = UserAuthData()
@@ -51,6 +51,7 @@ struct UserAuthData : ArrowParsable {
     var updated_at = ""
     var token = ""
     var device_id = ""
+    var dictionary: [String: String]!
 
     mutating func deserialize(_ json: JSON) {
         id <-- json["id"]
@@ -78,6 +79,33 @@ struct UserAuthData : ArrowParsable {
         updated_at <-- json["updated_at"]
         token <-- json["token"]
         device_id <-- json["device_id"]
+        dictionary = [
+            "id" : "\(id)",
+            "user_id" : "\(user_id)",
+            "insurance_id" : "\(insurance_id)",
+            "member_level_id" : "\(member_level_id)",
+            "registration_id" : "\(registration_id)",
+            "name" : "\(name)",
+            "address" : "\(address)",
+            "province" : "\(province)",
+            "city" : "\(city)",
+            "phone" : "\(phone)",
+            "gender" : "\(gender)",
+            "birth_date" : "\(birth_date)",
+            "birth_place" : "\(birth_place)",
+            "no_ktp" : "\(no_ktp)",
+            "no_npwp" : "\(no_npwp)",
+            "company" : "\(company)",
+            "company_image" : "\(company_image)",
+            "fax" : "\(fax)",
+            "director" : "\(director)",
+            "expired_date" : "\(expired_date)",
+            "status_exam" : "\(status_exam)",
+            "created_at" : "\(created_at)",
+            "updated_at" : "\(updated_at)",
+            "token" : "\(token)",
+            "device_id" : "\(device_id)"
+        ]
         
     }
 }

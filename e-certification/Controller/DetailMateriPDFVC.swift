@@ -14,12 +14,15 @@ class DetailMateriPDFVC: UIViewController {
     @IBOutlet weak var viewPdf: UIView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblDetail: UILabel!
+    @IBOutlet weak var lblDescription: UILabel!
     @IBOutlet weak var collectionPdf: UICollectionView!
     
     var urlPdf : URL?
     
     var title_ = ""
     var fileName = ""
+    var detail = ""
+    var description_ = ""
     
     private var readerController : PDFViewController!
     private var document : PDFDocument!
@@ -32,6 +35,8 @@ class DetailMateriPDFVC: UIViewController {
         app.statusBarStyle = .lightContent
         // Do any additional setup after loading the view.
         self.lblTitle.text = title_
+        self.lblDetail.text = detail
+        self.lblDescription.text = description_
         
         self.urlPdf = URL(fileURLWithPath: FileHelper().getFilePath(name: "\(fileName)"))
         document = PDFDocument(url: urlPdf!)!

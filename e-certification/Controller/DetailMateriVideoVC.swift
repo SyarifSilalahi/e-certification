@@ -9,6 +9,7 @@
 import UIKit
 import VGPlayer
 import SnapKit
+import Digger
 
 class DetailMateriVideoVC: UIViewController {
     
@@ -25,6 +26,7 @@ class DetailMateriVideoVC: UIViewController {
     var fileName = ""
     var description_ = ""
     var videoTimeFlag = ""
+    var currentDuration:Double = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +43,33 @@ class DetailMateriVideoVC: UIViewController {
         self.lblDescription.text = description_
         
         self.setVideoPlayer()
+    }
+    
+    func getArrFlag(flags:String) ->[String]{
+        return flags.components(separatedBy: ",")
+    }
+    
+    func getNextFlag()->Double{
+        player.pause()
+        let arrGetFlags = getArrFlag(flags: videoTimeFlag)
+        for i in 0..<arrGetFlags.count{
+            if (arrGetFlags[i] as NSString).doubleValue > currentDuration {
+//                print("current time \(self.currentDuration) arrGetFlags[i] \(arrGetFlags[i])")
+                return (arrGetFlags[i] as NSString).doubleValue
+            }
+        }
+        return self.currentDuration
+    }
+    
+    func getPrevFlag()->Double{
+        player.pause()
+        let arrGetFlags = getArrFlag(flags: videoTimeFlag)
+        for i in stride(from: arrGetFlags.count - 1, to: -1, by: -1){
+            if (arrGetFlags[i] as NSString).doubleValue < currentDuration - 2 {
+                return (arrGetFlags[i] as NSString).doubleValue
+            }
+        }
+        return 0
     }
     
     func setVideoPlayer(){
@@ -67,8 +96,28 @@ class DetailMateriVideoVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func forward(_ sender: AnyObject) {
+        player.seekTime(self.getNextFlag())
+        
+    }
+    
+    @IBAction func backward(_ sender: AnyObject) {
+        player.seekTime(self.getPrevFlag())
+    }
+    
     @IBAction func deleteVideo(_ sender: AnyObject) {
-        self.navigationController?.popViewController(animated: true)
+        let deleteAlert = UIAlertController(title: "Confirmation", message: "Are you sure want to delete this content?", preferredStyle: UIAlertControllerStyle.alert)
+        
+        deleteAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+            DiggerCache.removeItem(atPath: FileHelper().getFilePath(name: "\(self.fileName)"))
+            self.navigationController?.popViewController(animated: true)
+        }))
+        
+        deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+        }))
+        
+        present(deleteAlert, animated: true, completion: nil)
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -102,10 +151,14 @@ extension DetailMateriVideoVC: VGPlayerDelegate {
         print(error)
     }
     func vgPlayer(_ player: VGPlayer, stateDidChange state: VGPlayerState) {
-        print("player State ",state)
+//        print("player State ",state)
     }
     func vgPlayer(_ player: VGPlayer, bufferStateDidChange state: VGPlayerBufferstate) {
-        print("buffer State", state)
+//        print("buffer State", state)
+    }
+    func vgPlayer(_ player: VGPlayer, playerDurationDidChange currentDuration: TimeInterval, totalDuration: TimeInterval) {
+//        print("currentDuration \(currentDuration)")
+        self.currentDuration = currentDuration
     }
     
 }

@@ -17,6 +17,8 @@ class HomePageVC: UIViewController {
         //statusbar
         let app = UIApplication.shared
         app.statusBarStyle = .lightContent
+        
+        //set collectionview
         setNewsCollection()
     }
     

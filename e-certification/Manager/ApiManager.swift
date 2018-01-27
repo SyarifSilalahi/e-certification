@@ -12,12 +12,11 @@ import Alamofire
 import AlamofireImage
 
 class ApiManager: NSObject {
-    func forceLogOut(vc:UIViewController ,message:String){
-        let alert = UIAlertController(title: "Info", message: message, preferredStyle: UIAlertControllerStyle.alert)
+    func forceLogOut(){
+        let alert = UIAlertController(title: Wording.FORCE_LOG_OUT_ALLERT_TITLE, message: Wording.FORCE_LOG_OUT_ALLERT_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
         
         let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
-                Session.userChace.removeObject(forKey: Session.KEY_AUTH)
-                UIApplication.topViewController()?.navigationController?.popToRootViewController(animated: true)
+                self.logOut()
 //            var dataUser = UserAuthData()
 //            let data = JSON(Session.userChace.object(forKey: Session.KEY_AUTH) as AnyObject?)
 //            dataUser.deserialize(data!)
@@ -40,7 +39,13 @@ class ApiManager: NSObject {
 //            })
         })
         alert.addAction(alertOKAction)
-        vc.present(alert, animated: true, completion: nil)
+        UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+    }
+    
+    func logOut(){
+        Session.userChace.removeObject(forKey: Session.KEY_AUTH)
+        Session.userChace.removeObject(forKey: Session.EMAIL)
+        UIApplication.topViewController()?.navigationController?.popToRootViewController(animated: true)
     }
     
     func connectionCheck(error : Error){
@@ -110,6 +115,99 @@ class ApiManager: NSObject {
                     if status {
                         completionHandler(data!,nil,nil)
                     }else{
+                        if responseData["message"] as! String == "expired_token" {
+                            self.forceLogOut()
+                            return
+                        }
+                        completionHandler(nil,data!, nil)
+                    }
+                    break
+                case .failure(let error):
+                    self.connectionCheck(error: error)
+                    completionHandler(nil,nil, error as NSError?)
+                    break
+                }
+        }
+    }
+    
+    //user Get Modul Latihan
+    func getModulLatihan(completionHandler:@escaping (JSON?,JSON?, NSError?) -> ()) {
+        HUD().show()
+        
+        let data = JSON(Session.userChace.object(forKey: Session.KEY_AUTH) as AnyObject?)
+        var dataUser = UserAuthData()
+        dataUser.deserialize(data!)
+        let header = [
+            "token" : "\(dataUser.token)",
+            "device-id" : "\(dataUser.device_id)"
+        ]
+        
+        Alamofire.request("\(Domain.URL_MODUL_LATIHAN)",
+            method: HTTPMethod.post,
+            parameters: nil,
+            encoding: URLEncoding.httpBody,
+            headers: header)
+            .responseJSON { (response) in
+                HUD().hide()
+                switch response.result {
+                case .success(_):
+                    let data = JSON(response.result.value as AnyObject?)
+                    let responseData = response.result.value as! NSDictionary
+                    let status:Bool = (responseData["status"] as! String != "0")
+                    if status {
+                        completionHandler(data!,nil,nil)
+                    }else{
+                        if responseData["message"] as! String == "expired_token" {
+                            self.forceLogOut()
+                            return
+                        }
+                        completionHandler(nil,data!, nil)
+                    }
+                    break
+                case .failure(let error):
+                    self.connectionCheck(error: error)
+                    completionHandler(nil,nil, error as NSError?)
+                    break
+                }
+        }
+    }
+    
+    //user Get Question Latihan
+    func getQuestionsLatihan(_ modulId:Int, completionHandler:@escaping (JSON?,JSON?, NSError?) -> ()) {
+        HUD().show()
+        
+        let data = JSON(Session.userChace.object(forKey: Session.KEY_AUTH) as AnyObject?)
+        var dataUser = UserAuthData()
+        dataUser.deserialize(data!)
+        
+        let param = [
+            "sub_module_id" : "\(modulId)"
+        ]
+        
+        let header = [
+            "token" : "\(dataUser.token)",
+            "device-id" : "\(dataUser.device_id)"
+        ]
+        
+        Alamofire.request("\(Domain.URL_QUESTION_LATIHAN)",
+            method: HTTPMethod.post,
+            parameters: param,
+            encoding: URLEncoding.httpBody,
+            headers: header)
+            .responseJSON { (response) in
+                HUD().hide()
+                switch response.result {
+                case .success(_):
+                    let data = JSON(response.result.value as AnyObject?)
+                    let responseData = response.result.value as! NSDictionary
+                    let status:Bool = (responseData["status"] as! String != "0")
+                    if status {
+                        completionHandler(data!,nil,nil)
+                    }else{
+                        if responseData["message"] as! String == "expired_token" {
+                            self.forceLogOut()
+                            return
+                        }
                         completionHandler(nil,data!, nil)
                     }
                     break

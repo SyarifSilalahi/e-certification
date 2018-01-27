@@ -35,14 +35,18 @@ class SignInVC: UIViewController {
         
     }
     
+    @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
+        
+    }
+    
     func imagesBackground(){
         let horizontalMotionEffect = UIInterpolatingMotionEffect(keyPath: "center.x", type: .tiltAlongHorizontalAxis)
-        horizontalMotionEffect.minimumRelativeValue = -50
-        horizontalMotionEffect.maximumRelativeValue = 50
+        horizontalMotionEffect.minimumRelativeValue = -20
+        horizontalMotionEffect.maximumRelativeValue = 25
         
         let verticalMotionEffect = UIInterpolatingMotionEffect(keyPath: "center.y", type: .tiltAlongVerticalAxis)
-        verticalMotionEffect.minimumRelativeValue = -50
-        verticalMotionEffect.maximumRelativeValue = 50
+        verticalMotionEffect.minimumRelativeValue = -20
+        verticalMotionEffect.maximumRelativeValue = 25
         
         let motionEffectGroup = UIMotionEffectGroup()
         motionEffectGroup.motionEffects = [horizontalMotionEffect, verticalMotionEffect]
@@ -89,6 +93,7 @@ class SignInVC: UIViewController {
             //session user
             let userAuth = dataUser.dictionary! as NSDictionary
             Session.userChace.set(userAuth, forKey: Session.KEY_AUTH)
+            Session.userChace.set("\(self.txtUsername.text!)", forKey: Session.EMAIL)
 //            print("usercache \(Session.userChace.value(forKey: Session.KEY_AUTH))")
             //go to homepage
             self.performSegue(withIdentifier: "showHomePage", sender: self)

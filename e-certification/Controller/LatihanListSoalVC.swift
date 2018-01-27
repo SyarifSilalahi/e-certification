@@ -13,24 +13,55 @@ class LatihanListSoalVC: UIViewController {
     @IBOutlet weak var collectionMenu: UICollectionView!
     @IBOutlet weak var btnSelesai: UIButton!
     
+    var modul:ModulLatihan!
+    var listSoal:ListQuestionLatihan! = ListQuestionLatihan()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //statusbar
         let app = UIApplication.shared
         app.statusBarStyle = .lightContent
         // Do any additional setup after loading the view.
-        self.setMenuCollection()
+        self.getListSoal()
+    }
+    
+    func getListSoal(){
+        ApiManager().getQuestionsLatihan(self.modul.sub_module_id) { (response,failure, error) in
+            if error != nil{
+                print("error load Question Latihan \(String(describing: error))")
+                return
+            }
+            if failure != nil{
+                var fail = Failure()
+                fail.deserialize(failure!)
+                print("failure message \(fail.message)")
+                CustomAlert().Error(message: fail.message)
+                //do action failure here
+                return
+            }
+            
+            
+            //json data model
+            self.listSoal.deserialize(response!)
+            self.setMenuCollection()
+        }
     }
     
     func setMenuCollection(){
         self.collectionMenu.dataSource=self
         self.collectionMenu.delegate=self
         let collectionViewLayout:UICollectionViewFlowLayout = self.collectionMenu.collectionViewLayout as! UICollectionViewFlowLayout
-        let size = (self.view.frame.size.width / 4) - 40
+        let size = (self.view.frame.size.width / 4) - 35
         let cellheight = size
         let cellwidth = size
         collectionViewLayout.itemSize = CGSize(width: cellwidth, height: cellheight )
         self.collectionMenu.reloadData()
+    }
+    
+    
+    @IBAction func back(_ sender: AnyObject) {
+        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+        self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
     }
     
     @IBAction func selesai(_ sender: AnyObject) {
@@ -57,13 +88,20 @@ class LatihanListSoalVC: UIViewController {
 extension LatihanListSoalVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return 20 //listSoal.data.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell: MenuCVCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MenuCVCellIdentifier", for: indexPath) as! MenuCVCell
         cell.lblTitle.text = "\(indexPath.row + 1)"
+        if indexPath.row == 0 {
+            cell.setModeCorrect()
+        }else if indexPath.row == 3{
+            cell.setModeInCorrect()
+        }else{
+            cell.setModeNormal()
+        }
         return cell
     }
     

@@ -9,6 +9,13 @@
 import Foundation
 import Hue
 
+//exam atatus
+//1 sudah diassign
+//2 lulus
+//3 gagal
+//4 belum di assign
+//5 on progress
+
 struct Domain {
     
     // BASE URL PRODUCTION
@@ -22,18 +29,8 @@ struct Domain {
     
     static let URL_SIGNIN = "\(URL_BASE)/login"
     static let URL_MATERI = "\(URL_BASE)/user/material"
-    static let URL_FORGOT_PASS = "\(URL_BASE)/auth/password/forgot"
-    static let URL_VERIFY_TOKEN = "\(URL_BASE)/auth/password/token"
-    static let URL_RESET_PASS = "\(URL_BASE)/auth/password/reset"
-    static let URL_EDIT_PROFILE = "\(URL_BASE)/profile"
-    static let URL_NEW_FEEDBACK = "\(URL_BASE)/feedback"
-    static let URL_SUBMIT_POLLING = "\(URL_BASE)/poll"
-    static let URL_SUBMIT_SURVEY = "\(URL_BASE)/survey"
-    static let URL_ORGANIZATION_CHART = "\(URL_BASE)/organization/chart"
-    static let URL_LOGOUT = "\(URL_BASE)/auth/logout"
-    static let URL_TESTING = "\(URL_BASE)/apple/is-testing"
-    static let URL_REGISTER_TOKEN = "\(URL_BASE)/device/register"
-    static let URL_REMOVE_TOKEN = "\(URL_BASE)/device/delete"
+    static let URL_MODUL_LATIHAN = "\(URL_BASE)/user/sub_module"
+    static let URL_QUESTION_LATIHAN = "\(URL_BASE)/user/exercise_question"
     
     static let URL_CHAT = "\(URL_BASE)/chat"
     
@@ -44,12 +41,15 @@ struct Wording {
     static let PARTICIPATED = "You're already participated"
     static let TIMEOVER = "Time is over"
     static let Connection = "Connection problem!"
+    static let FORCE_LOG_OUT_ALLERT_TITLE = "Upss!"
+    static let FORCE_LOG_OUT_ALLERT_MESSAGE = "Expired Token\nPlease login again."
 }
 
 struct Session {
     static let userChace = UserDefaults.standard
     static let KEY_UDID = "UDID" //IMEI
     static let KEY_AUTH = "KEY_AUTH"
+    static let EMAIL = "EMAIL"
     static let OLD_PASS = "OLD_PASS"
 }
 
@@ -96,6 +96,7 @@ struct Theme {
     // Color for application
     static let primaryColor = UIColor.init(hex: "#66B219")
     static let secondaryColor = UIColor.init(hex: "#00AA00")
+    static let primaryBlueColor = UIColor.init(hex: "#29A9FF")
     
     static let errorColor = UIColor.init(hex: "#d31f26")
     static let successColor = UIColor.init(hex: "#8bc74a")

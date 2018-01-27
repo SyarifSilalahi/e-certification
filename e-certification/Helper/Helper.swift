@@ -91,17 +91,17 @@ class FileHelper {
         let url = NSURL(fileURLWithPath: path)
         if let pathComponent = url.appendingPathComponent("Digger/\(name)") {
             let filePath = pathComponent.path
-            print("filePath \(filePath)")
+//            print("filePath \(filePath)")
             let fileManager = FileManager.default
             if fileManager.fileExists(atPath: filePath) {
-                print("FILE AVAILABLE")
+//                print("FILE AVAILABLE")
                 return true
             } else {
-                print("FILE NOT AVAILABLE")
+//                print("FILE NOT AVAILABLE")
                 return false
             }
         } else {
-            print("FILE PATH NOT AVAILABLE")
+//            print("FILE PATH NOT AVAILABLE")
             return false
         }
     }

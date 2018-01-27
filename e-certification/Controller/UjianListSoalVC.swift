@@ -25,7 +25,7 @@ class UjianListSoalVC: UIViewController {
         self.collectionMenu.dataSource=self
         self.collectionMenu.delegate=self
         let collectionViewLayout:UICollectionViewFlowLayout = self.collectionMenu.collectionViewLayout as! UICollectionViewFlowLayout
-        let size = (self.view.frame.size.width / 4) - 40
+        let size = (self.view.frame.size.width / 4) - 35
         let cellheight = size
         let cellwidth = size
         collectionViewLayout.itemSize = CGSize(width: cellwidth, height: cellheight )

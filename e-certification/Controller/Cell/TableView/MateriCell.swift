@@ -57,10 +57,14 @@ class MateriCell: UITableViewCell {
         
         if FileHelper().isFileExist(name: FileHelper().getNameFromUrl(url: urlPdf)) {
             self.btnPdf.setImage(#imageLiteral(resourceName: "ico-pdf-enable"), for: .normal)
+        }else{
+            self.btnPdf.setImage(#imageLiteral(resourceName: "ico-pdf-disable"), for: .normal)
         }
         
         if FileHelper().isFileExist(name: FileHelper().getNameFromUrl(url: urlVideo)) {
             self.btnVideo.setImage(#imageLiteral(resourceName: "ico-video-enable"), for: .normal)
+        }else{
+            self.btnVideo.setImage(#imageLiteral(resourceName: "ico-video-disable"), for: .normal)
         }
         
         btnPdf.addTarget(self, action: #selector(openPdf(sender:)), for: .touchUpInside)

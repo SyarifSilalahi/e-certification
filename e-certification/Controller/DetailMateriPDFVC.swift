@@ -8,6 +8,7 @@
 
 import UIKit
 import PDFReader
+import Digger
 
 class DetailMateriPDFVC: UIViewController {
     
@@ -57,7 +58,17 @@ class DetailMateriPDFVC: UIViewController {
     }
     
     @IBAction func deletePdf(_ sender: AnyObject) {
-        self.navigationController?.popViewController(animated: true)
+        let deleteAlert = UIAlertController(title: "Confirmation", message: "Are you sure want to delete this content?", preferredStyle: UIAlertControllerStyle.alert)
+        
+        deleteAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+            DiggerCache.removeItem(atPath: FileHelper().getFilePath(name: "\(self.fileName)"))
+            self.navigationController?.popViewController(animated: true)
+        }))
+        
+        deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+        }))
+        
+        present(deleteAlert, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {

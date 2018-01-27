@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import Arrow
 
 class RSlideMenu: UIViewController {
     
     @IBOutlet weak var tblMenu: UITableView!
     @IBOutlet weak var imgAvatar: UIImageView!
     @IBOutlet weak var lblName: UILabel!
+    
+    var dataUser = UserAuthData()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,8 +24,12 @@ class RSlideMenu: UIViewController {
         app.isStatusBarHidden = true
         self.navigationController?.isNavigationBarHidden = true
         // Do any additional setup after loading the view.
+        let data = JSON(Session.userChace.object(forKey: Session.KEY_AUTH) as AnyObject?)
+        dataUser.deserialize(data!)
+        self.lblName.text = dataUser.name
         custamizeMenu()
         setTblMenu()
+        
     }
     
     func setTblMenu(){
@@ -47,7 +54,22 @@ class RSlideMenu: UIViewController {
     }
     
     @IBAction func logOut(_ sender: AnyObject) {
+        let alert = UIAlertController(title: nil, message: "Are you sure want to Logout?" , preferredStyle: .actionSheet)
         
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { action in
+            // perhaps use action.title here
+        })
+        
+        alert.addAction(UIAlertAction(title: "Logout", style: .destructive) { action in
+            //do logout
+            //clear session
+            Session.userChace.removeObject(forKey: Session.EMAIL)
+            Session.userChace.removeObject(forKey: Session.KEY_AUTH)
+            //force back to login
+            self.performSegue(withIdentifier: "unwindToViewController1", sender: self)
+        })
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -79,7 +101,7 @@ class RSlideMenu: UIViewController {
 
 extension RSlideMenu:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 3
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -91,20 +113,16 @@ extension RSlideMenu:UITableViewDelegate,UITableViewDataSource{
         cell.selectionStyle = .none
         switch indexPath.row {
         case 0:
-            cell.lblTitle.text = "Kartu Anggota"
-            cell.lblDetail.text = "0000-0000-000"
+            cell.lblTitle.text = "Nama"
+            cell.lblDetail.text = self.dataUser.name
             break
         case 1:
-            cell.lblTitle.text = "Ubah Password"
-            cell.lblDetail.text = ""
+            cell.lblTitle.text = "Email"
+            cell.lblDetail.text = Session.userChace.object(forKey: Session.EMAIL) as? String
             break
         case 2:
-            cell.lblTitle.text = "Tanggal Aktif"
-            cell.lblDetail.text = "21/07/2017"
-            break
-        case 3:
-            cell.lblTitle.text = "Masa Berlaku"
-            cell.lblDetail.text = "6 bulan"
+            cell.lblTitle.text = "Ubah Password"
+            cell.lblDetail.text = "************"
             break
         default:
             break

@@ -465,7 +465,6 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="lblTitle" destination="mR2-89-iDE" id="EFV-oO-NkG"/>
-                                            <segue destination="tEy-WP-JeJ" kind="show" id="LHR-m8-QsN"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -496,7 +495,7 @@
                                 <rect key="frame" x="0.0" y="49" width="375" height="40"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="20 / 20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I9J-9O-Cox">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0 / 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I9J-9O-Cox">
                                         <rect key="frame" x="43" y="10" width="68" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
@@ -536,7 +535,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="selesai:" destination="yHK-Ki-Pna" eventType="touchUpInside" id="Dgi-KV-vOQ"/>
+                                    <action selector="selesai:" destination="ECM-rL-yRH" eventType="touchUpInside" id="iP2-ga-kcR"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -545,6 +544,8 @@
                     </view>
                     <connections>
                         <outlet property="collectionMenu" destination="Ms0-vo-b3N" id="pQz-cE-vSE"/>
+                        <outlet property="lblCounter" destination="I9J-9O-Cox" id="BKS-F0-gEY"/>
+                        <segue destination="tEy-WP-JeJ" kind="show" identifier="openDetailSoal" id="myV-8q-OxV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fId-vj-2AN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -610,7 +611,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qkX-g6-hzE">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qkX-g6-hzE">
                                 <rect key="frame" x="0.0" y="89" width="375" height="461"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -631,77 +632,56 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
-                                <view key="tableFooterView" contentMode="scaleToFill" id="j7p-aC-dEg">
-                                    <rect key="frame" x="0.0" y="200" width="375" height="300"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uxO-HS-UUm">
-                                            <rect key="frame" x="70" y="30" width="234" height="54"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" red="0.74622938368055558" green="0.11264595723055557" blue="0.029052734375" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <state key="normal" title="A. Lorem ipsum dolor sit amet">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </state>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                    <real key="value" value="8"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C9P-xK-koC">
-                                            <rect key="frame" x="70" y="99" width="234" height="54"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" red="0.13307291666666662" green="0.70558044833888878" blue="0.52265401603722217" alpha="1" colorSpace="calibratedRGB"/>
-                                            <state key="normal" title="B. Lorem ipsum dolor sit amet">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </state>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                    <real key="value" value="8"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hV6-hf-RbD">
-                                            <rect key="frame" x="70" y="168" width="234" height="54"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <state key="normal" title="C. Lorem ipsum dolor sit amet">
-                                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </state>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                    <real key="value" value="8"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                    <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                    <real key="value" value="1"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wdf-X6-gk1">
-                                            <rect key="frame" x="70" y="237" width="234" height="54"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <state key="normal" title="D. Lorem ipsum dolor sit amet">
-                                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </state>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                    <real key="value" value="8"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                    <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                    <real key="value" value="1"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                        </button>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </view>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OpsiSoalCellIdentifier" rowHeight="66" id="pAz-5n-FIc" customClass="OpsiSoalCell" customModule="e_certification" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="228" width="375" height="66"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pAz-5n-FIc" id="42M-gQ-TMO">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tph-Gb-U3a">
+                                                    <rect key="frame" x="66" y="6" width="243" height="54"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="A." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9SK-8H-tGQ">
+                                                            <rect key="frame" x="20" y="0.0" width="20" height="54"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Aasdasda" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="94z-39-uSE">
+                                                            <rect key="frame" x="43" y="0.0" width="193" height="54"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                            <color key="value" red="0.30588235294117649" green="0.30588235294117649" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                            <real key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="8"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="lblDetail" destination="94z-39-uSE" id="dQb-Qk-5Ck"/>
+                                            <outlet property="lblTitle" destination="9SK-8H-tGQ" id="gMF-XS-9h6"/>
+                                            <outlet property="viewBgOpsi" destination="Tph-Gb-U3a" id="vHB-UY-1Kq"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2NR-2x-74N">
                                 <rect key="frame" x="0.0" y="550" width="375" height="117"/>
@@ -726,7 +706,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="selesai:" destination="yHK-Ki-Pna" eventType="touchUpInside" id="EIL-Sm-QRW"/>
+                                            <action selector="back:" destination="tEy-WP-JeJ" eventType="touchUpInside" id="b2f-GB-erg"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o9B-Gp-asY">
@@ -737,6 +717,9 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                                         <state key="normal" title="Sebelumnya" image="ico-arrow-backward">
                                             <color key="titleColor" red="0.16078431369999999" green="0.66274509800000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="soalBack:" destination="tEy-WP-JeJ" eventType="touchUpInside" id="q1T-z4-e0v"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Bg-PG-yLj">
                                         <rect key="frame" x="258" y="3" width="90" height="40"/>
@@ -747,6 +730,9 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                                         <state key="normal" title="Selanjutnya" image="ico-arrow-forward">
                                             <color key="titleColor" red="0.16078431369999999" green="0.66274509800000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="soalNext:" destination="tEy-WP-JeJ" eventType="touchUpInside" id="CQW-W0-Hme"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7dL-pC-dMJ">
                                         <rect key="frame" x="121" y="11" width="23" height="23"/>
@@ -791,6 +777,13 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="1gb-Aj-QaO"/>
                     </view>
+                    <connections>
+                        <outlet property="lblCounter" destination="Gxh-DW-XbD" id="tAq-oP-Zn8"/>
+                        <outlet property="lblCounterBack" destination="7dL-pC-dMJ" id="jvU-Iu-Zzb"/>
+                        <outlet property="lblCounterNext" destination="rLT-R6-nZQ" id="p58-lb-GeZ"/>
+                        <outlet property="lblSoal" destination="IlI-MZ-iDa" id="Qc8-pg-fZU"/>
+                        <outlet property="tblSoal" destination="qkX-g6-hzE" id="xya-fL-X0T"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vPk-yL-AjL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

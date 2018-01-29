@@ -43,6 +43,10 @@ struct Wording {
     static let Connection = "Connection problem!"
     static let FORCE_LOG_OUT_ALLERT_TITLE = "Upss!"
     static let FORCE_LOG_OUT_ALLERT_MESSAGE = "Expired Token\nPlease login again."
+    static let FINISH_EXERCISE_TITLE = "Latihan Selesai."
+    static let FINISH_EXERCISE_MESSAGE = "Anda yakin ingin mengumpulkan ?"
+    static let FINISH_EXAM_TITLE = "Ujian Selesai."
+    static let FINISH_EXAM_MESSAGE = "Anda yakin ingin mengumpulkan ?"
 }
 
 struct Session {
@@ -97,6 +101,7 @@ struct Theme {
     static let primaryColor = UIColor.init(hex: "#66B219")
     static let secondaryColor = UIColor.init(hex: "#00AA00")
     static let primaryBlueColor = UIColor.init(hex: "#29A9FF")
+    static let NavigationColor = UIColor.init(hex: "#4E4E4E") //charcoal
     
     static let errorColor = UIColor.init(hex: "#d31f26")
     static let successColor = UIColor.init(hex: "#8bc74a")

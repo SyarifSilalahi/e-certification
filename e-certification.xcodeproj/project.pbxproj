@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1307A7C72016617200A7EF45 /* LatihanDetailSoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1307A7C62016617200A7EF45 /* LatihanDetailSoalVC.swift */; };
 		1307A7C92016619900A7EF45 /* UjianDetailSoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1307A7C82016619900A7EF45 /* UjianDetailSoalVC.swift */; };
+		13171BBF201F9695005D4FEF /* OpsiSoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13171BBE201F9695005D4FEF /* OpsiSoalCell.swift */; };
 		1345768E2010F03800B0E2C6 /* UISideMenuNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1345768B2010F03700B0E2C6 /* UISideMenuNavigationController.swift */; };
 		1345768F2010F03800B0E2C6 /* SideMenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1345768C2010F03700B0E2C6 /* SideMenuManager.swift */; };
 		134576902010F03800B0E2C6 /* SideMenuTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1345768D2010F03700B0E2C6 /* SideMenuTransition.swift */; };
@@ -65,6 +66,7 @@
 		00752B244310665ED3A92153 /* Pods-e-certification.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-e-certification.release.xcconfig"; path = "Pods/Target Support Files/Pods-e-certification/Pods-e-certification.release.xcconfig"; sourceTree = "<group>"; };
 		1307A7C62016617200A7EF45 /* LatihanDetailSoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatihanDetailSoalVC.swift; sourceTree = "<group>"; };
 		1307A7C82016619900A7EF45 /* UjianDetailSoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UjianDetailSoalVC.swift; sourceTree = "<group>"; };
+		13171BBE201F9695005D4FEF /* OpsiSoalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpsiSoalCell.swift; sourceTree = "<group>"; };
 		1345768B2010F03700B0E2C6 /* UISideMenuNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UISideMenuNavigationController.swift; sourceTree = "<group>"; };
 		1345768C2010F03700B0E2C6 /* SideMenuManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuManager.swift; sourceTree = "<group>"; };
 		1345768D2010F03700B0E2C6 /* SideMenuTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuTransition.swift; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 				1347F523200F9B590023B3B8 /* JadwalCell.swift */,
 				13F1B521200FC65E005EC232 /* LatihanCell.swift */,
 				134576932011025300B0E2C6 /* MenuCell.swift */,
+				13171BBE201F9695005D4FEF /* OpsiSoalCell.swift */,
 			);
 			path = TableView;
 			sourceTree = "<group>";
@@ -531,6 +534,7 @@
 				1347F533200F9B590023B3B8 /* JadwalCell.swift in Sources */,
 				1347F4DF200F99D10023B3B8 /* ViewController.swift in Sources */,
 				1347F52F200F9B590023B3B8 /* MateriPageVC.swift in Sources */,
+				13171BBF201F9695005D4FEF /* OpsiSoalCell.swift in Sources */,
 				1347F4DD200F99D10023B3B8 /* AppDelegate.swift in Sources */,
 				1347F530200F9B590023B3B8 /* DetailMateriVideoVC.swift in Sources */,
 				13CCF02B201A2EF30045A5DE /* ListMateri.swift in Sources */,

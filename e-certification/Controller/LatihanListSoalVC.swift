@@ -12,9 +12,11 @@ class LatihanListSoalVC: UIViewController {
 
     @IBOutlet weak var collectionMenu: UICollectionView!
     @IBOutlet weak var btnSelesai: UIButton!
+    @IBOutlet weak var lblCounter: UILabel!
     
     var modul:ModulLatihan!
     var listSoal:ListQuestionLatihan! = ListQuestionLatihan()
+    var indexSelected = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +45,7 @@ class LatihanListSoalVC: UIViewController {
             
             //json data model
             self.listSoal.deserialize(response!)
+            self.lblCounter.text = "0 / \(self.listSoal.data.count)"
             self.setMenuCollection()
         }
     }
@@ -65,7 +68,24 @@ class LatihanListSoalVC: UIViewController {
     }
     
     @IBAction func selesai(_ sender: AnyObject) {
-        self.navigationController?.popViewController(animated: true)
+        let alert = UIAlertController(title: Wording.FINISH_EXERCISE_TITLE, message: Wording.FINISH_EXERCISE_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
+        
+        let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
+            let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+            self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
+        })
+        alert.addAction(alertOKAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        if (segue.identifier == "openDetailSoal") {
+            let vc = segue.destination as! LatihanDetailSoalVC
+            vc.index = self.indexSelected
+            vc.listSoal = self.listSoal
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -88,24 +108,25 @@ class LatihanListSoalVC: UIViewController {
 extension LatihanListSoalVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20 //listSoal.data.count
+        return listSoal.data.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell: MenuCVCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MenuCVCellIdentifier", for: indexPath) as! MenuCVCell
         cell.lblTitle.text = "\(indexPath.row + 1)"
-        if indexPath.row == 0 {
-            cell.setModeCorrect()
-        }else if indexPath.row == 3{
-            cell.setModeInCorrect()
-        }else{
-            cell.setModeNormal()
-        }
+//        if indexPath.row == 0 {
+//            cell.setModeCorrect()
+//        }else if indexPath.row == 3{
+//            cell.setModeInCorrect()
+//        }else{
+//            cell.setModeNormal()
+//        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        self.indexSelected = indexPath.row
+        self.performSegue(withIdentifier: "openDetailSoal", sender: self)
     }
 }

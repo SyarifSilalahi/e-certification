@@ -102,6 +102,9 @@ class SignInVC: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+        UIView.animate(withDuration: 0.5, animations: { () -> Void in
+            self.viewBgSignIn.frame.origin.y = 123
+        })
     }
     
     override func didReceiveMemoryWarning() {

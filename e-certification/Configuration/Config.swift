@@ -16,6 +16,14 @@ import Hue
 //4 belum di assign
 //5 on progress
 
+enum ExamStatus : Int {
+    case SudahDiAssign = 1
+    case Lulus = 2
+    case Gagal = 3
+    case BelumDiAssign = 4
+    case OnProgress = 5
+}
+
 struct Domain {
     
     // BASE URL PRODUCTION
@@ -31,6 +39,8 @@ struct Domain {
     static let URL_MATERI = "\(URL_BASE)/user/material"
     static let URL_MODUL_LATIHAN = "\(URL_BASE)/user/sub_module"
     static let URL_QUESTION_LATIHAN = "\(URL_BASE)/user/exercise_question"
+    static let URL_EXAM_STATUS = "\(URL_BASE)/user/check_status_exam"
+    static let URL_QUESTION_UJIAN = "\(URL_BASE)/user/exam_question"
     
     static let URL_CHAT = "\(URL_BASE)/chat"
     

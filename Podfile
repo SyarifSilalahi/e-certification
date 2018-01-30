@@ -17,6 +17,9 @@ target 'e-certification' do
   pod 'VGPlayer'
   pod 'PDFReader'
 
+  #timer label
+  pod 'CountdownLabel'
+  
   #Downloader
   pod 'Digger'
 

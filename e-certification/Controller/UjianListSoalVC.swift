@@ -7,10 +7,17 @@
 //
 
 import UIKit
+import CountdownLabel
 
 class UjianListSoalVC: UIViewController {
+    
     @IBOutlet weak var collectionMenu: UICollectionView!
     @IBOutlet weak var btnSelesai: UIButton!
+    @IBOutlet weak var lblCounter: UILabel!
+    @IBOutlet var lblTimer: CountdownLabel!
+    
+    var listSoal:ListQuestionUjian! = ListQuestionUjian()
+    var indexSelected = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,7 +25,37 @@ class UjianListSoalVC: UIViewController {
         let app = UIApplication.shared
         app.statusBarStyle = .lightContent
         // Do any additional setup after loading the view.
-        self.setMenuCollection()
+        self.getListSoal()
+    }
+    
+    func getListSoal(){
+        ApiManager().getQuestionsUjian { (response,failure, error) in
+            if error != nil{
+                print("error load Question Latihan \(String(describing: error))")
+                return
+            }
+            if failure != nil{
+                var fail = Failure()
+                fail.deserialize(failure!)
+                print("failure message \(fail.message)")
+                CustomAlert().Error(message: fail.message)
+                //do action failure here
+                return
+            }
+            
+            
+            //json data model
+            self.listSoal.deserialize(response!)
+            self.lblCounter.text = "0 / \(self.listSoal.data.count)"
+            self.setMenuCollection()
+            
+            //set timer
+            self.lblTimer.setCountDownTime(minutes: 6000)
+            self.lblTimer.animationType = CountdownEffect.Evaporate
+            self.lblTimer.timeFormat = "hh:mm:ss"
+            self.lblTimer.delegate = self as? LTMorphingLabelDelegate
+            self.lblTimer.start()
+        }
     }
     
     func setMenuCollection(){
@@ -32,8 +69,24 @@ class UjianListSoalVC: UIViewController {
         self.collectionMenu.reloadData()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        if (segue.identifier == "openDetailSoalUjian") {
+            let vc = segue.destination as! UjianDetailSoalVC
+            vc.index = self.indexSelected
+            vc.listSoal = self.listSoal
+        }
+    }
+    
     @IBAction func selesai(_ sender: AnyObject) {
-        self.navigationController?.popViewController(animated: true)
+        let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: Wording.FINISH_EXAM_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
+        
+        let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
+            //finish exam
+        })
+        alert.addAction(alertOKAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -56,7 +109,7 @@ class UjianListSoalVC: UIViewController {
 extension UjianListSoalVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 100
+        return listSoal.data.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -67,6 +120,21 @@ extension UjianListSoalVC: UICollectionViewDelegate, UICollectionViewDataSource 
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        self.indexSelected = indexPath.row
+        self.performSegue(withIdentifier: "openDetailSoalUjian", sender: self)
     }
+}
+
+extension UjianListSoalVC: CountdownLabelDelegate {
+    func countdownFinished() {
+        debugPrint("countdownFinished at delegate.")
+        //completion
+        print("timer finished")
+    }
+    
+    internal func countingAt(timeCounted: TimeInterval, timeRemaining: TimeInterval) {
+        debugPrint("time counted at delegate=\(timeCounted)")
+        debugPrint("time remaining at delegate=\(timeRemaining)")
+    }
+    
 }

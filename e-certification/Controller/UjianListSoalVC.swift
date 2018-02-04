@@ -18,6 +18,8 @@ class UjianListSoalVC: UIViewController {
     
     var listSoal:ListQuestionUjian! = ListQuestionUjian()
     var indexSelected = 0
+    let imagePicker = UIImagePickerController()
+    var nilai = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,37 +27,20 @@ class UjianListSoalVC: UIViewController {
         let app = UIApplication.shared
         app.statusBarStyle = .lightContent
         // Do any additional setup after loading the view.
+        self.imagePicker.delegate = self
         self.getListSoal()
     }
     
     func getListSoal(){
-        ApiManager().getQuestionsUjian { (response,failure, error) in
-            if error != nil{
-                print("error load Question Latihan \(String(describing: error))")
-                return
-            }
-            if failure != nil{
-                var fail = Failure()
-                fail.deserialize(failure!)
-                print("failure message \(fail.message)")
-                CustomAlert().Error(message: fail.message)
-                //do action failure here
-                return
-            }
-            
-            
-            //json data model
-            self.listSoal.deserialize(response!)
-            self.lblCounter.text = "0 / \(self.listSoal.data.count)"
-            self.setMenuCollection()
-            
-            //set timer
-            self.lblTimer.setCountDownTime(minutes: 6000)
-            self.lblTimer.animationType = CountdownEffect.Evaporate
-            self.lblTimer.timeFormat = "hh:mm:ss"
-            self.lblTimer.delegate = self as? LTMorphingLabelDelegate
-            self.lblTimer.start()
-        }
+        self.lblCounter.text = "0 / \(self.listSoal.data.count)"
+        self.setMenuCollection()
+        
+        //set timer
+        self.lblTimer.setCountDownTime(minutes: 6000)
+        self.lblTimer.animationType = CountdownEffect.Evaporate
+        self.lblTimer.timeFormat = "hh:mm:ss"
+        self.lblTimer.delegate = self as? LTMorphingLabelDelegate
+        self.lblTimer.start()
     }
     
     func setMenuCollection(){
@@ -76,17 +61,42 @@ class UjianListSoalVC: UIViewController {
             let vc = segue.destination as! UjianDetailSoalVC
             vc.index = self.indexSelected
             vc.listSoal = self.listSoal
+        }else if (segue.identifier == "hasilUjian"){
+            let vc = segue.destination as! HasilUjianVC
+            vc.nilai = self.nilai
         }
     }
     
     @IBAction func selesai(_ sender: AnyObject) {
-        let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: Wording.FINISH_EXAM_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
+        if UjianAnswer.isFinished == false{
+            UjianAnswer.isFinished = true
+            self.lblTimer.cancel()
+            self.collectionMenu.reloadData()
+            for dic in UjianAnswer.arrAnswer{
+                if dic["status"] == "true"{
+                    nilai += 1
+                }
+            }
+            let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: Wording.FINISH_EXAM_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
+            
+            let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
+                //finish exam
+                // camera
+                self.openCamera()
+            })
+            alert.addAction(alertOKAction)
+            self.present(alert, animated: true, completion: nil)
+        }else{
+            self.navigationController?.popViewController(animated: true)
+        }
         
-        let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
-            //finish exam
-        })
-        alert.addAction(alertOKAction)
-        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func openCamera(){
+        self.imagePicker.allowsEditing = true
+        self.imagePicker.sourceType = .camera
+        self.imagePicker.cameraDevice = .front
+        self.present(self.imagePicker, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -116,6 +126,17 @@ extension UjianListSoalVC: UICollectionViewDelegate, UICollectionViewDataSource 
         
         let cell: MenuCVCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MenuCVCellIdentifier", for: indexPath) as! MenuCVCell
         cell.lblTitle.text = "\(indexPath.row + 1)"
+        
+        if UjianAnswer.isFinished{
+            if UjianAnswer.arrAnswer[indexPath.row]["status"] == "true"{
+                cell.setModeCorrect()
+            }else {
+                cell.setModeInCorrect()
+            }
+        }else{
+            cell.setModeNormal()
+        }
+        
         return cell
     }
     
@@ -137,4 +158,21 @@ extension UjianListSoalVC: CountdownLabelDelegate {
         debugPrint("time remaining at delegate=\(timeRemaining)")
     }
     
+}
+
+extension UjianListSoalVC: UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage{
+//            self.imgProfilePicture.image = pickedImage
+            self.performSegue(withIdentifier: "hasilUjian", sender: self)
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true) {
+            UjianAnswer.isFinished = false
+        }
+    }
 }

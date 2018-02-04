@@ -117,3 +117,13 @@ struct Theme {
     static let successColor = UIColor.init(hex: "#8bc74a")
     
 }
+
+struct LatihanAnswer {
+    static var isFinished:Bool = false
+    static var arrAnswer:[[String:String]] = [] as! [[String:String]]
+}
+
+struct UjianAnswer {
+    static var isFinished:Bool = false
+    static var arrAnswer:[[String:String]] = [] as! [[String:String]]
+}

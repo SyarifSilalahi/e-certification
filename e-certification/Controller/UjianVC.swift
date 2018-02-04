@@ -27,6 +27,7 @@ class UjianVC: UIViewController {
     @IBOutlet weak var btnMulai: UIButton!
     
     var examStatus:StatusExam! = StatusExam()
+    var listSoal:ListQuestionUjian! = ListQuestionUjian()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,7 +71,7 @@ class UjianVC: UIViewController {
     
     func showComponent(){
         self.lblTitle.alpha = 1
-        self.lblDate.alpha = 1
+        self.lblDate.alpha = 0
         self.lblInfo.alpha = 1
         self.btnMulai.alpha = 1
     }
@@ -95,7 +96,50 @@ class UjianVC: UIViewController {
         case ExamStatus.OnProgress.rawValue:
             break
         default:
+            self.viewAccessDenied.frame = self.imgBg.frame
+            self.view.addSubview(self.viewAccessDenied)
             break
+        }
+    }
+    
+    @IBAction func start(_ sender: AnyObject) {
+        ApiManager().getQuestionsUjian { (response,failure, error) in
+            if error != nil{
+                print("error load Question Ujian \(String(describing: error))")
+                return
+            }
+            if failure != nil{
+                var fail = Failure()
+                fail.deserialize(failure!)
+                print("failure message \(fail.message)")
+                CustomAlert().Error(message: fail.message)
+                //do action failure here
+                return
+            }
+            
+            
+            //json data model
+            self.listSoal.deserialize(response!)
+            UjianAnswer.arrAnswer = []
+            UjianAnswer.isFinished = false
+            for _ in 0..<self.listSoal.data.count{
+                let tempAnswer = [
+                    "choosed" : "",
+                    "status" : "notAnswered"
+                ]
+                UjianAnswer.arrAnswer.append(tempAnswer)
+            }
+            self.performSegue(withIdentifier: "openListSoalUjian", sender: self)
+            
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        if (segue.identifier == "openListSoalUjian") {
+            let vc = segue.destination as! UjianListSoalVC
+            vc.listSoal = self.listSoal
         }
     }
     

@@ -89,15 +89,18 @@ extension MateriPageVC:UITableViewDelegate,UITableViewDataSource{
         cell.setTitle(text: "\(dataMateri.data[indexPath.row].title)", isNew: true)
         cell.lblDetail.text = dataMateri.data[indexPath.row].sub_module_title
         cell.description_ = dataMateri.data[indexPath.row].description
-        //for testing
-        if indexPath.row == 0 {
-            cell.setActions(urlPdf: "\(dataMateri.data[indexPath.row].host_file)\(dataMateri.data[indexPath.row].document)", urlVideo: "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")
-            cell.videoTimeFlag = "0,15,30,40,50"
-        }else{
-            //normal nya
-            cell.setActions(urlPdf: "\(dataMateri.data[indexPath.row].host_file)\(dataMateri.data[indexPath.row].document)", urlVideo: "\(dataMateri.data[indexPath.row].host_file)\(dataMateri.data[indexPath.row].video)")
-            cell.videoTimeFlag = dataMateri.data[indexPath.row].video_next
-        }
+        
+        cell.setActions(urlPdf: "\(dataMateri.data[indexPath.row].host_file)\(dataMateri.data[indexPath.row].document)", urlVideo: "\(dataMateri.data[indexPath.row].host_file)\(dataMateri.data[indexPath.row].video)")
+        cell.videoTimeFlag = dataMateri.data[indexPath.row].video_next
+        
+//        //for testing
+//        if indexPath.row == 0 {
+//            cell.setActions(urlPdf: "\(dataMateri.data[indexPath.row].host_file)\(dataMateri.data[indexPath.row].document)", urlVideo: "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")
+//            cell.videoTimeFlag = "0,15,30,40,50"
+//        }else{
+//            //normal nya
+//
+//        }
         cell.delegate = self
         return cell
     }

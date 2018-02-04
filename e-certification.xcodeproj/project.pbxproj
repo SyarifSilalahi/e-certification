@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1305EE5B202796E300F8D849 /* HasilUjianVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1305EE5A202796E300F8D849 /* HasilUjianVC.swift */; };
 		1307A7C72016617200A7EF45 /* LatihanDetailSoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1307A7C62016617200A7EF45 /* LatihanDetailSoalVC.swift */; };
 		1307A7C92016619900A7EF45 /* UjianDetailSoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1307A7C82016619900A7EF45 /* UjianDetailSoalVC.swift */; };
 		13171BBF201F9695005D4FEF /* OpsiSoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13171BBE201F9695005D4FEF /* OpsiSoalCell.swift */; };
@@ -65,6 +66,7 @@
 
 /* Begin PBXFileReference section */
 		00752B244310665ED3A92153 /* Pods-e-certification.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-e-certification.release.xcconfig"; path = "Pods/Target Support Files/Pods-e-certification/Pods-e-certification.release.xcconfig"; sourceTree = "<group>"; };
+		1305EE5A202796E300F8D849 /* HasilUjianVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasilUjianVC.swift; sourceTree = "<group>"; };
 		1307A7C62016617200A7EF45 /* LatihanDetailSoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatihanDetailSoalVC.swift; sourceTree = "<group>"; };
 		1307A7C82016619900A7EF45 /* UjianDetailSoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UjianDetailSoalVC.swift; sourceTree = "<group>"; };
 		13171BBE201F9695005D4FEF /* OpsiSoalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpsiSoalCell.swift; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 				13D6B7822012842100C4637B /* UjianVC.swift */,
 				13D6B7842012843D00C4637B /* UjianListSoalVC.swift */,
 				1307A7C82016619900A7EF45 /* UjianDetailSoalVC.swift */,
+				1305EE5A202796E300F8D849 /* HasilUjianVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -538,6 +541,7 @@
 				1347F513200F9A8E0023B3B8 /* DesignableUITextField.swift in Sources */,
 				1347F533200F9B590023B3B8 /* JadwalCell.swift in Sources */,
 				1347F4DF200F99D10023B3B8 /* ViewController.swift in Sources */,
+				1305EE5B202796E300F8D849 /* HasilUjianVC.swift in Sources */,
 				1347F52F200F9B590023B3B8 /* MateriPageVC.swift in Sources */,
 				13171BBF201F9695005D4FEF /* OpsiSoalCell.swift in Sources */,
 				1347F4DD200F99D10023B3B8 /* AppDelegate.swift in Sources */,

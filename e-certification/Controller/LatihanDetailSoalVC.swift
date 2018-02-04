@@ -11,6 +11,7 @@ import UIKit
 class LatihanDetailSoalVC: UIViewController {
     
     @IBOutlet weak var tblSoal: UITableView!
+    @IBOutlet weak var viewHeader: UIView!
     @IBOutlet weak var lblSoal: UILabel!
     @IBOutlet weak var lblCounterNext: UILabel!
     @IBOutlet weak var lblCounterBack: UILabel!
@@ -31,6 +32,12 @@ class LatihanDetailSoalVC: UIViewController {
         self.tblSoal.reloadData()
     }
     
+    func resetHeaderSize(){
+        let contentHeight = Helper().heightForView(self.listSoal.data[index].question, font: UIFont.systemFont(ofSize: 15, weight: .bold), width: self.lblSoal.frame.size.width) + 50
+        self.viewHeader.frame.size.height = contentHeight
+        self.tblSoal.tableHeaderView = self.viewHeader
+    }
+    
     func setLblCounter(){
         self.lblCounter.text = "\(index + 1) / \(self.listSoal.data.count)"
         if self.index > 0{
@@ -43,6 +50,7 @@ class LatihanDetailSoalVC: UIViewController {
             self.lblCounterBack.text = "\(self.index + 1)"
             self.lblCounterNext.text = "\(self.index + 1 + 1)"
         }
+        self.resetHeaderSize()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -119,16 +127,74 @@ extension LatihanDetailSoalVC:UITableViewDelegate,UITableViewDataSource{
         default:
             break
         }
-        if self.indexpathRow == indexPath.row{
-            cell.modeSelect()
+        
+        if LatihanAnswer.isFinished{
+            if LatihanAnswer.arrAnswer[self.index]["choosed"] == self.listSoal.data[self.index].answer{
+                if LatihanAnswer.arrAnswer[self.index]["choosed"] == cell.lblDetail.text {
+                    cell.modeTrue()
+                }else{
+                    if self.listSoal.data[self.index].answer == cell.lblDetail.text{
+                        cell.modeTrue()
+                    }else{
+                        cell.modeNormal()
+                    }
+                }
+            }else{
+                if LatihanAnswer.arrAnswer[self.index]["choosed"] == cell.lblDetail.text {
+                    cell.modeFalse()
+                }else{
+                    if self.listSoal.data[self.index].answer == cell.lblDetail.text{
+                        cell.modeTrue()
+                    }else{
+                        cell.modeNormal()
+                    }
+                }
+            }
         }else{
-            cell.modeNormal()
+            if LatihanAnswer.arrAnswer[self.index]["choosed"] == cell.lblDetail.text{
+                cell.modeSelect()
+            }else{
+                cell.modeNormal()
+            }
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.indexpathRow = indexPath.row
+        
+        switch indexPath.row {
+        case 0:
+            self.chooseAnswer(answer: self.listSoal.data[self.index].option1)
+            break
+        case 1:
+            self.chooseAnswer(answer: self.listSoal.data[self.index].option2)
+            break
+        case 2:
+            self.chooseAnswer(answer: self.listSoal.data[self.index].option3)
+            break
+        case 3:
+            self.chooseAnswer(answer: self.listSoal.data[self.index].option4)
+            break
+        default:
+            break
+        }
+        
         self.tblSoal.reloadData()
+    }
+    
+    func chooseAnswer(answer:String){
+        if self.listSoal.data[self.index].answer == answer{
+            let tempAnswer = [
+                "choosed" : "\(answer)",
+                "status" : "true"
+            ]
+            LatihanAnswer.arrAnswer[self.index] = tempAnswer
+        }else{
+            let tempAnswer = [
+                "choosed" : "\(answer)",
+                "status" : "false"
+            ]
+            LatihanAnswer.arrAnswer[self.index] = tempAnswer
+        }
     }
 }

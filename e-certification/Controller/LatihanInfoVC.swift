@@ -15,6 +15,7 @@ class LatihanInfoVC: UIViewController {
     @IBOutlet weak var lblInfo: UILabel!
 
     var modul:ModulLatihan!
+    var listSoal:ListQuestionLatihan! = ListQuestionLatihan()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,11 +31,45 @@ class LatihanInfoVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func start(_ sender: AnyObject) {
+        ApiManager().getQuestionsLatihan(self.modul.sub_module_id) { (response,failure, error) in
+            if error != nil{
+                print("error load Question Latihan \(String(describing: error))")
+                return
+            }
+            if failure != nil{
+                var fail = Failure()
+                fail.deserialize(failure!)
+                print("failure message \(fail.message)")
+                CustomAlert().Error(message: fail.message)
+                //do action failure here
+                return
+            }
+            
+            
+            //json data model
+            
+            self.listSoal.deserialize(response!)
+            LatihanAnswer.arrAnswer = []
+            LatihanAnswer.isFinished = false
+            for _ in 0..<self.listSoal.data.count{
+                let tempAnswer = [
+                    "choosed" : "",
+                    "status" : "notAnswered"
+                ]
+                LatihanAnswer.arrAnswer.append(tempAnswer)
+            }
+            self.performSegue(withIdentifier: "openListSoalLatihan", sender: self)
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        let vc = segue.destination as! LatihanListSoalVC
-        vc.modul = self.modul
+        if (segue.identifier == "openListSoalLatihan") {
+            let vc = segue.destination as! LatihanListSoalVC
+            vc.listSoal = self.listSoal
+        }
     }
     
     override func didReceiveMemoryWarning() {

@@ -108,3 +108,54 @@ struct QuestionUjian : ArrowParsable {
     }
 }
 
+struct StatusExam {
+    var code :Int = 0
+    var status = ""
+    var message = ""
+    var status_exam:Int = 0
+    var message_exam = ""
+    
+    /// The method you declare your json mapping in.
+    
+    mutating func deserialize(_ json: JSON) {
+        code <-- json["code"]
+        status <-- json["status"]
+        message <-- json["message"]
+        status_exam <-- json["data"]!["status_user"]!["status_exam"]
+        message_exam <-- json["data"]!["status_user"]!["message"]
+    }
+}
+
+struct DurationExam {
+    var code :Int = 0
+    var status = ""
+    var message = ""
+    var duration = ""
+    var server_time = ""
+    
+    /// The method you declare your json mapping in.
+    
+    mutating func deserialize(_ json: JSON) {
+        code <-- json["code"]
+        status <-- json["status"]
+        message <-- json["message"]
+        duration <-- json["data"]!["duration"] // base nya menit
+        server_time <-- json["data"]!["server_time"]
+    }
+}
+
+struct ScoreExam {
+    var code :Int = 0
+    var status = ""
+    var message = ""
+    var data :Int = 0
+    //data 2 = lulus
+    //data 3 = gagal
+    /// The method you declare your json mapping in.
+    mutating func deserialize(_ json: JSON) {
+        code <-- json["code"]
+        status <-- json["status"]
+        message <-- json["message"]
+        data <-- json["data"]
+    }
+}

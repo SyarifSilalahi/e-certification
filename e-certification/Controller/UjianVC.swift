@@ -28,11 +28,27 @@ class UjianVC: UIViewController {
     
     var examStatus:StatusExam! = StatusExam()
     var listSoal:ListQuestionUjian! = ListQuestionUjian()
+    var duration : DurationExam = DurationExam()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.hideComponentFirst()
+        
+        if Session.userChace.value(forKey: Session.FORCE_EXIT_EXAM) != nil {
+            UjianAnswer.arrAnswer = Session.userChace.value(forKey: Session.FORCE_EXIT_EXAM) as! [[String:String]]
+            var nilai = 0
+            for dic in UjianAnswer.arrAnswer{
+                if dic["status"] == "true"{
+                    nilai += 1
+                }
+            }
+            //do submit score here
+            //--> if success dont forget to clean the session
+            //and then re check status ujian
+            //then reload page
+        }
+        
         
     }
     
@@ -43,7 +59,7 @@ class UjianVC: UIViewController {
     func getStatus(){
         ApiManager().getExamStatus { (response,failure, error) in
             if error != nil{
-                print("error get \(String(describing: error))")
+                print("error getExamStatus \(String(describing: error))")
                 return
             }
             if failure != nil{
@@ -58,7 +74,31 @@ class UjianVC: UIViewController {
             //json data model
             self.examStatus.deserialize(response!)
             self.setViewStatusExam(status: self.examStatus)
+        }
+    }
+    
+    func setDuration(_: ()->()){
+        ApiManager().getDurationUjian { (response,failure, error) in
+            if error != nil{
+                print("error get Duration \(String(describing: error))")
+                return
+            }
+            if failure != nil{
+                var fail = Failure()
+                fail.deserialize(failure!)
+                print("failure message \(fail.message)")
+                CustomAlert().Error(message: fail.message)
+                //do action failure here
+                return
+            }
             
+            //json data model
+            self.duration.deserialize(response!)
+            let duration =  Double(self.duration.duration)
+            let minute:TimeInterval = duration!
+            let dateEndExam = Date(timeIntervalSinceNow: minute)
+            UjianAnswer.endDateExam = dateEndExam
+            print("UjianAnswer.endDateExam \(UjianAnswer.endDateExam)")
         }
     }
     
@@ -122,6 +162,7 @@ class UjianVC: UIViewController {
             self.listSoal.deserialize(response!)
             UjianAnswer.arrAnswer = []
             UjianAnswer.isFinished = false
+            UjianAnswer.isTimesUp = false
             for _ in 0..<self.listSoal.data.count{
                 let tempAnswer = [
                     "choosed" : "",
@@ -129,7 +170,10 @@ class UjianVC: UIViewController {
                 ]
                 UjianAnswer.arrAnswer.append(tempAnswer)
             }
-            self.performSegue(withIdentifier: "openListSoalUjian", sender: self)
+            self.setDuration({
+                self.performSegue(withIdentifier: "openListSoalUjian", sender: self)
+            })
+            
             
         }
     }

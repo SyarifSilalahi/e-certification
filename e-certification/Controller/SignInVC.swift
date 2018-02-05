@@ -66,11 +66,11 @@ class SignInVC: UIViewController {
     
     @IBAction func doSignIn(_ sender: AnyObject) {
         self.view.endEditing(true)
-        
+        let udid:String! = UIDevice.current.identifierForVendor!.uuidString
         let param = [
             "email" : "\(txtUsername.text!)",
             "password" : "\(txtPassword.text!)",
-            "device_id" : "1"
+            "device_id" : "\(udid)"
         ]
         ApiManager().userAuth(param) { (response,failure, error) in
             if error != nil{

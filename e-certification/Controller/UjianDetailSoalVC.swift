@@ -27,25 +27,40 @@ class UjianDetailSoalVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: Notification.Name.UIApplicationWillResignActive, object: nil)
+        
         self.lblSoal.text = self.listSoal.data[index].question
         self.setLblCounter()
         self.tblSoal.dataSource = self
         self.tblSoal.delegate = self
         self.tblSoal.reloadData()
         
+        let contentHeight = Helper().heightForView(self.listSoal.data[index].question, font: UIFont.systemFont(ofSize: 15, weight: .bold), width: self.lblSoal.frame.size.width) + 50
+        self.viewHeader.frame.size.height = contentHeight
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.setTimer()
+    }
+    
+    func setTimer(){
         if !UjianAnswer.isFinished{
             //set timer
-            self.lblTimer.setCountDownTime(minutes: 3000)
+            self.lblTimer.setCountDownDate(fromDate: Date() as NSDate, targetDate: UjianAnswer.endDateExam as NSDate)
             self.lblTimer.animationType = CountdownEffect.Evaporate
             self.lblTimer.timeFormat = "hh:mm:ss"
             self.lblTimer.delegate = self as? LTMorphingLabelDelegate
             self.lblTimer.start()
+        }else{
+            self.lblTimer.cancel()
         }
-        
-        let contentHeight = Helper().heightForView(self.listSoal.data[index].question, font: UIFont.systemFont(ofSize: 15, weight: .bold), width: self.lblSoal.frame.size.width) + 50
-        self.viewHeader.frame.size.height = contentHeight
     }
-
+    
+    @objc func appMovedToBackground() {
+       UjianAnswer.isFinished = true
+    }
+    
     func setLblCounter(){
         self.lblCounter.text = "\(index + 1) / \(self.listSoal.data.count)"
         if self.index > 0{
@@ -175,24 +190,26 @@ extension UjianDetailSoalVC:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row {
-        case 0:
-            self.chooseAnswer(answer: self.listSoal.data[self.index].option1)
-            break
-        case 1:
-            self.chooseAnswer(answer: self.listSoal.data[self.index].option2)
-            break
-        case 2:
-            self.chooseAnswer(answer: self.listSoal.data[self.index].option3)
-            break
-        case 3:
-            self.chooseAnswer(answer: self.listSoal.data[self.index].option4)
-            break
-        default:
-            break
+        if !UjianAnswer.isFinished{
+            switch indexPath.row {
+            case 0:
+                self.chooseAnswer(answer: self.listSoal.data[self.index].option1)
+                break
+            case 1:
+                self.chooseAnswer(answer: self.listSoal.data[self.index].option2)
+                break
+            case 2:
+                self.chooseAnswer(answer: self.listSoal.data[self.index].option3)
+                break
+            case 3:
+                self.chooseAnswer(answer: self.listSoal.data[self.index].option4)
+                break
+            default:
+                break
+            }
+            
+            self.tblSoal.reloadData()
         }
-        
-        self.tblSoal.reloadData()
     }
     
     func chooseAnswer(answer:String){
@@ -217,6 +234,15 @@ extension UjianDetailSoalVC: CountdownLabelDelegate {
         debugPrint("countdownFinished at delegate.")
         //completion
         print("timer finished")
+        let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: Wording.FINISH_EXAM_TIMESUP_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
+        
+        let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
+            //finish exam
+            self.navigationController?.popViewController(animated: true)
+        })
+        alert.addAction(alertOKAction)
+        self.present(alert, animated: true, completion: nil)
+        
     }
     
     internal func countingAt(timeCounted: TimeInterval, timeRemaining: TimeInterval) {

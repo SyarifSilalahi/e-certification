@@ -29,18 +29,41 @@ class UjianListSoalVC: UIViewController {
         // Do any additional setup after loading the view.
         self.imagePicker.delegate = self
         self.getListSoal()
+        
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: Notification.Name.UIApplicationWillResignActive, object: nil)
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.setTimer()
+        if UjianAnswer.isTimesUp{
+            self.lblTimer.cancel()
+            self.finishExam(message: Wording.FINISH_EXAM_TIMESUP_MESSAGE)
+        }
+    }
+    
+    @objc func appMovedToBackground() {
+        print("App moved to background!")
+        //submit score here
     }
     
     func getListSoal(){
         self.lblCounter.text = "0 / \(self.listSoal.data.count)"
         self.setMenuCollection()
-        
-        //set timer
-        self.lblTimer.setCountDownTime(minutes: 6000)
-        self.lblTimer.animationType = CountdownEffect.Evaporate
-        self.lblTimer.timeFormat = "hh:mm:ss"
-        self.lblTimer.delegate = self as? LTMorphingLabelDelegate
-        self.lblTimer.start()
+    }
+    
+    func setTimer(){
+        if !UjianAnswer.isFinished{
+            //set timer
+            self.lblTimer.setCountDownDate(fromDate: Date() as NSDate, targetDate: UjianAnswer.endDateExam as NSDate)
+            self.lblTimer.animationType = CountdownEffect.Evaporate
+            self.lblTimer.timeFormat = "hh:mm:ss"
+            self.lblTimer.delegate = self as? LTMorphingLabelDelegate
+            self.lblTimer.start()
+        }else{
+            self.lblTimer.cancel()
+        }
     }
     
     func setMenuCollection(){
@@ -67,25 +90,31 @@ class UjianListSoalVC: UIViewController {
         }
     }
     
+    func finishExam(message:String){
+        self.lblTimer.cancel()
+        self.collectionMenu.reloadData()
+        for dic in UjianAnswer.arrAnswer{
+            if dic["status"] == "true"{
+                nilai += 1
+            }
+        }
+        let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        
+        let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
+            //finish exam
+            //submit jawaban (score)
+            
+            // camera
+            self.openCamera()
+        })
+        alert.addAction(alertOKAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     @IBAction func selesai(_ sender: AnyObject) {
         if UjianAnswer.isFinished == false{
             UjianAnswer.isFinished = true
-            self.lblTimer.cancel()
-            self.collectionMenu.reloadData()
-            for dic in UjianAnswer.arrAnswer{
-                if dic["status"] == "true"{
-                    nilai += 1
-                }
-            }
-            let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: Wording.FINISH_EXAM_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
-            
-            let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
-                //finish exam
-                // camera
-                self.openCamera()
-            })
-            alert.addAction(alertOKAction)
-            self.present(alert, animated: true, completion: nil)
+            self.finishExam(message: Wording.FINISH_EXAM_TITLE)
         }else{
             self.navigationController?.popViewController(animated: true)
         }
@@ -141,8 +170,10 @@ extension UjianListSoalVC: UICollectionViewDelegate, UICollectionViewDataSource 
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.indexSelected = indexPath.row
-        self.performSegue(withIdentifier: "openDetailSoalUjian", sender: self)
+        if !UjianAnswer.isTimesUp{
+            self.indexSelected = indexPath.row
+            self.performSegue(withIdentifier: "openDetailSoalUjian", sender: self)
+        }
     }
 }
 
@@ -151,6 +182,8 @@ extension UjianListSoalVC: CountdownLabelDelegate {
         debugPrint("countdownFinished at delegate.")
         //completion
         print("timer finished")
+        UjianAnswer.isTimesUp = true
+        self.finishExam(message: Wording.FINISH_EXAM_TIMESUP_MESSAGE)
     }
     
     internal func countingAt(timeCounted: TimeInterval, timeRemaining: TimeInterval) {
@@ -165,6 +198,7 @@ extension UjianListSoalVC: UIImagePickerControllerDelegate,UINavigationControlle
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage{
 //            self.imgProfilePicture.image = pickedImage
+            //upload foto then go to hasil ujian
             self.performSegue(withIdentifier: "hasilUjian", sender: self)
             self.dismiss(animated: true, completion: nil)
         }

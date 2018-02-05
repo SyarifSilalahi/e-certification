@@ -41,6 +41,9 @@ struct Domain {
     static let URL_QUESTION_LATIHAN = "\(URL_BASE)/user/exercise_question"
     static let URL_EXAM_STATUS = "\(URL_BASE)/user/check_status_exam"
     static let URL_QUESTION_UJIAN = "\(URL_BASE)/user/exam_question"
+    static let URL_EXAM_DURATION = "\(URL_BASE)/user/get_exam_duration"
+    static let URL_EXAM_SUBMIT_SCORE = "\(URL_BASE)/user/score_after_exam"
+    static let URL_EXAM_UPLOAD_FOTO = "\(URL_BASE)/user/image_after_exam"
     
     static let URL_CHAT = "\(URL_BASE)/chat"
     
@@ -52,11 +55,13 @@ struct Wording {
     static let TIMEOVER = "Time is over"
     static let Connection = "Connection problem!"
     static let FORCE_LOG_OUT_ALLERT_TITLE = "Upss!"
-    static let FORCE_LOG_OUT_ALLERT_MESSAGE = "Expired Token\nPlease login again."
+    static let FORCE_LOG_OUT_ALLERT_MESSAGE = "User Access Expired.\nPlease login again."
     static let FINISH_EXERCISE_TITLE = "Latihan Selesai."
     static let FINISH_EXERCISE_MESSAGE = "Anda yakin ingin mengumpulkan ?"
     static let FINISH_EXAM_TITLE = "Ujian Selesai."
     static let FINISH_EXAM_MESSAGE = "Anda yakin ingin mengumpulkan ?"
+    static let FINISH_EXAM_DURATION_MESSAGE = "Anda telah menyelesaikan ujian.\nSilahkan lengkapi foto."
+    static let FINISH_EXAM_TIMESUP_MESSAGE = "Waktu ujian Telah selesai.\nSilahkan submit jawaban anda."
 }
 
 struct Session {
@@ -65,6 +70,7 @@ struct Session {
     static let KEY_AUTH = "KEY_AUTH"
     static let EMAIL = "EMAIL"
     static let OLD_PASS = "OLD_PASS"
+    static let FORCE_EXIT_EXAM = "EXIT"
 }
 
 struct FONT {
@@ -125,5 +131,7 @@ struct LatihanAnswer {
 
 struct UjianAnswer {
     static var isFinished:Bool = false
+    static var isTimesUp:Bool = false
     static var arrAnswer:[[String:String]] = [] as! [[String:String]]
+    static var endDateExam:Date = Date()
 }

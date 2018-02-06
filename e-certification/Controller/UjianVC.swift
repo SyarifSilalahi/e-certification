@@ -34,28 +34,53 @@ class UjianVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.hideComponentFirst()
-        
-        if Session.userChace.value(forKey: Session.FORCE_EXIT_EXAM) != nil {
-            UjianAnswer.arrAnswer = Session.userChace.value(forKey: Session.FORCE_EXIT_EXAM) as! [[String:String]]
-            var nilai = 0
-            for dic in UjianAnswer.arrAnswer{
-                if dic["status"] == "true"{
-                    nilai += 1
-                }
-            }
-            //do submit score here
-            //--> if success dont forget to clean the session
-            //and then re check status ujian
-            //then reload page
-        }
-        
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
+//        if Session.userChace.value(forKey: Session.FORCE_EXIT_EXAM) != nil {
+//            UjianAnswer.arrAnswer = Session.userChace.value(forKey: Session.FORCE_EXIT_EXAM) as! [[String:String]]
+//            var nilai = 0
+//            for dic in UjianAnswer.arrAnswer{
+//                if dic["status"] == "true"{
+//                    nilai += 1
+//                }
+//            }
+//            print("nilai \(UjianAnswer.arrAnswer)")
+//            //do submit score here
+//            self.submitJawaban(nilai: "\(nilai)")
+//
+//        }
+        
         self.getStatus()
+        
     }
     
+    func submitJawaban(nilai:String){
+        ApiManager().setScoreUjian(nilai: nilai) { (response,failure, error) in
+            if error != nil{
+                print("error setScoreUjian \(String(describing: error))")
+                return
+            }
+            if failure != nil{
+                var fail = Failure()
+                fail.deserialize(failure!)
+                print("failure message \(fail.message)")
+                CustomAlert().Error(message: fail.message)
+                //do action failure here
+                return
+            }
+            
+            var hasilUjian:ScoreExam = ScoreExam()
+            hasilUjian.deserialize(response!)
+            print("hasilUjian \(hasilUjian)")
+            //clear session
+//            Session.userChace.removeObject(forKey: Session.FORCE_EXIT_EXAM)
+            //and then re check status ujian
+            self.setViewStatusExam(status: hasilUjian.data)
+            //then reload page
+            
+        }
+    }
     func getStatus(){
         ApiManager().getExamStatus { (response,failure, error) in
             if error != nil{
@@ -77,7 +102,7 @@ class UjianVC: UIViewController {
         }
     }
     
-    func setDuration(_: ()->()){
+    func setDuration(){
         ApiManager().getDurationUjian { (response,failure, error) in
             if error != nil{
                 print("error get Duration \(String(describing: error))")
@@ -98,7 +123,8 @@ class UjianVC: UIViewController {
             let minute:TimeInterval = duration!
             let dateEndExam = Date(timeIntervalSinceNow: minute)
             UjianAnswer.endDateExam = dateEndExam
-            print("UjianAnswer.endDateExam \(UjianAnswer.endDateExam)")
+            print("now \(Date()) UjianAnswer.endDateExam \(UjianAnswer.endDateExam)")
+            self.performSegue(withIdentifier: "openListSoalUjian", sender: self)
         }
     }
     
@@ -116,6 +142,31 @@ class UjianVC: UIViewController {
         self.btnMulai.alpha = 1
     }
     
+    func setViewStatusExam(status:Int){
+        switch status {
+        case ExamStatus.Lulus.rawValue:
+            self.viewLulus.frame = self.imgBg.frame
+            self.view.addSubview(self.viewLulus)
+            break
+        case ExamStatus.Gagal.rawValue:
+            self.viewAccessDenied.frame = self.imgBg.frame
+            self.view.addSubview(self.viewAccessDenied)
+            break
+        case ExamStatus.BelumDiAssign.rawValue:
+            self.viewAccessDenied.frame = self.imgBg.frame
+            self.view.addSubview(self.viewAccessDenied)
+            break
+        case ExamStatus.OnProgress.rawValue:
+            self.viewAccessDenied.frame = self.imgBg.frame
+            self.view.addSubview(self.viewAccessDenied)
+            break
+        default:
+            self.viewAccessDenied.frame = self.imgBg.frame
+            self.view.addSubview(self.viewAccessDenied)
+            break
+        }
+    }
+    
     func setViewStatusExam(status:StatusExam!){
         
         switch status.status_exam {
@@ -128,12 +179,21 @@ class UjianVC: UIViewController {
             self.view.addSubview(self.viewLulus)
             break
         case ExamStatus.Gagal.rawValue:
+            self.viewAccessDenied.frame = self.imgBg.frame
+            self.view.addSubview(self.viewAccessDenied)
             break
         case ExamStatus.BelumDiAssign.rawValue:
             self.viewAccessDenied.frame = self.imgBg.frame
             self.view.addSubview(self.viewAccessDenied)
             break
         case ExamStatus.OnProgress.rawValue:
+            self.viewAccessDenied.frame = self.imgBg.frame
+            self.view.addSubview(self.viewAccessDenied)
+            
+            //buat testing
+//            self.submitJawaban(nilai: "90")
+            //
+            
             break
         default:
             self.viewAccessDenied.frame = self.imgBg.frame
@@ -170,10 +230,8 @@ class UjianVC: UIViewController {
                 ]
                 UjianAnswer.arrAnswer.append(tempAnswer)
             }
-            self.setDuration({
-                self.performSegue(withIdentifier: "openListSoalUjian", sender: self)
-            })
             
+            self.setDuration()
             
         }
     }

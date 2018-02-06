@@ -348,13 +348,15 @@ class ApiManager: NSObject {
     }
     
     //user Set Score Ujian
-    func setScoreUjian(completionHandler:@escaping (JSON?,JSON?, NSError?) -> ()) {
+    func setScoreUjian(nilai:String ,completionHandler:@escaping (JSON?,JSON?, NSError?) -> ()) {
         HUD().show()
         
         let data = JSON(Session.userChace.object(forKey: Session.KEY_AUTH) as AnyObject?)
         var dataUser = UserAuthData()
         dataUser.deserialize(data!)
-        
+        let param = [
+            "score" : "\(nilai)"
+        ]
         let header = [
             "token" : "\(dataUser.token)",
             "device-id" : "\(dataUser.device_id)"
@@ -362,7 +364,7 @@ class ApiManager: NSObject {
         
         Alamofire.request("\(Domain.URL_EXAM_SUBMIT_SCORE)",
             method: HTTPMethod.post,
-            parameters: nil,
+            parameters: param,
             encoding: URLEncoding.httpBody,
             headers: header)
             .responseJSON { (response) in

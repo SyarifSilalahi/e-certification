@@ -17,6 +17,8 @@ class UjianDetailSoalVC: UIViewController {
     @IBOutlet weak var lblCounterNext: UILabel!
     @IBOutlet weak var lblCounterBack: UILabel!
     @IBOutlet weak var lblCounter: UILabel!
+    @IBOutlet weak var btnCounterNext: UIButton!
+    @IBOutlet weak var btnCounterBack: UIButton!
     @IBOutlet var lblTimer: CountdownLabel!
     
     var listSoal:ListQuestionUjian! = ListQuestionUjian()
@@ -38,6 +40,12 @@ class UjianDetailSoalVC: UIViewController {
         
         let contentHeight = Helper().heightForView(self.listSoal.data[index].question, font: UIFont.systemFont(ofSize: 15, weight: .bold), width: self.lblSoal.frame.size.width) + 50
         self.viewHeader.frame.size.height = contentHeight
+        if index == 0 {
+            setVisibilityBack(hide: true)
+        }
+        if index == self.listSoal.data.count - 1{
+            setVisibilityNext(hide: true)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -84,24 +92,42 @@ class UjianDetailSoalVC: UIViewController {
     
     @IBAction func soalNext(_ sender: AnyObject) {
         if index < self.listSoal.data.count - 1 {
+            self.setVisibilityBack(hide: false)
             self.indexpathRow = -1
             index += 1
             self.setLblCounter()
             //get next soal
             self.lblSoal.text = self.listSoal.data[index].question
             self.tblSoal.reloadData()
+            if index == self.listSoal.data.count - 1{
+                self.setVisibilityNext(hide: true)
+            }
         }
     }
     
     @IBAction func soalBack(_ sender: AnyObject) {
         if index > 0{
+            self.setVisibilityNext(hide: false)
             self.indexpathRow = -1
             index -= 1
             self.setLblCounter()
             //get back soal
             self.lblSoal.text = self.listSoal.data[index].question
             self.tblSoal.reloadData()
+            if index == 0{
+                self.setVisibilityBack(hide: true)
+            }
         }
+    }
+    
+    func setVisibilityBack(hide:Bool){
+        self.btnCounterBack.isHidden = hide
+        self.lblCounterBack.isHidden = hide
+    }
+    
+    func setVisibilityNext(hide:Bool){
+        self.btnCounterNext.isHidden = hide
+        self.lblCounterNext.isHidden = hide
     }
     
     override func didReceiveMemoryWarning() {

@@ -16,6 +16,8 @@ class LatihanDetailSoalVC: UIViewController {
     @IBOutlet weak var lblCounterNext: UILabel!
     @IBOutlet weak var lblCounterBack: UILabel!
     @IBOutlet weak var lblCounter: UILabel!
+    @IBOutlet weak var btnCounterNext: UIButton!
+    @IBOutlet weak var btnCounterBack: UIButton!
     
     var listSoal:ListQuestionLatihan! = ListQuestionLatihan()
     
@@ -30,6 +32,12 @@ class LatihanDetailSoalVC: UIViewController {
         self.tblSoal.dataSource = self
         self.tblSoal.delegate = self
         self.tblSoal.reloadData()
+        if index == 0 {
+            setVisibilityBack(hide: true)
+        }
+        if index == self.listSoal.data.count - 1{
+            setVisibilityNext(hide: true)
+        }
     }
     
     func resetHeaderSize(){
@@ -59,24 +67,44 @@ class LatihanDetailSoalVC: UIViewController {
     
     @IBAction func soalNext(_ sender: AnyObject) {
         if index < self.listSoal.data.count - 1 {
+            self.setVisibilityBack(hide: false)
             self.indexpathRow = -1
             index += 1
             self.setLblCounter()
             //get next soal
             self.lblSoal.text = self.listSoal.data[index].question
             self.tblSoal.reloadData()
+            if index == self.listSoal.data.count - 1{
+                self.setVisibilityNext(hide: true)
+            }
         }
+        
     }
     
     @IBAction func soalBack(_ sender: AnyObject) {
+        print("index \(index)")
         if index > 0{
+            self.setVisibilityNext(hide: false)
             self.indexpathRow = -1
             index -= 1
             self.setLblCounter()
             //get back soal
             self.lblSoal.text = self.listSoal.data[index].question
             self.tblSoal.reloadData()
+            if index == 0{
+                self.setVisibilityBack(hide: true)
+            }
         }
+    }
+    
+    func setVisibilityBack(hide:Bool){
+        self.btnCounterBack.isHidden = hide
+        self.lblCounterBack.isHidden = hide
+    }
+    
+    func setVisibilityNext(hide:Bool){
+        self.btnCounterNext.isHidden = hide
+        self.lblCounterNext.isHidden = hide
     }
     
     @IBAction func back(_ sender: AnyObject) {
@@ -161,25 +189,26 @@ extension LatihanDetailSoalVC:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        switch indexPath.row {
-        case 0:
-            self.chooseAnswer(answer: self.listSoal.data[self.index].option1)
-            break
-        case 1:
-            self.chooseAnswer(answer: self.listSoal.data[self.index].option2)
-            break
-        case 2:
-            self.chooseAnswer(answer: self.listSoal.data[self.index].option3)
-            break
-        case 3:
-            self.chooseAnswer(answer: self.listSoal.data[self.index].option4)
-            break
-        default:
-            break
+        if !LatihanAnswer.isFinished{
+            switch indexPath.row {
+            case 0:
+                self.chooseAnswer(answer: self.listSoal.data[self.index].option1)
+                break
+            case 1:
+                self.chooseAnswer(answer: self.listSoal.data[self.index].option2)
+                break
+            case 2:
+                self.chooseAnswer(answer: self.listSoal.data[self.index].option3)
+                break
+            case 3:
+                self.chooseAnswer(answer: self.listSoal.data[self.index].option4)
+                break
+            default:
+                break
+            }
+            
+            self.tblSoal.reloadData()
         }
-        
-        self.tblSoal.reloadData()
     }
     
     func chooseAnswer(answer:String){

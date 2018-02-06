@@ -28,4 +28,10 @@ class MenuCVCell: UICollectionViewCell {
         self.layer.borderColor = Theme.primaryBlueColor.cgColor
         self.lblTitle.textColor = Theme.primaryBlueColor
     }
+    
+    func setModeSelected(){
+        self.backgroundColor = Theme.primaryBlueColor
+        self.layer.borderColor = UIColor.clear.cgColor
+        self.lblTitle.textColor = UIColor.white
+    }
 }

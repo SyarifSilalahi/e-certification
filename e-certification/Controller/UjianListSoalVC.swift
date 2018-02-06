@@ -36,10 +36,11 @@ class UjianListSoalVC: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        self.collectionMenu.reloadData()
         self.setTimer()
         if UjianAnswer.isTimesUp{
             self.lblTimer.cancel()
-            self.finishExam(message: Wording.FINISH_EXAM_TIMESUP_MESSAGE)
+            self.finishExam()
         }
     }
     
@@ -90,7 +91,7 @@ class UjianListSoalVC: UIViewController {
         }
     }
     
-    func finishExam(message:String){
+    func finishExam(){
         self.lblTimer.cancel()
         self.collectionMenu.reloadData()
         for dic in UjianAnswer.arrAnswer{
@@ -98,23 +99,51 @@ class UjianListSoalVC: UIViewController {
                 nilai += 1
             }
         }
-        let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        
-        let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
-            //finish exam
-            //submit jawaban (score)
+        print("nilai \(nilai)")
+        ApiManager().setScoreUjian(nilai: "\(nilai)") { (response,failure, error) in
+            if error != nil{
+                print("error setScoreUjian \(String(describing: error))")
+                return
+            }
+            if failure != nil{
+                var fail = Failure()
+                fail.deserialize(failure!)
+                print("failure message \(fail.message)")
+                CustomAlert().Error(message: fail.message)
+                //do action failure here
+                return
+            }
             
-            // camera
-            self.openCamera()
-        })
-        alert.addAction(alertOKAction)
-        self.present(alert, animated: true, completion: nil)
+            var hasilUjian:ScoreExam = ScoreExam()
+            hasilUjian.deserialize(response!)
+            print("hasilUjian \(hasilUjian)")
+            if hasilUjian.data == ExamStatus.Lulus.rawValue{
+                let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: Wording.FINISH_EXAM_SUCCESS_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
+                
+                let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
+                    // camera
+                    self.openCamera()
+                })
+                alert.addAction(alertOKAction)
+                self.present(alert, animated: true, completion: nil)
+            }else{
+                let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: Wording.FINISH_EXAM_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
+                
+                let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
+//                    self.navigationController?.popViewController(animated: true)
+                })
+                alert.addAction(alertOKAction)
+                self.present(alert, animated: true, completion: nil)
+            }
+            
+        }
+        
     }
     
     @IBAction func selesai(_ sender: AnyObject) {
         if UjianAnswer.isFinished == false{
             UjianAnswer.isFinished = true
-            self.finishExam(message: Wording.FINISH_EXAM_TITLE)
+            self.finishExam()
         }else{
             self.navigationController?.popViewController(animated: true)
         }
@@ -163,7 +192,11 @@ extension UjianListSoalVC: UICollectionViewDelegate, UICollectionViewDataSource 
                 cell.setModeInCorrect()
             }
         }else{
-            cell.setModeNormal()
+            if UjianAnswer.arrAnswer[indexPath.row]["choosed"] == ""{
+                cell.setModeNormal()
+            }else{
+                cell.setModeSelected()
+            }
         }
         
         return cell
@@ -178,12 +211,25 @@ extension UjianListSoalVC: UICollectionViewDelegate, UICollectionViewDataSource 
 }
 
 extension UjianListSoalVC: CountdownLabelDelegate {
+    
     func countdownFinished() {
         debugPrint("countdownFinished at delegate.")
         //completion
         print("timer finished")
         UjianAnswer.isTimesUp = true
-        self.finishExam(message: Wording.FINISH_EXAM_TIMESUP_MESSAGE)
+        self.alertTimesUp()
+    }
+    
+    func alertTimesUp(){
+        let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: Wording.FINISH_EXAM_TIMESUP_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
+        
+        let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
+            //finish exam
+            //submit jawaban (score)
+            self.finishExam()
+        })
+        alert.addAction(alertOKAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
     internal func countingAt(timeCounted: TimeInterval, timeRemaining: TimeInterval) {
@@ -199,7 +245,7 @@ extension UjianListSoalVC: UIImagePickerControllerDelegate,UINavigationControlle
         if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage{
 //            self.imgProfilePicture.image = pickedImage
             //upload foto then go to hasil ujian
-            self.performSegue(withIdentifier: "hasilUjian", sender: self)
+//            self.performSegue(withIdentifier: "hasilUjian", sender: self)
             self.dismiss(animated: true, completion: nil)
         }
     }

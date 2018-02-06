@@ -48,8 +48,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-        print("applicationWillTerminate")
-        Session.userChace.set(UjianAnswer.arrAnswer, forKey: Session.FORCE_EXIT_EXAM)
+//        print("applicationWillTerminate")
+//        Session.userChace.set(UjianAnswer.arrAnswer , forKey: Session.FORCE_EXIT_EXAM)
     }
     
     internal var shouldRotate = false

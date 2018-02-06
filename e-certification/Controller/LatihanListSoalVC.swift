@@ -28,6 +28,10 @@ class LatihanListSoalVC: UIViewController {
         print(" isFinished \(LatihanAnswer.isFinished)\narrAnswer \(LatihanAnswer.arrAnswer)")
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.collectionMenu.reloadData()
+    }
+    
     func setMenuCollection(){
         self.collectionMenu.dataSource=self
         self.collectionMenu.delegate=self
@@ -63,6 +67,8 @@ class LatihanListSoalVC: UIViewController {
             })
             alert.addAction(alertOKAction)
             self.present(alert, animated: true, completion: nil)
+        }else{
+            self.navigationController?.popViewController(animated: true)
         }
     }
     
@@ -110,7 +116,12 @@ extension LatihanListSoalVC: UICollectionViewDelegate, UICollectionViewDataSourc
                 cell.setModeInCorrect()
             }
         }else{
-            cell.setModeNormal()
+            if LatihanAnswer.arrAnswer[indexPath.row]["choosed"] == ""{
+                cell.setModeNormal()
+            }else{
+                cell.setModeSelected()
+            }
+            
         }
 //        if indexPath.row == 0 {
 //            cell.setModeCorrect()

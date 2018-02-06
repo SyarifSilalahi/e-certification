@@ -24,6 +24,8 @@ class MateriCell: UITableViewCell {
     @IBOutlet weak var imgContent: UIImageView!
     @IBOutlet weak var btnPdf: UIButton!
     @IBOutlet weak var btnVideo: UIButton!
+    @IBOutlet weak var lblProgressDownloadPDF: UILabel!
+    @IBOutlet weak var lblProgressDownloadVideo: UILabel!
     @IBOutlet weak var videoIndicator: KRActivityIndicatorView!
     @IBOutlet weak var pdfIndicator: KRActivityIndicatorView!
     
@@ -95,6 +97,7 @@ class MateriCell: UITableViewCell {
                 self.pdfIndicator.animating = false
                 self.pdfIndicator.stopAnimating()
                 self.pdfIndicator.alpha = 0
+                self.lblProgressDownloadPDF.alpha = 0
                 self.btnPdf.alpha = 1
                 print("url pdf \(url)")
                 diggerLog(url)
@@ -102,6 +105,7 @@ class MateriCell: UITableViewCell {
                 self.pdfIndicator.animating = false
                 self.pdfIndicator.stopAnimating()
                 self.pdfIndicator.alpha = 0
+                self.lblProgressDownloadPDF.alpha = 0
                 self.btnPdf.alpha = 1
                 _ =  error
                 diggerLog(error)
@@ -110,9 +114,12 @@ class MateriCell: UITableViewCell {
             
             }.progress { (progress) in
                 //                cell.progressView.progress = Float(progress.fractionCompleted)
-                print("progress \(Float(progress.fractionCompleted))")
+//                print("progress \(Float(progress.fractionCompleted))")
+                print("progress \(Int(Float(progress.fractionCompleted) * 100))")
+                self.lblProgressDownloadPDF.text = "\(Int(Float(progress.fractionCompleted) * 100))%"
                 self.btnPdf.alpha = 0
                 self.pdfIndicator.alpha = 1
+                self.lblProgressDownloadPDF.alpha = 1
                 self.pdfIndicator.animating = true
                 self.pdfIndicator.startAnimating()
                 
@@ -127,6 +134,7 @@ class MateriCell: UITableViewCell {
         pdfIndicator.animating = false
         pdfIndicator.stopAnimating()
         self.pdfIndicator.alpha = 0
+        self.lblProgressDownloadPDF.alpha = 0
         self.btnPdf.alpha = 1
     }
     
@@ -145,6 +153,7 @@ class MateriCell: UITableViewCell {
                 self.videoIndicator.animating = false
                 self.videoIndicator.stopAnimating()
                 self.videoIndicator.alpha = 0
+                self.lblProgressDownloadVideo.alpha = 0
                 self.btnVideo.alpha = 1
                 print("url video \(url)")
                 diggerLog(url)
@@ -152,6 +161,7 @@ class MateriCell: UITableViewCell {
                 self.videoIndicator.animating = false
                 self.videoIndicator.stopAnimating()
                 self.videoIndicator.alpha = 0
+                self.lblProgressDownloadVideo.alpha = 0
                 self.btnVideo.alpha = 1
                 _ =  error
                 diggerLog(error)
@@ -160,9 +170,13 @@ class MateriCell: UITableViewCell {
 
             }.progress { (progress) in
 //                cell.progressView.progress = Float(progress.fractionCompleted)
-                print("progress \(Float(progress.fractionCompleted))")
+//                print("progress \(Float(progress.fractionCompleted))")
+                print("progress \(Int(Float(progress.fractionCompleted) * 100))")
+                
+                self.lblProgressDownloadVideo.text = "\(Int(Float(progress.fractionCompleted) * 100))%"
                 self.btnVideo.alpha = 0
                 self.videoIndicator.alpha = 1
+                self.lblProgressDownloadVideo.alpha = 1
                 self.videoIndicator.animating = true
                 self.videoIndicator.startAnimating()
 
@@ -177,6 +191,7 @@ class MateriCell: UITableViewCell {
         videoIndicator.animating = false
         videoIndicator.stopAnimating()
         self.videoIndicator.alpha = 0
+        self.lblProgressDownloadVideo.alpha = 0
         self.btnVideo.alpha = 1
     }
 }

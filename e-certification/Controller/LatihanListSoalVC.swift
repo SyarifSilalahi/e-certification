@@ -53,22 +53,16 @@ class LatihanListSoalVC: UIViewController {
         if LatihanAnswer.isFinished == false{
             LatihanAnswer.isFinished = true
             self.collectionMenu.reloadData()
-            var nilai = 0
-            for dic in LatihanAnswer.arrAnswer{
-                if dic["status"] == "true"{
-                    nilai += 1
-                }
-            }
-            let alert = UIAlertController(title: Wording.FINISH_EXERCISE_TITLE, message:"Score Anda = \(nilai).\n\(Wording.FINISH_EXERCISE_MESSAGE)", preferredStyle: UIAlertControllerStyle.alert)
-            
-            let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
-//                    let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
-//                    self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
-            })
-            alert.addAction(alertOKAction)
-            self.present(alert, animated: true, completion: nil)
+            CustomAlert().Success(message: Wording.FINISH_EXERCISE_MESSAGE)
+//            var nilai = 0
+//            for dic in LatihanAnswer.arrAnswer{
+//                if dic["status"] == "true"{
+//                    nilai += 1
+//                }
+//            }
         }else{
-            self.navigationController?.popViewController(animated: true)
+            let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+            self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
         }
     }
     

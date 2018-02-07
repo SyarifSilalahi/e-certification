@@ -26,6 +26,11 @@ class UjianVC: UIViewController {
     @IBOutlet weak var lblInfo: UILabel!
     @IBOutlet weak var btnMulai: UIButton!
     
+    //view status lulus
+    @IBOutlet weak var lblTitleStatusLulus: UILabel!
+    @IBOutlet weak var lblDetailStatusLulus: UILabel!
+    @IBOutlet weak var imgStatusLulus: UIImageView!
+    
     var examStatus:StatusExam! = StatusExam()
     var listSoal:ListQuestionUjian! = ListQuestionUjian()
     var duration : DurationExam = DurationExam()
@@ -55,6 +60,7 @@ class UjianVC: UIViewController {
         
     }
     
+    //fungsi recheck ditujukan untuk submit jawaban jika user keluar dari applikasi
     func submitJawaban(nilai:String){
         ApiManager().setScoreUjian(nilai: nilai) { (response,failure, error) in
             if error != nil{
@@ -143,24 +149,37 @@ class UjianVC: UIViewController {
     }
     
     func setViewStatusExam(status:Int){
+        print("status \(status)")
+        print("ExamStatus.SudahDiAssign.rawValue \(ExamStatus.SudahDiAssign.rawValue)")
         switch status {
         case ExamStatus.Lulus.rawValue:
+            self.viewLulus.alpha = 1
+            self.imgStatusLulus.image = #imageLiteral(resourceName: "ico-lulus")
+            self.lblTitleStatusLulus.text = "Selamat!"
+            self.lblDetailStatusLulus.text = "Anda Telah Lulus."
             self.viewLulus.frame = self.imgBg.frame
             self.view.addSubview(self.viewLulus)
             break
         case ExamStatus.Gagal.rawValue:
+            self.viewLulus.alpha = 1
+            self.imgStatusLulus.image = #imageLiteral(resourceName: "ico-access-denied")
+            self.lblTitleStatusLulus.text = "Maaf!"
+            self.lblDetailStatusLulus.text = "Anda belum lulus ujian."
             self.viewAccessDenied.frame = self.imgBg.frame
             self.view.addSubview(self.viewAccessDenied)
             break
         case ExamStatus.BelumDiAssign.rawValue:
+            self.viewAccessDenied.alpha = 1
             self.viewAccessDenied.frame = self.imgBg.frame
             self.view.addSubview(self.viewAccessDenied)
             break
         case ExamStatus.OnProgress.rawValue:
+            self.viewAccessDenied.alpha = 1
             self.viewAccessDenied.frame = self.imgBg.frame
             self.view.addSubview(self.viewAccessDenied)
             break
         default:
+            self.viewAccessDenied.alpha = 1
             self.viewAccessDenied.frame = self.imgBg.frame
             self.view.addSubview(self.viewAccessDenied)
             break
@@ -168,25 +187,36 @@ class UjianVC: UIViewController {
     }
     
     func setViewStatusExam(status:StatusExam!){
-        
         switch status.status_exam {
         case ExamStatus.SudahDiAssign.rawValue:
+            self.viewLulus.alpha = 0
+            self.viewAccessDenied.alpha = 0
             self.showComponent()
             self.lblTitle.text = status.message_exam
             break
         case ExamStatus.Lulus.rawValue:
+            self.viewLulus.alpha = 1
             self.viewLulus.frame = self.imgBg.frame
+            self.imgStatusLulus.image = #imageLiteral(resourceName: "ico-lulus")
+            self.lblTitleStatusLulus.text = "Selamat!"
+            self.lblDetailStatusLulus.text = "Anda Telah Lulus."
             self.view.addSubview(self.viewLulus)
             break
         case ExamStatus.Gagal.rawValue:
-            self.viewAccessDenied.frame = self.imgBg.frame
-            self.view.addSubview(self.viewAccessDenied)
+            self.viewLulus.alpha = 1
+            self.viewLulus.frame = self.imgBg.frame
+            self.imgStatusLulus.image = #imageLiteral(resourceName: "ico-access-denied")
+            self.lblTitleStatusLulus.text = "Maaf!"
+            self.lblDetailStatusLulus.text = "Anda belum lulus ujian."
+            self.view.addSubview(self.viewLulus)
             break
         case ExamStatus.BelumDiAssign.rawValue:
+            self.viewAccessDenied.alpha = 1
             self.viewAccessDenied.frame = self.imgBg.frame
             self.view.addSubview(self.viewAccessDenied)
             break
         case ExamStatus.OnProgress.rawValue:
+            self.viewAccessDenied.alpha = 1
             self.viewAccessDenied.frame = self.imgBg.frame
             self.view.addSubview(self.viewAccessDenied)
             
@@ -196,6 +226,7 @@ class UjianVC: UIViewController {
             
             break
         default:
+            self.viewAccessDenied.alpha = 1
             self.viewAccessDenied.frame = self.imgBg.frame
             self.view.addSubview(self.viewAccessDenied)
             break

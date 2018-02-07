@@ -54,10 +54,10 @@ struct Wording {
     static let FORCE_LOG_OUT_ALLERT_TITLE = "Upss!"
     static let FORCE_LOG_OUT_ALLERT_MESSAGE = "Akun Anda sedang di pakai.\nSilahkan Login kembali."
     static let FINISH_EXERCISE_TITLE = "Latihan Selesai."
-    static let FINISH_EXERCISE_MESSAGE = "Anda yakin ingin mengumpulkan ?"
+    static let FINISH_EXERCISE_MESSAGE = "Anda telah menyelesaikan latihan ini.\nTerimakasih telah berpartisipasi."
     static let FINISH_EXAM_TITLE = "Ujian Selesai."
     static let FINISH_EXAM_MESSAGE = "Anda telah menyelesaikan ujian.\nTerimakasih telah berpartisipasi."
-    static let FINISH_EXAM_SUCCESS_MESSAGE = "Selamat!\nAnda telah lulus.\nSilahkan lengkapi foto."
+    static let FINISH_EXAM_SUCCESS_MESSAGE = "Selamat!\nAnda telah lulus.\nSilahkan lengkapi data diri anda dalam bentuk foto."
     static let FINISH_EXAM_TIMESUP_MESSAGE = "Waktu ujian Telah selesai.\nSilahkan submit jawaban anda."
 }
 

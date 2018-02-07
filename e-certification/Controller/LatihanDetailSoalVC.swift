@@ -23,11 +23,16 @@ class LatihanDetailSoalVC: UIViewController {
     
     var index = 0
     var indexpathRow = -1
+    var arrOption:[String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.lblSoal.text = self.listSoal.data[index].question
+        
+        self.arrOption = ["\(self.listSoal.data[index].option1)","\(self.listSoal.data[index].option2)","\(self.listSoal.data[index].option3)","\(self.listSoal.data[index].option4)"]
+        self.arrOption = self.arrOption.shuffled
+        
         self.setLblCounter()
         self.tblSoal.dataSource = self
         self.tblSoal.delegate = self
@@ -38,6 +43,8 @@ class LatihanDetailSoalVC: UIViewController {
         if index == self.listSoal.data.count - 1{
             setVisibilityNext(hide: true)
         }
+//        print("arrOption \(arrOption)")
+//        print("arrOption shuffled \(arrOption.shuffled)")
     }
     
     func resetHeaderSize(){
@@ -73,6 +80,8 @@ class LatihanDetailSoalVC: UIViewController {
             self.setLblCounter()
             //get next soal
             self.lblSoal.text = self.listSoal.data[index].question
+            self.arrOption = ["\(self.listSoal.data[index].option1)","\(self.listSoal.data[index].option2)","\(self.listSoal.data[index].option3)","\(self.listSoal.data[index].option4)"]
+            self.arrOption = self.arrOption.shuffled
             self.tblSoal.reloadData()
             if index == self.listSoal.data.count - 1{
                 self.setVisibilityNext(hide: true)
@@ -90,6 +99,8 @@ class LatihanDetailSoalVC: UIViewController {
             self.setLblCounter()
             //get back soal
             self.lblSoal.text = self.listSoal.data[index].question
+            self.arrOption = ["\(self.listSoal.data[index].option1)","\(self.listSoal.data[index].option2)","\(self.listSoal.data[index].option3)","\(self.listSoal.data[index].option4)"]
+            self.arrOption = self.arrOption.shuffled
             self.tblSoal.reloadData()
             if index == 0{
                 self.setVisibilityBack(hide: true)
@@ -129,7 +140,11 @@ extension LatihanDetailSoalVC:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 66
+        var height:CGFloat = 66
+        if height < Helper().heightForView(self.arrOption[indexPath.row], font: UIFont.systemFont(ofSize: 15, weight: .bold), width: 192) {
+            height = Helper().heightForView(self.arrOption[indexPath.row], font: UIFont.systemFont(ofSize: 15, weight: .bold), width: 192)
+        }
+        return CGFloat(height)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -138,23 +153,21 @@ extension LatihanDetailSoalVC:UITableViewDelegate,UITableViewDataSource{
         switch indexPath.row {
         case 0:
             cell.lblTitle.text = "A."
-            cell.lblDetail.text = self.listSoal.data[self.index].option1
             break
         case 1:
             cell.lblTitle.text = "B."
-            cell.lblDetail.text = self.listSoal.data[self.index].option2
             break
         case 2:
             cell.lblTitle.text = "C."
-            cell.lblDetail.text = self.listSoal.data[self.index].option3
             break
         case 3:
-            cell.lblTitle.text = "C."
-            cell.lblDetail.text = self.listSoal.data[self.index].option4
+            cell.lblTitle.text = "D."
             break
         default:
             break
         }
+        
+        cell.lblDetail.text = self.arrOption[indexPath.row]
         
         if LatihanAnswer.isFinished{
             if LatihanAnswer.arrAnswer[self.index]["choosed"] == self.listSoal.data[self.index].answer{
@@ -190,23 +203,7 @@ extension LatihanDetailSoalVC:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if !LatihanAnswer.isFinished{
-            switch indexPath.row {
-            case 0:
-                self.chooseAnswer(answer: self.listSoal.data[self.index].option1)
-                break
-            case 1:
-                self.chooseAnswer(answer: self.listSoal.data[self.index].option2)
-                break
-            case 2:
-                self.chooseAnswer(answer: self.listSoal.data[self.index].option3)
-                break
-            case 3:
-                self.chooseAnswer(answer: self.listSoal.data[self.index].option4)
-                break
-            default:
-                break
-            }
-            
+            self.chooseAnswer(answer: self.arrOption[indexPath.row])
             self.tblSoal.reloadData()
         }
     }

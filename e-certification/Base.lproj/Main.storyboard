@@ -649,7 +649,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                                             <subviews>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tph-Gb-U3a">
                                                     <rect key="frame" x="66" y="6" width="243" height="54"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="A." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9SK-8H-tGQ">
                                                             <rect key="frame" x="20" y="0.0" width="20" height="54"/>
@@ -658,9 +658,10 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Aasdasda" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="94z-39-uSE">
-                                                            <rect key="frame" x="43" y="0.0" width="193" height="54"/>
+                                                        <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Aasdasda" lineBreakMode="wordWrap" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="94z-39-uSE">
+                                                            <rect key="frame" x="43" y="2" width="193" height="50"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -903,9 +904,12 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                     <connections>
                         <outlet property="btnMulai" destination="jtX-Zl-NgZ" id="oFO-hL-rNT"/>
                         <outlet property="imgBg" destination="sT8-03-j4q" id="gEa-4f-mRy"/>
+                        <outlet property="imgStatusLulus" destination="6wV-BX-ki6" id="lGl-34-VwL"/>
                         <outlet property="lblDate" destination="60C-h3-8Jf" id="lfD-76-cHk"/>
+                        <outlet property="lblDetailStatusLulus" destination="eGz-aH-19j" id="pcd-ls-uV7"/>
                         <outlet property="lblInfo" destination="dP7-Yv-SSY" id="OfF-MA-KVg"/>
                         <outlet property="lblTitle" destination="pYE-3e-tda" id="Apc-Pw-n9M"/>
+                        <outlet property="lblTitleStatusLulus" destination="Pec-af-iWY" id="Gr7-Ha-AhR"/>
                         <outlet property="viewAccessDenied" destination="zCU-84-DBX" id="FHC-8A-5o6"/>
                         <outlet property="viewLulus" destination="aME-TR-lN8" id="3Ka-8x-JFX"/>
                         <segue destination="yHK-Ki-Pna" kind="show" identifier="openListSoalUjian" id="Tgr-vq-n2P"/>
@@ -934,7 +938,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="chK-vc-Vn6">
+                        <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="chK-vc-Vn6">
                             <rect key="frame" x="129" y="480" width="116" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <state key="normal" title="Hasil">
@@ -1278,19 +1282,20 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B2X-DS-JzA">
-                                                    <rect key="frame" x="66" y="5" width="242" height="55"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                    <rect key="frame" x="66" y="6" width="242" height="54"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="A." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uiv-Vu-dpl">
-                                                            <rect key="frame" x="20" y="0.0" width="20" height="55"/>
+                                                            <rect key="frame" x="20" y="-1" width="20" height="55"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Aasdasda" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="nDz-Y8-SxR">
-                                                            <rect key="frame" x="42" y="0.0" width="192" height="55"/>
+                                                        <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Aasdasda" lineBreakMode="wordWrap" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nDz-Y8-SxR">
+                                                            <rect key="frame" x="42" y="2" width="192" height="50"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -2785,12 +2790,12 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
         <image name="ico-ujian" width="20" height="20"/>
         <image name="ico-uname" width="14" height="18"/>
         <image name="ico-video-disable" width="24" height="24"/>
-        <image name="membership" width="309" height="490"/>
+        <image name="membership" width="319" height="501"/>
         <image name="splashscreen" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="vQg-5L-Oat"/>
         <segue reference="JlT-Gy-NoE"/>
-        <segue reference="MxL-dh-dPj"/>
+        <segue reference="emh-3X-dCB"/>
     </inferredMetricsTieBreakers>
 </document>

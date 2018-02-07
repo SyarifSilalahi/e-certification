@@ -17,26 +17,6 @@ class ApiManager: NSObject {
         
         let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
                 self.logOut()
-//            var dataUser = UserAuthData()
-//            let data = JSON(Session.userChace.object(forKey: Session.KEY_AUTH) as AnyObject?)
-//            dataUser.deserialize(data!)
-//            self.logOut(dataUser.api_token, completionHandler: { (response,failure, error) in
-//                if error != nil{
-//                    print("error signOut \(String(describing: error))")
-//                    return
-//                }
-//                if failure != nil{
-//                    var fail = Failure()
-//                    fail.deserialize(failure!)
-//                    print("failure message \(fail.message)")
-//                    //do action failure here
-//                    return
-//                }
-//
-//                Session.userChace.removeObject(forKey: Session.KEY_AUTH)
-//                Session.userChace.removeObject(forKey: Session.RECENT)
-//                UIApplication.topViewController()?.navigationController?.popToRootViewController(animated: true)
-//            })
         })
         alert.addAction(alertOKAction)
         UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
@@ -390,5 +370,54 @@ class ApiManager: NSObject {
                     break
                 }
         }
+    }
+    
+    func uploadImageSelfie(image:UIImage,completionHandler:@escaping (JSON?,JSON?, NSError?) -> ()){
+        HUD().show()
+        let data = JSON(Session.userChace.object(forKey: Session.KEY_AUTH) as AnyObject?)
+        var dataUser = UserAuthData()
+        dataUser.deserialize(data!)
+        
+        let header = [
+            "token" : "\(dataUser.token)",
+            "device-id" : "\(dataUser.device_id)"
+        ]
+        Alamofire.upload(multipartFormData:{ multipartFormData in
+            if let imageData = UIImageJPEGRepresentation(image, 1) {
+                multipartFormData.append(imageData, withName: "image", fileName: "myImage.png", mimeType: "image/png")
+            }
+//            // import parameters
+//            for (key, value) in param {
+//                multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
+//            }
+        },usingThreshold:UInt64.init(),
+         to:Domain.URL_EXAM_UPLOAD_FOTO,
+         method:.post,
+         headers:header,
+         encodingCompletion: { encodingResult in
+            HUD().hide()
+            switch encodingResult {
+            case .success(let upload, _, _):
+                upload.responseJSON { response in
+//                    print("response upload selfie \(response)")
+                    let data = JSON(response.result.value as AnyObject?)
+                    let responseData = response.result.value as! NSDictionary
+                    let status:Bool = (responseData["status"] as! String != "0")
+                    if status {
+                        completionHandler(data!,nil,nil)
+                    }else{
+                        if responseData["message"] as! String == "expired_token" {
+                            self.forceLogOut()
+                            return
+                        }
+                        completionHandler(nil,data!, nil)
+                    }
+                }
+            case .failure(let encodingError):
+                print(encodingError)
+                self.connectionCheck(error: encodingError)
+                completionHandler(nil,nil,encodingError as NSError?)
+            }
+        })
     }
 }

@@ -20,6 +20,7 @@ class UjianListSoalVC: UIViewController {
     var indexSelected = 0
     let imagePicker = UIImagePickerController()
     var nilai = 0
+    var successUploadSelfie = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,6 +100,10 @@ class UjianListSoalVC: UIViewController {
                 nilai += 1
             }
         }
+        
+        //buat testing lulus
+        nilai = 80
+        
         print("nilai \(nilai)")
         ApiManager().setScoreUjian(nilai: "\(nilai)") { (response,failure, error) in
             if error != nil{
@@ -116,7 +121,7 @@ class UjianListSoalVC: UIViewController {
             
             var hasilUjian:ScoreExam = ScoreExam()
             hasilUjian.deserialize(response!)
-            print("hasilUjian \(hasilUjian)")
+//            print("hasilUjian \(hasilUjian)")
             if hasilUjian.data == ExamStatus.Lulus.rawValue{
                 let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: Wording.FINISH_EXAM_SUCCESS_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
                 
@@ -145,7 +150,11 @@ class UjianListSoalVC: UIViewController {
             UjianAnswer.isFinished = true
             self.finishExam()
         }else{
-            self.navigationController?.popViewController(animated: true)
+            if !self.successUploadSelfie{
+                self.openCamera()
+            }else{
+                self.navigationController?.popViewController(animated: true)
+            }
         }
         
     }
@@ -244,6 +253,29 @@ extension UjianListSoalVC: UIImagePickerControllerDelegate,UINavigationControlle
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage{
 //            self.imgProfilePicture.image = pickedImage
+            ApiManager().uploadImageSelfie(image: pickedImage, completionHandler: { (response,failure, error) in
+                if error != nil{
+                    print("error Upload Selfie \(String(describing: error))")
+                    self.successUploadSelfie = false
+                    return
+                }
+                if failure != nil{
+                    self.successUploadSelfie = false
+                    var fail = Failure()
+                    fail.deserialize(failure!)
+                    print("failure message \(fail.message)")
+                    CustomAlert().Error(message: fail.message)
+                    //do action failure here
+                    return
+                }
+                
+                self.successUploadSelfie = true
+                var userSelfie:UserSelfie = UserSelfie()
+                userSelfie.deserialize(response!)
+//                print("userSelfie \(userSelfie)")
+                CustomAlert().Success(message: "Terimakasih.\nAnda telah menyelesaikan proses ujian.")
+                
+            })
             //upload foto then go to hasil ujian
 //            self.performSegue(withIdentifier: "hasilUjian", sender: self)
             self.dismiss(animated: true, completion: nil)

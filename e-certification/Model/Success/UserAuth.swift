@@ -51,7 +51,7 @@ struct UserAuthData : ArrowParsable {
     var updated_at = ""
     var token = ""
     var device_id = ""
-    var dictionary: [String: String]!
+    var dictionary: [String: String]! //temp untuk menghandle null biar bisa di masukin ke NSUserDefault
 
     mutating func deserialize(_ json: JSON) {
         id <-- json["id"]
@@ -116,5 +116,18 @@ struct UserAvatar : ArrowParsable {
     mutating func deserialize(_ json: JSON) {
         id <-- json["id"]
         path <-- json["path"]
+    }
+}
+
+struct UserSelfie: ArrowParsable{
+    var code :Int = 0
+    var status = ""
+    var message = ""
+    /// The method you declare your json mapping in.
+    
+    mutating func deserialize(_ json: JSON) {
+        code <-- json["code"]
+        status <-- json["status"]
+        message <-- json["message"]
     }
 }

@@ -70,14 +70,14 @@ class MateriCell: UITableViewCell {
         }
         
         btnPdf.addTarget(self, action: #selector(openPdf(sender:)), for: .touchUpInside)
-        let stopPdf = UITapGestureRecognizer(target: self, action: #selector(self.stopDownloadPdf(_:)))
-        pdfIndicator.addGestureRecognizer(stopPdf)
-        pdfIndicator.isUserInteractionEnabled = true
+//        let stopPdf = UITapGestureRecognizer(target: self, action: #selector(self.stopDownloadPdf(_:)))
+//        pdfIndicator.addGestureRecognizer(stopPdf)
+//        pdfIndicator.isUserInteractionEnabled = true
         
         btnVideo.addTarget(self, action: #selector(openVideo(sender:)), for: .touchUpInside)
-        let stopVideo = UITapGestureRecognizer(target: self, action: #selector(self.stopDownloadVideo(_:)))
-        videoIndicator.addGestureRecognizer(stopVideo)
-        videoIndicator.isUserInteractionEnabled = true
+//        let stopVideo = UITapGestureRecognizer(target: self, action: #selector(self.stopDownloadVideo(_:)))
+//        videoIndicator.addGestureRecognizer(stopVideo)
+//        videoIndicator.isUserInteractionEnabled = true
     }
     
     @objc func openPdf(sender:UIButton!) {

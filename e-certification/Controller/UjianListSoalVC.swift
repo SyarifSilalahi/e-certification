@@ -102,7 +102,7 @@ class UjianListSoalVC: UIViewController {
         }
         
         //buat testing lulus
-        nilai = 80
+//        nilai = 80
         
         print("nilai \(nilai)")
         ApiManager().setScoreUjian(nilai: "\(nilai)") { (response,failure, error) in

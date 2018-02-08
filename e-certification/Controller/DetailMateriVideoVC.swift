@@ -52,9 +52,10 @@ class DetailMateriVideoVC: UIViewController {
     func getNextFlag()->Double{
         player.pause()
         let arrGetFlags = getArrFlag(flags: videoTimeFlag)
+        print("arrGetFlags \(arrGetFlags)")
         for i in 0..<arrGetFlags.count{
             if (arrGetFlags[i] as NSString).doubleValue > currentDuration {
-//                print("current time \(self.currentDuration) arrGetFlags[i] \(arrGetFlags[i])")
+                print("current time \(self.currentDuration) arrGetFlags[i] \(arrGetFlags[i])")
                 return (arrGetFlags[i] as NSString).doubleValue
             }
         }
@@ -97,12 +98,24 @@ class DetailMateriVideoVC: UIViewController {
     }
     
     @IBAction func forward(_ sender: AnyObject) {
-        player.seekTime(self.getNextFlag())
+        player.pause()
+        let when = DispatchTime.now() + 1 // change 2 to desired number of seconds
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            // Your code with delay
+            self.player.seekTime(self.getNextFlag())
+        }
+        
         
     }
     
     @IBAction func backward(_ sender: AnyObject) {
-        player.seekTime(self.getPrevFlag())
+        player.pause()
+        let when = DispatchTime.now() + 1 // change 2 to desired number of seconds
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            // Your code with delay
+            self.player.seekTime(self.getPrevFlag())
+        }
+        
     }
     
     @IBAction func deleteVideo(_ sender: AnyObject) {

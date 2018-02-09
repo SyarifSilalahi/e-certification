@@ -58,9 +58,10 @@ class UjianListSoalVC: UIViewController {
     func setTimer(){
         if !UjianAnswer.isFinished{
             //set timer
-            self.lblTimer.setCountDownDate(fromDate: Date() as NSDate, targetDate: UjianAnswer.endDateExam as NSDate)
+//            self.lblTimer.setCountDownDate(fromDate: Date() as NSDate, targetDate: UjianAnswer.endDateExam as NSDate)
+            self.lblTimer.setCountDownDate(targetDate: UjianAnswer.endDateExam as NSDate)
             self.lblTimer.animationType = CountdownEffect.Evaporate
-            self.lblTimer.timeFormat = "hh:mm:ss"
+            self.lblTimer.timeFormat = "HH:mm:ss"
             self.lblTimer.delegate = self as? LTMorphingLabelDelegate
             self.lblTimer.start()
         }else{
@@ -135,7 +136,7 @@ class UjianListSoalVC: UIViewController {
                 let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: Wording.FINISH_EXAM_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
                 
                 let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
-//                    self.navigationController?.popViewController(animated: true)
+                    self.navigationController?.popViewController(animated: true)
                 })
                 alert.addAction(alertOKAction)
                 self.present(alert, animated: true, completion: nil)
@@ -278,7 +279,10 @@ extension UjianListSoalVC: UIImagePickerControllerDelegate,UINavigationControlle
             })
             //upload foto then go to hasil ujian
 //            self.performSegue(withIdentifier: "hasilUjian", sender: self)
-            self.dismiss(animated: true, completion: nil)
+            
+            self.dismiss(animated: true, completion: {
+                self.navigationController?.popViewController(animated: true)
+            })
         }
     }
     

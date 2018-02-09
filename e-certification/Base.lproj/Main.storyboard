@@ -851,6 +851,14 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r3d-79-9ul">
+                                        <rect key="frame" x="0.0" y="20" width="49" height="38"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="ico-notif-active"/>
+                                        <connections>
+                                            <segue destination="Wrk-FO-BKZ" kind="show" id="yEK-vM-oGp"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.1529411765" green="0.2156862745" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
@@ -2802,7 +2810,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="vQg-5L-Oat"/>
-        <segue reference="JlT-Gy-NoE"/>
-        <segue reference="MxL-dh-dPj"/>
+        <segue reference="yEK-vM-oGp"/>
+        <segue reference="emh-3X-dCB"/>
     </inferredMetricsTieBreakers>
 </document>

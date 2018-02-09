@@ -57,7 +57,6 @@ class UjianVC: UIViewController {
 //        }
         
         self.getStatus()
-        
     }
     
     //fungsi recheck ditujukan untuk submit jawaban jika user keluar dari applikasi
@@ -125,10 +124,13 @@ class UjianVC: UIViewController {
             
             //json data model
             self.duration.deserialize(response!)
-            let duration =  Double(self.duration.duration)
-            let minute:TimeInterval = duration!
-            let dateEndExam = Date(timeIntervalSinceNow: minute)
-            UjianAnswer.endDateExam = dateEndExam
+            let duration =  Int(self.duration.duration)
+            let minute:Int = duration!
+//            let dateEndExam = Date(timeIntervalSinceNow: minute)
+            let calendar = Calendar.current
+            let dateEndExam = calendar.date(byAdding: .minute, value: minute, to: Date())
+            UjianAnswer.endDateExam = dateEndExam!
+            print("minute \(minute)")
             print("now \(Date()) UjianAnswer.endDateExam \(UjianAnswer.endDateExam)")
             self.performSegue(withIdentifier: "openListSoalUjian", sender: self)
         }

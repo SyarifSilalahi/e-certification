@@ -62,7 +62,7 @@ class UjianDetailSoalVC: UIViewController {
             //set timer
             self.lblTimer.setCountDownDate(fromDate: Date() as NSDate, targetDate: UjianAnswer.endDateExam as NSDate)
             self.lblTimer.animationType = CountdownEffect.Evaporate
-            self.lblTimer.timeFormat = "hh:mm:ss"
+            self.lblTimer.timeFormat = "HH:mm:ss"
             self.lblTimer.delegate = self as? LTMorphingLabelDelegate
             self.lblTimer.start()
         }else{

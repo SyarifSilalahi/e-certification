@@ -1,0 +1,6 @@
+framework module HTPullToRefresh {
+  umbrella header "HTPullToRefresh-umbrella.h"
+
+  export *
+  module * { export * }
+}

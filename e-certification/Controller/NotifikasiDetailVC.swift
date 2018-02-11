@@ -15,10 +15,13 @@ class NotifikasiDetailVC: UIViewController {
     @IBOutlet weak var lblContent: UILabel!
     @IBOutlet weak var viewContent: UIView!
     
+    var detailNotifikasi:DataNotification = DataNotification()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+        self.lblTitle.text = self.detailNotifikasi.title
+        self.lblDetail.text = self.detailNotifikasi.description
     }
     
     @IBAction func back(_ sender: AnyObject) {

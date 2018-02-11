@@ -12,6 +12,8 @@ import Digger
 
 class DetailMateriPDFVC: UIViewController {
     
+    @IBOutlet weak var tblMateri: UITableView!
+    @IBOutlet weak var viewFooter: UIView!
     @IBOutlet weak var viewPdf: UIView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblDetail: UILabel!
@@ -43,6 +45,13 @@ class DetailMateriPDFVC: UIViewController {
         document = PDFDocument(url: urlPdf!)!
         readerController = PDFViewController.createNew(with: document)
         collectionPdf.register(PDFPageCollectionViewCell.self, forCellWithReuseIdentifier: "page")
+        self.resetContentSize()
+    }
+    
+    func resetContentSize(){
+        let contentHeight = Helper().heightForView(self.description_, font: UIFont.systemFont(ofSize: 12, weight: .regular), width: self.lblDescription.frame.size.width) + 30
+        self.viewFooter.frame.size.height = contentHeight
+        self.tblMateri.tableFooterView = self.viewFooter
     }
     
     override func viewWillAppear(_ animated: Bool) {

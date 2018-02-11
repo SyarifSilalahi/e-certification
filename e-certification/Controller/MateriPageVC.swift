@@ -87,7 +87,8 @@ extension MateriPageVC:UITableViewDelegate,UITableViewDataSource{
         let cell:MateriCell = tableView.dequeueReusableCell(withIdentifier: "MateriCellIdentifier", for: indexPath) as! MateriCell
         cell.selectionStyle = .none
         cell.setTitle(text: "\(dataMateri.data[indexPath.row].title)", isNew: true)
-        cell.lblDetail.text = dataMateri.data[indexPath.row].sub_module_title
+        cell.lblDetail.text = dataMateri.data[indexPath.row].description
+//        cell.lblDetail.text = dataMateri.data[indexPath.row].sub_module_title
         cell.description_ = dataMateri.data[indexPath.row].description
         
         cell.setActions(urlPdf: "\(dataMateri.data[indexPath.row].host_file)\(dataMateri.data[indexPath.row].document)", urlVideo: "\(dataMateri.data[indexPath.row].host_file)\(dataMateri.data[indexPath.row].video)")

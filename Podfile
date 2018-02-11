@@ -16,6 +16,7 @@ target 'e-certification' do
   pod 'KRActivityIndicatorView'
   pod 'VGPlayer'
   pod 'PDFReader'
+  pod 'HTPullToRefresh'
 
   #timer label
   pod 'CountdownLabel'

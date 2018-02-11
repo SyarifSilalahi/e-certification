@@ -10,6 +10,8 @@
 		1305EE5B202796E300F8D849 /* HasilUjianVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1305EE5A202796E300F8D849 /* HasilUjianVC.swift */; };
 		1307A7C72016617200A7EF45 /* LatihanDetailSoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1307A7C62016617200A7EF45 /* LatihanDetailSoalVC.swift */; };
 		1307A7C92016619900A7EF45 /* UjianDetailSoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1307A7C82016619900A7EF45 /* UjianDetailSoalVC.swift */; };
+		13160C3A2030B0C90064438D /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13160C392030B0C90064438D /* News.swift */; };
+		13160C3C2030B0F40064438D /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13160C3B2030B0F40064438D /* Notification.swift */; };
 		13171BBF201F9695005D4FEF /* OpsiSoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13171BBE201F9695005D4FEF /* OpsiSoalCell.swift */; };
 		1345768E2010F03800B0E2C6 /* UISideMenuNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1345768B2010F03700B0E2C6 /* UISideMenuNavigationController.swift */; };
 		1345768F2010F03800B0E2C6 /* SideMenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1345768C2010F03700B0E2C6 /* SideMenuManager.swift */; };
@@ -68,6 +70,8 @@
 		1305EE5A202796E300F8D849 /* HasilUjianVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasilUjianVC.swift; sourceTree = "<group>"; };
 		1307A7C62016617200A7EF45 /* LatihanDetailSoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatihanDetailSoalVC.swift; sourceTree = "<group>"; };
 		1307A7C82016619900A7EF45 /* UjianDetailSoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UjianDetailSoalVC.swift; sourceTree = "<group>"; };
+		13160C392030B0C90064438D /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
+		13160C3B2030B0F40064438D /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		13171BBE201F9695005D4FEF /* OpsiSoalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpsiSoalCell.swift; sourceTree = "<group>"; };
 		1345768B2010F03700B0E2C6 /* UISideMenuNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UISideMenuNavigationController.swift; sourceTree = "<group>"; };
 		1345768C2010F03700B0E2C6 /* SideMenuManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuManager.swift; sourceTree = "<group>"; };
@@ -339,6 +343,8 @@
 				134CCB342018EF0500D6D4B7 /* UserAuth.swift */,
 				13CCF02A201A2EF30045A5DE /* ListMateri.swift */,
 				1377DA75201CCFDC004A2559 /* ListModul.swift */,
+				13160C392030B0C90064438D /* News.swift */,
+				13160C3B2030B0F40064438D /* Notification.swift */,
 			);
 			path = Success;
 			sourceTree = "<group>";
@@ -480,6 +486,7 @@
 				"${BUILT_PRODUCTS_DIR}/Arrow/Arrow.framework",
 				"${BUILT_PRODUCTS_DIR}/CountdownLabel/CountdownLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/Digger/Digger.framework",
+				"${BUILT_PRODUCTS_DIR}/HTPullToRefresh/HTPullToRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Hue/Hue.framework",
 				"${BUILT_PRODUCTS_DIR}/KRActivityIndicatorView/KRActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/MKSpinner/MKSpinner.framework",
@@ -496,6 +503,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Arrow.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CountdownLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Digger.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HTPullToRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hue.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KRActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MKSpinner.framework",
@@ -550,6 +558,7 @@
 				1347F534200F9B590023B3B8 /* MenuCVCell.swift in Sources */,
 				1345769620110F5C00B0E2C6 /* LatihanListSoalVC.swift in Sources */,
 				134576922010F49100B0E2C6 /* RSlideMenu.swift in Sources */,
+				13160C3A2030B0C90064438D /* News.swift in Sources */,
 				1377DA76201CCFDC004A2559 /* ListModul.swift in Sources */,
 				134576902010F03800B0E2C6 /* SideMenuTransition.swift in Sources */,
 				1347F537200F9B590023B3B8 /* SignInVC.swift in Sources */,
@@ -564,6 +573,7 @@
 				1347F508200F9A8E0023B3B8 /* Helper.swift in Sources */,
 				1345768F2010F03800B0E2C6 /* SideMenuManager.swift in Sources */,
 				1347F52A200F9B590023B3B8 /* NewsDetailVC.swift in Sources */,
+				13160C3C2030B0F40064438D /* Notification.swift in Sources */,
 				13CDA0F0201798830079B61C /* DetailMateriPDFVC.swift in Sources */,
 				134576942011025300B0E2C6 /* MenuCell.swift in Sources */,
 				134CCB2C2018ED2900D6D4B7 /* ApiManager.swift in Sources */,

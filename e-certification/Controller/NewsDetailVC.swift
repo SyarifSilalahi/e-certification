@@ -18,14 +18,27 @@ class NewsDetailVC: UIViewController {
     @IBOutlet weak var viewFooter: UIView!
     @IBOutlet weak var webContent: UIWebView!
     
-    let content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</br>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+    var detailNews:ListDetailNews = ListDetailNews()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //statusbar
         let app = UIApplication.shared
         app.statusBarStyle = .lightContent
-        webContent.loadHTMLString("<html><body><p>\(content)</p></body></html>", baseURL: nil)
+        
+        self.lblTitle.text = self.detailNews.title
+        let imgUrl = URL(string: "\(self.detailNews.host_file)\(self.detailNews.image)")!
+        self.imgHeader.af_setImage(withURL: imgUrl)
+        
+        var contentBody = self.detailNews.description
+        contentBody = (contentBody as NSString).replacingOccurrences(of: "img style", with: "img _")
+        let iFrameWidth = self.webContent.frame.size.width - 5
+        let iFrameHeight = iFrameWidth / 1.5
+        let htmlString = "<html><head><style>img{max-width:100% ;height:auto !important;width:auto !important;} iframe{ width: \(iFrameWidth)px; height: \(iFrameHeight)px; resize: both; overflow: auto;} </style></head><bodystyle=\"background-color: transparent;\"><font face=\"Avenir-Roman\" color=\"#536066\"> \(contentBody) </font></body></html>"
+        self.webContent.delegate = self
+        webContent.isOpaque = false
+        webContent.backgroundColor = UIColor.clear
+        webContent.loadHTMLString(htmlString, baseURL: nil)
         // Do any additional setup after loading the view.
     }
     
@@ -49,4 +62,17 @@ class NewsDetailVC: UIViewController {
     }
     */
 
+}
+
+extension NewsDetailVC: UIWebViewDelegate {
+    
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        webViewResizeToContent(webView: webView)
+    }
+    
+    func webViewResizeToContent(webView: UIWebView) {
+        let height:CGFloat = webView.scrollView.contentSize.height
+        self.viewFooter.frame.size.height = height + 50
+        self.tblNews.tableFooterView = self.viewFooter
+    }
 }

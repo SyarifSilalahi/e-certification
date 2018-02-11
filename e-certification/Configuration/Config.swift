@@ -44,6 +44,9 @@ struct Domain {
     static let URL_EXAM_DURATION = "\(URL_BASE)/user/get_exam_duration"
     static let URL_EXAM_SUBMIT_SCORE = "\(URL_BASE)/user/score_after_exam"
     static let URL_EXAM_UPLOAD_FOTO = "\(URL_BASE)/user/image_after_exam"
+    static let URL_NEWS = "\(URL_BASE)/user/news"
+    static let URL_NOTIFICATION = "\(URL_BASE)/user/notification"
+    
     
     static let URL_CHAT = "\(URL_BASE)/chat"
     

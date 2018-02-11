@@ -1659,64 +1659,64 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SS9-DE-9GJ">
-                                <rect key="frame" x="0.0" y="90" width="375" height="528"/>
+                                <rect key="frame" x="0.0" y="107" width="375" height="511"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NotifCellIdentifier" id="cmG-Z5-ySZ" customClass="NotifCell" customModule="e_certification" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NotifCellIdentifier" rowHeight="60" id="cmG-Z5-ySZ" customClass="NotifCell" customModule="e_certification" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cmG-Z5-ySZ" id="zae-6A-AM3">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ico-dot-new" translatesAutoresizingMaskIntoConstraints="NO" id="fwL-4n-qep">
-                                                    <rect key="frame" x="23" y="11" width="6" height="6"/>
+                                                    <rect key="frame" x="23" y="22" width="6" height="6"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lisensi Keagenan Anda hampir habis!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0iQ-zJ-qIk">
-                                                    <rect key="frame" x="33" y="7" width="281" height="13"/>
+                                                    <rect key="frame" x="33" y="18" width="281" height="13"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                                     <color key="textColor" red="0.30196078430000001" green="0.30588235289999999" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lisensi Anda akan berakhir pada 29/10/17" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXq-47-TqY">
-                                                    <rect key="frame" x="33" y="24" width="281" height="13"/>
+                                                    <rect key="frame" x="33" y="35" width="281" height="13"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <color key="textColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="17/4/17" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XrT-vZ-hFE">
-                                                    <rect key="frame" x="313" y="18" width="40" height="13"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="17/4/17" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="XrT-vZ-hFE">
+                                                    <rect key="frame" x="313" y="27" width="40" height="13"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <color key="textColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ico-arrow-right" translatesAutoresizingMaskIntoConstraints="NO" id="Fdh-tg-P77">
-                                                    <rect key="frame" x="353" y="18" width="13" height="13"/>
+                                                    <rect key="frame" x="353" y="27" width="13" height="13"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="imgDot" destination="fwL-4n-qep" id="97o-ng-Gty"/>
-                                            <outlet property="lblDetail" destination="XrT-vZ-hFE" id="iNw-kY-scn"/>
+                                            <outlet property="lblDetail" destination="fXq-47-TqY" id="bjc-VN-85Q"/>
+                                            <outlet property="lblTime" destination="XrT-vZ-hFE" id="Om4-9J-8Db"/>
                                             <outlet property="lblTitle" destination="0iQ-zJ-qIk" id="bNw-X8-uhg"/>
-                                            <segue destination="jbU-bs-Ijk" kind="show" id="Hfb-fp-bT2"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fLF-e5-EZv">
-                                <rect key="frame" x="0.0" y="60" width="375" height="29"/>
+                                <rect key="frame" x="0.0" y="60" width="375" height="47"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Pw-2h-AMj">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="1"/>
+                                        <rect key="frame" x="0.0" y="46" width="375" height="1"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1724,15 +1724,18 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ico-search-notif" translatesAutoresizingMaskIntoConstraints="NO" id="Vle-pW-WqM">
-                                        <rect key="frame" x="35" y="0.0" width="18" height="28"/>
+                                        <rect key="frame" x="35" y="0.0" width="18" height="47"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="20 Notifikasi" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WgD-ea-7A2">
-                                        <rect key="frame" x="56" y="0.0" width="264" height="28"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="20 Notifikasi" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WgD-ea-7A2">
+                                        <rect key="frame" x="56" y="0.0" width="264" height="47"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" name="Raleway" family="Raleway" pointSize="9.5"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="Raleway" family="Raleway" pointSize="13.5"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="Wrk-FO-BKZ" id="Mwv-2Z-OPS"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1774,6 +1777,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                     <connections>
                         <outlet property="tblNotif" destination="SS9-DE-9GJ" id="1b5-hM-hkM"/>
                         <outlet property="txtSearch" destination="WgD-ea-7A2" id="mKh-cx-dQq"/>
+                        <segue destination="jbU-bs-Ijk" kind="show" identifier="openDetailNotification" id="9Tv-Fn-FLo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qKo-MU-9H7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1828,14 +1832,14 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lisensi Keagenan Anda hampir habis!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="szc-Lv-gXL">
                                         <rect key="frame" x="30" y="19" width="315" height="25"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <color key="textColor" red="0.30196078430000001" green="0.30588235289999999" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lisensi Anda akan berakhir pada 29/10/17" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rWR-Yb-dXa">
                                         <rect key="frame" x="30" y="48" width="315" height="15"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12.5"/>
                                         <color key="textColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1904,7 +1908,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                                 <rect key="frame" x="0.0" y="60" width="375" height="558"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ByK-Gf-xdT">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ByK-Gf-xdT">
                                 <rect key="frame" x="0.0" y="60" width="375" height="558"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1922,7 +1926,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                                             <rect key="frame" x="0.0" y="0.0" width="135" height="140"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="contoh" translatesAutoresizingMaskIntoConstraints="NO" id="JzI-39-Cd4">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ico-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="JzI-39-Cd4">
                                                     <rect key="frame" x="0.0" y="0.0" width="135" height="105"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <userDefinedRuntimeAttributes>
@@ -1952,7 +1956,6 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                                             <outlet property="imgIcoNews" destination="JzI-39-Cd4" id="guX-To-aDF"/>
                                             <outlet property="lblDetail" destination="8vn-rs-t3k" id="zrJ-3E-zRB"/>
                                             <outlet property="lblTitle" destination="TSz-19-aL7" id="AWy-LD-Dso"/>
-                                            <segue destination="Pe7-3Q-dZa" kind="show" id="6Kf-hf-8q2"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -1994,6 +1997,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                     <navigationItem key="navigationItem" id="brQ-Gc-qbI"/>
                     <connections>
                         <outlet property="collectionNews" destination="ByK-Gf-xdT" id="kqg-4b-Wcr"/>
+                        <segue destination="Pe7-3Q-dZa" kind="show" identifier="showDetailNews" id="BfH-3E-RqW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D6X-rx-pcg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2013,7 +2017,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="U94-Wr-Knc">
-                                <rect key="frame" x="0.0" y="60" width="375" height="504"/>
+                                <rect key="frame" x="0.0" y="60" width="375" height="558"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="F1x-W7-rEr">
@@ -2034,7 +2038,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                                             <color key="textColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="contoh" translatesAutoresizingMaskIntoConstraints="NO" id="khl-PU-ZrO">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ico-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="khl-PU-ZrO">
                                             <rect key="frame" x="23" y="51" width="330" height="255"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <userDefinedRuntimeAttributes>
@@ -2050,7 +2054,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                                     <rect key="frame" x="0.0" y="314" width="375" height="200"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aVP-hm-TRZ">
+                                        <webView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aVP-hm-TRZ">
                                             <rect key="frame" x="23" y="0.0" width="328" height="200"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2060,31 +2064,6 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                             </tableView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dIw-3c-5BP">
-                                <rect key="frame" x="0.0" y="564" width="375" height="54"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5uZ-gg-H7H">
-                                        <rect key="frame" x="27" y="0.0" width="90" height="54"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="italicSystem" pointSize="10"/>
-                                        <inset key="imageEdgeInsets" minX="-15" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="Sebelumnya" image="ico-arrow-backward">
-                                            <color key="titleColor" red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sys-im-hV3">
-                                        <rect key="frame" x="258" y="0.0" width="90" height="54"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="italicSystem" pointSize="10"/>
-                                        <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="Selanjutnya" image="ico-arrow-forward">
-                                            <color key="titleColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v7D-lF-z7J">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -2268,7 +2247,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                                             <outlet property="btnPdf" destination="gxU-pz-R4Z" id="xZT-fU-6lb"/>
                                             <outlet property="btnVideo" destination="XoZ-V3-BCn" id="VdW-Vk-YAX"/>
                                             <outlet property="imgContent" destination="f6m-be-y8e" id="r0b-RB-uzY"/>
-                                            <outlet property="lblDetail" destination="iVp-Mg-Per" id="zSo-sa-MjU"/>
+                                            <outlet property="lblDetail" destination="iVp-Mg-Per" id="omD-pv-kVL"/>
                                             <outlet property="lblProgressDownloadPDF" destination="bor-8f-MOC" id="MgK-Pj-yKr"/>
                                             <outlet property="lblProgressDownloadVideo" destination="vSf-91-nau" id="LwG-iM-TJB"/>
                                             <outlet property="lblTitle" destination="tTJ-Xe-eZl" id="0qV-FJ-Y3V"/>
@@ -2370,9 +2349,10 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                                     <rect key="frame" x="0.0" y="320" width="375" height="200"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xRC-8T-dmK">
-                                            <rect key="frame" x="33" y="5" width="309" height="190"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xRC-8T-dmK">
+                                            <rect key="frame" x="33" y="10" width="309" height="170"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</string>
@@ -2414,6 +2394,8 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                         <outlet property="lblDescription" destination="xRC-8T-dmK" id="B64-Zp-PPj"/>
                         <outlet property="lblDetail" destination="Y6e-aD-NC4" id="r16-hd-fQ8"/>
                         <outlet property="lblTitle" destination="dV9-qO-2oG" id="Dk8-yV-nJ3"/>
+                        <outlet property="tblMateri" destination="G9i-Om-HoH" id="uHZ-jW-7mh"/>
+                        <outlet property="viewFooter" destination="Kiu-uA-0Bq" id="jUO-Vs-Spb"/>
                         <outlet property="viewPlayer" destination="9JD-08-q51" id="lEA-lf-Z98"/>
                     </connections>
                 </viewController>
@@ -2532,7 +2514,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XIZ-qG-Eo0">
                                             <rect key="frame" x="33" y="5" width="309" height="190"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</string>
@@ -2553,6 +2535,8 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                         <outlet property="lblDescription" destination="XIZ-qG-Eo0" id="VMl-a8-Es2"/>
                         <outlet property="lblDetail" destination="GT9-MH-Kaq" id="XmI-Zl-WEa"/>
                         <outlet property="lblTitle" destination="AXc-g7-uFE" id="rXY-wZ-P6s"/>
+                        <outlet property="tblMateri" destination="6KP-fM-jYS" id="gRz-lr-1Wi"/>
+                        <outlet property="viewFooter" destination="Vl0-5I-fG9" id="uFh-tj-2xR"/>
                         <outlet property="viewPdf" destination="m02-gj-VK2" id="6Zb-5u-nz4"/>
                     </connections>
                 </viewController>
@@ -2799,6 +2783,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
         <image name="ico-notif-active" width="24" height="22"/>
         <image name="ico-pass" width="14" height="18"/>
         <image name="ico-pdf-disable" width="23" height="23"/>
+        <image name="ico-placeholder" width="288" height="376"/>
         <image name="ico-search-notif" width="13" height="13"/>
         <image name="ico-setting" width="23" height="23"/>
         <image name="ico-timer" width="16" height="19"/>
@@ -2810,7 +2795,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="vQg-5L-Oat"/>
-        <segue reference="yEK-vM-oGp"/>
-        <segue reference="emh-3X-dCB"/>
+        <segue reference="JlT-Gy-NoE"/>
+        <segue reference="MxL-dh-dPj"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -12,7 +12,8 @@ import SnapKit
 import Digger
 
 class DetailMateriVideoVC: UIViewController {
-    
+    @IBOutlet weak var tblMateri: UITableView!
+    @IBOutlet weak var viewFooter: UIView!
     @IBOutlet weak var viewPlayer: UIView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblDetail: UILabel!
@@ -41,8 +42,14 @@ class DetailMateriVideoVC: UIViewController {
         self.lblTitle.text = title_
         self.lblDetail.text = detail
         self.lblDescription.text = description_
-        
+        self.resetContentSize()
         self.setVideoPlayer()
+    }
+    
+    func resetContentSize(){
+        let contentHeight = Helper().heightForView(self.description_, font: UIFont.systemFont(ofSize: 12, weight: .regular), width: self.lblDescription.frame.size.width) + 30
+        self.viewFooter.frame.size.height = contentHeight
+        self.tblMateri.tableFooterView = self.viewFooter
     }
     
     func getArrFlag(flags:String) ->[String]{
@@ -73,13 +80,14 @@ class DetailMateriVideoVC: UIViewController {
         return 0
     }
     
+    
     func setVideoPlayer(){
         self.urlVideo = URL(fileURLWithPath: FileHelper().getFilePath(name: "\(fileName)"))
         
         self.player.replaceVideo(urlVideo!)
         self.viewPlayer.addSubview(self.player.displayView)
         
-        self.player.play()
+        self.player.pause()
         self.player.displayView.topView.alpha = 0
         self.player.backgroundMode = .proceed
         self.player.delegate = self
@@ -173,7 +181,6 @@ extension DetailMateriVideoVC: VGPlayerDelegate {
 //        print("currentDuration \(currentDuration)")
         self.currentDuration = currentDuration
     }
-    
 }
 
 extension DetailMateriVideoVC: VGPlayerViewDelegate {

@@ -37,12 +37,23 @@ class UjianListSoalVC: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        self.setLblCounter()
         self.collectionMenu.reloadData()
         self.setTimer()
         if UjianAnswer.isTimesUp{
             self.lblTimer.cancel()
             self.finishExam()
         }
+    }
+    
+    func setLblCounter(){
+        var totalSelected = 0
+        for i in 0..<self.listSoal.data.count{
+            if LatihanAnswer.arrAnswer[i]["choosed"] != ""{
+                totalSelected += 1
+            }
+        }
+        self.lblCounter.text = "\(totalSelected) / \(self.listSoal.data.count)"
     }
     
     @objc func appMovedToBackground() {

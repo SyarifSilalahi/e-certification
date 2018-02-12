@@ -49,7 +49,7 @@ class UjianListSoalVC: UIViewController {
     func setLblCounter(){
         var totalSelected = 0
         for i in 0..<self.listSoal.data.count{
-            if LatihanAnswer.arrAnswer[i]["choosed"] != ""{
+            if UjianAnswer.arrAnswer[i]["choosed"] != ""{
                 totalSelected += 1
             }
         }

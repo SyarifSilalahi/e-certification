@@ -17,7 +17,7 @@ public typealias Callback = (progress: ProgressCallback?,speed: SpeedCallback?,c
 
 public  class DiggerSeed {
     
-    var downloadTask: URLSessionDataTask
+    public var downloadTask: URLSessionDataTask
     var url : URL
     var progress  = Progress()
     var callbacks = [Callback]()

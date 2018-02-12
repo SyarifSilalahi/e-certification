@@ -10,6 +10,7 @@ import UIKit
 import VGPlayer
 import SnapKit
 import Digger
+import AVFoundation
 
 class DetailMateriVideoVC: UIViewController {
     @IBOutlet weak var tblMateri: UITableView!
@@ -27,7 +28,6 @@ class DetailMateriVideoVC: UIViewController {
     var fileName = ""
     var description_ = ""
     var videoTimeFlag = ""
-    var currentDuration:Double = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +46,14 @@ class DetailMateriVideoVC: UIViewController {
         self.setVideoPlayer()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.player.pause()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        self.player.pause()
+    }
+    
     func resetContentSize(){
         let contentHeight = Helper().heightForView(self.description_, font: UIFont.systemFont(ofSize: 12, weight: .regular), width: self.lblDescription.frame.size.width) + 30
         self.viewFooter.frame.size.height = contentHeight
@@ -56,31 +64,6 @@ class DetailMateriVideoVC: UIViewController {
         return flags.components(separatedBy: ",")
     }
     
-    func getNextFlag()->Double{
-        player.pause()
-        let arrGetFlags = getArrFlag(flags: videoTimeFlag)
-        print("arrGetFlags \(arrGetFlags)")
-        for i in 0..<arrGetFlags.count{
-            if (arrGetFlags[i] as NSString).doubleValue > currentDuration {
-                print("current time \(self.currentDuration) arrGetFlags[i] \(arrGetFlags[i])")
-                return (arrGetFlags[i] as NSString).doubleValue
-            }
-        }
-        return self.currentDuration
-    }
-    
-    func getPrevFlag()->Double{
-        player.pause()
-        let arrGetFlags = getArrFlag(flags: videoTimeFlag)
-        for i in stride(from: arrGetFlags.count - 1, to: -1, by: -1){
-            if (arrGetFlags[i] as NSString).doubleValue < currentDuration - 2 {
-                return (arrGetFlags[i] as NSString).doubleValue
-            }
-        }
-        return 0
-    }
-    
-    
     func setVideoPlayer(){
         self.urlVideo = URL(fileURLWithPath: FileHelper().getFilePath(name: "\(fileName)"))
         
@@ -89,7 +72,7 @@ class DetailMateriVideoVC: UIViewController {
         
         self.player.pause()
         self.player.displayView.topView.alpha = 0
-        self.player.backgroundMode = .proceed
+        self.player.backgroundMode = .suspend
         self.player.delegate = self
         self.player.displayView.delegate = self
         self.player.displayView.snp.makeConstraints { [weak self] (make) in
@@ -101,33 +84,53 @@ class DetailMateriVideoVC: UIViewController {
         }
     }
     
-    @IBAction func back(_ sender: AnyObject) {
-        self.navigationController?.popViewController(animated: true)
+    func getNextFlag()->Double{
+        player.pause()
+        let arrGetFlags = getArrFlag(flags: videoTimeFlag)
+        for i in 0..<arrGetFlags.count{
+            if (arrGetFlags[i] as NSString).doubleValue > self.player.currentDuration {
+                return (arrGetFlags[i] as NSString).doubleValue + 5
+            }
+        }
+        return self.player.currentDuration
+    }
+    
+    func getPrevFlag()->Double{
+        player.pause()
+        let arrGetFlags = getArrFlag(flags: videoTimeFlag)
+        for i in stride(from: arrGetFlags.count - 1, to: -1, by: -1){
+            if (arrGetFlags[i] as NSString).doubleValue < self.player.currentDuration {
+                return (arrGetFlags[i] as NSString).doubleValue - 5
+            }
+        }
+        return 0
     }
     
     @IBAction func forward(_ sender: AnyObject) {
         player.pause()
-        let when = DispatchTime.now() + 1 // change 2 to desired number of seconds
-        DispatchQueue.main.asyncAfter(deadline: when) {
-            // Your code with delay
-            self.player.seekTime(self.getNextFlag())
-        }
-        
-        
+        self.player.seekTime(self.getNextFlag())
+//        let when = DispatchTime.now() + 1 // change 2 to desired number of seconds
+//        DispatchQueue.main.asyncAfter(deadline: when) {
+//            // Your code with delay
+//        }
     }
     
     @IBAction func backward(_ sender: AnyObject) {
         player.pause()
-        let when = DispatchTime.now() + 1 // change 2 to desired number of seconds
-        DispatchQueue.main.asyncAfter(deadline: when) {
-            // Your code with delay
-            self.player.seekTime(self.getPrevFlag())
-        }
-        
+        self.player.seekTime(self.getPrevFlag())
+//        let when = DispatchTime.now() + 1 // change 2 to desired number of seconds
+//        DispatchQueue.main.asyncAfter(deadline: when) {
+//            // Your code with delay
+//        }
     }
     
+    @IBAction func back(_ sender: AnyObject) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    
     @IBAction func deleteVideo(_ sender: AnyObject) {
-        let deleteAlert = UIAlertController(title: "Confirmation", message: "Are you sure want to delete this content?", preferredStyle: UIAlertControllerStyle.alert)
+        let deleteAlert = UIAlertController(title: "Konfirmasi", message: "Apakah anda yakin ingin menghapus materi ini?", preferredStyle: UIAlertControllerStyle.alert)
         
         deleteAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
             DiggerCache.removeItem(atPath: FileHelper().getFilePath(name: "\(self.fileName)"))
@@ -178,8 +181,7 @@ extension DetailMateriVideoVC: VGPlayerDelegate {
 //        print("buffer State", state)
     }
     func vgPlayer(_ player: VGPlayer, playerDurationDidChange currentDuration: TimeInterval, totalDuration: TimeInterval) {
-//        print("currentDuration \(currentDuration)")
-        self.currentDuration = currentDuration
+//        print("currentDuration now \(currentDuration)")
     }
 }
 

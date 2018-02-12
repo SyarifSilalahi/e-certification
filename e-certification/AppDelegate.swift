@@ -17,14 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        do
-        {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
-        }
-        catch let error as NSError
-        {
-            print(error)
-        }
+//        //turn on videoplayer sounds even on mode silent
+//        do{try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+//        }catch let error as NSError{print(error)}
+        
         return true
     }
 

@@ -38,6 +38,7 @@ class MateriCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+//        DiggerCache.cleanDownloadFiles()
     }
 
     func setTitle(text:String,isNew:Bool){
@@ -69,27 +70,23 @@ class MateriCell: UITableViewCell {
             self.btnVideo.setImage(#imageLiteral(resourceName: "ico-video-disable"), for: .normal)
         }
         
+        DiggerManager.shared.startDownloadImmediately = false
+        self.prepareToDownloadPdf()
+        self.prepareToDownloadVideo()
+        
         btnPdf.addTarget(self, action: #selector(openPdf(sender:)), for: .touchUpInside)
-//        let stopPdf = UITapGestureRecognizer(target: self, action: #selector(self.stopDownloadPdf(_:)))
-//        pdfIndicator.addGestureRecognizer(stopPdf)
-//        pdfIndicator.isUserInteractionEnabled = true
+        let stopPdf = UITapGestureRecognizer(target: self, action: #selector(self.stopDownloadPdf(_:)))
+        pdfIndicator.addGestureRecognizer(stopPdf)
+        pdfIndicator.isUserInteractionEnabled = true
         
         btnVideo.addTarget(self, action: #selector(openVideo(sender:)), for: .touchUpInside)
-//        let stopVideo = UITapGestureRecognizer(target: self, action: #selector(self.stopDownloadVideo(_:)))
-//        videoIndicator.addGestureRecognizer(stopVideo)
-//        videoIndicator.isUserInteractionEnabled = true
+        let stopVideo = UITapGestureRecognizer(target: self, action: #selector(self.stopDownloadVideo(_:)))
+        videoIndicator.addGestureRecognizer(stopVideo)
+        videoIndicator.isUserInteractionEnabled = true
     }
     
-    @objc func openPdf(sender:UIButton!) {
-//        self.btnPdf.setImage(#imageLiteral(resourceName: "ico-pdf-enable"), for: .normal)
-//        getNameFromUrl(url: urlPdf)
-        if FileHelper().isFileExist(name: FileHelper().getNameFromUrl(url: urlPdf)) {
-            self.delegate?.proccessPDF(name: FileHelper().getNameFromUrl(url: urlPdf), title: self.lblTitle.text!, detail: self.lblDetail.text!, description: self.description_)
-            return
-        }
-        btnPdf.alpha = 0
-        DiggerManager.shared.startTask(for: self.urlPdf)
-        Digger.download(urlPdf).completion { (result) in
+    private func prepareToDownloadPdf(){
+        DiggerManager.shared.download(with:urlPdf).completion { (result) in
             switch result {
             case .success(let url):
                 self.btnPdf.setImage(#imageLiteral(resourceName: "ico-pdf-enable"), for: .normal)
@@ -114,7 +111,7 @@ class MateriCell: UITableViewCell {
             
             }.progress { (progress) in
                 //                cell.progressView.progress = Float(progress.fractionCompleted)
-//                print("progress \(Float(progress.fractionCompleted))")
+                //                print("progress \(Float(progress.fractionCompleted))")
                 print("progress \(Int(Float(progress.fractionCompleted) * 100))")
                 self.lblProgressDownloadPDF.text = "\(Int(Float(progress.fractionCompleted) * 100))%"
                 self.btnPdf.alpha = 0
@@ -129,23 +126,23 @@ class MateriCell: UITableViewCell {
         }
     }
     
-    @objc func stopDownloadPdf(_ sender: UITapGestureRecognizer) {
-        DiggerManager.shared.stopTask(for: self.urlPdf)
-        pdfIndicator.animating = false
-        pdfIndicator.stopAnimating()
-        self.pdfIndicator.alpha = 0
-        self.lblProgressDownloadPDF.alpha = 0
-        self.btnPdf.alpha = 1
-    }
-    
-    @objc func openVideo(sender:UIButton!) {
-        if FileHelper().isFileExist(name: FileHelper().getNameFromUrl(url: urlVideo)) {
-            self.delegate?.proccessVideo(name: FileHelper().getNameFromUrl(url: urlVideo), title: self.lblTitle.text!, detail: self.lblDetail.text!, description: self.description_,timeFlag: self.videoTimeFlag)
+    @objc func openPdf(sender:UIButton!) {
+//        self.btnPdf.setImage(#imageLiteral(resourceName: "ico-pdf-enable"), for: .normal)
+//        getNameFromUrl(url: urlPdf)
+        if FileHelper().isFileExist(name: FileHelper().getNameFromUrl(url: urlPdf)) {
+            self.delegate?.proccessPDF(name: FileHelper().getNameFromUrl(url: urlPdf), title: self.lblTitle.text!, detail: self.lblDetail.text!, description: self.description_)
             return
         }
-        btnVideo.alpha = 0
-        DiggerManager.shared.startTask(for: self.urlVideo)
-        Digger.download(urlVideo).completion { (result) in
+        self.btnPdf.alpha = 0
+        self.pdfIndicator.alpha = 1
+        self.lblProgressDownloadPDF.alpha = 1
+        self.pdfIndicator.animating = true
+        self.pdfIndicator.startAnimating()
+        DiggerManager.shared.startTask(for: self.urlPdf)
+    }
+    
+    private func prepareToDownloadVideo(){
+        DiggerManager.shared.download(with: urlVideo).completion { (result) in
             switch result {
             case .success(let url):
                 self.btnVideo.setImage(#imageLiteral(resourceName: "ico-video-enable"), for: .normal)
@@ -165,12 +162,12 @@ class MateriCell: UITableViewCell {
                 self.btnVideo.alpha = 1
                 _ =  error
                 diggerLog(error)
-
+                
             }
-
+            
             }.progress { (progress) in
-//                cell.progressView.progress = Float(progress.fractionCompleted)
-//                print("progress \(Float(progress.fractionCompleted))")
+                //                cell.progressView.progress = Float(progress.fractionCompleted)
+                //                print("progress \(Float(progress.fractionCompleted))")
                 print("progress \(Int(Float(progress.fractionCompleted) * 100))")
                 
                 self.lblProgressDownloadVideo.text = "\(Int(Float(progress.fractionCompleted) * 100))%"
@@ -179,56 +176,49 @@ class MateriCell: UITableViewCell {
                 self.lblProgressDownloadVideo.alpha = 1
                 self.videoIndicator.animating = true
                 self.videoIndicator.startAnimating()
-
+                
             }.speed { (speed) in
-//                print("\(speed / 1024)" + "KB/S")
-
+                //                print("\(speed / 1024)" + "KB/S")
         }
+    }
+    
+    @objc func openVideo(sender:UIButton!) {
+        if FileHelper().isFileExist(name: FileHelper().getNameFromUrl(url: urlVideo)) {
+            self.delegate?.proccessVideo(name: FileHelper().getNameFromUrl(url: urlVideo), title: self.lblTitle.text!, detail: self.lblDetail.text!, description: self.description_,timeFlag: self.videoTimeFlag)
+            return
+        }
+        self.btnVideo.alpha = 0
+        self.videoIndicator.alpha = 1
+        self.lblProgressDownloadVideo.alpha = 1
+        self.videoIndicator.animating = true
+        self.videoIndicator.startAnimating()
+        DiggerManager.shared.startTask(for: self.urlVideo)
+    }
+    
+    @objc func stopDownloadPdf(_ sender: UITapGestureRecognizer) {
+        DiggerManager.shared.stopTask(for: self.urlPdf)
+        
+//        let seed = DiggerManager.shared.findDiggerSeed(with: self.urlPdf)!
+//        seed.downloadTask.suspend()
+        
+        pdfIndicator.animating = false
+        pdfIndicator.stopAnimating()
+        self.pdfIndicator.alpha = 0
+        self.lblProgressDownloadPDF.alpha = 0
+        self.btnPdf.alpha = 1
+        
     }
     
     @objc func stopDownloadVideo(_ sender: UITapGestureRecognizer) {
         DiggerManager.shared.stopTask(for: self.urlVideo)
+        
+//        let seed = DiggerManager.shared.findDiggerSeed(with: self.urlVideo)!
+//        seed.downloadTask.suspend()
+        
         videoIndicator.animating = false
         videoIndicator.stopAnimating()
         self.videoIndicator.alpha = 0
         self.lblProgressDownloadVideo.alpha = 0
         self.btnVideo.alpha = 1
-    }
-}
-
-extension MateriCell{
-    func diggerConfig() {
-        /// 是否立刻开始任务,默认为true
-        DiggerManager.shared.startDownloadImmediately = false
-        /// 设置并发数,默认为3
-        DiggerManager.shared.maxConcurrentTasksCount = 4
-        /// 设置请求超时,默认为150毫秒
-        DiggerManager.shared.timeout = 150
-        /// 设置是否可用蜂窝数据下载,默认为true
-        DiggerManager.shared.allowsCellularAccess = false
-        /// 设置日志级别,默认为high,格式如下,设置为none则关闭
-        DiggerManager.shared.logLevel = .none
-        /*
-         ***************DiggerLog****************
-         file   : ExampleController.swift
-         method : viewDidLoad()
-         line   : [31]:
-         info   : digger log
-         
-         */
-        // MARK:-  DiggerCache
-        
-        /// 在沙盒cactes目录,自定义缓存目录
-        DiggerCache.cachesDirectory = "Directory"
-        /// 删除所有下载的文件
-        DiggerCache.cleanDownloadFiles()
-        /// 删除所有临时下载文件
-        DiggerCache.cleanDownloadTempFiles()
-        /// 获取系统可用内存
-        _ = DiggerCache.systemFreeSize()
-        /// 获取已下载文件大小
-        _ = DiggerCache.downloadedFilesSize()
-        /// 获取所有下载完成的文件的路径
-        _ = DiggerCache.pathsOfDownloadedfiles
     }
 }

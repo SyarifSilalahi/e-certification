@@ -222,9 +222,9 @@ class UjianVC: UIViewController {
             self.viewAccessDenied.frame = self.imgBg.frame
             self.view.addSubview(self.viewAccessDenied)
             
-            //buat testing
+////            buat testing
 //            self.submitJawaban(nilai: "90")
-            //
+            
             
             break
         default:

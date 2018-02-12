@@ -191,7 +191,7 @@ extension DiggerManager{
         }
     }
     
-    func findDiggerSeed(with diggerURL: DiggerURL) -> DiggerSeed? {
+    public func findDiggerSeed(with diggerURL: DiggerURL) -> DiggerSeed? {
         
         var diggerSeed: DiggerSeed?
         

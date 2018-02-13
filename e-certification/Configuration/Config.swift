@@ -117,7 +117,10 @@ struct Theme {
     static let primaryColor = UIColor.init(hex: "#66B219")
     static let secondaryColor = UIColor.init(hex: "#00AA00")
     static let primaryBlueColor = UIColor.init(hex: "#29A9FF")
+    static let primaryGreenColor = UIColor.init(hex: "#42ae41")
     static let NavigationColor = UIColor.init(hex: "#4E4E4E") //charcoal
+    
+    
     
     static let errorColor = UIColor.init(hex: "#d31f26")
     static let successColor = UIColor.init(hex: "#8bc74a")

@@ -77,7 +77,7 @@ open class MKNSpinner: UIView {
         self.Style = MKNSpinner.SpinnerStyle.light
         let background = UIView(frame: self.frame)
         background.alpha = 0.75
-        background.backgroundColor = UIColor(red: 43.0/255.0, green: 132.0/255.0, blue: 200.0/255.0, alpha: 1)
+        background.backgroundColor = UIColor(red: 66.0/255.0, green: 174.0/255.0, blue: 65.0/255.0, alpha: 1) //UIColor(red: 43.0/255.0, green: 132.0/255.0, blue: 200.0/255.0, alpha: 1)
         background.layer.cornerRadius = 10
         background.clipsToBounds = true
         

@@ -12,7 +12,7 @@ class MenuCVCell: UICollectionViewCell {
     @IBOutlet weak var lblTitle: UILabel!
     
     func setModeCorrect(){
-        self.backgroundColor = Theme.successColor
+        self.backgroundColor = Theme.primaryGreenColor
         self.layer.borderColor = UIColor.clear.cgColor
         self.lblTitle.textColor = UIColor.white
     }
@@ -24,14 +24,14 @@ class MenuCVCell: UICollectionViewCell {
     }
     
     func setModeNormal(){
-        self.backgroundColor = UIColor.white
-        self.layer.borderColor = Theme.primaryBlueColor.cgColor
-        self.lblTitle.textColor = Theme.primaryBlueColor
+        self.backgroundColor = UIColor.lightGray
+        self.layer.borderColor = UIColor.clear.cgColor
+        self.lblTitle.textColor = UIColor.white
     }
     
     func setModeSelected(){
-        self.backgroundColor = Theme.primaryBlueColor
-        self.layer.borderColor = UIColor.clear.cgColor
-        self.lblTitle.textColor = UIColor.white
+        self.backgroundColor = UIColor.clear
+        self.layer.borderColor = Theme.primaryGreenColor.cgColor
+        self.lblTitle.textColor = Theme.primaryGreenColor
     }
 }

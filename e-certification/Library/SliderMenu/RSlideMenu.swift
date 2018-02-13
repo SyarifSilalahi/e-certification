@@ -54,13 +54,13 @@ class RSlideMenu: UIViewController {
     }
     
     @IBAction func logOut(_ sender: AnyObject) {
-        let alert = UIAlertController(title: nil, message: "Are you sure want to Logout?" , preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: nil, message: "Apakah anda yakin ingin keluar?" , preferredStyle: .actionSheet)
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { action in
+        alert.addAction(UIAlertAction(title: "Batal", style: .cancel) { action in
             // perhaps use action.title here
         })
         
-        alert.addAction(UIAlertAction(title: "Logout", style: .destructive) { action in
+        alert.addAction(UIAlertAction(title: "Keluar", style: .destructive) { action in
             //do logout
             //clear session
             Session.userChace.removeObject(forKey: Session.EMAIL)
@@ -121,7 +121,7 @@ extension RSlideMenu:UITableViewDelegate,UITableViewDataSource{
             cell.lblDetail.text = Session.userChace.object(forKey: Session.EMAIL) as? String
             break
         case 2:
-            cell.lblTitle.text = "Ubah Password"
+            cell.lblTitle.text = "Ubah Kata Sandi"
             cell.lblDetail.text = "************"
             break
         default:
@@ -131,6 +131,14 @@ extension RSlideMenu:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        if indexPath.row == 2 {
+            let alert = UIAlertController(title: "Informasi.", message: "Untuk mengganti kata sandi, anda diharapkan untuk menghubungi Administrasi.", preferredStyle: UIAlertControllerStyle.alert)
+            
+            let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
+                
+            })
+            alert.addAction(alertOKAction)
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }

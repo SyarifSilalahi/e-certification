@@ -13,27 +13,113 @@ class SignInVC: UIViewController {
     
     @IBOutlet weak var backGroundImageView: UIImageView!
     @IBOutlet weak var viewBgSignIn: UIView!
+    @IBOutlet weak var viewBgUname: UIView!
+    @IBOutlet weak var viewBgPass: UIView!
     @IBOutlet weak var txtUsername: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var btnSignUp: UIButton!
+    @IBOutlet weak var btnForgotPass: UIButton!
+    @IBOutlet weak var btnSignIn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
+        NotificationCenter.default.addObserver(self, selector: #selector(checkUpdates), name: NSNotification.Name(rawValue: "CHECK_UPDATE"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(exit), name: NSNotification.Name(rawValue: "LOGOUT"), object: nil)
         //statusbar
         let app = UIApplication.shared
         app.isStatusBarHidden = false
         app.statusBarStyle = .lightContent
-        
-        //check if session is active, open homepage directly
-        if Session.userChace.value(forKey: Session.KEY_AUTH) != nil {
-            //go to homepage
-            self.performSegue(withIdentifier: "showDirectHomePage", sender: self)
-            return
-        }
-        
+        self.hide()
+        self.checkUpdates()
         self.imagesBackground()
         
+    }
+    
+    @objc func checkUpdates(){
+        ApiManager().checkUpdate { (response,failure, error) in
+            if error != nil{
+                print("error CheckUpdates \(String(describing: error))")
+                return
+            }
+            if failure != nil{
+                var fail = Failure()
+                fail.deserialize(failure!)
+//                print("failure message \(fail.message)")
+//                CustomAlert().Error(message: fail.message)
+                //do action failure here
+                return
+            }
+            
+            //json data model
+            var status = Status()
+            status.deserialize(response!)
+            if status.data != "1"{
+                let alert = UIAlertController(title: "Informasi.", message: "Aplikasi anda sudah usang.\nHarap lakukan pembaharuan.", preferredStyle: UIAlertControllerStyle.alert)
+                
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+                    
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }else{
+                self.show()
+                self.checkDevStatus()
+                //check if session is active, open homepage directly
+                if Session.userChace.value(forKey: Session.KEY_AUTH) != nil {
+                    //go to homepage
+                    self.performSegue(withIdentifier: "showDirectHomePage", sender: self)
+                    return
+                }
+            }
+            
+        }
+    }
+    
+    @objc func exit(){
+        let viewControllers: [UIViewController] = self.navigationController!.viewControllers
+        self.navigationController!.popToViewController(viewControllers[0], animated: true)
+    }
+    
+    func checkDevStatus(){
+        ApiManager().getStatusDev { (response,failure, error) in
+            if error != nil{
+                print("error checkDevStatus \(String(describing: error))")
+                return
+            }
+            if failure != nil{
+                var fail = Failure()
+                fail.deserialize(failure!)
+//                print("failure message \(fail.message)")
+//                CustomAlert().Error(message: fail.message)
+                //do action failure here
+                return
+            }
+            
+            //json data model
+            var status = Status()
+            status.deserialize(response!)
+            if status.data != "1"{
+                self.btnSignUp.alpha = 0
+            }else{
+                self.btnSignUp.alpha = 1
+            }
+        }
+    }
+    
+    func hide(){
+        self.viewBgPass.alpha = 0
+        self.viewBgUname.alpha = 0
+        self.btnSignIn.alpha = 0
+        self.btnSignUp.alpha = 0
+        self.btnForgotPass.alpha = 0
+    }
+    
+    func show(){
+        self.viewBgPass.alpha = 1
+        self.viewBgUname.alpha = 1
+        self.btnSignIn.alpha = 1
+        self.btnForgotPass.alpha = 1
     }
     
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {

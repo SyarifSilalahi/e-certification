@@ -188,10 +188,14 @@
                     <navigationItem key="navigationItem" id="FK7-dN-DXL"/>
                     <connections>
                         <outlet property="backGroundImageView" destination="WaO-NS-wKK" id="ZhK-P2-cYe"/>
+                        <outlet property="btnForgotPass" destination="ahI-wk-Twi" id="RTa-nl-fIz"/>
+                        <outlet property="btnSignIn" destination="GJo-9v-EeF" id="lr0-I6-AUt"/>
                         <outlet property="btnSignUp" destination="FYB-CT-c3u" id="NhG-3v-t6b"/>
                         <outlet property="txtPassword" destination="ePP-fN-e6O" id="RPi-3z-OSM"/>
                         <outlet property="txtUsername" destination="VGr-zJ-eQc" id="8aN-jb-jCW"/>
+                        <outlet property="viewBgPass" destination="7NW-5I-I85" id="vrO-Rc-682"/>
                         <outlet property="viewBgSignIn" destination="zu4-h4-XKf" id="8gA-qc-QVf"/>
+                        <outlet property="viewBgUname" destination="nP3-FQ-AVz" id="w8l-Id-Bp1"/>
                         <segue destination="1aL-fb-EB7" kind="show" identifier="showHomePage" id="MQ6-0Q-dm5"/>
                         <segue destination="1aL-fb-EB7" kind="show" identifier="showDirectHomePage" animates="NO" id="vQg-5L-Oat"/>
                     </connections>

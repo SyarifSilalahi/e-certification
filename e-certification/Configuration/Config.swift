@@ -46,10 +46,8 @@ struct Domain {
     static let URL_EXAM_UPLOAD_FOTO = "\(URL_BASE)/user/image_after_exam"
     static let URL_NEWS = "\(URL_BASE)/user/news"
     static let URL_NOTIFICATION = "\(URL_BASE)/user/notification"
-    
-    
-    static let URL_CHAT = "\(URL_BASE)/chat"
-    
+    static let URL_CHECK_UPDATE = "\(URL_BASE)/update_status"
+    static let URL_CHECK_DEV = "\(URL_BASE)/development_status"
 }
 
 struct Wording {
@@ -135,6 +133,8 @@ struct LatihanAnswer {
 struct UjianAnswer {
     static var isFinished:Bool = false
     static var isTimesUp:Bool = false
+    static var isInteruptExam:Bool = false
+    static var isKillWhileExam:Bool = false
     static var arrAnswer:[[String:String]] = [] as! [[String:String]]
     static var endDateExam:Date = Date()
 }

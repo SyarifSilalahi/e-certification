@@ -25,7 +25,8 @@ class ApiManager: NSObject {
     func logOut(){
         Session.userChace.removeObject(forKey: Session.KEY_AUTH)
         Session.userChace.removeObject(forKey: Session.EMAIL)
-        UIApplication.topViewController()?.navigationController?.popToRootViewController(animated: true)
+//        UIApplication.topViewController()?.navigationController?.popToRootViewController(animated: true)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LOGOUT"), object: nil)
     }
     
     func connectionCheck(error : Error){
@@ -448,6 +449,64 @@ class ApiManager: NSObject {
                             self.forceLogOut()
                             return
                         }
+                        completionHandler(nil,data!, nil)
+                    }
+                    break
+                case .failure(let error):
+                    self.connectionCheck(error: error)
+                    completionHandler(nil,nil, error as NSError?)
+                    break
+                }
+        }
+    }
+    
+    //user Get Status DEV
+    func getStatusDev(completionHandler:@escaping (JSON?,JSON?, NSError?) -> ()) {
+//        HUD().show()
+        Alamofire.request("\(Domain.URL_CHECK_DEV)",
+            method: HTTPMethod.post,
+            parameters: nil,
+            encoding: URLEncoding.httpBody,
+            headers: nil)
+            .responseJSON { (response) in
+                HUD().hide()
+                switch response.result {
+                case .success(_):
+                    let data = JSON(response.result.value as AnyObject?)
+                    let responseData = response.result.value as! NSDictionary
+                    let status:Bool = (responseData["status"] as! String != "0")
+                    if status {
+                        completionHandler(data!,nil,nil)
+                    }else{
+                        completionHandler(nil,data!, nil)
+                    }
+                    break
+                case .failure(let error):
+                    self.connectionCheck(error: error)
+                    completionHandler(nil,nil, error as NSError?)
+                    break
+                }
+        }
+    }
+    
+    //user Check Updates
+    func checkUpdate(completionHandler:@escaping (JSON?,JSON?, NSError?) -> ()) {
+//        HUD().show()
+        Alamofire.request("\(Domain.URL_CHECK_UPDATE)",
+            method: HTTPMethod.post,
+            parameters: nil,
+            encoding: URLEncoding.httpBody,
+            headers: nil)
+            .responseJSON { (response) in
+                HUD().hide()
+                switch response.result {
+                case .success(_):
+                    let data = JSON(response.result.value as AnyObject?)
+                    let responseData = response.result.value as! NSDictionary
+                    let status:Bool = (responseData["status"] as! String != "0")
+                    if status {
+                        completionHandler(data!,nil,nil)
+                    }else{
                         completionHandler(nil,data!, nil)
                     }
                     break

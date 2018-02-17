@@ -7,14 +7,14 @@
 //
 
 import UIKit
-import CountdownLabel
+import MZTimerLabel
 
 class UjianListSoalVC: UIViewController {
     
     @IBOutlet weak var collectionMenu: UICollectionView!
     @IBOutlet weak var btnSelesai: UIButton!
     @IBOutlet weak var lblCounter: UILabel!
-    @IBOutlet var lblTimer: CountdownLabel!
+    @IBOutlet weak var lblTimer: MZTimerLabel!
     
     var listSoal:ListQuestionUjian! = ListQuestionUjian()
     var indexSelected = 0
@@ -32,16 +32,15 @@ class UjianListSoalVC: UIViewController {
         self.getListSoal()
         
         let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: Notification.Name.UIApplicationWillResignActive, object: nil)
-        
+        notificationCenter.addObserver(self, selector: #selector(appWillTerminate), name: Notification.Name.UIApplicationWillTerminate, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(appMovedToForeground), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         self.setLblCounter()
         self.collectionMenu.reloadData()
         self.setTimer()
-        if UjianAnswer.isTimesUp{
-            self.lblTimer.cancel()
+        if UjianAnswer.isFinished{
             self.finishExam()
         }
     }
@@ -56,9 +55,23 @@ class UjianListSoalVC: UIViewController {
         self.lblCounter.text = "\(totalSelected) / \(self.listSoal.data.count)"
     }
     
-    @objc func appMovedToBackground() {
+    @objc func appMovedToForeground() {
         print("App moved to background!")
         //submit score here
+        let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: Wording.FINISH_EXAM_EXIT_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
+        
+        let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
+            //finish exam
+            self.finishExam()
+        })
+        alert.addAction(alertOKAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func appWillTerminate() {
+        print("App WillTerminate!")
+        //set status score here
+        Session.userChace.set(UjianAnswer.arrAnswer , forKey: Session.FORCE_EXIT_EXAM)
     }
     
     func getListSoal(){
@@ -67,16 +80,17 @@ class UjianListSoalVC: UIViewController {
     }
     
     func setTimer(){
-        if !UjianAnswer.isFinished{
+        let intervalDate = UjianAnswer.endDateExam.timeIntervalSince(Date())
+        if !UjianAnswer.isFinished && intervalDate > 0{
             //set timer
-//            self.lblTimer.setCountDownDate(fromDate: Date() as NSDate, targetDate: UjianAnswer.endDateExam as NSDate)
-            self.lblTimer.setCountDownDate(targetDate: UjianAnswer.endDateExam as NSDate)
-            self.lblTimer.animationType = CountdownEffect.Evaporate
+            self.lblTimer.setCountDownTime(TimeInterval(intervalDate))
+            self.lblTimer.timerType = MZTimerLabelTypeTimer
             self.lblTimer.timeFormat = "HH:mm:ss"
-            self.lblTimer.delegate = self as? LTMorphingLabelDelegate
+            self.lblTimer.delegate = self
             self.lblTimer.start()
         }else{
-            self.lblTimer.cancel()
+            self.lblTimer.reset()
+            self.lblTimer.text = "00:00:00"
         }
     }
     
@@ -105,7 +119,7 @@ class UjianListSoalVC: UIViewController {
     }
     
     func finishExam(){
-        self.lblTimer.cancel()
+        self.lblTimer.reset()
         self.collectionMenu.reloadData()
         for dic in UjianAnswer.arrAnswer{
             if dic["status"] == "true"{
@@ -224,21 +238,23 @@ extension UjianListSoalVC: UICollectionViewDelegate, UICollectionViewDataSource 
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if !UjianAnswer.isTimesUp{
+        if !UjianAnswer.isFinished{
             self.indexSelected = indexPath.row
             self.performSegue(withIdentifier: "openDetailSoalUjian", sender: self)
         }
     }
 }
 
-extension UjianListSoalVC: CountdownLabelDelegate {
+extension UjianListSoalVC: MZTimerLabelDelegate {
     
-    func countdownFinished() {
-        debugPrint("countdownFinished at delegate.")
-        //completion
+    func timerLabel(_ timerLabel: MZTimerLabel!, finshedCountDownTimerWithTime countTime: TimeInterval) {
         print("timer finished")
-        UjianAnswer.isTimesUp = true
+        UjianAnswer.isFinished = true
         self.alertTimesUp()
+    }
+    
+    func timerLabel(_ timerLabel: MZTimerLabel!, countingTo time: TimeInterval, timertype timerType: MZTimerLabelType) {
+        
     }
     
     func alertTimesUp(){
@@ -253,11 +269,6 @@ extension UjianListSoalVC: CountdownLabelDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
-    internal func countingAt(timeCounted: TimeInterval, timeRemaining: TimeInterval) {
-        debugPrint("time counted at delegate=\(timeCounted)")
-        debugPrint("time remaining at delegate=\(timeRemaining)")
-    }
-    
 }
 
 extension UjianListSoalVC: UIImagePickerControllerDelegate,UINavigationControllerDelegate{
@@ -265,7 +276,7 @@ extension UjianListSoalVC: UIImagePickerControllerDelegate,UINavigationControlle
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage{
 //            self.imgProfilePicture.image = pickedImage
-            ApiManager().uploadImageSelfie(image: pickedImage, completionHandler: { (response,failure, error) in
+            ApiManager().uploadImageSelfie(image: pickedImage,imageLicense: pickedImage, completionHandler: { (response,failure, error) in
                 if error != nil{
                     print("error Upload Selfie \(String(describing: error))")
                     self.successUploadSelfie = false

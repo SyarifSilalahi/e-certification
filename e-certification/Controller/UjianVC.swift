@@ -25,12 +25,15 @@ class UjianVC: UIViewController {
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var lblInfo: UILabel!
     @IBOutlet weak var btnMulai: UIButton!
+    let imagePicker = UIImagePickerController()
     
     //view status lulus
     @IBOutlet weak var lblTitleStatusLulus: UILabel!
     @IBOutlet weak var lblDetailStatusLulus: UILabel!
     @IBOutlet weak var imgStatusLulus: UIImageView!
     
+    var successUploadSelfie = true
+    var hasilUjian:ScoreExam = ScoreExam()
     var examStatus:StatusExam! = StatusExam()
     var listSoal:ListQuestionUjian! = ListQuestionUjian()
     var duration : DurationExam = DurationExam()
@@ -42,21 +45,26 @@ class UjianVC: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-//        if Session.userChace.value(forKey: Session.FORCE_EXIT_EXAM) != nil {
-//            UjianAnswer.arrAnswer = Session.userChace.value(forKey: Session.FORCE_EXIT_EXAM) as! [[String:String]]
-//            var nilai = 0
-//            for dic in UjianAnswer.arrAnswer{
-//                if dic["status"] == "true"{
-//                    nilai += 1
-//                }
-//            }
-//            print("nilai \(UjianAnswer.arrAnswer)")
-//            //do submit score here
-//            self.submitJawaban(nilai: "\(nilai)")
-//
-//        }
-        
-        self.getStatus()
+        if Session.userChace.value(forKey: Session.FORCE_EXIT_EXAM) != nil {
+            UjianAnswer.arrAnswer = Session.userChace.value(forKey: Session.FORCE_EXIT_EXAM) as! [[String:String]]
+            self.imagePicker.delegate = self
+            self.submitSisaJawaban()
+
+        }else{
+            self.getStatus()
+        }
+    }
+    
+    func submitSisaJawaban(){
+        var nilai = 0
+        for dic in UjianAnswer.arrAnswer{
+            if dic["status"] == "true"{
+                nilai += 1
+            }
+        }
+        print("nilai \(UjianAnswer.arrAnswer)")
+        //do submit score here
+        self.submitJawaban(nilai: "\(nilai)")
     }
     
     //fungsi recheck ditujukan untuk submit jawaban jika user keluar dari applikasi
@@ -75,17 +83,34 @@ class UjianVC: UIViewController {
                 return
             }
             
-            var hasilUjian:ScoreExam = ScoreExam()
-            hasilUjian.deserialize(response!)
-            print("hasilUjian \(hasilUjian)")
-            //clear session
-//            Session.userChace.removeObject(forKey: Session.FORCE_EXIT_EXAM)
-            //and then re check status ujian
-            self.setViewStatusExam(status: hasilUjian.data)
-            //then reload page
+            self.hasilUjian.deserialize(response!)
+            print("hasilUjian \(self.hasilUjian)")
             
+            self.setViewStatusExam(status: self.hasilUjian.data)
+            
+            if self.hasilUjian.data == ExamStatus.Lulus.rawValue{
+                let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: Wording.FINISH_EXAM_SUCCESS_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
+                
+                let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
+                    // camera
+                    self.openCamera()
+                })
+                alert.addAction(alertOKAction)
+                self.present(alert, animated: true, completion: nil)
+            }
+            
+            //clear session
+            Session.userChace.removeObject(forKey: Session.FORCE_EXIT_EXAM)
         }
     }
+    
+    func openCamera(){
+        self.imagePicker.allowsEditing = true
+        self.imagePicker.sourceType = .camera
+        self.imagePicker.cameraDevice = .front
+        self.present(self.imagePicker, animated: true, completion: nil)
+    }
+    
     func getStatus(){
         ApiManager().getExamStatus { (response,failure, error) in
             if error != nil{
@@ -222,9 +247,10 @@ class UjianVC: UIViewController {
             self.viewAccessDenied.frame = self.imgBg.frame
             self.view.addSubview(self.viewAccessDenied)
             
-////            buat testing
-//            self.submitJawaban(nilai: "90")
-            
+            if Session.userChace.value(forKey: Session.FORCE_EXIT_EXAM) != nil {
+                UjianAnswer.arrAnswer = Session.userChace.value(forKey: Session.FORCE_EXIT_EXAM) as! [[String:String]]
+            }
+            self.submitSisaJawaban()
             
             break
         default:
@@ -255,7 +281,6 @@ class UjianVC: UIViewController {
             self.listSoal.deserialize(response!)
             UjianAnswer.arrAnswer = []
             UjianAnswer.isFinished = false
-            UjianAnswer.isTimesUp = false
             for _ in 0..<self.listSoal.data.count{
                 let tempAnswer = [
                     "choosed" : "",
@@ -294,4 +319,63 @@ class UjianVC: UIViewController {
     }
     */
 
+}
+
+extension UjianVC: UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage{
+            //            self.imgProfilePicture.image = pickedImage
+            ApiManager().uploadImageSelfie(image: pickedImage,imageLicense: pickedImage, completionHandler: { (response,failure, error) in
+                if error != nil{
+                    print("error Upload Selfie \(String(describing: error))")
+                    self.successUploadSelfie = false
+                    return
+                }
+                if failure != nil{
+                    self.successUploadSelfie = false
+                    var fail = Failure()
+                    fail.deserialize(failure!)
+                    print("failure message \(fail.message)")
+                    CustomAlert().Error(message: fail.message)
+                    //do action failure here
+                    return
+                }
+                
+                self.successUploadSelfie = true
+                var userSelfie:UserSelfie = UserSelfie()
+                userSelfie.deserialize(response!)
+                CustomAlert().Success(message: "Terimakasih.\nAnda telah menyelesaikan proses ujian.")
+                
+            })
+            //upload foto then go to hasil ujian
+            //            self.performSegue(withIdentifier: "hasilUjian", sender: self)
+            
+            self.dismiss(animated: true, completion: {
+                if !self.successUploadSelfie{
+                    let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: Wording.FINISH_EXAM_SUCCESS_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
+                    
+                    let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
+                        // camera
+                        self.openCamera()
+                    })
+                    alert.addAction(alertOKAction)
+                    self.present(alert, animated: true, completion: nil)
+                }
+            })
+        }
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true) {
+            let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: Wording.FINISH_EXAM_SUCCESS_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
+            
+            let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
+                // camera
+                self.openCamera()
+            })
+            alert.addAction(alertOKAction)
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
 }

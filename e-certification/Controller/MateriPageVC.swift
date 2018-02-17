@@ -8,6 +8,7 @@
 
 import UIKit
 import Arrow
+import Digger
 
 class MateriPageVC: UIViewController {
     
@@ -88,11 +89,11 @@ extension MateriPageVC:UITableViewDelegate,UITableViewDataSource{
         cell.selectionStyle = .none
         cell.setTitle(text: "\(dataMateri.data[indexPath.row].title)", isNew: true)
         cell.lblDetail.text = dataMateri.data[indexPath.row].description
-//        cell.lblDetail.text = dataMateri.data[indexPath.row].sub_module_title
         cell.description_ = dataMateri.data[indexPath.row].description
         
         cell.setActions(urlPdf: "\(dataMateri.data[indexPath.row].host_file)\(dataMateri.data[indexPath.row].document)", urlVideo: "\(dataMateri.data[indexPath.row].host_file)\(dataMateri.data[indexPath.row].video)")
         cell.videoTimeFlag = dataMateri.data[indexPath.row].video_next
+        cell.delegate = self
         
 //        //for testing
 //        if indexPath.row == 0 {
@@ -102,13 +103,13 @@ extension MateriPageVC:UITableViewDelegate,UITableViewDataSource{
 //            //normal nya
 //
 //        }
-        cell.delegate = self
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
+
 }
 
 extension MateriPageVC: MateriCellDelegate {
@@ -129,5 +130,13 @@ extension MateriPageVC: MateriCellDelegate {
         detailMateriVideoVC.fileName = name
         detailMateriVideoVC.videoTimeFlag = timeFlag
         self.navigationController?.pushViewController(detailMateriVideoVC, animated: true)
+    }
+    
+    func startDownloadVideo(url: String) {
+        DiggerManager.shared.startTask(for: url)
+    }
+    
+    func stopDownloadVideo(url: String) {
+        DiggerManager.shared.stopTask(for: url)
     }
 }

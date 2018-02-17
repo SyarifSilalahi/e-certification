@@ -60,6 +60,8 @@ struct Wording {
     static let FINISH_EXAM_MESSAGE = "Anda telah menyelesaikan ujian.\nTerimakasih telah berpartisipasi."
     static let FINISH_EXAM_SUCCESS_MESSAGE = "Selamat!\nAnda telah lulus.\nSilahkan lengkapi data diri anda dalam bentuk foto."
     static let FINISH_EXAM_TIMESUP_MESSAGE = "Waktu ujian Telah selesai.\nSilahkan submit jawaban anda."
+    static let FINISH_EXAM_EXIT_MESSAGE = "Anda baru saja keluar, anda dianggap telah menyelesaikan ujian."
+    
 }
 
 struct Session {
@@ -132,9 +134,6 @@ struct LatihanAnswer {
 
 struct UjianAnswer {
     static var isFinished:Bool = false
-    static var isTimesUp:Bool = false
-    static var isInteruptExam:Bool = false
-    static var isKillWhileExam:Bool = false
     static var arrAnswer:[[String:String]] = [] as! [[String:String]]
     static var endDateExam:Date = Date()
 }

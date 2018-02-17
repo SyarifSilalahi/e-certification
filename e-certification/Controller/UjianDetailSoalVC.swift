@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import CountdownLabel
+import MZTimerLabel
 
 class UjianDetailSoalVC: UIViewController {
     
@@ -19,7 +19,7 @@ class UjianDetailSoalVC: UIViewController {
     @IBOutlet weak var lblCounter: UILabel!
     @IBOutlet weak var btnCounterNext: UIButton!
     @IBOutlet weak var btnCounterBack: UIButton!
-    @IBOutlet var lblTimer: CountdownLabel!
+    @IBOutlet weak var lblTimer: MZTimerLabel!
     
     var listSoal:ListQuestionUjian! = ListQuestionUjian()
     
@@ -31,7 +31,8 @@ class UjianDetailSoalVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: Notification.Name.UIApplicationWillResignActive, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(appWillTerminate), name: Notification.Name.UIApplicationWillTerminate, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(appMovedToForeground), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
         
         self.lblSoal.text = self.listSoal.data[index].question
         
@@ -58,21 +59,39 @@ class UjianDetailSoalVC: UIViewController {
     }
     
     func setTimer(){
-        if !UjianAnswer.isFinished{
+        let intervalDate = UjianAnswer.endDateExam.timeIntervalSince(Date())
+        if !UjianAnswer.isFinished && intervalDate > 0{
             //set timer
-            self.lblTimer.setCountDownDate(fromDate: Date() as NSDate, targetDate: UjianAnswer.endDateExam as NSDate)
-            self.lblTimer.animationType = CountdownEffect.Evaporate
+            self.lblTimer.setCountDownTime(TimeInterval(intervalDate))
+            self.lblTimer.timerType = MZTimerLabelTypeTimer
             self.lblTimer.timeFormat = "HH:mm:ss"
-            self.lblTimer.delegate = self as? LTMorphingLabelDelegate
+            self.lblTimer.delegate = self
             self.lblTimer.start()
         }else{
-            self.lblTimer.cancel()
+            self.lblTimer.reset()
+            self.lblTimer.text = "00:00:00"
         }
     }
     
-    @objc func appMovedToBackground() {
-       UjianAnswer.isFinished = true
+    @objc func appMovedToForeground() {
+        //submit score here
+        let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: Wording.FINISH_EXAM_EXIT_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
+        
+        let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
+            //finish exam
+            UjianAnswer.isFinished = true
+            self.navigationController?.popViewController(animated: true)
+        })
+        alert.addAction(alertOKAction)
+        self.present(alert, animated: true, completion: nil)
     }
+    
+    @objc func appWillTerminate() {
+        print("App WillTerminate!")
+        //set status score here
+        Session.userChace.set(UjianAnswer.arrAnswer , forKey: Session.FORCE_EXIT_EXAM)
+    }
+
     
     func setLblCounter(){
         self.lblCounter.text = "\(index + 1) / \(self.listSoal.data.count)"
@@ -251,25 +270,22 @@ extension UjianDetailSoalVC:UITableViewDelegate,UITableViewDataSource{
     }
 }
 
-extension UjianDetailSoalVC: CountdownLabelDelegate {
-    func countdownFinished() {
-        debugPrint("countdownFinished at delegate.")
-        //completion
+extension UjianDetailSoalVC: MZTimerLabelDelegate {
+    func timerLabel(_ timerLabel: MZTimerLabel!, finshedCountDownTimerWithTime countTime: TimeInterval) {
         print("timer finished")
         let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: Wording.FINISH_EXAM_TIMESUP_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
         
         let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
             //finish exam
+            UjianAnswer.isFinished = true
             self.navigationController?.popViewController(animated: true)
         })
         alert.addAction(alertOKAction)
         self.present(alert, animated: true, completion: nil)
-        
     }
     
-    internal func countingAt(timeCounted: TimeInterval, timeRemaining: TimeInterval) {
-        debugPrint("time counted at delegate=\(timeCounted)")
-        debugPrint("time remaining at delegate=\(timeRemaining)")
+    func timerLabel(_ timerLabel: MZTimerLabel!, countingTo time: TimeInterval, timertype timerType: MZTimerLabelType) {
+        
     }
     
 }

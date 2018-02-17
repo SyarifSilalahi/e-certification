@@ -1242,7 +1242,7 @@ Terima Kasih</string>
                                         <rect key="frame" x="260" y="4" width="30" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vfz-er-o3s" customClass="CountdownLabel" customModule="CountdownLabel">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vfz-er-o3s" customClass="MZTimerLabel">
                                         <rect key="frame" x="284" y="10" width="58" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12.5"/>
@@ -1325,8 +1325,8 @@ Terima Kasih</string>
                     </view>
                     <connections>
                         <outlet property="collectionMenu" destination="9Y2-eX-YJQ" id="tv8-Kc-bNp"/>
-                        <outlet property="lblCounter" destination="JYO-Wr-hBa" id="CKP-oy-eKf"/>
-                        <outlet property="lblTimer" destination="vfz-er-o3s" id="aMt-9y-iHQ"/>
+                        <outlet property="lblCounter" destination="JYO-Wr-hBa" id="68U-5V-K2r"/>
+                        <outlet property="lblTimer" destination="vfz-er-o3s" id="sSy-c4-pwn"/>
                         <segue destination="bTX-iR-iIO" kind="show" identifier="openDetailSoalUjian" id="ti1-Ka-NeI"/>
                         <segue destination="QSF-Rg-Kx5" kind="show" identifier="hasilUjian" id="Whe-mX-080"/>
                     </connections>
@@ -1548,7 +1548,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                                         <rect key="frame" x="260" y="4" width="30" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9BM-xL-M1o" customClass="CountdownLabel" customModule="CountdownLabel">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9BM-xL-M1o" customClass="MZTimerLabel">
                                         <rect key="frame" x="284" y="10" width="58" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12.5"/>
@@ -1569,7 +1569,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                         <outlet property="lblCounterBack" destination="Hwy-r4-Yuk" id="S1Y-EC-pyd"/>
                         <outlet property="lblCounterNext" destination="AXi-K6-8Sf" id="kqJ-iB-1wG"/>
                         <outlet property="lblSoal" destination="7IS-3V-veO" id="3uT-Jd-VhO"/>
-                        <outlet property="lblTimer" destination="9BM-xL-M1o" id="08b-aN-y1u"/>
+                        <outlet property="lblTimer" destination="9BM-xL-M1o" id="NGI-ls-8GN"/>
                         <outlet property="tblSoal" destination="pXH-Wa-S4D" id="Me4-j1-Vwl"/>
                         <outlet property="viewHeader" destination="aLx-Dg-F3Z" id="PH7-cn-Emh"/>
                     </connections>
@@ -2994,8 +2994,8 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
         <image name="splashscreen" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vQg-5L-Oat"/>
-        <segue reference="Qf2-k3-ggD"/>
-        <segue reference="nc6-Sm-rNm"/>
+        <segue reference="MQ6-0Q-dm5"/>
+        <segue reference="JlT-Gy-NoE"/>
+        <segue reference="MxL-dh-dPj"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -19,8 +19,8 @@ target 'e-certification' do
   pod 'HTPullToRefresh'
 
   #timer label
-  pod 'CountdownLabel'
-  
+  pod 'MZTimerLabel'
+
   #Downloader
   pod 'Digger'
 

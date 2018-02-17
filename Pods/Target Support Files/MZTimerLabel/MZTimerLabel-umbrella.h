@@ -10,7 +10,8 @@
 #endif
 #endif
 
+#import "MZTimerLabel.h"
 
-FOUNDATION_EXPORT double CountdownLabelVersionNumber;
-FOUNDATION_EXPORT const unsigned char CountdownLabelVersionString[];
+FOUNDATION_EXPORT double MZTimerLabelVersionNumber;
+FOUNDATION_EXPORT const unsigned char MZTimerLabelVersionString[];
 

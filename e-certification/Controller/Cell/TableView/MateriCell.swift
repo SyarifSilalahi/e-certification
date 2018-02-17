@@ -15,6 +15,9 @@ protocol MateriCellDelegate {
     func proccessPDF(name: String, title: String, detail: String, description: String)
     // Indicates that the edit process has committed for the given cell
     func proccessVideo(name: String, title: String, detail: String, description: String,timeFlag: String)
+    
+    func startDownloadVideo(url: String)
+    func stopDownloadVideo(url: String)
 }
 
 class MateriCell: UITableViewCell {
@@ -35,6 +38,9 @@ class MateriCell: UITableViewCell {
     var urlVideo = ""
     var videoTimeFlag = ""
     
+    var isDownloadingVideo = false
+    var isDownloadingPDF = false
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -53,6 +59,65 @@ class MateriCell: UITableViewCell {
         }
         lblTitle.attributedText = title
     }
+    
+    //set active deactive
+    func setPDFActive(){
+        self.btnPdf.setImage(#imageLiteral(resourceName: "ico-pdf-enable"), for: .normal)
+    }
+    
+    func setPDFDeActive(){
+        self.btnPdf.setImage(#imageLiteral(resourceName: "ico-pdf-disable"), for: .normal)
+    }
+    
+    func setVideoActive(){
+        self.btnVideo.setImage(#imageLiteral(resourceName: "ico-video-enable"), for: .normal)
+    }
+    
+    func setVideoDeActive(){
+        self.btnVideo.setImage(#imageLiteral(resourceName: "ico-video-disable"), for: .normal)
+    }
+    
+    //show hide loading
+    func showPDFLoading(){
+        self.pdfIndicator.animating = true
+        self.pdfIndicator.startAnimating()
+        self.pdfIndicator.alpha = 1
+        self.lblProgressDownloadPDF.alpha = 1
+        self.btnPdf.alpha = 0
+    }
+    
+    func hidePDFLoading(){
+        self.pdfIndicator.animating = false
+        self.pdfIndicator.stopAnimating()
+        self.pdfIndicator.alpha = 0
+        self.lblProgressDownloadPDF.alpha = 0
+        self.btnPdf.alpha = 1
+    }
+    
+    func showVideoLoading(){
+        self.videoIndicator.animating = true
+        self.videoIndicator.startAnimating()
+        self.videoIndicator.alpha = 1
+        self.lblProgressDownloadVideo.alpha = 1
+        self.btnVideo.alpha = 0
+    }
+    
+    func hideVideoLoading(){
+        self.videoIndicator.animating = false
+        self.videoIndicator.stopAnimating()
+        self.videoIndicator.alpha = 0
+        self.lblProgressDownloadVideo.alpha = 0
+        self.btnVideo.alpha = 1
+    }
+    
+    func setProgressPDF(progres:Int){
+        self.lblProgressDownloadPDF.text = "\(progres)%"
+    }
+    
+    func setProgressVideo(progres:Int){
+        self.lblProgressDownloadVideo.text = "\(progres)%"
+    }
+    
     
     func setActions(urlPdf:String, urlVideo:String){
         self.urlPdf = urlPdf
@@ -192,7 +257,8 @@ class MateriCell: UITableViewCell {
         self.lblProgressDownloadVideo.alpha = 1
         self.videoIndicator.animating = true
         self.videoIndicator.startAnimating()
-        DiggerManager.shared.startTask(for: self.urlVideo)
+//        DiggerManager.shared.startTask(for: self.urlVideo)
+        self.delegate?.startDownloadVideo(url: self.urlVideo)
     }
     
     @objc func stopDownloadPdf(_ sender: UITapGestureRecognizer) {
@@ -210,7 +276,8 @@ class MateriCell: UITableViewCell {
     }
     
     @objc func stopDownloadVideo(_ sender: UITapGestureRecognizer) {
-        DiggerManager.shared.stopTask(for: self.urlVideo)
+//        DiggerManager.shared.stopTask(for: self.urlVideo)
+        self.delegate?.stopDownloadVideo(url: self.urlVideo)
         
 //        let seed = DiggerManager.shared.findDiggerSeed(with: self.urlVideo)!
 //        seed.downloadTask.suspend()

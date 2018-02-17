@@ -518,7 +518,7 @@ class ApiManager: NSObject {
         }
     }
     
-    func uploadImageSelfie(image:UIImage,completionHandler:@escaping (JSON?,JSON?, NSError?) -> ()){
+    func uploadImageSelfie(image:UIImage,imageLicense:UIImage,completionHandler:@escaping (JSON?,JSON?, NSError?) -> ()){
         HUD().show()
         let data = JSON(Session.userChace.object(forKey: Session.KEY_AUTH) as AnyObject?)
         var dataUser = UserAuthData()
@@ -530,8 +530,12 @@ class ApiManager: NSObject {
         ]
         Alamofire.upload(multipartFormData:{ multipartFormData in
             if let imageData = UIImageJPEGRepresentation(image, 1) {
-                multipartFormData.append(imageData, withName: "image", fileName: "myImage.png", mimeType: "image/png")
+                multipartFormData.append(imageData, withName: "image_user", fileName: "myImage.png", mimeType: "image/png")
             }
+            if let imageData = UIImageJPEGRepresentation(imageLicense, 1) {
+                multipartFormData.append(imageData, withName: "image_license", fileName: "myImage.png", mimeType: "image/png")
+            }
+            
 //            // import parameters
 //            for (key, value) in param {
 //                multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)

@@ -159,3 +159,55 @@ struct ScoreExam {
         data <-- json["data"]
     }
 }
+
+
+struct BaseHistoryLatihan {
+    var code :Int = 0
+    var status = ""
+    var message = ""
+    var data = ListHistoryLatihan()
+    /// The method you declare your json mapping in.
+    
+    mutating func deserialize(_ json: JSON) {
+        code <-- json["code"]
+        status <-- json["status"]
+        message <-- json["message"]
+        data <-- json["data"]!["exercise_questions"]
+    }
+}
+
+struct ListHistoryLatihan : ArrowParsable {
+    var total:Int = 0
+    var per_page:Int = 0
+    var current_page:Int = 0
+    var last_page:Int = 0
+    var next_page_url = ""
+    var prev_page_url = ""
+    var from:Int = 0
+    var to:Int = 0
+    var listDetailHistory = [HistoryLatihan]()
+    
+    mutating func deserialize(_ json: JSON) {
+        total <-- json["total"]
+        per_page <-- json["per_page"]
+        current_page <-- json["current_page"]
+        last_page <-- json["last_page"]
+        next_page_url <-- json["next_page_url"]
+        prev_page_url <-- json["prev_page_url"]
+        from <-- json["from"]
+        to <-- json["to"]
+        listDetailHistory <-- json["data"]
+    }
+}
+
+struct HistoryLatihan : ArrowParsable {
+    var exercise_history_id:Int = 0
+    var sub_module_id:Int = 0
+    var history = ""
+    
+    mutating func deserialize(_ json: JSON) {
+        exercise_history_id <-- json["exercise_history_id"]
+        sub_module_id <-- json["sub_module_id"]
+        history <-- json["history"]
+    }
+}

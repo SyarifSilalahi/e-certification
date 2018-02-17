@@ -18,6 +18,7 @@ class DetailMateriPDFVC: UIViewController {
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblDetail: UILabel!
     @IBOutlet weak var lblDescription: UILabel!
+    @IBOutlet weak var lblUpdate: UILabel!
     @IBOutlet weak var collectionPdf: UICollectionView!
     
     var urlPdf : URL?
@@ -26,6 +27,7 @@ class DetailMateriPDFVC: UIViewController {
     var fileName = ""
     var detail = ""
     var description_ = ""
+    var update = ""
     
     private var readerController : PDFViewController!
     private var document : PDFDocument!
@@ -40,6 +42,7 @@ class DetailMateriPDFVC: UIViewController {
         self.lblTitle.text = title_
         self.lblDetail.text = detail
         self.lblDescription.text = description_
+        self.lblUpdate.text = "Diperbaharui \(update)"
         
         self.urlPdf = URL(fileURLWithPath: FileHelper().getFilePath(name: "\(fileName)"))
         document = PDFDocument(url: urlPdf!)!

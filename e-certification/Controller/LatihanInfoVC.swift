@@ -52,15 +52,49 @@ class LatihanInfoVC: UIViewController {
             self.listSoal.deserialize(response!)
             LatihanAnswer.arrAnswer = []
             LatihanAnswer.isFinished = false
-            for _ in 0..<self.listSoal.data.count{
+            for i in 0..<self.listSoal.data.count{
+//                let tempAnswer = [
+//                    "choosed" : "",
+//                    "status" : "notAnswered"
+//                ]
                 let tempAnswer = [
-                    "choosed" : "",
-                    "status" : "notAnswered"
+                    "id" : "\(self.listSoal.data[i].id)",
+                    "sub_module_id" : "\(self.listSoal.data[i].sub_module_id)",
+                    "question" : "\(self.listSoal.data[i].question)",
+                    "option1" : "\(self.listSoal.data[i].option1)",
+                    "option2" : "\(self.listSoal.data[i].option2)",
+                    "option3" : "\(self.listSoal.data[i].option3)",
+                    "option4" : "\(self.listSoal.data[i].option4)",
+                    "answer" : "\(self.listSoal.data[i].answer)",
+                    "selected" : ""
                 ]
+                
                 LatihanAnswer.arrAnswer.append(tempAnswer)
             }
             self.performSegue(withIdentifier: "openListSoalLatihan", sender: self)
         }
+    }
+    
+    @IBAction func showHistory(_ sender: AnyObject) {
+        ApiManager().getQuestionsLatihan(self.modul.sub_module_id) { (response,failure, error) in
+            if error != nil{
+                print("error load Question Latihan \(String(describing: error))")
+                return
+            }
+            if failure != nil{
+                var fail = Failure()
+                fail.deserialize(failure!)
+                print("failure message \(fail.message)")
+                CustomAlert().Error(message: fail.message)
+                //do action failure here
+                return
+            }
+            
+            //json data model
+            self.listSoal.deserialize(response!)
+            self.performSegue(withIdentifier: "showHistoryLatihan", sender: self)
+        }
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -68,6 +102,10 @@ class LatihanInfoVC: UIViewController {
         // Pass the selected object to the new view controller.
         if (segue.identifier == "openListSoalLatihan") {
             let vc = segue.destination as! LatihanListSoalVC
+            vc.listSoal = self.listSoal
+        }else if (segue.identifier == "showHistoryLatihan"){
+            let vc = segue.destination as! LatihanHistoryVC
+            vc.modul = self.modul
             vc.listSoal = self.listSoal
         }
     }

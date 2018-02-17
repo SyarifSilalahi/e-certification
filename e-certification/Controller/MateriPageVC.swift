@@ -93,6 +93,7 @@ extension MateriPageVC:UITableViewDelegate,UITableViewDataSource{
         
         cell.setActions(urlPdf: "\(dataMateri.data[indexPath.row].host_file)\(dataMateri.data[indexPath.row].document)", urlVideo: "\(dataMateri.data[indexPath.row].host_file)\(dataMateri.data[indexPath.row].video)")
         cell.videoTimeFlag = dataMateri.data[indexPath.row].video_next
+        cell.update = dataMateri.data[indexPath.row].updated_at
         cell.delegate = self
         
 //        //for testing
@@ -113,22 +114,24 @@ extension MateriPageVC:UITableViewDelegate,UITableViewDataSource{
 }
 
 extension MateriPageVC: MateriCellDelegate {
-    func proccessPDF(name: String, title: String, detail: String, description: String) {
-        let detailMateriVideoVC = storyboard?.instantiateViewController(withIdentifier: "DetailMateriPDFVC") as! DetailMateriPDFVC
-        detailMateriVideoVC.title_ = title
-        detailMateriVideoVC.detail = detail
-        detailMateriVideoVC.description_ = description
-        detailMateriVideoVC.fileName = name
-        self.navigationController?.pushViewController(detailMateriVideoVC, animated: true)
+    func proccessPDF(name: String, title: String, detail: String, update:String, description: String) {
+        let detailMateriPDFVC = storyboard?.instantiateViewController(withIdentifier: "DetailMateriPDFVC") as! DetailMateriPDFVC
+        detailMateriPDFVC.title_ = title
+        detailMateriPDFVC.detail = detail
+        detailMateriPDFVC.description_ = description
+        detailMateriPDFVC.fileName = name
+        detailMateriPDFVC.update = update
+        self.navigationController?.pushViewController(detailMateriPDFVC, animated: true)
     }
     
-    func proccessVideo(name: String, title: String, detail: String, description: String, timeFlag: String) {
+    func proccessVideo(name: String, title: String, detail: String, update:String, description: String, timeFlag: String) {
         let detailMateriVideoVC = storyboard?.instantiateViewController(withIdentifier: "DetailMateriVideoVC") as! DetailMateriVideoVC
         detailMateriVideoVC.title_ = title
         detailMateriVideoVC.detail = detail
         detailMateriVideoVC.description_ = description
         detailMateriVideoVC.fileName = name
         detailMateriVideoVC.videoTimeFlag = timeFlag
+        detailMateriVideoVC.update = update
         self.navigationController?.pushViewController(detailMateriVideoVC, animated: true)
     }
     

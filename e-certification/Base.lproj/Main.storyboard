@@ -533,7 +533,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <state key="normal" title="Batal">
+                                <state key="normal" title="Telusuri">
                                     <color key="titleColor" red="0.25882352941176467" green="0.68235294117647061" blue="0.25490196078431371" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -548,7 +548,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="back:" destination="Wu5-LM-tfU" eventType="touchUpInside" id="zD0-d6-p8y"/>
+                                    <action selector="showHistory:" destination="Wu5-LM-tfU" eventType="touchUpInside" id="g1q-z3-50U"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="10 Januari 2018" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S3n-HZ-1IH">
@@ -613,6 +613,7 @@
                         <outlet property="lblInfo" destination="nQ2-ee-Jdq" id="UjJ-Pd-YtH"/>
                         <outlet property="lblTitle" destination="b0b-2o-USO" id="DeO-qs-FlV"/>
                         <segue destination="ECM-rL-yRH" kind="show" identifier="openListSoalLatihan" id="wvs-8F-gdz"/>
+                        <segue destination="MCc-j7-MIF" kind="show" identifier="showHistoryLatihan" id="iDB-wo-Xvf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gSK-UY-Zz2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -999,6 +1000,113 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vPk-yL-AjL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4189.6000000000004" y="365.66716641679164"/>
+        </scene>
+        <!--Latihan HistoryVC-->
+        <scene sceneID="eLl-4b-8FN">
+            <objects>
+                <viewController id="MCc-j7-MIF" customClass="LatihanHistoryVC" customModule="e_certification" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="C6b-EG-4vX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kUC-Uk-sjB">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ukh-vi-r5o">
+                                        <rect key="frame" x="0.0" y="20" width="49" height="38"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="ico-arrow-back"/>
+                                        <connections>
+                                            <action selector="back:" destination="MCc-j7-MIF" eventType="touchUpInside" id="0ZO-Id-X3a"/>
+                                            <action selector="back:" destination="Wu5-LM-tfU" eventType="touchUpInside" id="nRU-Cc-5yU"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rekaman Latihan" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5DS-1H-FfS">
+                                        <rect key="frame" x="57" y="26" width="261" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Raleway-SemiBold" family="Raleway" pointSize="19"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.1529411765" green="0.2156862745" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ico-gradient-bg" translatesAutoresizingMaskIntoConstraints="NO" id="BJb-fH-UZA">
+                                <rect key="frame" x="0.0" y="60" width="375" height="558"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OkC-pS-HxM">
+                                <rect key="frame" x="0.0" y="60" width="375" height="558"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="separatorColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LatihanCellIdentifier" rowHeight="53" id="6ak-zI-iBO" customClass="LatihanCell" customModule="e_certification" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="53"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6ak-zI-iBO" id="Xud-wc-J0c">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="52.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bab I" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Vs-Ah-Isq">
+                                                    <rect key="frame" x="30" y="10" width="214" height="13"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                    <color key="textColor" red="0.30196078430000001" green="0.30588235289999999" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Prinsip Dasar Asuransi" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="bMm-Fe-BjX">
+                                                    <rect key="frame" x="30" y="28" width="214" height="17"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11.5"/>
+                                                    <color key="textColor" red="0.42745098040000001" green="0.43137254899999999" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t1m-Mc-8iw">
+                                                    <rect key="frame" x="276" y="12" width="85" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <state key="normal" title="Telusuri">
+                                                        <color key="titleColor" red="0.25882352939999997" green="0.68235294120000001" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                            <color key="value" red="0.25882352939999997" green="0.68235294120000001" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                            <real key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </button>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="btnStart" destination="t1m-Mc-8iw" id="aJ7-i2-Ftu"/>
+                                            <outlet property="lblDetail" destination="bMm-Fe-BjX" id="Anv-0q-Ta3"/>
+                                            <outlet property="lblTitle" destination="9Vs-Ah-Isq" id="aTC-cq-eyv"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="JZP-Ib-1Eo"/>
+                    </view>
+                    <connections>
+                        <outlet property="tblLatihan" destination="OkC-pS-HxM" id="k21-qv-YmG"/>
+                        <segue destination="ECM-rL-yRH" kind="show" identifier="reviewHistoryLatihan" id="Tq1-V0-yim"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yju-jN-W4o" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4876" y="366"/>
         </scene>
         <!--Side Menu Navigation Controller-->
         <scene sceneID="kmN-RV-0iG">
@@ -2594,6 +2702,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                         <outlet property="lblDescription" destination="xRC-8T-dmK" id="B64-Zp-PPj"/>
                         <outlet property="lblDetail" destination="Y6e-aD-NC4" id="r16-hd-fQ8"/>
                         <outlet property="lblTitle" destination="dV9-qO-2oG" id="Dk8-yV-nJ3"/>
+                        <outlet property="lblUpdate" destination="Hhs-AD-Z7M" id="4FW-Oc-4Nr"/>
                         <outlet property="tblMateri" destination="G9i-Om-HoH" id="uHZ-jW-7mh"/>
                         <outlet property="viewFooter" destination="Kiu-uA-0Bq" id="jUO-Vs-Spb"/>
                         <outlet property="viewPlayer" destination="9JD-08-q51" id="lEA-lf-Z98"/>
@@ -2735,6 +2844,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                         <outlet property="lblDescription" destination="XIZ-qG-Eo0" id="VMl-a8-Es2"/>
                         <outlet property="lblDetail" destination="GT9-MH-Kaq" id="XmI-Zl-WEa"/>
                         <outlet property="lblTitle" destination="AXc-g7-uFE" id="rXY-wZ-P6s"/>
+                        <outlet property="lblUpdate" destination="BIV-gR-yzM" id="45O-AG-BIs"/>
                         <outlet property="tblMateri" destination="6KP-fM-jYS" id="gRz-lr-1Wi"/>
                         <outlet property="viewFooter" destination="Vl0-5I-fG9" id="uFh-tj-2xR"/>
                         <outlet property="viewPdf" destination="m02-gj-VK2" id="6Zb-5u-nz4"/>
@@ -2995,7 +3105,8 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="MQ6-0Q-dm5"/>
-        <segue reference="JlT-Gy-NoE"/>
-        <segue reference="MxL-dh-dPj"/>
+        <segue reference="WoE-Fp-kwy"/>
+        <segue reference="RPJ-7p-ZD7"/>
+        <segue reference="wvs-8F-gdz"/>
     </inferredMetricsTieBreakers>
 </document>

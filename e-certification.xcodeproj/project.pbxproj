@@ -65,6 +65,7 @@
 		13F1B522200FC65F005EC232 /* LatihanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F1B521200FC65E005EC232 /* LatihanCell.swift */; };
 		13F1B524200FC80D005EC232 /* LatihanInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F1B523200FC80D005EC232 /* LatihanInfoVC.swift */; };
 		17EE18FDCA671C684A6414A5 /* Pods_e_certification.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA2AB0B2B0EB425F298D3D18 /* Pods_e_certification.framework */; };
+		E52283FE2038B348003A4804 /* LatihanHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52283FD2038B348003A4804 /* LatihanHistoryVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -130,6 +131,7 @@
 		13F1B523200FC80D005EC232 /* LatihanInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatihanInfoVC.swift; sourceTree = "<group>"; };
 		4104E80E865DF24274608FB7 /* Pods-e-certification.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-e-certification.debug.xcconfig"; path = "Pods/Target Support Files/Pods-e-certification/Pods-e-certification.debug.xcconfig"; sourceTree = "<group>"; };
 		AA2AB0B2B0EB425F298D3D18 /* Pods_e_certification.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_e_certification.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E52283FD2038B348003A4804 /* LatihanHistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatihanHistoryVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -290,23 +292,12 @@
 			isa = PBXGroup;
 			children = (
 				1347F51F200F9B590023B3B8 /* Cell */,
-				1347F528200F9B590023B3B8 /* SignInVC.swift */,
-				13C02A792033647D00C625CD /* SignUpVC.swift */,
-				1347F51A200F9B580023B3B8 /* HomePageVC.swift */,
-				1347F518200F9B580023B3B8 /* NewsDetailVC.swift */,
-				13D6B77E20127D3E00C4637B /* NotifikasiVC.swift */,
-				13D6B78020127D8000C4637B /* NotifikasiDetailVC.swift */,
-				1347F51D200F9B590023B3B8 /* MateriPageVC.swift */,
-				1347F51E200F9B590023B3B8 /* DetailMateriVideoVC.swift */,
-				13CDA0EF201798830079B61C /* DetailMateriPDFVC.swift */,
-				1347F51C200F9B590023B3B8 /* LatihanVC.swift */,
-				13F1B523200FC80D005EC232 /* LatihanInfoVC.swift */,
-				1345769520110F5C00B0E2C6 /* LatihanListSoalVC.swift */,
-				1307A7C62016617200A7EF45 /* LatihanDetailSoalVC.swift */,
-				13D6B7822012842100C4637B /* UjianVC.swift */,
-				13D6B7842012843D00C4637B /* UjianListSoalVC.swift */,
-				1307A7C82016619900A7EF45 /* UjianDetailSoalVC.swift */,
-				1305EE5A202796E300F8D849 /* HasilUjianVC.swift */,
+				E52283F62038B075003A4804 /* User */,
+				E52283F72038B080003A4804 /* Main */,
+				E52283F92038B0C4003A4804 /* Materi */,
+				E52283FA2038B107003A4804 /* Latihan */,
+				E52283FB2038B11F003A4804 /* Ujian */,
+				E52283FC2038B12A003A4804 /* Membership */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -378,6 +369,66 @@
 				00752B244310665ED3A92153 /* Pods-e-certification.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		E52283F62038B075003A4804 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				1347F528200F9B590023B3B8 /* SignInVC.swift */,
+				13C02A792033647D00C625CD /* SignUpVC.swift */,
+			);
+			name = User;
+			sourceTree = "<group>";
+		};
+		E52283F72038B080003A4804 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				1347F51A200F9B580023B3B8 /* HomePageVC.swift */,
+				1347F518200F9B580023B3B8 /* NewsDetailVC.swift */,
+				13D6B77E20127D3E00C4637B /* NotifikasiVC.swift */,
+				13D6B78020127D8000C4637B /* NotifikasiDetailVC.swift */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		E52283F92038B0C4003A4804 /* Materi */ = {
+			isa = PBXGroup;
+			children = (
+				1347F51D200F9B590023B3B8 /* MateriPageVC.swift */,
+				1347F51E200F9B590023B3B8 /* DetailMateriVideoVC.swift */,
+				13CDA0EF201798830079B61C /* DetailMateriPDFVC.swift */,
+			);
+			name = Materi;
+			sourceTree = "<group>";
+		};
+		E52283FA2038B107003A4804 /* Latihan */ = {
+			isa = PBXGroup;
+			children = (
+				1347F51C200F9B590023B3B8 /* LatihanVC.swift */,
+				13F1B523200FC80D005EC232 /* LatihanInfoVC.swift */,
+				1345769520110F5C00B0E2C6 /* LatihanListSoalVC.swift */,
+				1307A7C62016617200A7EF45 /* LatihanDetailSoalVC.swift */,
+				E52283FD2038B348003A4804 /* LatihanHistoryVC.swift */,
+			);
+			name = Latihan;
+			sourceTree = "<group>";
+		};
+		E52283FB2038B11F003A4804 /* Ujian */ = {
+			isa = PBXGroup;
+			children = (
+				13D6B7822012842100C4637B /* UjianVC.swift */,
+				13D6B7842012843D00C4637B /* UjianListSoalVC.swift */,
+				1307A7C82016619900A7EF45 /* UjianDetailSoalVC.swift */,
+				1305EE5A202796E300F8D849 /* HasilUjianVC.swift */,
+			);
+			name = Ujian;
+			sourceTree = "<group>";
+		};
+		E52283FC2038B12A003A4804 /* Membership */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Membership;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -571,6 +622,7 @@
 				1347F537200F9B590023B3B8 /* SignInVC.swift in Sources */,
 				1347F531200F9B590023B3B8 /* MateriCell.swift in Sources */,
 				1347F532200F9B590023B3B8 /* NotifCell.swift in Sources */,
+				E52283FE2038B348003A4804 /* LatihanHistoryVC.swift in Sources */,
 				13F1B522200FC65F005EC232 /* LatihanCell.swift in Sources */,
 				134CCB352018EF0500D6D4B7 /* UserAuth.swift in Sources */,
 				13D6B7832012842100C4637B /* UjianVC.swift in Sources */,

@@ -170,8 +170,8 @@ extension LatihanDetailSoalVC:UITableViewDelegate,UITableViewDataSource{
         cell.lblDetail.text = self.arrOption[indexPath.row]
         
         if LatihanAnswer.isFinished{
-            if LatihanAnswer.arrAnswer[self.index]["choosed"] == self.listSoal.data[self.index].answer{
-                if LatihanAnswer.arrAnswer[self.index]["choosed"] == cell.lblDetail.text {
+            if LatihanAnswer.arrAnswer[self.index]["selected"] == self.listSoal.data[self.index].answer{
+                if LatihanAnswer.arrAnswer[self.index]["selected"] == cell.lblDetail.text {
                     cell.modeTrue()
                 }else{
                     if self.listSoal.data[self.index].answer == cell.lblDetail.text{
@@ -181,7 +181,7 @@ extension LatihanDetailSoalVC:UITableViewDelegate,UITableViewDataSource{
                     }
                 }
             }else{
-                if LatihanAnswer.arrAnswer[self.index]["choosed"] == cell.lblDetail.text {
+                if LatihanAnswer.arrAnswer[self.index]["selected"] == cell.lblDetail.text {
                     cell.modeFalse()
                 }else{
                     if self.listSoal.data[self.index].answer == cell.lblDetail.text{
@@ -192,7 +192,7 @@ extension LatihanDetailSoalVC:UITableViewDelegate,UITableViewDataSource{
                 }
             }
         }else{
-            if LatihanAnswer.arrAnswer[self.index]["choosed"] == cell.lblDetail.text{
+            if LatihanAnswer.arrAnswer[self.index]["selected"] == cell.lblDetail.text{
                 cell.modeSelect()
             }else{
                 cell.modeNormal()
@@ -209,18 +209,31 @@ extension LatihanDetailSoalVC:UITableViewDelegate,UITableViewDataSource{
     }
     
     func chooseAnswer(answer:String){
-        if self.listSoal.data[self.index].answer == answer{
-            let tempAnswer = [
-                "choosed" : "\(answer)",
-                "status" : "true"
-            ]
-            LatihanAnswer.arrAnswer[self.index] = tempAnswer
-        }else{
-            let tempAnswer = [
-                "choosed" : "\(answer)",
-                "status" : "false"
-            ]
-            LatihanAnswer.arrAnswer[self.index] = tempAnswer
-        }
+        let tempAnswer = [
+            "id" : "\(self.listSoal.data[self.index].id)",
+            "sub_module_id" : "\(self.listSoal.data[self.index].sub_module_id)",
+            "question" : "\(self.listSoal.data[self.index].question)",
+            "option1" : "\(self.listSoal.data[self.index].option1)",
+            "option2" : "\(self.listSoal.data[self.index].option2)",
+            "option3" : "\(self.listSoal.data[self.index].option3)",
+            "option4" : "\(self.listSoal.data[self.index].option4)",
+            "answer" : "\(self.listSoal.data[self.index].answer)",
+            "selected" : "\(answer)"
+        ]
+        LatihanAnswer.arrAnswer[self.index] = tempAnswer
+        
+//        if self.listSoal.data[self.index].answer == answer{
+//            let tempAnswer = [
+//                "choosed" : "\(answer)",
+//                "status" : "true"
+//            ]
+//            LatihanAnswer.arrAnswer[self.index] = tempAnswer
+//        }else{
+//            let tempAnswer = [
+//                "choosed" : "\(answer)",
+//                "status" : "false"
+//            ]
+//            LatihanAnswer.arrAnswer[self.index] = tempAnswer
+//        }
     }
 }

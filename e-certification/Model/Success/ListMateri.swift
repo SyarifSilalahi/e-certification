@@ -34,6 +34,9 @@ struct Materi : ArrowParsable {
     var sub_module_title = ""
     var host_file = ""
     var video_next = ""
+    var updated_at = ""
+    var created_at = ""
+    
     mutating func deserialize(_ json: JSON) {
         material_id <-- json["material_id"]
         sub_module_id <-- json["sub_module_id"]
@@ -44,6 +47,8 @@ struct Materi : ArrowParsable {
         sub_module_title <-- json["sub_module_title"]
         host_file <-- json["host_file"]
         video_next <-- json["video_next"]
+        updated_at <-- json["updated_at"]
+        created_at <-- json["created_at"]
     }
 }
 

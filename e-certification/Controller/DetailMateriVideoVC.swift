@@ -19,6 +19,7 @@ class DetailMateriVideoVC: UIViewController {
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblDetail: UILabel!
     @IBOutlet weak var lblDescription: UILabel!
+    @IBOutlet weak var lblUpdate: UILabel!
     
     var player = VGPlayer()
     var urlVideo : URL?
@@ -26,6 +27,7 @@ class DetailMateriVideoVC: UIViewController {
     var title_ = ""
     var detail = ""
     var fileName = ""
+    var update = ""
     var description_ = ""
     var videoTimeFlag = ""
     
@@ -42,6 +44,7 @@ class DetailMateriVideoVC: UIViewController {
         self.lblTitle.text = title_
         self.lblDetail.text = detail
         self.lblDescription.text = description_
+        self.lblUpdate.text = "Diperbaharui \(update)"
         self.resetContentSize()
         self.setVideoPlayer()
     }

@@ -200,6 +200,102 @@ class ApiManager: NSObject {
         }
     }
     
+    //user Set History Latihan
+    func setHistoryLatihan(_ modulId:Int,history:String, completionHandler:@escaping (JSON?,JSON?, NSError?) -> ()) {
+        HUD().show()
+        
+        let data = JSON(Session.userChace.object(forKey: Session.KEY_AUTH) as AnyObject?)
+        var dataUser = UserAuthData()
+        dataUser.deserialize(data!)
+        
+        let param = [
+            "sub_module_id" : "\(modulId)",
+            "history" : "\(history)"
+        ]
+        
+        let header = [
+            "token" : "\(dataUser.token)",
+            "device-id" : "\(dataUser.device_id)"
+        ]
+        
+        Alamofire.request("\(Domain.URL_SUBMIT_HISTORY_LATIHAN)",
+            method: HTTPMethod.post,
+            parameters: param,
+            encoding: URLEncoding.httpBody,
+            headers: header)
+            .responseJSON { (response) in
+                HUD().hide()
+                switch response.result {
+                case .success(_):
+                    let data = JSON(response.result.value as AnyObject?)
+                    let responseData = response.result.value as! NSDictionary
+                    let status:Bool = (responseData["status"] as! String != "0")
+                    if status {
+                        completionHandler(data!,nil,nil)
+                    }else{
+                        if responseData["message"] as! String == "expired_token" {
+                            self.forceLogOut()
+                            return
+                        }
+                        completionHandler(nil,data!, nil)
+                    }
+                    break
+                case .failure(let error):
+                    self.connectionCheck(error: error)
+                    completionHandler(nil,nil, error as NSError?)
+                    break
+                }
+        }
+    }
+    
+    //user Get List History Latihan
+    func getListHistoryLatihan(_ modulId:Int,page:Int = 1, completionHandler:@escaping (JSON?,JSON?, NSError?) -> ()) {
+        HUD().show()
+        
+        let data = JSON(Session.userChace.object(forKey: Session.KEY_AUTH) as AnyObject?)
+        var dataUser = UserAuthData()
+        dataUser.deserialize(data!)
+        
+        let param = [
+            "sub_module_id" : "\(modulId)",
+            "page" : "\(page)"
+        ]
+        
+        let header = [
+            "token" : "\(dataUser.token)",
+            "device-id" : "\(dataUser.device_id)"
+        ]
+        
+        Alamofire.request("\(Domain.URL_GET_HISTORY_LATIHAN)",
+            method: HTTPMethod.post,
+            parameters: param,
+            encoding: URLEncoding.httpBody,
+            headers: header)
+            .responseJSON { (response) in
+                HUD().hide()
+                switch response.result {
+                case .success(_):
+                    let data = JSON(response.result.value as AnyObject?)
+                    let responseData = response.result.value as! NSDictionary
+                    let status:Bool = (responseData["status"] as! String != "0")
+                    if status {
+                        completionHandler(data!,nil,nil)
+                    }else{
+                        if responseData["message"] as! String == "expired_token" {
+                            self.forceLogOut()
+                            return
+                        }
+                        completionHandler(nil,data!, nil)
+                    }
+                    break
+                case .failure(let error):
+                    self.connectionCheck(error: error)
+                    completionHandler(nil,nil, error as NSError?)
+                    break
+                }
+        }
+    }
+    
     //user Get Status Ujian
     func getExamStatus(completionHandler:@escaping (JSON?,JSON?, NSError?) -> ()) {
         HUD().show()

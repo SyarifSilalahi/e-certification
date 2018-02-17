@@ -16,6 +16,7 @@ class LatihanListSoalVC: UIViewController {
     
     var listSoal:ListQuestionLatihan! = ListQuestionLatihan()
     var indexSelected = 0
+    var isHistory = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +26,7 @@ class LatihanListSoalVC: UIViewController {
         // Do any additional setup after loading the view.
         self.lblCounter.text = "0 / \(self.listSoal.data.count)"
         self.setMenuCollection()
-        print(" isFinished \(LatihanAnswer.isFinished)\narrAnswer \(LatihanAnswer.arrAnswer)")
+//        print(" isFinished \(LatihanAnswer.isFinished)\narrAnswer \(LatihanAnswer.arrAnswer)")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -34,13 +35,17 @@ class LatihanListSoalVC: UIViewController {
     }
     
     func setLblCounter(){
-        var totalSelected = 0
-        for i in 0..<self.listSoal.data.count{
-            if LatihanAnswer.arrAnswer[i]["choosed"] != ""{
-                totalSelected += 1
+        if isHistory{
+            self.lblCounter.text = "\(self.listSoal.data.count) / \(self.listSoal.data.count)"
+        }else{
+            var totalSelected = 0
+            for i in 0..<self.listSoal.data.count{
+                if LatihanAnswer.arrAnswer[i]["selected"] != ""{
+                    totalSelected += 1
+                }
             }
+            self.lblCounter.text = "\(totalSelected) / \(self.listSoal.data.count)"
         }
-        self.lblCounter.text = "\(totalSelected) / \(self.listSoal.data.count)"
     }
     
     func setMenuCollection(){
@@ -56,15 +61,42 @@ class LatihanListSoalVC: UIViewController {
     
     
     @IBAction func back(_ sender: AnyObject) {
-        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
-        self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
+        if isHistory{
+            self.navigationController?.popViewController(animated: true)
+        }else{
+            let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+            self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
+        }
+        
     }
     
     @IBAction func selesai(_ sender: AnyObject) {
         if LatihanAnswer.isFinished == false{
-            LatihanAnswer.isFinished = true
-            self.collectionMenu.reloadData()
-            CustomAlert().Success(message: Wording.FINISH_EXERCISE_MESSAGE)
+            let history = "\(LatihanAnswer.arrAnswer)"
+            let replaced1 = history.replacingOccurrences(of: "[", with: "{")
+            let newHistory = replaced1.replacingOccurrences(of: "]", with: "}")
+            var historyJson = newHistory.replace(0, "[")
+            historyJson = historyJson.replace(historyJson.characters.count - 1 , "]")
+            ApiManager().setHistoryLatihan(self.listSoal.data[0].sub_module_id, history: historyJson, completionHandler: { (response,failure, error) in
+                if error != nil{
+                    print("error set History Latihan \(String(describing: error))")
+                    return
+                }
+                if failure != nil{
+                    var fail = Failure()
+                    fail.deserialize(failure!)
+                    print("failure message \(fail.message)")
+                    CustomAlert().Error(message: fail.message)
+                    //do action failure here
+                    return
+                }
+                
+                LatihanAnswer.isFinished = true
+                self.collectionMenu.reloadData()
+                CustomAlert().Success(message: Wording.FINISH_EXERCISE_MESSAGE)
+                
+            })
+//            print("history JSON :\n\(historyJson)")
 //            var nilai = 0
 //            for dic in LatihanAnswer.arrAnswer{
 //                if dic["status"] == "true"{
@@ -72,8 +104,12 @@ class LatihanListSoalVC: UIViewController {
 //                }
 //            }
         }else{
-            let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
-            self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
+            if isHistory{
+                self.navigationController?.popViewController(animated: true)
+            }else{
+                let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+                self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
+            }
         }
     }
     
@@ -115,13 +151,13 @@ extension LatihanListSoalVC: UICollectionViewDelegate, UICollectionViewDataSourc
         let cell: MenuCVCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MenuCVCellIdentifier", for: indexPath) as! MenuCVCell
         cell.lblTitle.text = "\(indexPath.row + 1)"
         if LatihanAnswer.isFinished{
-            if LatihanAnswer.arrAnswer[indexPath.row]["status"] == "true"{
+            if LatihanAnswer.arrAnswer[indexPath.row]["selected"] == LatihanAnswer.arrAnswer[indexPath.row]["answer"]{
                 cell.setModeCorrect()
             }else {
                 cell.setModeInCorrect()
             }
         }else{
-            if LatihanAnswer.arrAnswer[indexPath.row]["choosed"] == ""{
+            if LatihanAnswer.arrAnswer[indexPath.row]["selected"] == ""{
                 cell.setModeNormal()
             }else{
                 cell.setModeSelected()

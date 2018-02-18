@@ -728,6 +728,15 @@ extension UIImage{
         let processedImage = UIImage(cgImage: cgimg!)
         return processedImage
     }
+    
+    //convert view into image
+    convenience init(view: UIView) {
+        UIGraphicsBeginImageContext(view.frame.size)
+        view.layer.render(in:UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        self.init(cgImage: image!.cgImage!)
+    }
 }
 
 extension UILabel {

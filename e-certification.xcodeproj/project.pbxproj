@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		130099202039E49F00483B1E /* Membership.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1300991F2039E49F00483B1E /* Membership.swift */; };
+		130099232039E67600483B1E /* MembershipVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130099222039E67600483B1E /* MembershipVC.swift */; };
+		130099262039E6B500483B1E /* Lisence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130099242039E6B500483B1E /* Lisence.swift */; };
+		130099272039E6B500483B1E /* Lisence.xib in Resources */ = {isa = PBXBuildFile; fileRef = 130099252039E6B500483B1E /* Lisence.xib */; };
 		1305EE5B202796E300F8D849 /* HasilUjianVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1305EE5A202796E300F8D849 /* HasilUjianVC.swift */; };
 		1307A7C72016617200A7EF45 /* LatihanDetailSoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1307A7C62016617200A7EF45 /* LatihanDetailSoalVC.swift */; };
 		1307A7C92016619900A7EF45 /* UjianDetailSoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1307A7C82016619900A7EF45 /* UjianDetailSoalVC.swift */; };
@@ -70,6 +74,10 @@
 
 /* Begin PBXFileReference section */
 		00752B244310665ED3A92153 /* Pods-e-certification.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-e-certification.release.xcconfig"; path = "Pods/Target Support Files/Pods-e-certification/Pods-e-certification.release.xcconfig"; sourceTree = "<group>"; };
+		1300991F2039E49F00483B1E /* Membership.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Membership.swift; sourceTree = "<group>"; };
+		130099222039E67600483B1E /* MembershipVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembershipVC.swift; sourceTree = "<group>"; };
+		130099242039E6B500483B1E /* Lisence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lisence.swift; sourceTree = "<group>"; };
+		130099252039E6B500483B1E /* Lisence.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Lisence.xib; sourceTree = "<group>"; };
 		1305EE5A202796E300F8D849 /* HasilUjianVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasilUjianVC.swift; sourceTree = "<group>"; };
 		1307A7C62016617200A7EF45 /* LatihanDetailSoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatihanDetailSoalVC.swift; sourceTree = "<group>"; };
 		1307A7C82016619900A7EF45 /* UjianDetailSoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UjianDetailSoalVC.swift; sourceTree = "<group>"; };
@@ -146,6 +154,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		130099212039E62200483B1E /* Lisence */ = {
+			isa = PBXGroup;
+			children = (
+				130099242039E6B500483B1E /* Lisence.swift */,
+				130099252039E6B500483B1E /* Lisence.xib */,
+			);
+			path = Lisence;
+			sourceTree = "<group>";
+		};
 		134576832010EFFF00B0E2C6 /* SliderMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -342,6 +359,7 @@
 				13160C392030B0C90064438D /* News.swift */,
 				13160C3B2030B0F40064438D /* Notification.swift */,
 				138528102034A9B3001F66D7 /* Status.swift */,
+				1300991F2039E49F00483B1E /* Membership.swift */,
 			);
 			path = Success;
 			sourceTree = "<group>";
@@ -427,6 +445,8 @@
 		E52283FC2038B12A003A4804 /* Membership */ = {
 			isa = PBXGroup;
 			children = (
+				130099212039E62200483B1E /* Lisence */,
+				130099222039E67600483B1E /* MembershipVC.swift */,
 			);
 			name = Membership;
 			sourceTree = "<group>";
@@ -500,6 +520,7 @@
 				1347F509200F9A8E0023B3B8 /* Raleway-Heavy.ttf in Resources */,
 				1347F50B200F9A8E0023B3B8 /* Raleway-Medium.ttf in Resources */,
 				1347F4E7200F99D20023B3B8 /* LaunchScreen.storyboard in Resources */,
+				130099272039E6B500483B1E /* Lisence.xib in Resources */,
 				1347F514200F9A8E0023B3B8 /* AlertDialogView.xib in Resources */,
 				1347F50E200F9A8E0023B3B8 /* Raleway-Regular.ttf in Resources */,
 				1347F50A200F9A8E0023B3B8 /* Raleway-ExtraLight.ttf in Resources */,
@@ -601,6 +622,7 @@
 				13D6B7852012843D00C4637B /* UjianListSoalVC.swift in Sources */,
 				1347F535200F9B590023B3B8 /* NewsCVCell.swift in Sources */,
 				1347F513200F9A8E0023B3B8 /* DesignableUITextField.swift in Sources */,
+				130099232039E67600483B1E /* MembershipVC.swift in Sources */,
 				1347F533200F9B590023B3B8 /* JadwalCell.swift in Sources */,
 				1347F4DF200F99D10023B3B8 /* ViewController.swift in Sources */,
 				1305EE5B202796E300F8D849 /* HasilUjianVC.swift in Sources */,
@@ -630,11 +652,13 @@
 				13C02A7A2033647D00C625CD /* SignUpVC.swift in Sources */,
 				134CCB332018EEEC00D6D4B7 /* Failure.swift in Sources */,
 				13D6B78120127D8000C4637B /* NotifikasiDetailVC.swift in Sources */,
+				130099262039E6B500483B1E /* Lisence.swift in Sources */,
 				1347F508200F9A8E0023B3B8 /* Helper.swift in Sources */,
 				1345768F2010F03800B0E2C6 /* SideMenuManager.swift in Sources */,
 				1347F52A200F9B590023B3B8 /* NewsDetailVC.swift in Sources */,
 				13160C3C2030B0F40064438D /* Notification.swift in Sources */,
 				13CDA0F0201798830079B61C /* DetailMateriPDFVC.swift in Sources */,
+				130099202039E49F00483B1E /* Membership.swift in Sources */,
 				134576942011025300B0E2C6 /* MenuCell.swift in Sources */,
 				134CCB2C2018ED2900D6D4B7 /* ApiManager.swift in Sources */,
 				1307A7C92016619900A7EF45 /* UjianDetailSoalVC.swift in Sources */,

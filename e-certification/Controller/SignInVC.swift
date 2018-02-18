@@ -84,10 +84,12 @@ class SignInVC: UIViewController {
     func checkDevStatus(){
         ApiManager().getStatusDev { (response,failure, error) in
             if error != nil{
+                self.btnSignUp.alpha = 0
                 print("error checkDevStatus \(String(describing: error))")
                 return
             }
             if failure != nil{
+                self.btnSignUp.alpha = 0
                 var fail = Failure()
                 fail.deserialize(failure!)
 //                print("failure message \(fail.message)")

@@ -1898,10 +1898,10 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
             </objects>
             <point key="canvasLocation" x="4240.8000000000002" y="1075.4122938530736"/>
         </scene>
-        <!--View Controller-->
+        <!--MembershipVC-->
         <scene sceneID="7gf-39-IUM">
             <objects>
-                <viewController id="MCp-W7-ZZX" sceneMemberID="viewController">
+                <viewController id="MCp-W7-ZZX" customClass="MembershipVC" customModule="e_certification" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pGt-Fw-aMo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1940,7 +1940,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                                 </subviews>
                                 <color key="backgroundColor" red="0.1529411765" green="0.2156862745" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="membership" translatesAutoresizingMaskIntoConstraints="NO" id="pxc-hu-PP9">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oku-Q4-ZJ0">
                                 <rect key="frame" x="16" y="75" width="343" height="526"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
@@ -1949,8 +1949,43 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                         <viewLayoutGuide key="safeArea" id="mGt-sK-g43"/>
                     </view>
                     <navigationItem key="navigationItem" id="gdl-gk-5BI"/>
+                    <connections>
+                        <outlet property="imgBg" destination="XQ9-C4-K79" id="Wfo-Do-zHr"/>
+                        <outlet property="imgLisence" destination="Oku-Q4-ZJ0" id="cms-8g-oHv"/>
+                        <outlet property="viewAccessDenied" destination="9fi-Fq-ggn" id="Kgl-91-bmD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EFo-y9-uhP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="9fi-Fq-ggn">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="569"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ico-access-denied" translatesAutoresizingMaskIntoConstraints="NO" id="69g-sf-ToJ">
+                            <rect key="frame" x="127" y="98" width="121" height="121"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="AKSES DITOLAK!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U0P-Qx-PGz">
+                            <rect key="frame" x="30" y="236" width="316" height="52"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                            <color key="textColor" red="0.74509803919999995" green="0.1176470588" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9LF-Cs-y6M">
+                            <rect key="frame" x="83" y="291" width="209" height="94"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <string key="text">Maaf.
+Untuk saat ini anda belum mendapatkan lisensi.
+
+Terima Kasih.</string>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.070588235289999995" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <viewLayoutGuide key="safeArea" id="RvF-iu-pVq"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="2808.8000000000002" y="1794.1529235382311"/>
         </scene>
@@ -3100,7 +3135,6 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
         <image name="ico-ujian" width="20" height="20"/>
         <image name="ico-uname" width="14" height="18"/>
         <image name="ico-video-disable" width="24" height="24"/>
-        <image name="membership" width="319" height="501"/>
         <image name="splashscreen" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>

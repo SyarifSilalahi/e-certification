@@ -77,7 +77,7 @@ class UjianVC: UIViewController {
             if failure != nil{
                 var fail = Failure()
                 fail.deserialize(failure!)
-                print("failure message \(fail.message)")
+                print("failure setScoreUjian message \(fail.message)")
                 CustomAlert().Error(message: fail.message)
                 //do action failure here
                 return
@@ -120,7 +120,7 @@ class UjianVC: UIViewController {
             if failure != nil{
                 var fail = Failure()
                 fail.deserialize(failure!)
-                print("failure message \(fail.message)")
+                print("failure getExamStatus message \(fail.message)")
                 CustomAlert().Error(message: fail.message)
                 //do action failure here
                 return
@@ -141,8 +141,8 @@ class UjianVC: UIViewController {
             if failure != nil{
                 var fail = Failure()
                 fail.deserialize(failure!)
-                print("failure message \(fail.message)")
-                CustomAlert().Error(message: fail.message)
+                print("failure get Duration message \(fail.message)")
+//                CustomAlert().Error(message: fail.message)
                 //do action failure here
                 return
             }
@@ -249,8 +249,8 @@ class UjianVC: UIViewController {
             
             if Session.userChace.value(forKey: Session.FORCE_EXIT_EXAM) != nil {
                 UjianAnswer.arrAnswer = Session.userChace.value(forKey: Session.FORCE_EXIT_EXAM) as! [[String:String]]
+                self.submitSisaJawaban()
             }
-            self.submitSisaJawaban()
             
             break
         default:
@@ -270,7 +270,7 @@ class UjianVC: UIViewController {
             if failure != nil{
                 var fail = Failure()
                 fail.deserialize(failure!)
-                print("failure message \(fail.message)")
+                print("failure load Question Ujian message \(fail.message)")
                 CustomAlert().Error(message: fail.message)
                 //do action failure here
                 return
@@ -303,6 +303,12 @@ class UjianVC: UIViewController {
         }
     }
     
+    func getDataFromUrl(url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            completion(data, response, error)
+            }.resume()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -325,29 +331,74 @@ extension UjianVC: UIImagePickerControllerDelegate,UINavigationControllerDelegat
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage{
-            //            self.imgProfilePicture.image = pickedImage
-            ApiManager().uploadImageSelfie(image: pickedImage,imageLicense: pickedImage, completionHandler: { (response,failure, error) in
+            ApiManager().getLisence { (response,failure, error) in
                 if error != nil{
-                    print("error Upload Selfie \(String(describing: error))")
-                    self.successUploadSelfie = false
+                    print("error load Membership \(String(describing: error))")
+//                    self.viewAccessDenied.frame = self.imgBg.frame
+//                    self.view.addSubview(self.viewAccessDenied)
+                    
                     return
                 }
                 if failure != nil{
-                    self.successUploadSelfie = false
                     var fail = Failure()
                     fail.deserialize(failure!)
-                    print("failure message \(fail.message)")
+                    print("failure load Membership message \(fail.message)")
                     CustomAlert().Error(message: fail.message)
                     //do action failure here
+//                    self.viewAccessDenied.frame = self.imgBg.frame
+//                    self.view.addSubview(self.viewAccessDenied)
                     return
                 }
                 
-                self.successUploadSelfie = true
-                var userSelfie:UserSelfie = UserSelfie()
-                userSelfie.deserialize(response!)
-                CustomAlert().Success(message: "Terimakasih.\nAnda telah menyelesaikan proses ujian.")
+                //json data model
+                var membership:Membership = Membership()
+                membership.deserialize(response!)
+                //set Lisence
+                let viewLisence = UINib(nibName: "Lisence", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! Lisence
+                viewLisence.lblTitle.text = membership.lisence.insurance_title
+                viewLisence.lblSubtitle.text = membership.lisence.insurance_sub_title
+                viewLisence.lblUserName.text = membership.lisence.name
+                viewLisence.lblNoLisence.text = "No. Lisensi   :   \(membership.lisence.no_license)"
+                viewLisence.lblDateLisence.text = "Berlaku s/d   :   \(membership.lisence.expired_date)"
+                viewLisence.viewBaseLisensiData.transform = CGAffineTransform(rotationAngle: CGFloat((90.0 * M_PI) / 180.0));
+                viewLisence.viewBaseLisensiData.frame.origin.y = 0
+                viewLisence.viewBaseLisensiData.frame.origin.x = 0
                 
-            })
+                let imgUrl = URL(string: "\(membership.lisence.host_file)\(membership.lisence.image_user)")!
+                self.getDataFromUrl(url: imgUrl) { data, response, error in
+                    guard let data = data, error == nil else { return }
+                    //            print(response?.suggestedFilename ?? url.lastPathComponent)
+                    print("Download Finished")
+                    DispatchQueue.main.async() {
+                        viewLisence.imgUserAvatar.image = UIImage(data: data)
+                        let image = UIImage(view: viewLisence)
+                        
+                        //set foto user
+                        ApiManager().uploadImageSelfie(image: pickedImage,imageLicense: image, completionHandler: { (response,failure, error) in
+                            if error != nil{
+                                print("error Upload Selfie \(String(describing: error))")
+                                self.successUploadSelfie = false
+                                return
+                            }
+                            if failure != nil{
+                                self.successUploadSelfie = false
+                                var fail = Failure()
+                                fail.deserialize(failure!)
+                                print("failure Upload Selfie message \(fail.message)")
+                                CustomAlert().Error(message: fail.message)
+                                //do action failure here
+                                return
+                            }
+                            
+                            self.successUploadSelfie = true
+                            var userSelfie:UserSelfie = UserSelfie()
+                            userSelfie.deserialize(response!)
+                            CustomAlert().Success(message: "Terimakasih.\nAnda telah menyelesaikan proses ujian.")
+                            
+                        })
+                    }
+                    }
+                }
             //upload foto then go to hasil ujian
             //            self.performSegue(withIdentifier: "hasilUjian", sender: self)
             
@@ -363,7 +414,7 @@ extension UjianVC: UIImagePickerControllerDelegate,UINavigationControllerDelegat
                     self.present(alert, animated: true, completion: nil)
                 }
             })
-        }
+            }
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

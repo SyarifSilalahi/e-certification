@@ -40,7 +40,7 @@ class LatihanListSoalVC: UIViewController {
         }else{
             var totalSelected = 0
             for i in 0..<self.listSoal.data.count{
-                if LatihanAnswer.arrAnswer[i]["selected"] != ""{
+                if LatihanAnswer.arrAnswer[i].selected != ""{
                     totalSelected += 1
                 }
             }
@@ -72,30 +72,56 @@ class LatihanListSoalVC: UIViewController {
     
     @IBAction func selesai(_ sender: AnyObject) {
         if LatihanAnswer.isFinished == false{
-            let history = "\(LatihanAnswer.arrAnswer)"
-            let replaced1 = history.replacingOccurrences(of: "[", with: "{")
-            let newHistory = replaced1.replacingOccurrences(of: "]", with: "}")
-            var historyJson = newHistory.replace(0, "[")
-            historyJson = historyJson.replace(historyJson.characters.count - 1 , "]")
-            ApiManager().setHistoryLatihan(self.listSoal.data[0].sub_module_id, history: historyJson, completionHandler: { (response,failure, error) in
-                if error != nil{
-                    print("error set History Latihan \(String(describing: error))")
-                    return
-                }
-                if failure != nil{
-                    var fail = Failure()
-                    fail.deserialize(failure!)
-                    print("failure message \(fail.message)")
-                    CustomAlert().Error(message: fail.message)
-                    //do action failure here
-                    return
-                }
+//            let history = "\(LatihanAnswer.arrAnswer)"
+//            print("history\(history)")
+            var arrTemp:[NSDictionary] = []
+            for item in LatihanAnswer.arrAnswer{
+                let dictTemp = [
+                    "sub_module_id": "\(item.sub_module_id)",
+                    "id": "\(item.id)",
+                    "selected": "\(item.selected)",
+                    "explanation": "\(item.explanation)",
+                    "option1": "\(item.option1)",
+                    "option2": "\(item.option2)",
+                    "option4": "\(item.option3)",
+                    "option3": "\(item.option4)",
+                    "answer": "\(item.answer)",
+                    "question": "\(item.question)"
+                ]
+                arrTemp.append(dictTemp as NSDictionary)
+            }
+            
+            if let data = try? JSONSerialization.data(withJSONObject: arrTemp, options: .prettyPrinted),
+                let str = String(data: data, encoding: .utf8) {
+                let historyJson = str.replacingOccurrences(of: "\n", with: "")
+//                debugPrint(historyJson)
                 
-                LatihanAnswer.isFinished = true
-                self.collectionMenu.reloadData()
-                CustomAlert().Success(message: Wording.FINISH_EXERCISE_MESSAGE)
-                
-            })
+                ApiManager().setHistoryLatihan(self.listSoal.data[0].sub_module_id, history: historyJson, completionHandler: { (response,failure, error) in
+                    if error != nil{
+                        print("error set History Latihan \(String(describing: error))")
+                        return
+                    }
+                    if failure != nil{
+                        var fail = Failure()
+                        fail.deserialize(failure!)
+                        print("failure message \(fail.message)")
+                        CustomAlert().Error(message: fail.message)
+                        //do action failure here
+                        return
+                    }
+                    
+                    LatihanAnswer.isFinished = true
+                    self.collectionMenu.reloadData()
+                    CustomAlert().Success(message: Wording.FINISH_EXERCISE_MESSAGE)
+                    
+                })
+            }
+            
+//            let replaced1 = history.replacingOccurrences(of: "\n", with: "")
+//            let newHistory = replaced1.replacingOccurrences(of: "]", with: "}")
+//            var historyJson = newHistory.replace(0, "[")
+//            historyJson = historyJson.replace(historyJson.characters.count - 1 , "]")
+            
 //            print("history JSON :\n\(historyJson)")
 //            var nilai = 0
 //            for dic in LatihanAnswer.arrAnswer{
@@ -151,13 +177,13 @@ extension LatihanListSoalVC: UICollectionViewDelegate, UICollectionViewDataSourc
         let cell: MenuCVCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MenuCVCellIdentifier", for: indexPath) as! MenuCVCell
         cell.lblTitle.text = "\(indexPath.row + 1)"
         if LatihanAnswer.isFinished{
-            if LatihanAnswer.arrAnswer[indexPath.row]["selected"] == LatihanAnswer.arrAnswer[indexPath.row]["answer"]{
+            if LatihanAnswer.arrAnswer[indexPath.row].selected == LatihanAnswer.arrAnswer[indexPath.row].answer{
                 cell.setModeCorrect()
             }else {
                 cell.setModeInCorrect()
             }
         }else{
-            if LatihanAnswer.arrAnswer[indexPath.row]["selected"] == ""{
+            if LatihanAnswer.arrAnswer[indexPath.row].selected == ""{
                 cell.setModeNormal()
             }else{
                 cell.setModeSelected()

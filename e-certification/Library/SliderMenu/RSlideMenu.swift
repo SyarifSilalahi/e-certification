@@ -54,7 +54,7 @@ class RSlideMenu: UIViewController {
     }
     
     @IBAction func logOut(_ sender: AnyObject) {
-        let alert = UIAlertController(title: nil, message: "Apakah anda yakin ingin keluar?" , preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: nil, message: Wording.LOGOUT_MESSAGE , preferredStyle: .actionSheet)
         
         alert.addAction(UIAlertAction(title: "Batal", style: .cancel) { action in
             // perhaps use action.title here
@@ -132,7 +132,7 @@ extension RSlideMenu:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 2 {
-            let alert = UIAlertController(title: "Informasi.", message: "Untuk mengganti kata sandi, anda diharapkan untuk menghubungi Administrasi.", preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: "Informasi.", message: Wording.CHANGE_PASSWORD_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
             
             let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
                 

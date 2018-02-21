@@ -21,7 +21,6 @@ class MateriPageVC: UIViewController {
         let app = UIApplication.shared
         app.statusBarStyle = .lightContent
         // Do any additional setup after loading the view.
-        self.loadMateri()
     }
     
     func loadMateri(){
@@ -54,7 +53,7 @@ class MateriPageVC: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        self.tblMateri.reloadData()
+        self.loadMateri()
     }
     
     override func didReceiveMemoryWarning() {
@@ -87,7 +86,7 @@ extension MateriPageVC:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:MateriCell = tableView.dequeueReusableCell(withIdentifier: "MateriCellIdentifier", for: indexPath) as! MateriCell
         cell.selectionStyle = .none
-        cell.setTitle(text: "\(dataMateri.data[indexPath.row].title)", isNew: true)
+        cell.setTitle(text: "\(dataMateri.data[indexPath.row].title)", isNew: false)
         cell.lblDetail.text = dataMateri.data[indexPath.row].description
         cell.description_ = dataMateri.data[indexPath.row].description
         

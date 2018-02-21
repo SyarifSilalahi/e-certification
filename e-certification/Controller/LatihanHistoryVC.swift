@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Arrow
 
 class LatihanHistoryVC: UIViewController {
     @IBOutlet weak var tblLatihan: UITableView!
@@ -107,11 +108,17 @@ extension LatihanHistoryVC:UITableViewDelegate,UITableViewDataSource{
         self.indexChoosed = sender.tag
         var str = self.history.data.listDetailHistory[indexChoosed].history
         str = str.replacingOccurrences(of: "\\", with: "")
+//        debugPrint("str \(str)")
         let dict = convertToDictionary(text: str)
-        LatihanAnswer.arrAnswer = dict!
+        let jsonObj = JSON(dict as AnyObject)
+        LatihanAnswer.arrAnswer = []
+        for value in (jsonObj?.collection)! {
+            var tempAnswer = QuestionLatihan()
+            tempAnswer.deserialize(value)
+            LatihanAnswer.arrAnswer.append(tempAnswer)
+        }
+
         LatihanAnswer.isFinished = true
-//        print("\(LatihanAnswer.arrAnswer)")
-        
         self.performSegue(withIdentifier: "reviewHistoryLatihan", sender: self)
     }
     
@@ -119,10 +126,10 @@ extension LatihanHistoryVC:UITableViewDelegate,UITableViewDataSource{
         
     }
     
-    func convertToDictionary(text: String) -> [[String: String]]? {
+    func convertToDictionary(text: String) -> [NSDictionary]? {
         if let data = text.data(using: .utf8) {
             do {
-                return try JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] as? [[String : String]]
+                return try JSONSerialization.jsonObject(with: data, options: []) as? [NSDictionary]
             } catch {
                 print(error.localizedDescription)
             }

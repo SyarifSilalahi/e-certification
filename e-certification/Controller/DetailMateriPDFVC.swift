@@ -70,7 +70,7 @@ class DetailMateriPDFVC: UIViewController {
     }
     
     @IBAction func deletePdf(_ sender: AnyObject) {
-        let deleteAlert = UIAlertController(title: "Konfirmasi", message: "Apakah anda yakin ingin menghapus materi ini?", preferredStyle: UIAlertControllerStyle.alert)
+        let deleteAlert = UIAlertController(title: "Konfirmasi", message: Wording.CONFIRM_DELETE_MATERI, preferredStyle: UIAlertControllerStyle.alert)
         
         deleteAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
             DiggerCache.removeItem(atPath: FileHelper().getFilePath(name: "\(self.fileName)"))

@@ -14,33 +14,72 @@ class MembershipVC: UIViewController {
     @IBOutlet weak var viewAccessDenied: UIView!
     @IBOutlet weak var imgBg: UIImageView!
     var membership:Membership = Membership()
+    var examStatus:StatusExam! = StatusExam()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        ApiManager().getLisence { (response,failure, error) in
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        self.getStatus()
+    }
+    func getStatus(){
+        ApiManager().getExamStatus { (response,failure, error) in
             if error != nil{
-                print("error load Membership \(String(describing: error))")
-                self.viewAccessDenied.frame = self.imgBg.frame
-                self.view.addSubview(self.viewAccessDenied)
-                
+                print("error getExamStatus \(String(describing: error))")
                 return
             }
             if failure != nil{
                 var fail = Failure()
                 fail.deserialize(failure!)
-                print("failure message \(fail.message)")
+                print("failure getExamStatus message \(fail.message)")
                 CustomAlert().Error(message: fail.message)
                 //do action failure here
-                self.viewAccessDenied.frame = self.imgBg.frame
-                self.view.addSubview(self.viewAccessDenied)
                 return
             }
             
             //json data model
-            self.membership.deserialize(response!)
-            print("lisence \(self.membership.lisence)")
-            self.setLisence(data: self.membership)
+            self.examStatus.deserialize(response!)
+            self.setViewStatusExam(status: self.examStatus)
+        }
+    }
+    
+    func setViewStatusExam(status:StatusExam!){
+        switch status.status_exam {
+        case ExamStatus.Lulus.rawValue:
+            self.viewAccessDenied.alpha = 0
+            ApiManager().getLisence { (response,failure, error) in
+                if error != nil{
+                    print("error load Membership \(String(describing: error))")
+                    self.viewAccessDenied.frame = self.imgBg.frame
+                    self.viewAccessDenied.alpha = 1
+                    self.view.addSubview(self.viewAccessDenied)
+                    
+                    return
+                }
+                if failure != nil{
+                    var fail = Failure()
+                    fail.deserialize(failure!)
+                    print("failure message \(fail.message)")
+                    CustomAlert().Error(message: fail.message)
+                    //do action failure here
+                    self.viewAccessDenied.frame = self.imgBg.frame
+                    self.viewAccessDenied.alpha = 1
+                    self.view.addSubview(self.viewAccessDenied)
+                    return
+                }
+                
+                //json data model
+                self.membership.deserialize(response!)
+                print("lisence \(self.membership.lisence)")
+                self.setLisence(data: self.membership)
+            }
+            break
+        default:
+            self.viewAccessDenied.alpha = 1
+            self.viewAccessDenied.frame = self.imgBg.frame
+            self.view.addSubview(self.viewAccessDenied)
+            break
         }
     }
     

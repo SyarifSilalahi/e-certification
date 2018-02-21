@@ -310,40 +310,34 @@ extension UjianListSoalVC: UIImagePickerControllerDelegate,UINavigationControlle
                 viewLisence.viewBaseLisensiData.frame.origin.y = 0
                 viewLisence.viewBaseLisensiData.frame.origin.x = 0
                 
-                let imgUrl = URL(string: "\(membership.lisence.host_file)\(membership.lisence.image_user)")!
-                self.getDataFromUrl(url: imgUrl) { data, response, error in
-                    guard let data = data, error == nil else { return }
-                    //            print(response?.suggestedFilename ?? url.lastPathComponent)
-                    print("Download Finished")
-                    DispatchQueue.main.async() {
-                        viewLisence.imgUserAvatar.image = UIImage(data: data)
-                        let image = UIImage(view: viewLisence)
-                        
-                        //set foto user
-                        ApiManager().uploadImageSelfie(image: pickedImage,imageLicense: image, completionHandler: { (response,failure, error) in
-                            if error != nil{
-                                print("error Upload Selfie \(String(describing: error))")
-                                self.successUploadSelfie = false
-                                return
-                            }
-                            if failure != nil{
-                                self.successUploadSelfie = false
-                                var fail = Failure()
-                                fail.deserialize(failure!)
-                                print("failure Upload Selfie message \(fail.message)")
-                                CustomAlert().Error(message: fail.message)
-                                //do action failure here
-                                return
-                            }
-                            
-                            self.successUploadSelfie = true
-                            var userSelfie:UserSelfie = UserSelfie()
-                            userSelfie.deserialize(response!)
-                            CustomAlert().Success(message: "Terimakasih.\nAnda telah menyelesaikan proses ujian.")
-                            
-                        })
+                viewLisence.imgUserAvatar.image = pickedImage
+                let image = UIImage(view: viewLisence)
+                let compressImageAvatar = UIImage(data: pickedImage.jpeg(.medium)!)
+                let compressImageLisence = UIImage(data: image.jpeg(.low)!)
+                
+                //set foto user
+                ApiManager().uploadImageSelfie(image: compressImageAvatar!,imageLicense: compressImageLisence!, completionHandler: { (response,failure, error) in
+                    if error != nil{
+                        print("error Upload Selfie \(String(describing: error))")
+                        self.successUploadSelfie = false
+                        return
                     }
-                }
+                    if failure != nil{
+                        self.successUploadSelfie = false
+                        var fail = Failure()
+                        fail.deserialize(failure!)
+                        print("failure Upload Selfie message \(fail.message)")
+                        CustomAlert().Error(message: fail.message)
+                        //do action failure here
+                        return
+                    }
+                    
+                    self.successUploadSelfie = true
+                    var userSelfie:UserSelfie = UserSelfie()
+                    userSelfie.deserialize(response!)
+                    CustomAlert().Success(message: Wording.FINISH_EXAM_MESSAGE)
+                    
+                })
             }
             
             //upload foto then go to hasil ujian
@@ -357,7 +351,7 @@ extension UjianListSoalVC: UIImagePickerControllerDelegate,UINavigationControlle
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true) {
-            UjianAnswer.isFinished = false
+//            UjianAnswer.isFinished = false
         }
     }
 }

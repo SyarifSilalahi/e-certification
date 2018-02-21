@@ -65,6 +65,14 @@ struct Wording {
     static let FINISH_EXAM_SUCCESS_MESSAGE = "Selamat!\nAnda telah lulus.\nSilahkan lengkapi data diri anda dalam bentuk foto."
     static let FINISH_EXAM_TIMESUP_MESSAGE = "Waktu ujian Telah selesai.\nSilahkan submit jawaban anda."
     static let FINISH_EXAM_EXIT_MESSAGE = "Anda baru saja keluar, anda dianggap telah menyelesaikan ujian."
+    static let EMPTY_FIELD = "Silahkan isi semua kolom yang dibutuhkan."
+    static let EMAIL_VALIDATION = "Harap mengisi format email yang benar."
+    static let FORGOT_PASSWORD_MESSAGE = "Untuk mengganti kata sandi, anda diharapkan untuk menghubungi Administrasi."
+    static let CHANGE_PASSWORD_MESSAGE = "Untuk mengganti kata sandi, anda diharapkan untuk menghubungi Administrasi."
+    static let FORCE_UPDATE_MESSAGE = "Aplikasi anda sudah usang.\nHarap lakukan pembaharuan."
+    static let SUCCESS_REGISTER = "Pendaftaran berhasil."
+    static let CONFIRM_DELETE_MATERI = "Apakah anda yakin ingin menghapus materi ini?"
+    static let LOGOUT_MESSAGE = "Apakah anda yakin ingin keluar?"
     
 }
 
@@ -133,7 +141,7 @@ struct Theme {
 
 struct LatihanAnswer {
     static var isFinished:Bool = false
-    static var arrAnswer:[[String:String]] = [] as! [[String:String]]
+    static var arrAnswer:[QuestionLatihan] = []
 }
 
 struct UjianAnswer {

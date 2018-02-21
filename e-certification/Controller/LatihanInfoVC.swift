@@ -54,22 +54,17 @@ class LatihanInfoVC: UIViewController {
             LatihanAnswer.isFinished = false
             for i in 0..<self.listSoal.data.count{
 //                let tempAnswer = [
-//                    "choosed" : "",
-//                    "status" : "notAnswered"
+//                    "id" : "\(self.listSoal.data[i].id)",
+//                    "sub_module_id" : "\(self.listSoal.data[i].sub_module_id)",
+//                    "question" : "\(self.listSoal.data[i].question)",
+//                    "option1" : "\(self.listSoal.data[i].option1)",
+//                    "option2" : "\(self.listSoal.data[i].option2)",
+//                    "option3" : "\(self.listSoal.data[i].option3)",
+//                    "option4" : "\(self.listSoal.data[i].option4)",
+//                    "answer" : "\(self.listSoal.data[i].answer)",
+//                    "selected" : ""
 //                ]
-                let tempAnswer = [
-                    "id" : "\(self.listSoal.data[i].id)",
-                    "sub_module_id" : "\(self.listSoal.data[i].sub_module_id)",
-                    "question" : "\(self.listSoal.data[i].question)",
-                    "option1" : "\(self.listSoal.data[i].option1)",
-                    "option2" : "\(self.listSoal.data[i].option2)",
-                    "option3" : "\(self.listSoal.data[i].option3)",
-                    "option4" : "\(self.listSoal.data[i].option4)",
-                    "answer" : "\(self.listSoal.data[i].answer)",
-                    "selected" : ""
-                ]
-                
-                LatihanAnswer.arrAnswer.append(tempAnswer)
+                LatihanAnswer.arrAnswer.append(self.listSoal.data[i])
             }
             self.performSegue(withIdentifier: "openListSoalLatihan", sender: self)
         }

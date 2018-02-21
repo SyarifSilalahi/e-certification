@@ -59,6 +59,9 @@ struct QuestionLatihan : ArrowParsable {
     var option3 = ""
     var option4 = ""
     var answer = ""
+    var explanation = ""
+    var selected = ""
+    
     
     mutating func deserialize(_ json: JSON) {
         id <-- json["id"]
@@ -69,6 +72,8 @@ struct QuestionLatihan : ArrowParsable {
         option3 <-- json["option3"]
         option4 <-- json["option4"]
         answer <-- json["answer"]
+        explanation <-- json["explanation"]
+        selected <-- json["selected"]
     }
 }
 

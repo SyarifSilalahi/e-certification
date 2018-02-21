@@ -55,9 +55,9 @@ class SignUpVC: UIViewController {
     @IBAction func doSignUp(_ sender: AnyObject) {
         self.view.endEditing(true)
         if (self.txtUsername.text?.isEmpty)! || (self.txtPassword.text?.isEmpty)! {
-            CustomAlert().Error(message: "Silahkan isi semua kolom yang dibutuhkan.")
+            CustomAlert().Error(message: Wording.EMPTY_FIELD)
         }else if !isValidEmail(testStr: self.txtEmail.text!) {
-            CustomAlert().Error(message: "Harap mengisi format email yang benar.")
+            CustomAlert().Error(message: Wording.EMAIL_VALIDATION)
         }else{
             HUD().show()
             //delay
@@ -65,7 +65,7 @@ class SignUpVC: UIViewController {
             DispatchQueue.main.asyncAfter(deadline: when) {
                 // Your code with delay
                 HUD().hide()
-                CustomAlert().Success(message: "Pendaftaran berhasil.")
+                CustomAlert().Success(message: Wording.SUCCESS_REGISTER)
                 let when = DispatchTime.now() + 2 // change to desired number of seconds
                 DispatchQueue.main.asyncAfter(deadline: when) {
                     // Your code with delay

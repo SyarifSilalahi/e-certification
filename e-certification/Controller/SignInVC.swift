@@ -56,7 +56,7 @@ class SignInVC: UIViewController {
             var status = Status()
             status.deserialize(response!)
             if status.data != "1"{
-                let alert = UIAlertController(title: "Informasi.", message: "Aplikasi anda sudah usang.\nHarap lakukan pembaharuan.", preferredStyle: UIAlertControllerStyle.alert)
+                let alert = UIAlertController(title: "Informasi.", message: Wording.FORCE_UPDATE_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
                 
                 alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
                     
@@ -104,7 +104,8 @@ class SignInVC: UIViewController {
             if status.data != "1"{
                 self.btnSignUp.alpha = 0
             }else{
-                self.btnSignUp.alpha = 1
+                //harusnya 1 tapi nanti aja di pasang setelah dijelaskan ke user, karena usernya gak mau
+                self.btnSignUp.alpha = 0
             }
         }
     }
@@ -150,7 +151,7 @@ class SignInVC: UIViewController {
     }
     
     @IBAction func forgotPassword(_ sender: AnyObject) {
-        let alert = UIAlertController(title: "Informasi.", message: "Untuk mengganti kata sandi, anda diharapkan untuk menghubungi Administrasi.", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "Informasi.", message: Wording.FORGOT_PASSWORD_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
         
         let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
             
@@ -162,9 +163,9 @@ class SignInVC: UIViewController {
     @IBAction func doSignIn(_ sender: AnyObject) {
         self.view.endEditing(true)
         if (self.txtUsername.text?.isEmpty)! || (self.txtPassword.text?.isEmpty)! {
-            CustomAlert().Error(message: "Silahkan isi semua kolom yang dibutuhkan.")
+            CustomAlert().Error(message: Wording.EMPTY_FIELD)
         }else if !isValidEmail(testStr: self.txtUsername.text!) {
-            CustomAlert().Error(message: "Harap mengisi format email yang benar.")
+            CustomAlert().Error(message: Wording.EMAIL_VALIDATION)
         }else{
             let udid:String! = UIDevice.current.identifierForVendor!.uuidString
             let param = [

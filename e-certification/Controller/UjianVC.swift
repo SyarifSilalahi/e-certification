@@ -334,9 +334,6 @@ extension UjianVC: UIImagePickerControllerDelegate,UINavigationControllerDelegat
             ApiManager().getLisence { (response,failure, error) in
                 if error != nil{
                     print("error load Membership \(String(describing: error))")
-//                    self.viewAccessDenied.frame = self.imgBg.frame
-//                    self.view.addSubview(self.viewAccessDenied)
-                    
                     return
                 }
                 if failure != nil{
@@ -345,8 +342,6 @@ extension UjianVC: UIImagePickerControllerDelegate,UINavigationControllerDelegat
                     print("failure load Membership message \(fail.message)")
                     CustomAlert().Error(message: fail.message)
                     //do action failure here
-//                    self.viewAccessDenied.frame = self.imgBg.frame
-//                    self.view.addSubview(self.viewAccessDenied)
                     return
                 }
                 
@@ -364,41 +359,35 @@ extension UjianVC: UIImagePickerControllerDelegate,UINavigationControllerDelegat
                 viewLisence.viewBaseLisensiData.frame.origin.y = 0
                 viewLisence.viewBaseLisensiData.frame.origin.x = 0
                 
-                let imgUrl = URL(string: "\(membership.lisence.host_file)\(membership.lisence.image_user)")!
-                self.getDataFromUrl(url: imgUrl) { data, response, error in
-                    guard let data = data, error == nil else { return }
-                    //            print(response?.suggestedFilename ?? url.lastPathComponent)
-                    print("Download Finished")
-                    DispatchQueue.main.async() {
-                        viewLisence.imgUserAvatar.image = UIImage(data: data)
-                        let image = UIImage(view: viewLisence)
-                        
-                        //set foto user
-                        ApiManager().uploadImageSelfie(image: pickedImage,imageLicense: image, completionHandler: { (response,failure, error) in
-                            if error != nil{
-                                print("error Upload Selfie \(String(describing: error))")
-                                self.successUploadSelfie = false
-                                return
-                            }
-                            if failure != nil{
-                                self.successUploadSelfie = false
-                                var fail = Failure()
-                                fail.deserialize(failure!)
-                                print("failure Upload Selfie message \(fail.message)")
-                                CustomAlert().Error(message: fail.message)
-                                //do action failure here
-                                return
-                            }
-                            
-                            self.successUploadSelfie = true
-                            var userSelfie:UserSelfie = UserSelfie()
-                            userSelfie.deserialize(response!)
-                            CustomAlert().Success(message: "Terimakasih.\nAnda telah menyelesaikan proses ujian.")
-                            
-                        })
+                viewLisence.imgUserAvatar.image = pickedImage
+                let image = UIImage(view: viewLisence)
+                let compressImageAvatar = UIImage(data: pickedImage.jpeg(.medium)!)
+                let compressImageLisence = UIImage(data: image.jpeg(.low)!)
+                
+                //set foto user
+                ApiManager().uploadImageSelfie(image: compressImageAvatar!,imageLicense: compressImageLisence!, completionHandler: { (response,failure, error) in
+                    if error != nil{
+                        print("error Upload Selfie \(String(describing: error))")
+                        self.successUploadSelfie = false
+                        return
                     }
+                    if failure != nil{
+                        self.successUploadSelfie = false
+                        var fail = Failure()
+                        fail.deserialize(failure!)
+                        print("failure Upload Selfie message \(fail.message)")
+                        CustomAlert().Error(message: fail.message)
+                        //do action failure here
+                        return
                     }
-                }
+                    
+                    self.successUploadSelfie = true
+                    var userSelfie:UserSelfie = UserSelfie()
+                    userSelfie.deserialize(response!)
+                    CustomAlert().Success(message: Wording.FINISH_EXAM_MESSAGE)
+                    
+                })
+            }
             //upload foto then go to hasil ujian
             //            self.performSegue(withIdentifier: "hasilUjian", sender: self)
             
@@ -414,19 +403,19 @@ extension UjianVC: UIImagePickerControllerDelegate,UINavigationControllerDelegat
                     self.present(alert, animated: true, completion: nil)
                 }
             })
-            }
+        }
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.dismiss(animated: true) {
-            let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: Wording.FINISH_EXAM_SUCCESS_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
-            
-            let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
-                // camera
-                self.openCamera()
-            })
-            alert.addAction(alertOKAction)
-            self.present(alert, animated: true, completion: nil)
+//            let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: Wording.FINISH_EXAM_SUCCESS_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
+//
+//            let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
+//                // camera
+//                self.openCamera()
+//            })
+//            alert.addAction(alertOKAction)
+//            self.present(alert, animated: true, completion: nil)
         }
     }
 }

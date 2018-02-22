@@ -1294,10 +1294,8 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iZZ-mb-Tqx">
                             <rect key="frame" x="83" y="291" width="209" height="94"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <string key="text">Akses dibuka kembali pada saat
-Anda akan perpanjang lisensi
-
-Terima Kasih</string>
+                            <string key="text">Akses Ujian akan dibuka
+pada saat Anda telah diassign untuk mengikuti ujian.</string>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -1964,18 +1962,16 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                             <rect key="frame" x="127" y="98" width="121" height="121"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="AKSES DITOLAK!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U0P-Qx-PGz">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Belum ada kartu License." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="U0P-Qx-PGz">
                             <rect key="frame" x="30" y="236" width="316" height="52"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                             <color key="textColor" red="0.74509803919999995" green="0.1176470588" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9LF-Cs-y6M">
-                            <rect key="frame" x="83" y="291" width="209" height="94"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Kartu license akan ada pada saat Anda telah diassign untuk mengikuti ujian dan lulus." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9LF-Cs-y6M">
+                            <rect key="frame" x="83" y="291" width="209" height="102"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <string key="text">Maaf.
-Anda belum mempunyai kartu digital.</string>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -3126,7 +3122,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
         <image name="ico-notif" width="23" height="22"/>
         <image name="ico-pass" width="14" height="18"/>
         <image name="ico-pdf-disable" width="23" height="23"/>
-        <image name="ico-placeholder" width="288" height="376"/>
+        <image name="ico-placeholder" width="512" height="512"/>
         <image name="ico-search-notif" width="13" height="13"/>
         <image name="ico-setting" width="23" height="23"/>
         <image name="ico-timer" width="16" height="19"/>
@@ -3138,7 +3134,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
     <inferredMetricsTieBreakers>
         <segue reference="MQ6-0Q-dm5"/>
         <segue reference="skf-iw-bTX"/>
-        <segue reference="RWf-x8-L4B"/>
+        <segue reference="rQc-mj-gPp"/>
         <segue reference="Tq1-V0-yim"/>
     </inferredMetricsTieBreakers>
 </document>

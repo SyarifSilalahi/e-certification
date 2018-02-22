@@ -55,24 +55,31 @@ struct Domain {
 }
 
 struct Wording {
-    static let Connection = "Mohon periksa koneksi internet anda!"
-    static let FORCE_LOG_OUT_ALLERT_TITLE = "Upss!"
-    static let FORCE_LOG_OUT_ALLERT_MESSAGE = "Akun Anda sedang di pakai.\nSilahkan Login kembali."
+    static let Connection = "Maaf! Koneksi gagal, Silahkan periksa koneksi internet anda"
+    static let FORCE_LOG_OUT_ALLERT_TITLE = "Pemberitahuan"
+    static let FORCE_LOG_OUT_ALLERT_MESSAGE = "Seseorang telah menggunakan Akun anda, \nSilahkan Login kembali"
     static let FINISH_EXERCISE_TITLE = "Latihan Selesai."
     static let FINISH_EXERCISE_MESSAGE = "Anda telah menyelesaikan latihan ini.\nTerimakasih telah berpartisipasi."
     static let FINISH_EXAM_TITLE = "Ujian Selesai."
     static let FINISH_EXAM_MESSAGE = "Anda telah menyelesaikan ujian.\nTerimakasih telah berpartisipasi."
     static let FINISH_EXAM_SUCCESS_MESSAGE = "Selamat!\nAnda telah lulus.\nSilahkan lengkapi data diri anda dalam bentuk foto."
-    static let FINISH_EXAM_TIMESUP_MESSAGE = "Waktu ujian Telah selesai.\nSilahkan submit jawaban anda."
-    static let FINISH_EXAM_EXIT_MESSAGE = "Anda baru saja keluar, anda dianggap telah menyelesaikan ujian."
+    static let FINISH_EXAM_TIMESUP_MESSAGE = "Waktu ujian telah selesai.\nSilahkan submit jawaban anda."
+    static let FINISH_EXAM_EXIT_MESSAGE = "Maaf anda telah keluar atau menutup aplikasi, Anda tidak dapat melanjutkan ujian, Sistem akan segera melakukan penghitungan hasil ujian."
     static let EMPTY_FIELD = "Silahkan isi semua kolom yang dibutuhkan."
-    static let EMAIL_VALIDATION = "Harap mengisi format email yang benar."
+    static let EMAIL_VALIDATION = "Harap mengisi format email dengan benar."
     static let FORGOT_PASSWORD_MESSAGE = "Untuk mengganti kata sandi, anda diharapkan untuk menghubungi Administrasi."
     static let CHANGE_PASSWORD_MESSAGE = "Untuk mengganti kata sandi, anda diharapkan untuk menghubungi Administrasi."
     static let FORCE_UPDATE_MESSAGE = "Aplikasi anda sudah usang.\nHarap lakukan pembaharuan."
     static let SUCCESS_REGISTER = "Pendaftaran berhasil."
     static let CONFIRM_DELETE_MATERI = "Apakah anda yakin ingin menghapus materi ini?"
-    static let LOGOUT_MESSAGE = "Apakah anda yakin ingin keluar?"
+    static let LOGOUT_MESSAGE = "Apakah anda yakin ingin keluar dari aplikasi?"
+    
+    static let ACCESS_DENIED = "Akses dibuka kembali pada saat anda akan perpanjang lisensi.\nTerima Kasih."
+    static let NO_LISENCE = "Maaf.\nAnda belum mempunyai kartu digital."
+    static let PASS_EXAM = "Anda Telah Lulus!"
+    static let FAILED_EXAM = "Anda belum lulus ujian."
+    static let CONGRATS = "Slamat!"
+    static let SORRY = "Maaf!"
     
 }
 
@@ -83,6 +90,7 @@ struct Session {
     static let EMAIL = "EMAIL"
     static let OLD_PASS = "OLD_PASS"
     static let FORCE_EXIT_EXAM = "EXIT"
+    static let ID_NOTIF_READ = "ID_NOTIF_READ"
 }
 
 struct FONT {

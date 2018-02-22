@@ -54,7 +54,7 @@ class MembershipVC: UIViewController {
                     self.viewAccessDenied.frame = self.imgBg.frame
                     self.viewAccessDenied.alpha = 1
                     self.view.addSubview(self.viewAccessDenied)
-                    
+
                     return
                 }
                 if failure != nil{
@@ -68,7 +68,7 @@ class MembershipVC: UIViewController {
                     self.view.addSubview(self.viewAccessDenied)
                     return
                 }
-                
+
                 //json data model
                 self.membership.deserialize(response!)
                 print("lisence \(self.membership.lisence)")

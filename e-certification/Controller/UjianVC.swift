@@ -182,16 +182,16 @@ class UjianVC: UIViewController {
         case ExamStatus.Lulus.rawValue:
             self.viewLulus.alpha = 1
             self.imgStatusLulus.image = #imageLiteral(resourceName: "ico-lulus")
-            self.lblTitleStatusLulus.text = "Selamat!"
-            self.lblDetailStatusLulus.text = "Anda Telah Lulus."
+            self.lblTitleStatusLulus.text = Wording.CONGRATS
+            self.lblDetailStatusLulus.text = Wording.PASS_EXAM
             self.viewLulus.frame = self.imgBg.frame
             self.view.addSubview(self.viewLulus)
             break
         case ExamStatus.Gagal.rawValue:
             self.viewLulus.alpha = 1
             self.imgStatusLulus.image = #imageLiteral(resourceName: "ico-access-denied")
-            self.lblTitleStatusLulus.text = "Maaf!"
-            self.lblDetailStatusLulus.text = "Anda belum lulus ujian."
+            self.lblTitleStatusLulus.text = Wording.SORRY
+            self.lblDetailStatusLulus.text = Wording.FAILED_EXAM
             self.viewAccessDenied.frame = self.imgBg.frame
             self.view.addSubview(self.viewAccessDenied)
             break
@@ -363,9 +363,9 @@ extension UjianVC: UIImagePickerControllerDelegate,UINavigationControllerDelegat
                 let image = UIImage(view: viewLisence)
                 let compressImageAvatar = UIImage(data: pickedImage.jpeg(.medium)!)
                 let compressImageLisence = UIImage(data: image.jpeg(.low)!)
-                
+                let imgCompressRotate = compressImageLisence?.imageRotatedByDegrees(-90, flip: false)
                 //set foto user
-                ApiManager().uploadImageSelfie(image: compressImageAvatar!,imageLicense: compressImageLisence!, completionHandler: { (response,failure, error) in
+                ApiManager().uploadImageSelfie(image: compressImageAvatar!,imageLicense: imgCompressRotate!, completionHandler: { (response,failure, error) in
                     if error != nil{
                         print("error Upload Selfie \(String(describing: error))")
                         self.successUploadSelfie = false

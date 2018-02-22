@@ -65,6 +65,7 @@ class RSlideMenu: UIViewController {
             //clear session
             Session.userChace.removeObject(forKey: Session.EMAIL)
             Session.userChace.removeObject(forKey: Session.KEY_AUTH)
+            Session.userChace.removeObject(forKey: Session.ID_NOTIF_READ)
             //force back to login
             self.performSegue(withIdentifier: "unwindToViewController1", sender: self)
         })

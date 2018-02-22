@@ -314,9 +314,10 @@ extension UjianListSoalVC: UIImagePickerControllerDelegate,UINavigationControlle
                 let image = UIImage(view: viewLisence)
                 let compressImageAvatar = UIImage(data: pickedImage.jpeg(.medium)!)
                 let compressImageLisence = UIImage(data: image.jpeg(.low)!)
+                let imgCompressRotate = compressImageLisence?.imageRotatedByDegrees(-90, flip: false)
                 
                 //set foto user
-                ApiManager().uploadImageSelfie(image: compressImageAvatar!,imageLicense: compressImageLisence!, completionHandler: { (response,failure, error) in
+                ApiManager().uploadImageSelfie(image: compressImageAvatar!,imageLicense: imgCompressRotate!, completionHandler: { (response,failure, error) in
                     if error != nil{
                         print("error Upload Selfie \(String(describing: error))")
                         self.successUploadSelfie = false

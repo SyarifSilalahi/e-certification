@@ -15,6 +15,7 @@ class NotifikasiVC: UIViewController {
     var listNotif:ListNotification = ListNotification()
     var indexChoosed = 0
     var arrSearchDataNotification:[DataNotification] = []
+    var arrIndexRead:[Int] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,6 +100,16 @@ extension NotifikasiVC:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:NotifCell = tableView.dequeueReusableCell(withIdentifier: "NotifCellIdentifier", for: indexPath) as! NotifCell
         cell.selectionStyle = .none
+        if Session.userChace.value(forKey: Session.ID_NOTIF_READ) == nil {
+            cell.imgDot.alpha = 1
+        }else{
+            self.arrIndexRead = Session.userChace.value(forKey: Session.ID_NOTIF_READ) as! [Int]
+            if self.arrIndexRead.contains(self.arrSearchDataNotification[indexPath.row].user_notification_id){
+                cell.imgDot.alpha = 0
+            }else{
+                cell.imgDot.alpha = 1
+            }
+        }
         cell.lblTitle.text = self.arrSearchDataNotification[indexPath.row].title
         cell.lblDetail.text = self.arrSearchDataNotification[indexPath.row].description
         cell.lblTime.text = self.arrSearchDataNotification[indexPath.row].created_at
@@ -107,6 +118,18 @@ extension NotifikasiVC:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if Session.userChace.value(forKey: Session.ID_NOTIF_READ) == nil {
+            self.arrIndexRead = []
+            self.arrIndexRead.append(self.arrSearchDataNotification[indexPath.row].user_notification_id)
+            Session.userChace.set(self.arrIndexRead, forKey: Session.ID_NOTIF_READ)
+        }else{
+            self.arrIndexRead = Session.userChace.value(forKey: Session.ID_NOTIF_READ) as! [Int]
+            if self.arrIndexRead.contains(self.arrSearchDataNotification[indexPath.row].user_notification_id){
+            }else{
+                self.arrIndexRead.append(self.arrSearchDataNotification[indexPath.row].user_notification_id)
+                Session.userChace.set(self.arrIndexRead, forKey: Session.ID_NOTIF_READ)
+            }
+        }
         self.indexChoosed = indexPath.row
         self.performSegue(withIdentifier: "openDetailNotification", sender: self)
     }

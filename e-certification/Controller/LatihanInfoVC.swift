@@ -71,24 +71,25 @@ class LatihanInfoVC: UIViewController {
     }
     
     @IBAction func showHistory(_ sender: AnyObject) {
-        ApiManager().getQuestionsLatihan(self.modul.sub_module_id) { (response,failure, error) in
-            if error != nil{
-                print("error load Question Latihan \(String(describing: error))")
-                return
-            }
-            if failure != nil{
-                var fail = Failure()
-                fail.deserialize(failure!)
-                print("failure message \(fail.message)")
-                CustomAlert().Error(message: fail.message)
-                //do action failure here
-                return
-            }
-            
-            //json data model
-            self.listSoal.deserialize(response!)
-            self.performSegue(withIdentifier: "showHistoryLatihan", sender: self)
-        }
+//        ApiManager().getQuestionsLatihan(self.modul.sub_module_id) { (response,failure, error) in
+//            if error != nil{
+//                print("error load Question Latihan \(String(describing: error))")
+//                return
+//            }
+//            if failure != nil{
+//                var fail = Failure()
+//                fail.deserialize(failure!)
+//                print("failure message \(fail.message)")
+//                CustomAlert().Error(message: fail.message)
+//                //do action failure here
+//                return
+//            }
+//
+//            //json data model
+//            self.listSoal.deserialize(response!)
+//            self.performSegue(withIdentifier: "showHistoryLatihan", sender: self)
+//        }
+        self.performSegue(withIdentifier: "showHistoryLatihan", sender: self)
         
     }
     
@@ -97,11 +98,10 @@ class LatihanInfoVC: UIViewController {
         // Pass the selected object to the new view controller.
         if (segue.identifier == "openListSoalLatihan") {
             let vc = segue.destination as! LatihanListSoalVC
-            vc.listSoal = self.listSoal
+            vc.listSoal = self.listSoal.data
         }else if (segue.identifier == "showHistoryLatihan"){
             let vc = segue.destination as! LatihanHistoryVC
-            vc.modul = self.modul
-            vc.listSoal = self.listSoal
+            vc.sub_module_id = self.modul.sub_module_id
         }
     }
     

@@ -81,6 +81,9 @@ struct Wording {
     static let CONGRATS = "Slamat!"
     static let SORRY = "Maaf!"
     
+    static let DEACTIVATE_INSURANCE = "Insurance di non aktifkan"
+    static let DEACTIVATE_USER = "User di non aktifkan"
+    
 }
 
 struct Session {
@@ -91,6 +94,7 @@ struct Session {
     static let OLD_PASS = "OLD_PASS"
     static let FORCE_EXIT_EXAM = "EXIT"
     static let ID_NOTIF_READ = "ID_NOTIF_READ"
+    static let LISENCE_NO_EXP = "LISENCE_NO_EXP"
 }
 
 struct FONT {

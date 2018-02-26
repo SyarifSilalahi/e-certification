@@ -14,6 +14,7 @@ class LatihanVC: UIViewController {
     @IBOutlet weak var tblLatihan: UITableView!
     var dataModulLatihan = ListModulLatihan()
     var indexChoosed = 0
+    var listSoal:ListQuestionLatihan! = ListQuestionLatihan()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +53,10 @@ class LatihanVC: UIViewController {
         self.tblLatihan.delegate = self
         self.tblLatihan.dataSource = self
         self.tblLatihan.reloadData()
+    }
+    
+    @IBAction func showHistory(_ sender: AnyObject) {
+        self.performSegue(withIdentifier: "showHistoryLatihan", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -209,10 +209,16 @@ struct HistoryLatihan : ArrowParsable {
     var exercise_history_id:Int = 0
     var sub_module_id:Int = 0
     var history = ""
+    var created_at = ""
+    var sub_module_title = ""
+    var module_title = ""
     
     mutating func deserialize(_ json: JSON) {
         exercise_history_id <-- json["exercise_history_id"]
         sub_module_id <-- json["sub_module_id"]
         history <-- json["history"]
+        created_at <-- json["created_at"]
+        sub_module_title <-- json["sub_module_title"]
+        module_title <-- json["module_title"]
     }
 }

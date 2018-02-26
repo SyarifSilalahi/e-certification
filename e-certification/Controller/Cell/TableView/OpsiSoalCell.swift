@@ -40,6 +40,13 @@ class OpsiSoalCell: UITableViewCell {
         self.lblDetail.textColor = UIColor.white
     }
     
+    func modeTrueAnswerNotSelected(){
+        self.viewBgOpsi.layer.borderColor = Theme.successColor.cgColor
+        self.viewBgOpsi.backgroundColor = UIColor.white
+        self.lblTitle.textColor = Theme.successColor
+        self.lblDetail.textColor = Theme.successColor
+    }
+    
     func modeTrue(){
         self.viewBgOpsi.layer.borderColor = UIColor.clear.cgColor
         self.viewBgOpsi.backgroundColor = Theme.successColor

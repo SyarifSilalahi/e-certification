@@ -188,16 +188,25 @@ class SignInVC: UIViewController {
                 }
                 
                 //json data model
-                var dataUser = UserAuthData()
-                dataUser.deserialize(JSON(response?.object(forKey: "data") as AnyObject)!)
-                
-                //session user
-                let userAuth = dataUser.dictionary! as NSDictionary
-                Session.userChace.set(userAuth, forKey: Session.KEY_AUTH)
-                Session.userChace.set("\(self.txtUsername.text!)", forKey: Session.EMAIL)
-                //            print("usercache \(Session.userChace.value(forKey: Session.KEY_AUTH))")
-                //go to homepage
-                self.performSegue(withIdentifier: "showHomePage", sender: self)
+                var user = UserAuth()
+                user.deserialize(JSON(response as AnyObject)!)
+//                print("user \(user)")
+                if user.status == "1"{
+//                    var dataUser = UserAuthData()
+//                    dataUser.deserialize(JSON(response?.object(forKey: "data") as AnyObject)!)
+                    
+                    //session user
+                    let userAuth = user.data.dictionary! as NSDictionary
+                    Session.userChace.set(userAuth, forKey: Session.KEY_AUTH)
+                    Session.userChace.set("\(self.txtUsername.text!)", forKey: Session.EMAIL)
+                    //            print("usercache \(Session.userChace.value(forKey: Session.KEY_AUTH))")
+                    //go to homepage
+                    self.performSegue(withIdentifier: "showHomePage", sender: self)
+                }else if user.status == "2" {
+                    CustomAlert().Error(message: Wording.DEACTIVATE_INSURANCE)
+                }else if user.status == "3" {
+                    CustomAlert().Error(message: Wording.DEACTIVATE_USER)
+                }
             }
         }
         

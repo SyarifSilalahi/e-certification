@@ -16,7 +16,7 @@ class RSlideMenu: UIViewController {
     @IBOutlet weak var lblName: UILabel!
     
     var dataUser = UserAuthData()
-    
+    var arr:[String] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         //statusbar
@@ -24,6 +24,11 @@ class RSlideMenu: UIViewController {
         app.isStatusBarHidden = true
         self.navigationController?.isNavigationBarHidden = true
         // Do any additional setup after loading the view.
+        
+        if Session.userChace.value(forKey: Session.LISENCE_NO_EXP) != nil{
+            arr = Session.userChace.value(forKey: Session.LISENCE_NO_EXP) as! [String]
+        }
+        
         let data = JSON(Session.userChace.object(forKey: Session.KEY_AUTH) as AnyObject?)
         dataUser.deserialize(data!)
         self.lblName.text = dataUser.name
@@ -102,11 +107,37 @@ class RSlideMenu: UIViewController {
 
 extension RSlideMenu:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 3 + arr.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 42
+        var height:CGFloat = 42
+        switch indexPath.row {
+        case 0:
+            if height < Helper().heightForView(self.dataUser.name, font: UIFont.systemFont(ofSize: 13, weight: .regular), width: self.tblMenu.frame.size.width - 112) {
+                height = Helper().heightForView(self.dataUser.name, font: UIFont.systemFont(ofSize: 13, weight: .regular), width: self.tblMenu.frame.size.width - 112) + 30
+            }
+            break
+        case 1:
+            if height < Helper().heightForView((Session.userChace.object(forKey: Session.EMAIL) as? String)!, font: UIFont.systemFont(ofSize: 13, weight: .regular), width: self.tblMenu.frame.size.width - 112) {
+                height = Helper().heightForView((Session.userChace.object(forKey: Session.EMAIL) as? String)!, font: UIFont.systemFont(ofSize: 13, weight: .regular), width: self.tblMenu.frame.size.width - 112) + 30
+            }
+            break
+        case 2:
+            
+            break
+        case 3:
+            if height < Helper().heightForView("\(arr[0])", font: UIFont.systemFont(ofSize: 13, weight: .regular), width: self.tblMenu.frame.size.width - 112) {
+                height = Helper().heightForView("\(arr[0])", font: UIFont.systemFont(ofSize: 13, weight: .regular), width: self.tblMenu.frame.size.width - 112) + 30
+            }
+            break
+        case 4:
+            
+            break
+        default:
+            break
+        }
+        return CGFloat(height)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -122,8 +153,16 @@ extension RSlideMenu:UITableViewDelegate,UITableViewDataSource{
             cell.lblDetail.text = Session.userChace.object(forKey: Session.EMAIL) as? String
             break
         case 2:
-            cell.lblTitle.text = "Ubah Kata Sandi"
+            cell.lblTitle.text = "Ubah Sandi"
             cell.lblDetail.text = "************"
+            break
+        case 3:
+            cell.lblTitle.text = "No Lisensi"
+            cell.lblDetail.text = "\(arr[0])"
+            break
+        case 4:
+            cell.lblTitle.text = "Berlaku s/d"
+            cell.lblDetail.text = "\(arr[1])"
             break
         default:
             break

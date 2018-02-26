@@ -11,8 +11,7 @@ import Arrow
 
 class LatihanHistoryVC: UIViewController {
     @IBOutlet weak var tblLatihan: UITableView!
-    var modul:ModulLatihan!
-    var listSoal:ListQuestionLatihan!
+    var sub_module_id = 0
     var history:BaseHistoryLatihan! = BaseHistoryLatihan()
     var indexChoosed = 0
     
@@ -27,7 +26,7 @@ class LatihanHistoryVC: UIViewController {
     }
 
     func loadHistory(){
-        ApiManager().getListHistoryLatihan(self.modul.sub_module_id) { (response,failure, error) in
+        ApiManager().getListHistoryLatihan(self.sub_module_id) { (response,failure, error) in
             if error != nil{
                 print("error load List History Latihan \(String(describing: error))")
                 return
@@ -57,7 +56,7 @@ class LatihanHistoryVC: UIViewController {
         // Pass the selected object to the new view controller.
         if (segue.identifier == "reviewHistoryLatihan"){
             let vc = segue.destination as! LatihanListSoalVC
-            vc.listSoal = self.listSoal
+            vc.listSoal = LatihanAnswer.arrAnswer
             vc.isHistory = true
         }
     }
@@ -90,14 +89,15 @@ extension LatihanHistoryVC:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 53
+        return 73
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:LatihanCell = tableView.dequeueReusableCell(withIdentifier: "LatihanCellIdentifier", for: indexPath) as! LatihanCell
         cell.selectionStyle = .none
-        cell.lblTitle.text = modul.module_title
-        cell.lblDetail.text = modul.sub_module_title
+        cell.lblTitle.text = history.data.listDetailHistory[indexPath.row].module_title
+        cell.lblDetail.text = history.data.listDetailHistory[indexPath.row].sub_module_title
+        cell.lblDate.text = history.data.listDetailHistory[indexPath.row].created_at
         cell.btnStart.tag = indexPath.row
         cell.btnStart.addTarget(self, action: #selector(openInfo(sender:)), for: .touchUpInside)
         return cell

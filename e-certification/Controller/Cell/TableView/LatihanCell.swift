@@ -12,6 +12,7 @@ class LatihanCell: UITableViewCell {
     
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblDetail: UILabel!
+    @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var btnStart: UIButton!
     
     override func awakeFromNib() {

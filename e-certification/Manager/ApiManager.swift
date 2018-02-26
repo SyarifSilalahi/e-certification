@@ -252,7 +252,7 @@ class ApiManager: NSObject {
     }
     
     //user Get List History Latihan
-    func getListHistoryLatihan(_ modulId:Int,page:Int = 1, completionHandler:@escaping (JSON?,JSON?, NSError?) -> ()) {
+    func getListHistoryLatihan(_ modulId:Int,page:Int = 0, completionHandler:@escaping (JSON?,JSON?, NSError?) -> ()) {
         HUD().show()
         
         let data = JSON(Session.userChace.object(forKey: Session.KEY_AUTH) as AnyObject?)

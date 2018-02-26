@@ -14,7 +14,7 @@ class LatihanListSoalVC: UIViewController {
     @IBOutlet weak var btnSelesai: UIButton!
     @IBOutlet weak var lblCounter: UILabel!
     
-    var listSoal:ListQuestionLatihan! = ListQuestionLatihan()
+    var listSoal:[QuestionLatihan] = []
     var indexSelected = 0
     var isHistory = false
     
@@ -24,7 +24,7 @@ class LatihanListSoalVC: UIViewController {
         let app = UIApplication.shared
         app.statusBarStyle = .lightContent
         // Do any additional setup after loading the view.
-        self.lblCounter.text = "0 / \(self.listSoal.data.count)"
+        self.lblCounter.text = "0 / \(self.listSoal.count)"
         self.setMenuCollection()
 //        print(" isFinished \(LatihanAnswer.isFinished)\narrAnswer \(LatihanAnswer.arrAnswer)")
     }
@@ -36,15 +36,15 @@ class LatihanListSoalVC: UIViewController {
     
     func setLblCounter(){
         if isHistory{
-            self.lblCounter.text = "\(self.listSoal.data.count) / \(self.listSoal.data.count)"
+            self.lblCounter.text = "\(self.listSoal.count) / \(self.listSoal.count)"
         }else{
             var totalSelected = 0
-            for i in 0..<self.listSoal.data.count{
+            for i in 0..<self.listSoal.count{
                 if LatihanAnswer.arrAnswer[i].selected != ""{
                     totalSelected += 1
                 }
             }
-            self.lblCounter.text = "\(totalSelected) / \(self.listSoal.data.count)"
+            self.lblCounter.text = "\(totalSelected) / \(self.listSoal.count)"
         }
     }
     
@@ -96,7 +96,7 @@ class LatihanListSoalVC: UIViewController {
                 let historyJson = str.replacingOccurrences(of: "\n", with: "")
 //                debugPrint(historyJson)
                 
-                ApiManager().setHistoryLatihan(self.listSoal.data[0].sub_module_id, history: historyJson, completionHandler: { (response,failure, error) in
+                ApiManager().setHistoryLatihan(self.listSoal[0].sub_module_id, history: historyJson, completionHandler: { (response,failure, error) in
                     if error != nil{
                         print("error set History Latihan \(String(describing: error))")
                         return
@@ -169,7 +169,7 @@ class LatihanListSoalVC: UIViewController {
 extension LatihanListSoalVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return listSoal.data.count
+        return listSoal.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -180,7 +180,11 @@ extension LatihanListSoalVC: UICollectionViewDelegate, UICollectionViewDataSourc
             if LatihanAnswer.arrAnswer[indexPath.row].selected == LatihanAnswer.arrAnswer[indexPath.row].answer{
                 cell.setModeCorrect()
             }else {
-                cell.setModeInCorrect()
+                if LatihanAnswer.arrAnswer[indexPath.row].selected == ""{
+                    cell.setModeNormal()
+                }else{
+                    cell.setModeInCorrect()
+                }
             }
         }else{
             if LatihanAnswer.arrAnswer[indexPath.row].selected == ""{

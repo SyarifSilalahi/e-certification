@@ -230,7 +230,11 @@ extension UjianListSoalVC: UICollectionViewDelegate, UICollectionViewDataSource 
             if UjianAnswer.arrAnswer[indexPath.row]["status"] == "true"{
                 cell.setModeCorrect()
             }else {
-                cell.setModeInCorrect()
+                if UjianAnswer.arrAnswer[indexPath.row]["choosed"] == ""{
+                    cell.setModeNormal()
+                }else{
+                    cell.setModeInCorrect()
+                }
             }
         }else{
             if UjianAnswer.arrAnswer[indexPath.row]["choosed"] == ""{

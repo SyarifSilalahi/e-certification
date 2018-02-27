@@ -24,7 +24,7 @@ class LatihanHistoryVC: UIViewController {
         // Do any additional setup after loading the view.
         self.loadHistory()
     }
-
+    
     func loadHistory(){
         ApiManager().getListHistoryLatihan(self.sub_module_id) { (response,failure, error) in
             if error != nil{
@@ -97,7 +97,7 @@ extension LatihanHistoryVC:UITableViewDelegate,UITableViewDataSource{
         cell.selectionStyle = .none
         cell.lblTitle.text = history.data.listDetailHistory[indexPath.row].module_title
         cell.lblDetail.text = history.data.listDetailHistory[indexPath.row].sub_module_title
-        cell.lblDate.text = history.data.listDetailHistory[indexPath.row].created_at
+        cell.lblDate.text = history.data.listDetailHistory[indexPath.row].created_at.toNormalFormat()
         cell.btnStart.tag = indexPath.row
         cell.btnStart.addTarget(self, action: #selector(openInfo(sender:)), for: .touchUpInside)
         return cell

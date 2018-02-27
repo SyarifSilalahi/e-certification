@@ -42,7 +42,7 @@ class DetailMateriPDFVC: UIViewController {
         self.lblTitle.text = title_
         self.lblDetail.text = detail
         self.lblDescription.text = description_
-        self.lblUpdate.text = "Diperbaharui \(update)"
+        self.lblUpdate.text = "Diperbaharui \(update.toNormalFormat())"
         
         self.urlPdf = URL(fileURLWithPath: FileHelper().getFilePath(name: "\(fileName)"))
         document = PDFDocument(url: urlPdf!)!

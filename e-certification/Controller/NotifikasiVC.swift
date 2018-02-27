@@ -112,7 +112,7 @@ extension NotifikasiVC:UITableViewDelegate,UITableViewDataSource{
         }
         cell.lblTitle.text = self.arrSearchDataNotification[indexPath.row].title
         cell.lblDetail.text = self.arrSearchDataNotification[indexPath.row].description
-        cell.lblTime.text = self.arrSearchDataNotification[indexPath.row].created_at
+        cell.lblTime.text = self.arrSearchDataNotification[indexPath.row].created_at.toNormalFormat()
         
         return cell
     }

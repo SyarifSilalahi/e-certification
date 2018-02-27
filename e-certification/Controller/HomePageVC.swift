@@ -130,7 +130,7 @@ extension HomePageVC: UICollectionViewDelegate, UICollectionViewDataSource {
         let imgUrl = URL(string: "\(self.arrData[indexPath.row].host_file)\(self.arrData[indexPath.row].image)")!
         cell.imgIcoNews.af_setImage(withURL: imgUrl)
         cell.lblTitle.text = "\(self.arrData[indexPath.row].title)"
-        cell.lblDetail.text = "\(self.arrData[indexPath.row].created_at)"
+        cell.lblDetail.text = "\(self.arrData[indexPath.row].created_at.toNormalFormat())"
         return cell
     }
     

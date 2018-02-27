@@ -1094,7 +1094,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t1m-Mc-8iw">
-                                                    <rect key="frame" x="275" y="23" width="85" height="25"/>
+                                                    <rect key="frame" x="275" y="21" width="85" height="25"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -2056,8 +2056,8 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                                                     <color key="textColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="17/4/17" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="XrT-vZ-hFE">
-                                                    <rect key="frame" x="294" y="26" width="59" height="13"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="17/4/17" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="XrT-vZ-hFE">
+                                                    <rect key="frame" x="294" y="15" width="59" height="32"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <color key="textColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -3164,7 +3164,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
     <inferredMetricsTieBreakers>
         <segue reference="MQ6-0Q-dm5"/>
         <segue reference="Qf2-k3-ggD"/>
-        <segue reference="nc6-Sm-rNm"/>
+        <segue reference="RWf-x8-L4B"/>
         <segue reference="fcY-Xk-bSQ"/>
         <segue reference="Tq1-V0-yim"/>
     </inferredMetricsTieBreakers>

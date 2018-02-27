@@ -95,12 +95,6 @@ class MembershipVC: UIViewController {
         viewLisence.viewBaseLisensiData.frame.origin.y = 0
         viewLisence.viewBaseLisensiData.frame.origin.x = 0
         
-        //set session to get lisence number and expirate date to show on setting right menu
-        var arrIndexRead:[String] = []
-        arrIndexRead.append("\(data.lisence.no_license)")
-        arrIndexRead.append("\(data.lisence.expired_date)")
-        Session.userChace.set(arrIndexRead, forKey: Session.LISENCE_NO_EXP)
-        
         let imgUrl = URL(string: "\(data.lisence.host_file)\(data.lisence.image_user)")!
         self.getDataFromUrl(url: imgUrl) { data, response, error in
             guard let data = data, error == nil else { return }

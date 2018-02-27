@@ -24,7 +24,9 @@ class SignInVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
-        NotificationCenter.default.addObserver(self, selector: #selector(checkUpdates), name: NSNotification.Name(rawValue: "CHECK_UPDATE"), object: nil)
+        
+//    //sementara di hold dulu, takut nya gak sesuai dengan request
+//        NotificationCenter.default.addObserver(self, selector: #selector(notifCheckUpdates), name: NSNotification.Name(rawValue: "CHECK_UPDATE"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(exit), name: NSNotification.Name(rawValue: "LOGOUT"), object: nil)
         //statusbar
@@ -75,6 +77,33 @@ class SignInVC: UIViewController {
             
         }
     }
+    
+//    //sementara di hold dulu, takut nya gak sesuai dengan request
+//    @objc func notifCheckUpdates(){
+//        ApiManager().checkUpdate { (response,failure, error) in
+//            if error != nil{
+//                print("error CheckUpdates \(String(describing: error))")
+//                return
+//            }
+//            if failure != nil{
+//                var fail = Failure()
+//                fail.deserialize(failure!)
+//                return
+//            }
+//            //json data model
+//            var status = Status()
+//            status.deserialize(response!)
+//            print("checkUpdate \(status)")
+//            if status.data != "1"{
+//                let alert = UIAlertController(title: "Informasi.", message: Wording.FORCE_UPDATE_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
+//
+//                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+//
+//                }))
+//                self.present(alert, animated: true, completion: nil)
+//            }
+//        }
+//    }
     
     @objc func exit(){
         let viewControllers: [UIViewController] = self.navigationController!.viewControllers

@@ -472,6 +472,7 @@ extension String
         return dateFormatter.string(from: date)
     }
     
+    
     func toQuestPointHistoryDateFormat() -> String
     {
         //Create Date Formatter
@@ -522,6 +523,25 @@ extension String
         let date = dateFormatter.date(from:self)
         
         dateFormatter.dateFormat = "dd MMMM"
+        
+        let newDate = dateFormatter.string(from: date!)
+        
+        //Return Parsed Date
+        return newDate
+    }
+    
+    func toNormalFormat() -> String
+    {
+        //Create Date Formatter
+        let dateFormatter = DateFormatter()
+        
+        //Specify Format of String to Parse
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        //Parse into NSDate
+        let date = dateFormatter.date(from:self)
+        
+        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
         
         let newDate = dateFormatter.string(from: date!)
         

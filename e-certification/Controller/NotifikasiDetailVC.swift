@@ -21,7 +21,7 @@ class NotifikasiDetailVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.lblTitle.text = self.detailNotifikasi.title
-        self.lblDetail.text = self.detailNotifikasi.created_at
+        self.lblDetail.text = self.detailNotifikasi.created_at.toNormalFormat()
         
         let height:CGFloat = Helper().heightForView(self.detailNotifikasi.description, font: self.lblContent.font, width: self.lblContent.frame.size.width)
         self.viewContent.frame.size.height = height + 20

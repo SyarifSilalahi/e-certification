@@ -16,7 +16,10 @@ class RSlideMenu: UIViewController {
     @IBOutlet weak var lblName: UILabel!
     
     var dataUser = UserAuthData()
-    var arr:[String] = []
+    
+    var lisenceID = ""
+    var expDate = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //statusbar
@@ -25,16 +28,35 @@ class RSlideMenu: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
         // Do any additional setup after loading the view.
         
-        if Session.userChace.value(forKey: Session.LISENCE_NO_EXP) != nil{
-            arr = Session.userChace.value(forKey: Session.LISENCE_NO_EXP) as! [String]
-        }
-        
         let data = JSON(Session.userChace.object(forKey: Session.KEY_AUTH) as AnyObject?)
         dataUser.deserialize(data!)
         self.lblName.text = dataUser.name
         custamizeMenu()
         setTblMenu()
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        ApiManager().getLisence { (response,failure, error) in
+            if error != nil{
+                print("error load Membership \(String(describing: error))")
+                return
+            }
+            if failure != nil{
+                var fail = Failure()
+                fail.deserialize(failure!)
+                print("failure message \(fail.message)")
+                //                CustomAlert().Error(message: fail.message)
+                return
+            }
+            
+            //json data model
+            var membership:Membership = Membership()
+            membership.deserialize(response!)
+            self.lisenceID = membership.lisence.no_license
+            self.expDate = membership.lisence.expired_date
+            self.tblMenu.reloadData()
+        }
     }
     
     func setTblMenu(){
@@ -107,7 +129,7 @@ class RSlideMenu: UIViewController {
 
 extension RSlideMenu:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3 + arr.count
+        return 5
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -127,8 +149,8 @@ extension RSlideMenu:UITableViewDelegate,UITableViewDataSource{
             
             break
         case 3:
-            if height < Helper().heightForView("\(arr[0])", font: UIFont.systemFont(ofSize: 13, weight: .regular), width: self.tblMenu.frame.size.width - 112) {
-                height = Helper().heightForView("\(arr[0])", font: UIFont.systemFont(ofSize: 13, weight: .regular), width: self.tblMenu.frame.size.width - 112) + 30
+            if height < Helper().heightForView("\(lisenceID)", font: UIFont.systemFont(ofSize: 13, weight: .regular), width: self.tblMenu.frame.size.width - 112) {
+                height = Helper().heightForView("\(lisenceID)", font: UIFont.systemFont(ofSize: 13, weight: .regular), width: self.tblMenu.frame.size.width - 112) + 30
             }
             break
         case 4:
@@ -158,11 +180,11 @@ extension RSlideMenu:UITableViewDelegate,UITableViewDataSource{
             break
         case 3:
             cell.lblTitle.text = "No Lisensi"
-            cell.lblDetail.text = "\(arr[0])"
+            cell.lblDetail.text = "\(lisenceID)"
             break
         case 4:
             cell.lblTitle.text = "Berlaku s/d"
-            cell.lblDetail.text = "\(arr[1])"
+            cell.lblDetail.text = "\(expDate)"
             break
         default:
             break

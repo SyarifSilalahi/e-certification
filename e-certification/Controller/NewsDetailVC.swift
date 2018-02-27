@@ -28,6 +28,7 @@ class NewsDetailVC: UIViewController {
         
         self.lblTitle.text = self.detailNews.title
         let imgUrl = URL(string: "\(self.detailNews.host_file)\(self.detailNews.image)")!
+        self.lblDetail.text = self.detailNews.created_at.toNormalFormat()
         self.imgHeader.af_setImage(withURL: imgUrl)
         
         var contentBody = self.detailNews.description

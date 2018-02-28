@@ -32,7 +32,7 @@ class UjianDetailSoalVC: UIViewController {
         // Do any additional setup after loading the view.
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(appWillTerminate), name: Notification.Name.UIApplicationWillTerminate, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(appMovedToForeground), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
+//        notificationCenter.addObserver(self, selector: #selector(appMovedToForeground), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
         
         self.lblSoal.text = self.listSoal.data[index].question
         
@@ -73,18 +73,20 @@ class UjianDetailSoalVC: UIViewController {
         }
     }
     
-    @objc func appMovedToForeground() {
-        //submit score here
-        let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: Wording.FINISH_EXAM_EXIT_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
-        
-        let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
-            //finish exam
-            UjianAnswer.isFinished = true
-            self.navigationController?.popViewController(animated: true)
-        })
-        alert.addAction(alertOKAction)
-        self.present(alert, animated: true, completion: nil)
-    }
+//    @objc func appMovedToForeground() {
+//        //submit score here
+//        let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: Wording.FINISH_EXAM_EXIT_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
+//        
+//        let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
+//            //finish exam
+//            UjianAnswer.isFinished = true
+//            self.dismiss(animated: true, completion: {
+//                self.navigationController?.popViewController(animated: true)
+//            })
+//        })
+//        alert.addAction(alertOKAction)
+//        self.present(alert, animated: true, completion: nil)
+//    }
     
     @objc func appWillTerminate() {
         print("App WillTerminate!")

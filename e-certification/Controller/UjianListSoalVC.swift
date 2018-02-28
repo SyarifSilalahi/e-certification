@@ -161,7 +161,14 @@ class UjianListSoalVC: UIViewController {
                 let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: Wording.FINISH_EXAM_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
                 
                 let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
-                    self.navigationController?.popViewController(animated: true)
+                    //because the observer in this VC is also active in detailVC so just need to call once
+                    //but when the observer active on page detailVC, this method will call, and pop vc once (from detailvc to this vc)
+                    // so we need to pop vc to spesific vc
+//                    self.navigationController?.popViewController(animated: true)
+                    
+                    //back to directly to ujianVC
+                    let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+                    self.navigationController!.popToViewController(viewControllers[1], animated: true)
                 })
                 alert.addAction(alertOKAction)
                 self.present(alert, animated: true, completion: nil)

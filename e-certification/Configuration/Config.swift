@@ -51,6 +51,7 @@ struct Domain {
     static let URL_NOTIFICATION = "\(URL_BASE)/user/notification"
     static let URL_CHECK_UPDATE = "\(URL_BASE)/update_status"
     static let URL_CHECK_DEV = "\(URL_BASE)/development_status"
+    static let URL_CHANGE_PASSWORD = "\(URL_BASE)/user/update_password"
     
 }
 
@@ -83,6 +84,11 @@ struct Wording {
     
     static let DEACTIVATE_INSURANCE = "Maaf perusahaan asuransi anda tidak aktif. Silahkan hubungi administrator."
     static let DEACTIVATE_USER = "Maaf user anda tidak aktif. Silahkan hubungi administrator."
+    
+    //new wording
+    static let NEW_PASS_VALIDATION = "Harap konfirmasi kembali kata sandi baru anda."
+    static let OLD_PASS_VALIDATION = "Kata sandi anda sebelumnya tidak sesuai."
+    static let OLD_SUCCESS_CHANGE_PASSWORD = "Kata sandi berhasil di ubah."
     
 }
 

@@ -54,7 +54,7 @@ class SignUpVC: UIViewController {
     
     @IBAction func doSignUp(_ sender: AnyObject) {
         self.view.endEditing(true)
-        if (self.txtUsername.text?.isEmpty)! || (self.txtPassword.text?.isEmpty)! {
+        if (self.txtUsername.text?.isEmpty)! || (self.txtPassword.text?.isEmpty)! || (self.txtUsername.text?.isEmpty)! {
             CustomAlert().Error(message: Wording.EMPTY_FIELD)
         }else if !isValidEmail(testStr: self.txtEmail.text!) {
             CustomAlert().Error(message: Wording.EMAIL_VALIDATION)

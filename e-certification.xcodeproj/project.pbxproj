@@ -57,6 +57,7 @@
 		134CCB2C2018ED2900D6D4B7 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134CCB2B2018ED2900D6D4B7 /* ApiManager.swift */; };
 		134CCB332018EEEC00D6D4B7 /* Failure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134CCB322018EEEC00D6D4B7 /* Failure.swift */; };
 		134CCB352018EF0500D6D4B7 /* UserAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134CCB342018EF0500D6D4B7 /* UserAuth.swift */; };
+		134EAF57204727F3005CCC5B /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134EAF56204727F3005CCC5B /* ChangePasswordVC.swift */; };
 		1377DA76201CCFDC004A2559 /* ListModul.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1377DA75201CCFDC004A2559 /* ListModul.swift */; };
 		138528112034A9B3001F66D7 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138528102034A9B3001F66D7 /* Status.swift */; };
 		13C02A7A2033647D00C625CD /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C02A792033647D00C625CD /* SignUpVC.swift */; };
@@ -126,6 +127,7 @@
 		134CCB2B2018ED2900D6D4B7 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		134CCB322018EEEC00D6D4B7 /* Failure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Failure.swift; sourceTree = "<group>"; };
 		134CCB342018EF0500D6D4B7 /* UserAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAuth.swift; sourceTree = "<group>"; };
+		134EAF56204727F3005CCC5B /* ChangePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
 		1377DA75201CCFDC004A2559 /* ListModul.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModul.swift; sourceTree = "<group>"; };
 		138528102034A9B3001F66D7 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		13C02A792033647D00C625CD /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
@@ -394,6 +396,7 @@
 			children = (
 				1347F528200F9B590023B3B8 /* SignInVC.swift */,
 				13C02A792033647D00C625CD /* SignUpVC.swift */,
+				134EAF56204727F3005CCC5B /* ChangePasswordVC.swift */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -653,6 +656,7 @@
 				134CCB332018EEEC00D6D4B7 /* Failure.swift in Sources */,
 				13D6B78120127D8000C4637B /* NotifikasiDetailVC.swift in Sources */,
 				130099262039E6B500483B1E /* Lisence.swift in Sources */,
+				134EAF57204727F3005CCC5B /* ChangePasswordVC.swift in Sources */,
 				1347F508200F9A8E0023B3B8 /* Helper.swift in Sources */,
 				1345768F2010F03800B0E2C6 /* SideMenuManager.swift in Sources */,
 				1347F52A200F9B590023B3B8 /* NewsDetailVC.swift in Sources */,

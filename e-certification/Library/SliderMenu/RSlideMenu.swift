@@ -54,7 +54,10 @@ class RSlideMenu: UIViewController {
             var membership:Membership = Membership()
             membership.deserialize(response!)
             self.lisenceID = membership.lisence.no_license
-            self.expDate = membership.lisence.expired_date
+            if self.lisenceID != "" {
+                self.expDate = membership.lisence.expired_date
+            }
+            
             self.tblMenu.reloadData()
         }
     }
@@ -194,13 +197,14 @@ extension RSlideMenu:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 2 {
-            let alert = UIAlertController(title: "Informasi.", message: Wording.CHANGE_PASSWORD_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
-            
-            let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
-                
-            })
-            alert.addAction(alertOKAction)
-            self.present(alert, animated: true, completion: nil)
+//            let alert = UIAlertController(title: "Informasi.", message: Wording.CHANGE_PASSWORD_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
+//
+//            let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
+//
+//            })
+//            alert.addAction(alertOKAction)
+//            self.present(alert, animated: true, completion: nil)
+            self.performSegue(withIdentifier: "changePassword", sender: self)
         }
     }
 }

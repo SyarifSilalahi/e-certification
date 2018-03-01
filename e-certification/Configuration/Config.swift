@@ -78,8 +78,8 @@ struct Wording {
     static let ACCESS_DENIED = "Akses dibuka kembali pada saat anda akan perpanjang lisensi.\nTerima Kasih."
     static let NO_LISENCE = "Maaf.\nAnda belum mempunyai kartu digital."
     static let PASS_EXAM = "Anda Telah Lulus!"
-    static let FAILED_EXAM = "Anda belum lulus ujian."
-    static let CONGRATS = "Slamat!"
+    static let FAILED_EXAM = "Anda tidak lulus ujian."
+    static let CONGRATS = "Selamat!"
     static let SORRY = "Maaf!"
     
     static let DEACTIVATE_INSURANCE = "Maaf perusahaan asuransi anda tidak aktif. Silahkan hubungi administrator."
@@ -89,6 +89,7 @@ struct Wording {
     static let NEW_PASS_VALIDATION = "Harap konfirmasi kembali kata sandi baru anda."
     static let OLD_PASS_VALIDATION = "Kata sandi anda sebelumnya tidak sesuai."
     static let OLD_SUCCESS_CHANGE_PASSWORD = "Kata sandi berhasil di ubah."
+    static let ASSIGN_EXAM = "Sudah di assign"
     
 }
 
@@ -100,6 +101,7 @@ struct Session {
     static let OLD_PASS = "OLD_PASS"
     static let FORCE_EXIT_EXAM = "EXIT"
     static let ID_NOTIF_READ = "ID_NOTIF_READ"
+    static let NEED_TO_UPLOAD_FOTO = "NEED_TO_UPLOAD_FOTO"
 }
 
 struct FONT {

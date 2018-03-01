@@ -37,17 +37,22 @@ class UjianVC: UIViewController {
     var examStatus:StatusExam! = StatusExam()
     var listSoal:ListQuestionUjian! = ListQuestionUjian()
     var duration : DurationExam = DurationExam()
+    var fotoAgain = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.hideComponentFirst()
+        self.imagePicker.delegate = self
     }
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        if Session.userChace.value(forKey: Session.NEED_TO_UPLOAD_FOTO) != nil {
+            self.fotoAgain = true
+        }
+    }
     override func viewDidAppear(_ animated: Bool) {
         if Session.userChace.value(forKey: Session.FORCE_EXIT_EXAM) != nil {
             UjianAnswer.arrAnswer = Session.userChace.value(forKey: Session.FORCE_EXIT_EXAM) as! [[String:String]]
-            self.imagePicker.delegate = self
             self.submitSisaJawaban()
 
         }else{
@@ -93,6 +98,7 @@ class UjianVC: UIViewController {
                 
                 let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
                     // camera
+                    Session.userChace.set(true, forKey: Session.NEED_TO_UPLOAD_FOTO)
                     self.openCamera()
                 })
                 alert.addAction(alertOKAction)
@@ -219,7 +225,7 @@ class UjianVC: UIViewController {
             self.viewLulus.alpha = 0
             self.viewAccessDenied.alpha = 0
             self.showComponent()
-            self.lblTitle.text = status.message_exam
+            self.lblTitle.text = Wording.ASSIGN_EXAM //status.message_exam
             break
         case ExamStatus.Lulus.rawValue:
             self.viewLulus.alpha = 1
@@ -228,6 +234,18 @@ class UjianVC: UIViewController {
             self.lblTitleStatusLulus.text = "Selamat!"
             self.lblDetailStatusLulus.text = "Anda Telah Lulus."
             self.view.addSubview(self.viewLulus)
+            
+            if Session.userChace.value(forKey: Session.NEED_TO_UPLOAD_FOTO) != nil && self.fotoAgain {
+                let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: Wording.FINISH_EXAM_SUCCESS_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
+                
+                let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
+                    // camera
+                    self.openCamera()
+                })
+                alert.addAction(alertOKAction)
+                self.present(alert, animated: true, completion: nil)
+            }
+            
             break
         case ExamStatus.Gagal.rawValue:
             self.viewLulus.alpha = 1
@@ -380,7 +398,7 @@ extension UjianVC: UIImagePickerControllerDelegate,UINavigationControllerDelegat
                         //do action failure here
                         return
                     }
-                    
+                    Session.userChace.removeObject(forKey: Session.NEED_TO_UPLOAD_FOTO)
                     self.successUploadSelfie = true
                     var userSelfie:UserSelfie = UserSelfie()
                     userSelfie.deserialize(response!)
@@ -394,7 +412,7 @@ extension UjianVC: UIImagePickerControllerDelegate,UINavigationControllerDelegat
             self.dismiss(animated: true, completion: {
                 if !self.successUploadSelfie{
                     let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: Wording.FINISH_EXAM_SUCCESS_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
-                    
+
                     let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
                         // camera
                         self.openCamera()
@@ -408,6 +426,9 @@ extension UjianVC: UIImagePickerControllerDelegate,UINavigationControllerDelegat
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.dismiss(animated: true) {
+            //set cancel open camera forever
+            self.fotoAgain = false
+            
 //            let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: Wording.FINISH_EXAM_SUCCESS_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
 //
 //            let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in

@@ -36,29 +36,49 @@ class RSlideMenu: UIViewController {
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        ApiManager().getLisence { (response,failure, error) in
+    override func viewWillAppear(_ animated: Bool) {
+        ApiManager().getExamStatus(isHUD: false) { (response,failure, error) in
             if error != nil{
-                print("error load Membership \(String(describing: error))")
+                print("error getExamStatus \(String(describing: error))")
                 return
             }
             if failure != nil{
                 var fail = Failure()
                 fail.deserialize(failure!)
-                print("failure message \(fail.message)")
-                //                CustomAlert().Error(message: fail.message)
+                print("failure getExamStatus message \(fail.message)")
+                CustomAlert().Error(message: fail.message)
+                //do action failure here
                 return
             }
             
             //json data model
-            var membership:Membership = Membership()
-            membership.deserialize(response!)
-            self.lisenceID = membership.lisence.no_license
-            if self.lisenceID != "" {
-                self.expDate = membership.lisence.expired_date
+            var examStatus:StatusExam! = StatusExam()
+            examStatus.deserialize(response!)
+            if examStatus.status_exam == ExamStatus.Lulus.rawValue {
+                ApiManager().getLisence { (response,failure, error) in
+                    if error != nil{
+                        print("error load Membership \(String(describing: error))")
+                        return
+                    }
+                    if failure != nil{
+                        var fail = Failure()
+                        fail.deserialize(failure!)
+                        print("failure message \(fail.message)")
+                        //                CustomAlert().Error(message: fail.message)
+                        return
+                    }
+                    
+                    //json data model
+                    var membership:Membership = Membership()
+                    membership.deserialize(response!)
+                    self.lisenceID = membership.lisence.no_license
+                    if self.lisenceID != "" {
+                        self.expDate = membership.lisence.expired_date
+                    }
+                    
+                    self.tblMenu.reloadData()
+                }
             }
-            
-            self.tblMenu.reloadData()
         }
     }
     

@@ -128,7 +128,7 @@ class UjianListSoalVC: UIViewController {
         }
         
         //buat testing lulus
-//        nilai = 80
+        nilai = 80
         
         print("nilai \(nilai)")
         ApiManager().setScoreUjian(nilai: "\(nilai)") { (response,failure, error) in
@@ -153,6 +153,7 @@ class UjianListSoalVC: UIViewController {
                 
                 let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
                     // camera
+                    Session.userChace.set(true, forKey: Session.NEED_TO_UPLOAD_FOTO)
                     self.openCamera()
                 })
                 alert.addAction(alertOKAction)
@@ -233,23 +234,29 @@ extension UjianListSoalVC: UICollectionViewDelegate, UICollectionViewDataSource 
         let cell: MenuCVCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MenuCVCellIdentifier", for: indexPath) as! MenuCVCell
         cell.lblTitle.text = "\(indexPath.row + 1)"
         
-        if UjianAnswer.isFinished{
-            if UjianAnswer.arrAnswer[indexPath.row]["status"] == "true"{
-                cell.setModeCorrect()
-            }else {
-                if UjianAnswer.arrAnswer[indexPath.row]["choosed"] == ""{
-                    cell.setModeNormal()
-                }else{
-                    cell.setModeInCorrect()
-                }
-            }
+        if UjianAnswer.arrAnswer[indexPath.row]["choosed"] == ""{
+            cell.setModeNormal()
         }else{
-            if UjianAnswer.arrAnswer[indexPath.row]["choosed"] == ""{
-                cell.setModeNormal()
-            }else{
-                cell.setModeSelected()
-            }
+            cell.setModeCorrect()
         }
+        
+//        if UjianAnswer.isFinished{
+//            if UjianAnswer.arrAnswer[indexPath.row]["status"] == "true"{
+//                cell.setModeCorrect()
+//            }else {
+//                if UjianAnswer.arrAnswer[indexPath.row]["choosed"] == ""{
+//                    cell.setModeNormal()
+//                }else{
+//                    cell.setModeInCorrect()
+//                }
+//            }
+//        }else{
+//            if UjianAnswer.arrAnswer[indexPath.row]["choosed"] == ""{
+//                cell.setModeNormal()
+//            }else{
+//                cell.setModeSelected()
+//            }
+//        }
         
         return cell
     }
@@ -344,6 +351,7 @@ extension UjianListSoalVC: UIImagePickerControllerDelegate,UINavigationControlle
                         return
                     }
                     
+                    Session.userChace.removeObject(forKey: Session.NEED_TO_UPLOAD_FOTO)
                     self.successUploadSelfie = true
                     var userSelfie:UserSelfie = UserSelfie()
                     userSelfie.deserialize(response!)
@@ -363,6 +371,7 @@ extension UjianListSoalVC: UIImagePickerControllerDelegate,UINavigationControlle
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true) {
+            self.navigationController?.popViewController(animated: true)
 //            UjianAnswer.isFinished = false
         }
     }

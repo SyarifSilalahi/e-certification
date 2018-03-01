@@ -341,8 +341,10 @@ class ApiManager: NSObject {
     }
     
     //user Get Status Ujian
-    func getExamStatus(completionHandler:@escaping (JSON?,JSON?, NSError?) -> ()) {
-        HUD().show()
+    func getExamStatus(isHUD:Bool = true ,completionHandler:@escaping (JSON?,JSON?, NSError?) -> ()) {
+        if isHUD{
+            HUD().show()
+        }
         
         let data = JSON(Session.userChace.object(forKey: Session.KEY_AUTH) as AnyObject?)
         var dataUser = UserAuthData()

@@ -240,7 +240,8 @@ extension UjianDetailSoalVC:UITableViewDelegate,UITableViewDataSource{
             }
         }else{
             if UjianAnswer.arrAnswer[self.index]["choosed"] == cell.lblDetail.text{
-                cell.modeSelect()
+//                cell.modeSelect()
+                cell.modeTrue()
             }else{
                 cell.modeNormal()
             }

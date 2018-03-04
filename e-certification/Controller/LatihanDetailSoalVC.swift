@@ -48,7 +48,7 @@ class LatihanDetailSoalVC: UIViewController {
     }
     
     func resetHeaderSize(){
-        let contentHeight = Helper().heightForView(self.listSoal[index].question, font: UIFont.systemFont(ofSize: 15, weight: .bold), width: self.lblSoal.frame.size.width) + 50
+        let contentHeight = Helper().heightForView(self.listSoal[index].question, font: FONT().setFontM_ROMAN(15), width: self.lblSoal.frame.size.width) + 50
         self.viewHeader.frame.size.height = contentHeight
         self.tblSoal.tableHeaderView = self.viewHeader
     }
@@ -141,8 +141,8 @@ extension LatihanDetailSoalVC:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var height:CGFloat = 66
-        if height < Helper().heightForView(self.arrOption[indexPath.row], font: UIFont.systemFont(ofSize: 15, weight: .bold), width: 192) {
-            height = Helper().heightForView(self.arrOption[indexPath.row], font: UIFont.systemFont(ofSize: 15, weight: .bold), width: 192)
+        if height < Helper().heightForView(self.arrOption[indexPath.row], font: FONT().setFontM_ROMAN(15), width: 192) {
+            height = Helper().heightForView(self.arrOption[indexPath.row], font: FONT().setFontM_ROMAN(15), width: 192)
         }
         return CGFloat(height)
     }

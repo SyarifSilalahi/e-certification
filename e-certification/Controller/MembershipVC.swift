@@ -13,6 +13,7 @@ class MembershipVC: UIViewController {
     @IBOutlet weak var imgLisence: UIImageView!
     @IBOutlet weak var viewAccessDenied: UIView!
     @IBOutlet weak var imgBg: UIImageView!
+    @IBOutlet weak var btnNotification: UIButton!
     var membership:Membership = Membership()
     var examStatus:StatusExam! = StatusExam()
     
@@ -21,6 +22,11 @@ class MembershipVC: UIViewController {
         // Do any additional setup after loading the view.
     }
     override func viewDidAppear(_ animated: Bool) {
+        if Notif.isNew{
+            self.btnNotification.setImage(#imageLiteral(resourceName: "ico-notif-active"), for: .normal)
+        }else{
+            self.btnNotification.setImage(#imageLiteral(resourceName: "ico-notif"), for: .normal)
+        }
         self.getStatus()
     }
     func getStatus(){

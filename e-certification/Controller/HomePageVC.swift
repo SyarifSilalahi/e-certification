@@ -12,6 +12,7 @@ import HTPullToRefresh
 class HomePageVC: UIViewController {
     
     @IBOutlet weak var collectionNews: UICollectionView!
+    @IBOutlet weak var btnNotification: UIButton!
     
     var listNews = ListNews()
     var arrData:[ListDetailNews] = []
@@ -24,6 +25,45 @@ class HomePageVC: UIViewController {
         app.statusBarStyle = .lightContent
         
         self.getNews()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        getNotification()
+    }
+    
+    func getNotification(){
+        ApiManager().getNotification(isHUD: false) { (response,failure, error) in
+            if error != nil{
+                print("error load Notification \(String(describing: error))")
+                return
+            }
+            if failure != nil{
+                var fail = Failure()
+                fail.deserialize(failure!)
+                print("failure message \(fail.message)")
+                //CustomAlert().Error(message: fail.message)
+                //do action failure here
+                return
+            }
+            
+            //json data model
+            var listNotif:ListNotification = ListNotification()
+            listNotif.deserialize(response!)
+            if Session.userChace.value(forKey: Session.ID_NOTIF_READ) == nil{
+                self.btnNotification.setImage(#imageLiteral(resourceName: "ico-notif-active"), for: .normal)
+                Notif.isNew = true
+            }else{
+                let arrIndexRead:[Int] = Session.userChace.value(forKey: Session.ID_NOTIF_READ) as! [Int]
+                if listNotif.data.count == arrIndexRead.count{
+                    self.btnNotification.setImage(#imageLiteral(resourceName: "ico-notif"), for: .normal)
+                    Notif.isNew = false
+                }else{
+                    self.btnNotification.setImage(#imageLiteral(resourceName: "ico-notif-active"), for: .normal)
+                    Notif.isNew = true
+                }
+            }
+            
+        }
     }
     
     func getNews(){

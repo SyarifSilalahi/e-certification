@@ -25,6 +25,7 @@ class UjianVC: UIViewController {
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var lblInfo: UILabel!
     @IBOutlet weak var btnMulai: UIButton!
+    @IBOutlet weak var btnNotification: UIButton!
     let imagePicker = UIImagePickerController()
     
     //view status lulus
@@ -51,6 +52,13 @@ class UjianVC: UIViewController {
         }
     }
     override func viewDidAppear(_ animated: Bool) {
+        
+        if Notif.isNew{
+            self.btnNotification.setImage(#imageLiteral(resourceName: "ico-notif-active"), for: .normal)
+        }else{
+            self.btnNotification.setImage(#imageLiteral(resourceName: "ico-notif"), for: .normal)
+        }
+        
         if Session.userChace.value(forKey: Session.FORCE_EXIT_EXAM) != nil {
             UjianAnswer.arrAnswer = Session.userChace.value(forKey: Session.FORCE_EXIT_EXAM) as! [[String:String]]
             self.submitSisaJawaban()

@@ -12,6 +12,7 @@ import Arrow
 class LatihanVC: UIViewController {
 
     @IBOutlet weak var tblLatihan: UITableView!
+    @IBOutlet weak var btnNotification: UIButton!
     var dataModulLatihan = ListModulLatihan()
     var indexChoosed = 0
     var listSoal:ListQuestionLatihan! = ListQuestionLatihan()
@@ -24,6 +25,14 @@ class LatihanVC: UIViewController {
         // Do any additional setup after loading the view.
         self.loadSubModul()
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if Notif.isNew{
+            self.btnNotification.setImage(#imageLiteral(resourceName: "ico-notif-active"), for: .normal)
+        }else{
+            self.btnNotification.setImage(#imageLiteral(resourceName: "ico-notif"), for: .normal)
+        }
     }
     
     func loadSubModul(){

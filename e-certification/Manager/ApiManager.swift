@@ -561,8 +561,10 @@ class ApiManager: NSObject {
     }
     
     //user Get Notification
-    func getNotification(completionHandler:@escaping (JSON?,JSON?, NSError?) -> ()) {
-        HUD().show()
+    func getNotification(isHUD:Bool = true,completionHandler:@escaping (JSON?,JSON?, NSError?) -> ()) {
+        if isHUD{
+            HUD().show()
+        }
         
         let data = JSON(Session.userChace.object(forKey: Session.KEY_AUTH) as AnyObject?)
         var dataUser = UserAuthData()

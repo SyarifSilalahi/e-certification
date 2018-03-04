@@ -35,7 +35,7 @@ class NewsDetailVC: UIViewController {
         contentBody = (contentBody as NSString).replacingOccurrences(of: "img style", with: "img _")
         let iFrameWidth = self.webContent.frame.size.width - 5
         let iFrameHeight = iFrameWidth / 1.5
-        let htmlString = "<html><head><style>img{max-width:100% ;height:auto !important;width:auto !important;} iframe{ width: \(iFrameWidth)px; height: \(iFrameHeight)px; resize: both; overflow: auto;} </style></head><bodystyle=\"background-color: transparent;\"><font face=\"Avenir-Roman\" color=\"#536066\"> \(contentBody) </font></body></html>"
+        let htmlString = "<html><head><style>img{max-width:100% ;height:auto !important;width:auto !important;} iframe{ width: \(iFrameWidth)px; height: \(iFrameHeight)px; resize: both; overflow: auto;} </style></head><bodystyle=\"background-color: transparent;\"><font face=\"MyriadPro-Regular\" color=\"#536066\"> \(contentBody) </font></body></html>"
         self.webContent.delegate = self
         webContent.isOpaque = false
         webContent.backgroundColor = UIColor.clear

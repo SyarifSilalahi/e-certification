@@ -58,6 +58,10 @@
 		134CCB332018EEEC00D6D4B7 /* Failure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134CCB322018EEEC00D6D4B7 /* Failure.swift */; };
 		134CCB352018EF0500D6D4B7 /* UserAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134CCB342018EF0500D6D4B7 /* UserAuth.swift */; };
 		134EAF57204727F3005CCC5B /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134EAF56204727F3005CCC5B /* ChangePasswordVC.swift */; };
+		1369F916204C56A500E041F4 /* MyriadPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1369F912204C568C00E041F4 /* MyriadPro-Regular.otf */; };
+		1369F917204C56A500E041F4 /* MyriadPro-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1369F913204C569400E041F4 /* MyriadPro-Semibold.otf */; };
+		1369F918204C56A500E041F4 /* MyriadWebPro-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1369F914204C569A00E041F4 /* MyriadWebPro-Italic.ttf */; };
+		1369F919204C56A500E041F4 /* MyriadPro-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1369F915204C569F00E041F4 /* MyriadPro-Bold.otf */; };
 		1377DA76201CCFDC004A2559 /* ListModul.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1377DA75201CCFDC004A2559 /* ListModul.swift */; };
 		138528112034A9B3001F66D7 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138528102034A9B3001F66D7 /* Status.swift */; };
 		13C02A7A2033647D00C625CD /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C02A792033647D00C625CD /* SignUpVC.swift */; };
@@ -128,6 +132,10 @@
 		134CCB322018EEEC00D6D4B7 /* Failure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Failure.swift; sourceTree = "<group>"; };
 		134CCB342018EF0500D6D4B7 /* UserAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAuth.swift; sourceTree = "<group>"; };
 		134EAF56204727F3005CCC5B /* ChangePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
+		1369F912204C568C00E041F4 /* MyriadPro-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MyriadPro-Regular.otf"; sourceTree = "<group>"; };
+		1369F913204C569400E041F4 /* MyriadPro-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MyriadPro-Semibold.otf"; sourceTree = "<group>"; };
+		1369F914204C569A00E041F4 /* MyriadWebPro-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MyriadWebPro-Italic.ttf"; sourceTree = "<group>"; };
+		1369F915204C569F00E041F4 /* MyriadPro-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MyriadPro-Bold.otf"; sourceTree = "<group>"; };
 		1377DA75201CCFDC004A2559 /* ListModul.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModul.swift; sourceTree = "<group>"; };
 		138528102034A9B3001F66D7 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		13C02A792033647D00C625CD /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
@@ -258,6 +266,7 @@
 		1347F4F5200F9A8E0023B3B8 /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				1369F911204C55D700E041F4 /* Myriad */,
 				1347F4F6200F9A8E0023B3B8 /* raleway */,
 			);
 			path = Font;
@@ -372,6 +381,17 @@
 				134CCB322018EEEC00D6D4B7 /* Failure.swift */,
 			);
 			path = Failure;
+			sourceTree = "<group>";
+		};
+		1369F911204C55D700E041F4 /* Myriad */ = {
+			isa = PBXGroup;
+			children = (
+				1369F915204C569F00E041F4 /* MyriadPro-Bold.otf */,
+				1369F912204C568C00E041F4 /* MyriadPro-Regular.otf */,
+				1369F913204C569400E041F4 /* MyriadPro-Semibold.otf */,
+				1369F914204C569A00E041F4 /* MyriadWebPro-Italic.ttf */,
+			);
+			path = Myriad;
 			sourceTree = "<group>";
 		};
 		33D21C19AEA3C65260CAAB03 /* Frameworks */ = {
@@ -518,9 +538,11 @@
 			files = (
 				1347F50D200F9A8E0023B3B8 /* Raleway-ExtraBold.ttf in Resources */,
 				1347F512200F9A8E0023B3B8 /* Raleway-Bold.ttf in Resources */,
+				1369F916204C56A500E041F4 /* MyriadPro-Regular.otf in Resources */,
 				1347F510200F9A8E0023B3B8 /* OFL.txt in Resources */,
 				1347F50F200F9A8E0023B3B8 /* Raleway-Light.ttf in Resources */,
 				1347F509200F9A8E0023B3B8 /* Raleway-Heavy.ttf in Resources */,
+				1369F917204C56A500E041F4 /* MyriadPro-Semibold.otf in Resources */,
 				1347F50B200F9A8E0023B3B8 /* Raleway-Medium.ttf in Resources */,
 				1347F4E7200F99D20023B3B8 /* LaunchScreen.storyboard in Resources */,
 				130099272039E6B500483B1E /* Lisence.xib in Resources */,
@@ -530,7 +552,9 @@
 				1347F4E4200F99D20023B3B8 /* Assets.xcassets in Resources */,
 				1347F511200F9A8E0023B3B8 /* Raleway-Thin.ttf in Resources */,
 				1347F4E2200F99D20023B3B8 /* Main.storyboard in Resources */,
+				1369F919204C56A500E041F4 /* MyriadPro-Bold.otf in Resources */,
 				1347F50C200F9A8E0023B3B8 /* Raleway-SemiBold.ttf in Resources */,
+				1369F918204C56A500E041F4 /* MyriadWebPro-Italic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

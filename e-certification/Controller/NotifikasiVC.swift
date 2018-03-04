@@ -44,6 +44,18 @@ class NotifikasiVC: UIViewController {
             //json data model
             self.listNotif.deserialize(response!)
             self.arrSearchDataNotification = self.listNotif.data
+            
+            if Session.userChace.value(forKey: Session.ID_NOTIF_READ) == nil{
+                Notif.isNew = true
+            }else{
+                let arrIndexRead:[Int] = Session.userChace.value(forKey: Session.ID_NOTIF_READ) as! [Int]
+                if self.listNotif.data.count == arrIndexRead.count{
+                    Notif.isNew = false
+                }else{
+                    Notif.isNew = true
+                }
+            }
+            
             self.setTblNotif()
         }
     }

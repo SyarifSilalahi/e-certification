@@ -13,6 +13,7 @@ import Digger
 class MateriPageVC: UIViewController {
     
     @IBOutlet weak var tblMateri: UITableView!
+    @IBOutlet weak var btnNotification: UIButton!
     var dataMateri = ListMateri()
     
     override func viewDidLoad() {
@@ -53,6 +54,11 @@ class MateriPageVC: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        if Notif.isNew{
+            self.btnNotification.setImage(#imageLiteral(resourceName: "ico-notif-active"), for: .normal)
+        }else{
+            self.btnNotification.setImage(#imageLiteral(resourceName: "ico-notif"), for: .normal)
+        }
         self.loadMateri()
     }
     

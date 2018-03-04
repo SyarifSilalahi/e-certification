@@ -105,10 +105,10 @@ struct Session {
 }
 
 struct FONT {
-    static let A_BOOK = "Avenir-Book"
-    static let A_HEAVY = "Avenir-Heavy"
-    static let A_MEDIUM = "Avenir-Medium"
-    static let A_ROMAN = "Avenir-Roman"
+    static let M_BOLD = "MyriadPro-Bold"
+    static let M_ROMAN = "MyriadPro-Regular"
+    static let M_SEMIBOLD = "MyriadPro-Semibold"
+    static let M_ITALIC = "MyriadWebPro-Italic"
     static let G_BOOK = "GothamBook"
     static let G_MEDIUM = "GothamMedium"
     
@@ -116,20 +116,20 @@ struct FONT {
         return UIFont(name: fontType, size: fontSize)!
     }
     
-    func setFontAbook(_ fontSize:CGFloat) -> UIFont{
-        return UIFont(name: FONT.A_BOOK, size: fontSize)!
+    func setFontM_BOLD(_ fontSize:CGFloat) -> UIFont{
+        return UIFont(name: FONT.M_BOLD, size: fontSize)!
     }
     
-    func setFontAheavy(_ fontSize:CGFloat) -> UIFont{
-        return UIFont(name: FONT.A_HEAVY, size: fontSize)!
+    func setFontM_ROMAN(_ fontSize:CGFloat) -> UIFont{
+        return UIFont(name: FONT.M_ROMAN, size: fontSize)!
     }
     
-    func setFontAmedium(_ fontSize:CGFloat) -> UIFont{
-        return UIFont(name: FONT.A_MEDIUM, size: fontSize)!
+    func setFontM_SEMIBOLD(_ fontSize:CGFloat) -> UIFont{
+        return UIFont(name: FONT.M_SEMIBOLD, size: fontSize)!
     }
     
-    func setFontAroman(_ fontSize:CGFloat) -> UIFont{
-        return UIFont(name: FONT.A_ROMAN, size: fontSize)!
+    func setFontM_ITALIC(_ fontSize:CGFloat) -> UIFont{
+        return UIFont(name: FONT.M_ITALIC, size: fontSize)!
     }
     
     func setFontGbook(_ fontSize:CGFloat) -> UIFont{
@@ -156,6 +156,10 @@ struct Theme {
     static let errorColor = UIColor.init(hex: "#d31f26")
     static let successColor = UIColor.init(hex: "#8bc74a")
     
+}
+
+struct Notif {
+    static var isNew:Bool = true
 }
 
 struct LatihanAnswer {

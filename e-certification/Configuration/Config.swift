@@ -90,6 +90,7 @@ struct Wording {
     static let OLD_PASS_VALIDATION = "Kata sandi anda sebelumnya tidak sesuai."
     static let OLD_SUCCESS_CHANGE_PASSWORD = "Kata sandi berhasil di ubah."
     static let ASSIGN_EXAM = "Sudah di assign"
+    static let FINISH_EXAM_CONFIRMATION = "Apakah anda yakin sudah menyelesaikan ujian dan ingin keluar?"
     
 }
 

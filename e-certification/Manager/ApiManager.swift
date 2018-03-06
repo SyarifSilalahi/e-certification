@@ -26,7 +26,7 @@ class ApiManager: NSObject {
         //clear session
         Session.userChace.removeObject(forKey: Session.EMAIL)
         Session.userChace.removeObject(forKey: Session.KEY_AUTH)
-        Session.userChace.removeObject(forKey: Session.ID_NOTIF_READ)
+//        Session.userChace.removeObject(forKey: Session.ID_NOTIF_READ)
         
 //        UIApplication.topViewController()?.navigationController?.popToRootViewController(animated: true)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LOGOUT"), object: nil)

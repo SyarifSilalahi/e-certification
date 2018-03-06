@@ -33,7 +33,8 @@ class UjianListSoalVC: UIViewController {
         
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(appWillTerminate), name: Notification.Name.UIApplicationWillTerminate, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(appMovedToForeground), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
+        //karena minta di takeout
+//        notificationCenter.addObserver(self, selector: #selector(appMovedToForeground), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -55,18 +56,19 @@ class UjianListSoalVC: UIViewController {
         self.lblCounter.text = "\(totalSelected) / \(self.listSoal.data.count)"
     }
     
-    @objc func appMovedToForeground() {
-        print("App moved to background!")
-        //submit score here
-        let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: Wording.FINISH_EXAM_EXIT_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
-        
-        let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
-            //finish exam
-            self.finishExam()
-        })
-        alert.addAction(alertOKAction)
-        self.present(alert, animated: true, completion: nil)
-    }
+    //karena minta di takeout
+//    @objc func appMovedToForeground() {
+//        print("App moved to background!")
+//        //submit score here
+//        let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: Wording.FINISH_EXAM_EXIT_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
+//
+//        let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
+//            //finish exam
+//            self.finishExam()
+//        })
+//        alert.addAction(alertOKAction)
+//        self.present(alert, animated: true, completion: nil)
+//    }
     
     @objc func appWillTerminate() {
         print("App WillTerminate!")
@@ -127,8 +129,8 @@ class UjianListSoalVC: UIViewController {
             }
         }
         
-        //buat testing lulus
-        nilai = 80
+//        //buat testing lulus
+//        nilai = 80
         
         print("nilai \(nilai)")
         ApiManager().setScoreUjian(nilai: "\(nilai)") { (response,failure, error) in
@@ -187,8 +189,22 @@ class UjianListSoalVC: UIViewController {
     
     @IBAction func selesai(_ sender: AnyObject) {
         if UjianAnswer.isFinished == false{
-            UjianAnswer.isFinished = true
-            self.finishExam()
+            let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: Wording.FINISH_EXAM_CONFIRMATION, preferredStyle: UIAlertControllerStyle.alert)
+            
+            let alertOKAction=UIAlertAction(title:"Ya", style: UIAlertActionStyle.default,handler: { action in
+                //finish exam
+                UjianAnswer.isFinished = true
+                self.finishExam()
+            })
+            
+            let alertCancel=UIAlertAction(title:"Tidak", style: UIAlertActionStyle.cancel,handler: { action in
+                
+            })
+            
+            alert.addAction(alertOKAction)
+            alert.addAction(alertCancel)
+            self.present(alert, animated: true, completion: nil)
+            
         }else{
             if !self.successUploadSelfie{
                 self.openCamera()

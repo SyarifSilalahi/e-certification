@@ -45,6 +45,7 @@ class UjianVC: UIViewController {
         // Do any additional setup after loading the view.
         self.hideComponentFirst()
         self.imagePicker.delegate = self
+        
     }
     override func viewWillDisappear(_ animated: Bool) {
         if Session.userChace.value(forKey: Session.NEED_TO_UPLOAD_FOTO) != nil {
@@ -59,13 +60,7 @@ class UjianVC: UIViewController {
             self.btnNotification.setImage(#imageLiteral(resourceName: "ico-notif"), for: .normal)
         }
         
-        if Session.userChace.value(forKey: Session.FORCE_EXIT_EXAM) != nil {
-            UjianAnswer.arrAnswer = Session.userChace.value(forKey: Session.FORCE_EXIT_EXAM) as! [[String:String]]
-            self.submitSisaJawaban()
-
-        }else{
-            self.getStatus()
-        }
+        self.getStatus()
     }
     
     func submitSisaJawaban(){
@@ -191,7 +186,6 @@ class UjianVC: UIViewController {
     
     func setViewStatusExam(status:Int){
         print("status \(status)")
-        print("ExamStatus.SudahDiAssign.rawValue \(ExamStatus.SudahDiAssign.rawValue)")
         switch status {
         case ExamStatus.Lulus.rawValue:
             self.viewLulus.alpha = 1
@@ -206,8 +200,8 @@ class UjianVC: UIViewController {
             self.imgStatusLulus.image = #imageLiteral(resourceName: "ico-access-denied")
             self.lblTitleStatusLulus.text = Wording.SORRY
             self.lblDetailStatusLulus.text = Wording.FAILED_EXAM
-            self.viewAccessDenied.frame = self.imgBg.frame
-            self.view.addSubview(self.viewAccessDenied)
+            self.viewLulus.frame = self.imgBg.frame
+            self.view.addSubview(self.viewLulus)
             break
         case ExamStatus.BelumDiAssign.rawValue:
             self.viewAccessDenied.alpha = 1
@@ -269,13 +263,19 @@ class UjianVC: UIViewController {
             self.view.addSubview(self.viewAccessDenied)
             break
         case ExamStatus.OnProgress.rawValue:
-            self.viewAccessDenied.alpha = 1
-            self.viewAccessDenied.frame = self.imgBg.frame
-            self.view.addSubview(self.viewAccessDenied)
-            
             if Session.userChace.value(forKey: Session.FORCE_EXIT_EXAM) != nil {
-                UjianAnswer.arrAnswer = Session.userChace.value(forKey: Session.FORCE_EXIT_EXAM) as! [[String:String]]
-                self.submitSisaJawaban()
+                let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: Wording.FINISH_EXAM_EXIT_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
+                
+                let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
+                    UjianAnswer.arrAnswer = Session.userChace.value(forKey: Session.FORCE_EXIT_EXAM) as! [[String:String]]
+                    self.submitSisaJawaban()
+                })
+                alert.addAction(alertOKAction)
+                self.present(alert, animated: true, completion: nil)
+            }else{
+                self.viewAccessDenied.alpha = 1
+                self.viewAccessDenied.frame = self.imgBg.frame
+                self.view.addSubview(self.viewAccessDenied)
             }
             
             break

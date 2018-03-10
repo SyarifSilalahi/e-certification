@@ -14,6 +14,7 @@ class RSlideMenu: UIViewController {
     @IBOutlet weak var tblMenu: UITableView!
     @IBOutlet weak var imgAvatar: UIImageView!
     @IBOutlet weak var lblName: UILabel!
+    @IBOutlet weak var btnLogout: UIButton!
     
     var dataUser = UserAuthData()
     
@@ -37,6 +38,7 @@ class RSlideMenu: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.btnLogout.isUserInteractionEnabled = false
         ApiManager().getExamStatus(isHUD: false) { (response,failure, error) in
             if error != nil{
                 print("error getExamStatus \(String(describing: error))")
@@ -77,6 +79,7 @@ class RSlideMenu: UIViewController {
                     }
                     
                     self.tblMenu.reloadData()
+                    self.btnLogout.isUserInteractionEnabled = true
                 }
             }
         }

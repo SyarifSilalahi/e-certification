@@ -129,8 +129,8 @@ class UjianListSoalVC: UIViewController {
             }
         }
         
-//        //buat testing lulus
-//        nilai = 80
+        //buat testing lulus
+        nilai = 80
         
         print("nilai \(nilai)")
         ApiManager().setScoreUjian(nilai: "\(nilai)") { (response,failure, error) in
@@ -155,7 +155,6 @@ class UjianListSoalVC: UIViewController {
                 
                 let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
                     // camera
-                    Session.userChace.set(true, forKey: Session.NEED_TO_UPLOAD_FOTO)
                     self.openCamera()
                 })
                 alert.addAction(alertOKAction)
@@ -366,22 +365,16 @@ extension UjianListSoalVC: UIImagePickerControllerDelegate,UINavigationControlle
                         //do action failure here
                         return
                     }
-                    
-                    Session.userChace.removeObject(forKey: Session.NEED_TO_UPLOAD_FOTO)
                     self.successUploadSelfie = true
                     var userSelfie:UserSelfie = UserSelfie()
                     userSelfie.deserialize(response!)
                     CustomAlert().Success(message: Wording.FINISH_EXAM_MESSAGE)
-                    
+                    self.dismiss(animated: true, completion: {
+                        self.navigationController?.popViewController(animated: true)
+                    })
                 })
             }
             
-            //upload foto then go to hasil ujian
-            //            self.performSegue(withIdentifier: "hasilUjian", sender: self)
-            
-            self.dismiss(animated: true, completion: {
-                self.navigationController?.popViewController(animated: true)
-            })
         }
     }
     

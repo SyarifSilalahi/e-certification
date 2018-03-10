@@ -27,11 +27,64 @@ class LatihanVC: UIViewController {
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        if Notif.isNew{
-            self.btnNotification.setImage(#imageLiteral(resourceName: "ico-notif-active"), for: .normal)
-        }else{
-            self.btnNotification.setImage(#imageLiteral(resourceName: "ico-notif"), for: .normal)
+    override func viewWillAppear(_ animated: Bool) {
+        self.getNotification()
+    }
+    
+    func getNotification(){
+        self.btnNotification.isUserInteractionEnabled = false
+        ApiManager().getNotification(isHUD: false) { (response,failure, error) in
+            if error != nil{
+                print("error load Notification \(String(describing: error))")
+                return
+            }
+            if failure != nil{
+                var fail = Failure()
+                fail.deserialize(failure!)
+                print("failure message \(fail.message)")
+                //CustomAlert().Error(message: fail.message)
+                //do action failure here
+                return
+            }
+            
+            //json data model
+            var listNotif:ListNotification = ListNotification()
+            listNotif.deserialize(response!)
+            if listNotif.data.count == 0 {
+                self.btnNotification.setImage(#imageLiteral(resourceName: "ico-notif"), for: .normal)
+            }else{
+                if Session.userChace.value(forKey: Session.CHECK_NEW_NOTIF) == nil {
+                    self.btnNotification.setImage(#imageLiteral(resourceName: "ico-notif-active"), for: .normal)
+                    let dicInfoNotif = [
+                        "user" : "\(Session.userChace.value(forKey: Session.EMAIL) as! String)",
+                        "total_notif" : "\(listNotif.data.count)"
+                    ]
+                    var arrInfoNotif:[[String:String]] = []
+                    arrInfoNotif.append(dicInfoNotif)
+                    Session.userChace.set(arrInfoNotif, forKey: Session.CHECK_NEW_NOTIF)
+                }else{
+                    var arrInfoNotif:[[String:String]] = []
+                    arrInfoNotif = Session.userChace.value(forKey: Session.CHECK_NEW_NOTIF) as! [[String : String]]
+                    var index = 0
+                    for dicInfoNotif in arrInfoNotif{
+                        if dicInfoNotif["user"] == Session.userChace.value(forKey: Session.EMAIL) as? String {
+                            index += 1
+                        }
+                    }
+                    
+                    if index == 0{ //user not found
+                        self.btnNotification.setImage(#imageLiteral(resourceName: "ico-notif-active"), for: .normal)
+                    }else{ // user found
+                        if Int(arrInfoNotif[index - 1]["total_notif"]!)! < listNotif.data.count {
+                            self.btnNotification.setImage(#imageLiteral(resourceName: "ico-notif-active"), for: .normal)
+                        }else{
+                            self.btnNotification.setImage(#imageLiteral(resourceName: "ico-notif"), for: .normal)
+                        }
+                    }
+                    
+                }
+            }
+            self.btnNotification.isUserInteractionEnabled = true
         }
     }
     

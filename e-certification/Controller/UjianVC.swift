@@ -47,20 +47,75 @@ class UjianVC: UIViewController {
         self.imagePicker.delegate = self
         
     }
-    override func viewWillDisappear(_ animated: Bool) {
-        if Session.userChace.value(forKey: Session.NEED_TO_UPLOAD_FOTO) != nil {
-            self.fotoAgain = true
-        }
-    }
+
     override func viewDidAppear(_ animated: Bool) {
         
-        if Notif.isNew{
-            self.btnNotification.setImage(#imageLiteral(resourceName: "ico-notif-active"), for: .normal)
-        }else{
-            self.btnNotification.setImage(#imageLiteral(resourceName: "ico-notif"), for: .normal)
-        }
-        
         self.getStatus()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getNotification()
+    }
+    
+    func getNotification(){
+        self.btnNotification.isUserInteractionEnabled = false
+        ApiManager().getNotification(isHUD: false) { (response,failure, error) in
+            if error != nil{
+                print("error load Notification \(String(describing: error))")
+                return
+            }
+            if failure != nil{
+                var fail = Failure()
+                fail.deserialize(failure!)
+                print("failure message \(fail.message)")
+                //CustomAlert().Error(message: fail.message)
+                //do action failure here
+                return
+            }
+            
+            //json data model
+            var listNotif:ListNotification = ListNotification()
+            listNotif.deserialize(response!)
+            if listNotif.data.count == 0 {
+                self.btnNotification.setImage(#imageLiteral(resourceName: "ico-notif"), for: .normal)
+            }else{
+                if Session.userChace.value(forKey: Session.CHECK_NEW_NOTIF) == nil {
+                    self.btnNotification.setImage(#imageLiteral(resourceName: "ico-notif-active"), for: .normal)
+                    let dicInfoNotif = [
+                        "user" : "\(Session.userChace.value(forKey: Session.EMAIL) as! String)",
+                        "total_notif" : "\(listNotif.data.count)"
+                    ]
+                    var arrInfoNotif:[[String:String]] = []
+                    arrInfoNotif.append(dicInfoNotif)
+                    Session.userChace.set(arrInfoNotif, forKey: Session.CHECK_NEW_NOTIF)
+                }else{
+                    var arrInfoNotif:[[String:String]] = []
+                    arrInfoNotif = Session.userChace.value(forKey: Session.CHECK_NEW_NOTIF) as! [[String : String]]
+                    var index = 0
+                    for dicInfoNotif in arrInfoNotif{
+                        if dicInfoNotif["user"] == Session.userChace.value(forKey: Session.EMAIL) as? String {
+                            index += 1
+                        }
+                    }
+                    
+                    if index == 0{ //user not found
+                        self.btnNotification.setImage(#imageLiteral(resourceName: "ico-notif-active"), for: .normal)
+                    }else{ // user found
+                        if Int(arrInfoNotif[index - 1]["total_notif"]!)! < listNotif.data.count {
+                            self.btnNotification.setImage(#imageLiteral(resourceName: "ico-notif-active"), for: .normal)
+                        }else{
+                            self.btnNotification.setImage(#imageLiteral(resourceName: "ico-notif"), for: .normal)
+                        }
+                    }
+                    
+                }
+            }
+            self.btnNotification.isUserInteractionEnabled = true
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.fotoAgain = true
     }
     
     func submitSisaJawaban(){
@@ -101,7 +156,6 @@ class UjianVC: UIViewController {
                 
                 let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
                     // camera
-                    Session.userChace.set(true, forKey: Session.NEED_TO_UPLOAD_FOTO)
                     self.openCamera()
                 })
                 alert.addAction(alertOKAction)
@@ -137,7 +191,19 @@ class UjianVC: UIViewController {
             
             //json data model
             self.examStatus.deserialize(response!)
-            self.setViewStatusExam(status: self.examStatus)
+            self.setViewStatusExam(status: self.examStatus.status_exam)
+            if self.examStatus.status_exam == ExamStatus.Lulus.rawValue {
+                if self.examStatus.status_image == UploadFotoExam.BelumSubmitFoto.rawValue && self.fotoAgain{
+                    let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: Wording.FINISH_EXAM_SUCCESS_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
+                    
+                    let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
+                        // camera
+                        self.openCamera()
+                    })
+                    alert.addAction(alertOKAction)
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
         }
     }
     
@@ -185,49 +251,13 @@ class UjianVC: UIViewController {
     }
     
     func setViewStatusExam(status:Int){
-        print("status \(status)")
+        print("status exam \(status)")
         switch status {
-        case ExamStatus.Lulus.rawValue:
-            self.viewLulus.alpha = 1
-            self.imgStatusLulus.image = #imageLiteral(resourceName: "ico-lulus")
-            self.lblTitleStatusLulus.text = Wording.CONGRATS
-            self.lblDetailStatusLulus.text = Wording.PASS_EXAM
-            self.viewLulus.frame = self.imgBg.frame
-            self.view.addSubview(self.viewLulus)
-            break
-        case ExamStatus.Gagal.rawValue:
-            self.viewLulus.alpha = 1
-            self.imgStatusLulus.image = #imageLiteral(resourceName: "ico-access-denied")
-            self.lblTitleStatusLulus.text = Wording.SORRY
-            self.lblDetailStatusLulus.text = Wording.FAILED_EXAM
-            self.viewLulus.frame = self.imgBg.frame
-            self.view.addSubview(self.viewLulus)
-            break
-        case ExamStatus.BelumDiAssign.rawValue:
-            self.viewAccessDenied.alpha = 1
-            self.viewAccessDenied.frame = self.imgBg.frame
-            self.view.addSubview(self.viewAccessDenied)
-            break
-        case ExamStatus.OnProgress.rawValue:
-            self.viewAccessDenied.alpha = 1
-            self.viewAccessDenied.frame = self.imgBg.frame
-            self.view.addSubview(self.viewAccessDenied)
-            break
-        default:
-            self.viewAccessDenied.alpha = 1
-            self.viewAccessDenied.frame = self.imgBg.frame
-            self.view.addSubview(self.viewAccessDenied)
-            break
-        }
-    }
-    
-    func setViewStatusExam(status:StatusExam!){
-        switch status.status_exam {
         case ExamStatus.SudahDiAssign.rawValue:
             self.viewLulus.alpha = 0
             self.viewAccessDenied.alpha = 0
             self.showComponent()
-            self.lblTitle.text = Wording.ASSIGN_EXAM //status.message_exam
+            self.lblTitle.text = Wording.ASSIGN_EXAM
             break
         case ExamStatus.Lulus.rawValue:
             self.viewLulus.alpha = 1
@@ -236,17 +266,6 @@ class UjianVC: UIViewController {
             self.lblTitleStatusLulus.text = "Selamat!"
             self.lblDetailStatusLulus.text = "Anda Telah Lulus."
             self.view.addSubview(self.viewLulus)
-            
-            if Session.userChace.value(forKey: Session.NEED_TO_UPLOAD_FOTO) != nil && self.fotoAgain {
-                let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: Wording.FINISH_EXAM_SUCCESS_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
-                
-                let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
-                    // camera
-                    self.openCamera()
-                })
-                alert.addAction(alertOKAction)
-                self.present(alert, animated: true, completion: nil)
-            }
             
             break
         case ExamStatus.Gagal.rawValue:
@@ -263,6 +282,7 @@ class UjianVC: UIViewController {
             self.view.addSubview(self.viewAccessDenied)
             break
         case ExamStatus.OnProgress.rawValue:
+//            self.submitSisaJawaban()
             if Session.userChace.value(forKey: Session.FORCE_EXIT_EXAM) != nil {
                 let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: Wording.FINISH_EXAM_EXIT_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
                 
@@ -273,6 +293,7 @@ class UjianVC: UIViewController {
                 alert.addAction(alertOKAction)
                 self.present(alert, animated: true, completion: nil)
             }else{
+                self.submitSisaJawaban()
                 self.viewAccessDenied.alpha = 1
                 self.viewAccessDenied.frame = self.imgBg.frame
                 self.view.addSubview(self.viewAccessDenied)
@@ -406,29 +427,19 @@ extension UjianVC: UIImagePickerControllerDelegate,UINavigationControllerDelegat
                         //do action failure here
                         return
                     }
-                    Session.userChace.removeObject(forKey: Session.NEED_TO_UPLOAD_FOTO)
                     self.successUploadSelfie = true
                     var userSelfie:UserSelfie = UserSelfie()
                     userSelfie.deserialize(response!)
                     CustomAlert().Success(message: Wording.FINISH_EXAM_MESSAGE)
                     
+                    self.dismiss(animated: true, completion: {
+                        self.fotoAgain = false
+                    })
+                    
                 })
             }
             //upload foto then go to hasil ujian
             //            self.performSegue(withIdentifier: "hasilUjian", sender: self)
-            
-            self.dismiss(animated: true, completion: {
-                if !self.successUploadSelfie{
-                    let alert = UIAlertController(title: Wording.FINISH_EXAM_TITLE, message: Wording.FINISH_EXAM_SUCCESS_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
-
-                    let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
-                        // camera
-                        self.openCamera()
-                    })
-                    alert.addAction(alertOKAction)
-                    self.present(alert, animated: true, completion: nil)
-                }
-            })
         }
     }
     

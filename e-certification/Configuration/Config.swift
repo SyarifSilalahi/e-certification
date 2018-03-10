@@ -24,6 +24,11 @@ enum ExamStatus : Int {
     case OnProgress = 5
 }
 
+enum UploadFotoExam : String {
+    case SudahSubmitFoto = "1"
+    case BelumSubmitFoto = "2"
+}
+
 struct Domain {
     
     // BASE URL PRODUCTION
@@ -52,11 +57,14 @@ struct Domain {
     static let URL_CHECK_UPDATE = "\(URL_BASE)/update_status"
     static let URL_CHECK_DEV = "\(URL_BASE)/development_status"
     static let URL_CHANGE_PASSWORD = "\(URL_BASE)/user/update_password"
+    static let URL_FORGOT_PASSWORD = "\(URL_BASE)/forgot_password"
+    
     
 }
 
 struct Wording {
     static let Connection = "Maaf! Koneksi gagal, Silahkan periksa koneksi internet anda"
+    static let DEFAULT_ALLERT_TITLE = "Informasi"
     static let FORCE_LOG_OUT_ALLERT_TITLE = "Pemberitahuan"
     static let FORCE_LOG_OUT_ALLERT_MESSAGE = "Seseorang telah menggunakan Akun anda, \nSilahkan Login kembali"
     static let FINISH_EXERCISE_TITLE = "Latihan Selesai."
@@ -91,6 +99,8 @@ struct Wording {
     static let OLD_SUCCESS_CHANGE_PASSWORD = "Kata sandi berhasil di ubah."
     static let ASSIGN_EXAM = "Sudah di assign"
     static let FINISH_EXAM_CONFIRMATION = "Apakah anda yakin sudah menyelesaikan ujian dan ingin keluar?"
+    static let REQ_EMAIL_FORGOT_PASS = "Silahkan masukkan email anda"
+    static let SUCCESS_REQ_FORGOT_PASS = "Permintaan lupa kata sandi anda sedang di proses. Untuk info lebih lanjut harap untuk menghubungi Administrasi"
     
 }
 
@@ -102,7 +112,7 @@ struct Session {
     static let OLD_PASS = "OLD_PASS"
     static let FORCE_EXIT_EXAM = "EXIT"
     static let ID_NOTIF_READ = "ID_NOTIF_READ"
-    static let NEED_TO_UPLOAD_FOTO = "NEED_TO_UPLOAD_FOTO"
+    static let CHECK_NEW_NOTIF = "CHECK_NEW_NOTIF"
 }
 
 struct FONT {
@@ -157,10 +167,6 @@ struct Theme {
     static let errorColor = UIColor.init(hex: "#d31f26")
     static let successColor = UIColor.init(hex: "#8bc74a")
     
-}
-
-struct Notif {
-    static var isNew:Bool = true
 }
 
 struct LatihanAnswer {

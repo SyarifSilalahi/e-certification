@@ -170,7 +170,7 @@ extension LatihanDetailSoalVC:UITableViewDelegate,UITableViewDataSource{
         cell.lblDetail.text = self.arrOption[indexPath.row]
         
         if LatihanAnswer.isFinished{
-            if self.listSoal[self.index].selected == ""{
+            if LatihanAnswer.arrAnswer[self.index].selected == ""{
                 if self.listSoal[self.index].answer == cell.lblDetail.text{
                     cell.modeTrueAnswerNotSelected()
                 }else{
@@ -200,7 +200,8 @@ extension LatihanDetailSoalVC:UITableViewDelegate,UITableViewDataSource{
             }
         }else{
             if LatihanAnswer.arrAnswer[self.index].selected == cell.lblDetail.text{
-                cell.modeSelect()
+//                cell.modeSelect()
+                cell.modeTrue()
             }else{
                 cell.modeNormal()
             }

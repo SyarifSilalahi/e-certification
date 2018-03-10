@@ -45,14 +45,33 @@ class NotifikasiVC: UIViewController {
             self.listNotif.deserialize(response!)
             self.arrSearchDataNotification = self.listNotif.data
             
-            if Session.userChace.value(forKey: Session.ID_NOTIF_READ) == nil{
-                Notif.isNew = true
-            }else{
-                let arrIndexRead:[Int] = Session.userChace.value(forKey: Session.ID_NOTIF_READ) as! [Int]
-                if self.listNotif.data.count == arrIndexRead.count{
-                    Notif.isNew = false
-                }else{
-                    Notif.isNew = true
+            if Session.userChace.value(forKey: Session.CHECK_NEW_NOTIF) != nil{
+                //reset is new notif
+                var arrInfoNotif:[[String:String]] = []
+                arrInfoNotif = Session.userChace.value(forKey: Session.CHECK_NEW_NOTIF) as! [[String : String]]
+                var index = 0
+                for dicInfoNotif in arrInfoNotif{
+                    if dicInfoNotif["user"] == Session.userChace.value(forKey: Session.EMAIL) as? String {
+                        index += 1
+                    }
+                }
+                
+                if index == 0{ //user not found
+                    let dicInfoNotif = [
+                        "user" : "\(Session.userChace.value(forKey: Session.EMAIL) as! String)",
+                        "total_notif" : "\(self.listNotif.data.count)"
+                    ]
+                    arrInfoNotif.append(dicInfoNotif)
+                    Session.userChace.set(arrInfoNotif, forKey: Session.CHECK_NEW_NOTIF)
+                }else{ // user found
+                    if Int(arrInfoNotif[index - 1]["total_notif"]!)! < self.listNotif.data.count {
+                        let dicInfoNotif = [
+                            "user" : "\(Session.userChace.value(forKey: Session.EMAIL) as! String)",
+                            "total_notif" : "\(self.listNotif.data.count)"
+                        ]
+                        arrInfoNotif[index - 1] = dicInfoNotif
+                        Session.userChace.set(arrInfoNotif, forKey: Session.CHECK_NEW_NOTIF)
+                    }
                 }
             }
             

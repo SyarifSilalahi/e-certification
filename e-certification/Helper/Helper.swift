@@ -131,7 +131,7 @@ class HUD: NSObject {
 class CustomAlert: NSObject {
     
     // MARK: Show HUD
-    func Success(message:String) {
+    func Success(message:String,bottom:Bool = true) {
         let view: AlertDialogView = try! SwiftMessages.viewFromNib()
         view.configureDropShadow()
         view.bodyLabel?.text = message
@@ -147,13 +147,17 @@ class CustomAlert: NSObject {
         var config = SwiftMessages.defaultConfig
         config.presentationContext = .automatic
         config.duration = .automatic
-        config.presentationStyle = .bottom
+        if bottom {
+            config.presentationStyle = .bottom
+        }else{
+            config.presentationStyle = .top
+        }
         config.dimMode = .none
         SwiftMessages.show(config: config, view: view)
     }
     
     // MARK: Show HUD
-    func Error(message:String) {
+    func Error(message:String,bottom:Bool = true) {
         let view: AlertDialogView = try! SwiftMessages.viewFromNib()
         view.configureDropShadow()
         view.bodyLabel?.text = message
@@ -168,7 +172,11 @@ class CustomAlert: NSObject {
         var config = SwiftMessages.defaultConfig
         config.presentationContext = .automatic
         config.duration = .automatic
-        config.presentationStyle = .bottom
+        if bottom {
+            config.presentationStyle = .bottom
+        }else{
+            config.presentationStyle = .top
+        }
         config.dimMode = .none
         SwiftMessages.show(config: config, view: view)
     }

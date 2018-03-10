@@ -180,13 +180,68 @@ class SignInVC: UIViewController {
     }
     
     @IBAction func forgotPassword(_ sender: AnyObject) {
-        let alert = UIAlertController(title: "Informasi.", message: Wording.FORGOT_PASSWORD_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
-        
-        let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
+//        let alert = UIAlertController(title: "Informasi.", message: Wording.FORGOT_PASSWORD_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
+//
+//        let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
+//
+//        })
+//        alert.addAction(alertOKAction)
+//        self.present(alert, animated: true, completion: nil)
+        let alertController = UIAlertController(title: Wording.DEFAULT_ALLERT_TITLE, message: Wording.REQ_EMAIL_FORGOT_PASS, preferredStyle: .alert)
+        let saveAction = UIAlertAction(title: "Proses", style: .default, handler: { alert -> Void in
+            let firstTextField = alertController.textFields![0] as UITextField
+//            print("firstName \(firstTextField.text), secondName \(secondTextField.text)")
+            if (firstTextField.text?.isEmpty)! {
+                CustomAlert().Error(message: Wording.EMPTY_FIELD, bottom: false)
+                self.present(alertController, animated: true, completion: nil)
+            }else if !self.isValidEmail(testStr: firstTextField.text!) {
+                CustomAlert().Error(message: Wording.EMAIL_VALIDATION, bottom: false)
+                self.present(alertController, animated: true, completion: nil)
+            }else{
+                let param = [
+                    "email" : "\(firstTextField.text!)"
+                ]
+                ApiManager().forgotPassword(param, completionHandler: { (response,failure, error) in
+                    if error != nil{
+                        self.btnSignUp.alpha = 0
+                        print("error forgotPassword \(String(describing: error))")
+                        return
+                    }
+                    if failure != nil{
+                        self.btnSignUp.alpha = 0
+                        var fail = Failure()
+                        fail.deserialize(failure!)
+                        print("failure message \(fail.message)")
+                        CustomAlert().Error(message: fail.message)
+                        //do action failure here
+                        return
+                    }
+                    
+                    //json data model
+                    var status = Status()
+                    status.deserialize(response!)
+                    if status.status == "1"{
+                        CustomAlert().Success(message: Wording.SUCCESS_REQ_FORGOT_PASS)
+                    }else{
+                        CustomAlert().Error(message: status.message,bottom: false)
+                        self.present(alertController, animated: true, completion: nil)
+                    }
+                })
+            }
             
         })
-        alert.addAction(alertOKAction)
-        self.present(alert, animated: true, completion: nil)
+        let cancelAction = UIAlertAction(title: "Batal", style: .default, handler: { (action : UIAlertAction!) -> Void in })
+        
+        alertController.addTextField { (textField : UITextField!) -> Void in
+            textField.placeholder = "Email"
+            textField.keyboardType = .emailAddress
+            textField.borderStyle = .none
+        }
+        
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func doSignIn(_ sender: AnyObject) {

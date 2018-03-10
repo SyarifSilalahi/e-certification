@@ -13,13 +13,15 @@ import AlamofireImage
 
 class ApiManager: NSObject {
     func forceLogOut(){
-        let alert = UIAlertController(title: Wording.FORCE_LOG_OUT_ALLERT_TITLE, message: Wording.FORCE_LOG_OUT_ALLERT_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
-        
-        let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
-                self.logOut()
-        })
-        alert.addAction(alertOKAction)
-        UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+//        let alert = UIAlertController(title: Wording.FORCE_LOG_OUT_ALLERT_TITLE, message: Wording.FORCE_LOG_OUT_ALLERT_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
+//
+//        let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
+//                self.logOut()
+//        })
+//        alert.addAction(alertOKAction)
+//        UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+        CustomAlert().Error(message: Wording.FORCE_LOG_OUT_ALLERT_MESSAGE)
+        self.logOut()
     }
     
     func logOut(){
@@ -102,6 +104,34 @@ class ApiManager: NSObject {
                             self.forceLogOut()
                             return
                         }
+                        completionHandler(nil,data!, nil)
+                    }
+                    break
+                case .failure(let error):
+                    self.connectionCheck(error: error)
+                    completionHandler(nil,nil, error as NSError?)
+                    break
+                }
+        }
+    }
+    
+    func forgotPassword(_ param:[String:String], completionHandler:@escaping (JSON?,JSON?, NSError?) -> ()) {
+        HUD().show()
+        Alamofire.request("\(Domain.URL_FORGOT_PASSWORD)",
+            method: HTTPMethod.post,
+            parameters: param,
+            encoding: URLEncoding.httpBody,
+            headers: nil)
+            .responseJSON { (response) in
+                HUD().hide()
+                switch response.result {
+                case .success(_):
+                    let data = JSON(response.result.value as AnyObject?)
+                    let responseData = response.result.value as! NSDictionary
+                    let status:Bool = (responseData["status"] as! String != "0")
+                    if status {
+                        completionHandler(data!,nil,nil)
+                    }else{
                         completionHandler(nil,data!, nil)
                     }
                     break
@@ -705,7 +735,7 @@ class ApiManager: NSObject {
     }
     
     func uploadImageSelfie(image:UIImage,imageLicense:UIImage,completionHandler:@escaping (JSON?,JSON?, NSError?) -> ()){
-        HUD().show()
+//        HUD().show()
         let data = JSON(Session.userChace.object(forKey: Session.KEY_AUTH) as AnyObject?)
         var dataUser = UserAuthData()
         dataUser.deserialize(data!)

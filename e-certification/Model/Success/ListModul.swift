@@ -119,6 +119,7 @@ struct StatusExam {
     var message = ""
     var status_exam:Int = 0
     var message_exam = ""
+    var status_image = ""
     
     /// The method you declare your json mapping in.
     
@@ -128,6 +129,7 @@ struct StatusExam {
         message <-- json["message"]
         status_exam <-- json["data"]!["status_user"]!["status_exam"]
         message_exam <-- json["data"]!["status_user"]!["message"]
+        status_image <-- json["data"]!["status_user"]!["status_image"]
     }
 }
 

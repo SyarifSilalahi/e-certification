@@ -114,21 +114,10 @@ class LatihanListSoalVC: UIViewController {
                     self.collectionMenu.reloadData()
                     CustomAlert().Success(message: Wording.FINISH_EXERCISE_MESSAGE)
                     
+                    print("LatihanAnswer \(LatihanAnswer.arrAnswer)")
                 })
             }
             
-//            let replaced1 = history.replacingOccurrences(of: "\n", with: "")
-//            let newHistory = replaced1.replacingOccurrences(of: "]", with: "}")
-//            var historyJson = newHistory.replace(0, "[")
-//            historyJson = historyJson.replace(historyJson.characters.count - 1 , "]")
-            
-//            print("history JSON :\n\(historyJson)")
-//            var nilai = 0
-//            for dic in LatihanAnswer.arrAnswer{
-//                if dic["status"] == "true"{
-//                    nilai += 1
-//                }
-//            }
         }else{
             if isHistory{
                 self.navigationController?.popViewController(animated: true)

@@ -18,7 +18,7 @@ target 'e-certification' do
   pod 'PDFReader'
   pod 'HTPullToRefresh'
 
-  #timer label
+  #timer label --> old library
   pod 'MZTimerLabel'
 
   #Downloader

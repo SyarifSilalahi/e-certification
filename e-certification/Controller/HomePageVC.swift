@@ -78,7 +78,31 @@ class HomePageVC: UIViewController {
                         if Int(arrInfoNotif[index - 1]["total_notif"]!)! < listNotif.data.count {
                             self.btnNotification.setImage(#imageLiteral(resourceName: "ico-notif-active"), for: .normal)
                         }else{
-                            self.btnNotification.setImage(#imageLiteral(resourceName: "ico-notif"), for: .normal)
+                            // set is new notif on notif button if there is detail notif not read
+                            if Session.userChace.value(forKey: Session.ID_NOTIF_READ) == nil {
+                                self.btnNotification.setImage(#imageLiteral(resourceName: "ico-notif-active"), for: .normal)
+                            }else{
+                                var arrNotifSession:[NSMutableDictionary] = []
+                                arrNotifSession = Session.userChace.value(forKey: Session.ID_NOTIF_READ) as! [NSMutableDictionary]
+                                var index = 0
+                                for dicInfoNotif in arrNotifSession{
+                                    if dicInfoNotif["user"] as? String == Session.userChace.value(forKey: Session.EMAIL) as? String {
+                                        index += 1
+                                    }
+                                }
+                                
+                                if index == 0{ //user not found
+                                    self.btnNotification.setImage(#imageLiteral(resourceName: "ico-notif-active"), for: .normal)
+                                }else{ // user found
+                                    let dicData = arrNotifSession[index-1]
+                                    let arrIndexRead = dicData["arrIndex"] as! [Int]
+                                    if arrIndexRead.count == listNotif.data.count {
+                                        self.btnNotification.setImage(#imageLiteral(resourceName: "ico-notif"), for: .normal)
+                                    }else{
+                                        self.btnNotification.setImage(#imageLiteral(resourceName: "ico-notif-active"), for: .normal)
+                                    }
+                                }
+                            }
                         }
                     }
                     

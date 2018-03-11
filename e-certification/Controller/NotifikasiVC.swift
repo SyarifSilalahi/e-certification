@@ -16,6 +16,7 @@ class NotifikasiVC: UIViewController {
     var indexChoosed = 0
     var arrSearchDataNotification:[DataNotification] = []
     var arrIndexRead:[Int] = []
+    var arrDataNotifSession:[NSMutableDictionary] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -134,11 +135,25 @@ extension NotifikasiVC:UITableViewDelegate,UITableViewDataSource{
         if Session.userChace.value(forKey: Session.ID_NOTIF_READ) == nil {
             cell.imgDot.alpha = 1
         }else{
-            self.arrIndexRead = Session.userChace.value(forKey: Session.ID_NOTIF_READ) as! [Int]
-            if self.arrIndexRead.contains(self.arrSearchDataNotification[indexPath.row].user_notification_id){
-                cell.imgDot.alpha = 0
-            }else{
+            var arrNotifSession:[NSMutableDictionary] = []
+            arrNotifSession = Session.userChace.value(forKey: Session.ID_NOTIF_READ) as! [NSMutableDictionary]
+            var index = 0
+            for dicInfoNotif in arrNotifSession{
+                if dicInfoNotif["user"] as? String == Session.userChace.value(forKey: Session.EMAIL) as? String {
+                    index += 1
+                }
+            }
+            
+            if index == 0{ //user not found
                 cell.imgDot.alpha = 1
+            }else{ // user found
+                let dicData = arrNotifSession[index-1]
+                self.arrIndexRead = dicData["arrIndex"] as! [Int]
+                if self.arrIndexRead.contains(self.arrSearchDataNotification[indexPath.row].user_notification_id){
+                    cell.imgDot.alpha = 0
+                }else{
+                    cell.imgDot.alpha = 1
+                }
             }
         }
         cell.lblTitle.text = self.arrSearchDataNotification[indexPath.row].title
@@ -152,14 +167,49 @@ extension NotifikasiVC:UITableViewDelegate,UITableViewDataSource{
         if Session.userChace.value(forKey: Session.ID_NOTIF_READ) == nil {
             self.arrIndexRead = []
             self.arrIndexRead.append(self.arrSearchDataNotification[indexPath.row].user_notification_id)
-            Session.userChace.set(self.arrIndexRead, forKey: Session.ID_NOTIF_READ)
+            
+            let dicData = NSMutableDictionary()
+            dicData["arrIndex"] = self.arrIndexRead
+            dicData["user"] = "\(Session.userChace.value(forKey: Session.EMAIL) as! String)"
+            self.arrDataNotifSession = []
+            self.arrDataNotifSession.append(dicData)
+            Session.userChace.set(self.arrDataNotifSession, forKey: Session.ID_NOTIF_READ)
         }else{
-            self.arrIndexRead = Session.userChace.value(forKey: Session.ID_NOTIF_READ) as! [Int]
-            if self.arrIndexRead.contains(self.arrSearchDataNotification[indexPath.row].user_notification_id){
-            }else{
-                self.arrIndexRead.append(self.arrSearchDataNotification[indexPath.row].user_notification_id)
-                Session.userChace.set(self.arrIndexRead, forKey: Session.ID_NOTIF_READ)
+            
+            var arrNotifSession:[NSMutableDictionary] = []
+            arrNotifSession = Session.userChace.value(forKey: Session.ID_NOTIF_READ) as! [NSMutableDictionary]
+            var index = 0
+            for dicInfoNotif in arrNotifSession{
+                if dicInfoNotif["user"] as? String == Session.userChace.value(forKey: Session.EMAIL) as? String {
+                    index += 1
+                }
             }
+            
+            if index == 0{ //user not found
+                self.arrIndexRead = []
+                self.arrIndexRead.append(self.arrSearchDataNotification[indexPath.row].user_notification_id)
+                
+                let dicData = NSMutableDictionary()
+                dicData["arrIndex"] = self.arrIndexRead
+                dicData["user"] = "\(Session.userChace.value(forKey: Session.EMAIL) as! String)"
+                self.arrDataNotifSession = Session.userChace.value(forKey: Session.ID_NOTIF_READ) as![NSMutableDictionary]
+                self.arrDataNotifSession.append(dicData)
+                Session.userChace.set(self.arrDataNotifSession, forKey: Session.ID_NOTIF_READ)
+            }else{ // user found
+                self.arrDataNotifSession = Session.userChace.value(forKey: Session.ID_NOTIF_READ) as![NSMutableDictionary]
+                let dicData = self.arrDataNotifSession[index-1]
+                self.arrIndexRead = dicData["arrIndex"] as! [Int]
+                if self.arrIndexRead.contains(self.arrSearchDataNotification[indexPath.row].user_notification_id){
+                }else{
+                    self.arrIndexRead.append(self.arrSearchDataNotification[indexPath.row].user_notification_id)
+                    let newDic = NSMutableDictionary()
+                    newDic["arrIndex"] = self.arrIndexRead
+                    newDic["user"] = dicData["user"]
+                    self.arrDataNotifSession[index-1] = newDic
+                    Session.userChace.set(self.arrDataNotifSession, forKey: Session.ID_NOTIF_READ)
+                }
+            }
+            
         }
         self.indexChoosed = indexPath.row
         self.performSegue(withIdentifier: "openDetailNotification", sender: self)

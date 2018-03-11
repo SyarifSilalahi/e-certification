@@ -118,7 +118,11 @@ class RSlideMenu: UIViewController {
             //clear session
             Session.userChace.removeObject(forKey: Session.EMAIL)
             Session.userChace.removeObject(forKey: Session.KEY_AUTH)
+            
+//            //buat test aja nanti di comment lagi
 //            Session.userChace.removeObject(forKey: Session.ID_NOTIF_READ)
+//            Session.userChace.removeObject(forKey: Session.CHECK_NEW_NOTIF)
+            
             //force back to login
             self.performSegue(withIdentifier: "unwindToViewController1", sender: self)
         })

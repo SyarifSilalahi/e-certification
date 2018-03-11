@@ -12,7 +12,7 @@ import Alamofire
 import AlamofireImage
 
 class ApiManager: NSObject {
-    func forceLogOut(){
+    func forceLogOut(status:String){
 //        let alert = UIAlertController(title: Wording.FORCE_LOG_OUT_ALLERT_TITLE, message: Wording.FORCE_LOG_OUT_ALLERT_MESSAGE, preferredStyle: UIAlertControllerStyle.alert)
 //
 //        let alertOKAction=UIAlertAction(title:"OK", style: UIAlertActionStyle.default,handler: { action in
@@ -20,7 +20,15 @@ class ApiManager: NSObject {
 //        })
 //        alert.addAction(alertOKAction)
 //        UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
-        CustomAlert().Error(message: Wording.FORCE_LOG_OUT_ALLERT_MESSAGE)
+        var message = Wording.FORCE_LOG_OUT_ALLERT_MESSAGE
+        if status == "0" {
+            message = Wording.FORCE_LOG_OUT_ALLERT_MESSAGE
+        }else if status == "1" {
+            message = Wording.DEACTIVATE_INSURANCE
+        }else if status == "2" {
+            message = Wording.DEACTIVATE_USER
+        }
+        CustomAlert().Error(message: message)
         self.logOut()
     }
     
@@ -96,14 +104,18 @@ class ApiManager: NSObject {
                 case .success(_):
                     let data = JSON(response.result.value as AnyObject?)
                     let responseData = response.result.value as! NSDictionary
+                    
+                    if let type = responseData["type"] as? String {
+                        if type == "failed" {
+                            self.forceLogOut(status: responseData["status"] as! String)
+                            return
+                        }
+                    }
+                    
                     let status:Bool = (responseData["status"] as! String != "0")
                     if status {
                         completionHandler(data!,nil,nil)
                     }else{
-                        if responseData["message"] as! String == "expired_token" {
-                            self.forceLogOut()
-                            return
-                        }
                         completionHandler(nil,data!, nil)
                     }
                     break
@@ -166,14 +178,18 @@ class ApiManager: NSObject {
                 case .success(_):
                     let data = JSON(response.result.value as AnyObject?)
                     let responseData = response.result.value as! NSDictionary
+                    
+                    if let type = responseData["type"] as? String {
+                        if type == "failed" {
+                            self.forceLogOut(status: responseData["status"] as! String)
+                            return
+                        }
+                    }
+                    
                     let status:Bool = (responseData["status"] as! String != "0")
                     if status {
                         completionHandler(data!,nil,nil)
                     }else{
-                        if responseData["message"] as! String == "expired_token" {
-                            self.forceLogOut()
-                            return
-                        }
                         completionHandler(nil,data!, nil)
                     }
                     break
@@ -208,14 +224,18 @@ class ApiManager: NSObject {
                 case .success(_):
                     let data = JSON(response.result.value as AnyObject?)
                     let responseData = response.result.value as! NSDictionary
+                    
+                    if let type = responseData["type"] as? String {
+                        if type == "failed" {
+                            self.forceLogOut(status: responseData["status"] as! String)
+                            return
+                        }
+                    }
+                    
                     let status:Bool = (responseData["status"] as! String != "0")
                     if status {
                         completionHandler(data!,nil,nil)
                     }else{
-                        if responseData["message"] as! String == "expired_token" {
-                            self.forceLogOut()
-                            return
-                        }
                         completionHandler(nil,data!, nil)
                     }
                     break
@@ -255,16 +275,21 @@ class ApiManager: NSObject {
                 case .success(_):
                     let data = JSON(response.result.value as AnyObject?)
                     let responseData = response.result.value as! NSDictionary
+                    
+                    if let type = responseData["type"] as? String {
+                        if type == "failed" {
+                            self.forceLogOut(status: responseData["status"] as! String)
+                            return
+                        }
+                    }
+                    
                     let status:Bool = (responseData["status"] as! String != "0")
                     if status {
                         completionHandler(data!,nil,nil)
                     }else{
-                        if responseData["message"] as! String == "expired_token" {
-                            self.forceLogOut()
-                            return
-                        }
                         completionHandler(nil,data!, nil)
                     }
+                    
                     break
                 case .failure(let error):
                     self.connectionCheck(error: error)
@@ -303,16 +328,21 @@ class ApiManager: NSObject {
                 case .success(_):
                     let data = JSON(response.result.value as AnyObject?)
                     let responseData = response.result.value as! NSDictionary
+                    
+                    if let type = responseData["type"] as? String {
+                        if type == "failed" {
+                            self.forceLogOut(status: responseData["status"] as! String)
+                            return
+                        }
+                    }
+                    
                     let status:Bool = (responseData["status"] as! String != "0")
                     if status {
                         completionHandler(data!,nil,nil)
                     }else{
-                        if responseData["message"] as! String == "expired_token" {
-                            self.forceLogOut()
-                            return
-                        }
                         completionHandler(nil,data!, nil)
                     }
+                    
                     break
                 case .failure(let error):
                     self.connectionCheck(error: error)
@@ -355,8 +385,8 @@ class ApiManager: NSObject {
                     if status {
                         completionHandler(data!,nil,nil)
                     }else{
-                        if responseData["message"] as! String == "expired_token" {
-                            self.forceLogOut()
+                        if responseData["type"] as! String == "failed" {
+                            self.forceLogOut(status: responseData["status"] as! String)
                             return
                         }
                         completionHandler(nil,data!, nil)
@@ -395,16 +425,21 @@ class ApiManager: NSObject {
                 case .success(_):
                     let data = JSON(response.result.value as AnyObject?)
                     let responseData = response.result.value as! NSDictionary
+                    
+                    if let type = responseData["type"] as? String {
+                        if type == "failed" {
+                            self.forceLogOut(status: responseData["status"] as! String)
+                            return
+                        }
+                    }
+                    
                     let status:Bool = (responseData["status"] as! String != "0")
                     if status {
                         completionHandler(data!,nil,nil)
                     }else{
-                        if responseData["message"] as! String == "expired_token" {
-                            self.forceLogOut()
-                            return
-                        }
                         completionHandler(nil,data!, nil)
                     }
+                    
                     break
                 case .failure(let error):
                     self.connectionCheck(error: error)
@@ -438,16 +473,21 @@ class ApiManager: NSObject {
                 case .success(_):
                     let data = JSON(response.result.value as AnyObject?)
                     let responseData = response.result.value as! NSDictionary
+                    
+                    if let type = responseData["type"] as? String {
+                        if type == "failed" {
+                            self.forceLogOut(status: responseData["status"] as! String)
+                            return
+                        }
+                    }
+                    
                     let status:Bool = (responseData["status"] as! String != "0")
                     if status {
                         completionHandler(data!,nil,nil)
                     }else{
-                        if responseData["message"] as! String == "expired_token" {
-                            self.forceLogOut()
-                            return
-                        }
                         completionHandler(nil,data!, nil)
                     }
+                    
                     break
                 case .failure(let error):
                     self.connectionCheck(error: error)
@@ -481,16 +521,21 @@ class ApiManager: NSObject {
                 case .success(_):
                     let data = JSON(response.result.value as AnyObject?)
                     let responseData = response.result.value as! NSDictionary
+                    
+                    if let type = responseData["type"] as? String {
+                        if type == "failed" {
+                            self.forceLogOut(status: responseData["status"] as! String)
+                            return
+                        }
+                    }
+                    
                     let status:Bool = (responseData["status"] as! String != "0")
                     if status {
                         completionHandler(data!,nil,nil)
                     }else{
-                        if responseData["message"] as! String == "expired_token" {
-                            self.forceLogOut()
-                            return
-                        }
                         completionHandler(nil,data!, nil)
                     }
+                    
                     break
                 case .failure(let error):
                     self.connectionCheck(error: error)
@@ -526,16 +571,21 @@ class ApiManager: NSObject {
                 case .success(_):
                     let data = JSON(response.result.value as AnyObject?)
                     let responseData = response.result.value as! NSDictionary
+                    
+                    if let type = responseData["type"] as? String {
+                        if type == "failed" {
+                            self.forceLogOut(status: responseData["status"] as! String)
+                            return
+                        }
+                    }
+                    
                     let status:Bool = (responseData["status"] as! String != "0")
                     if status {
                         completionHandler(data!,nil,nil)
                     }else{
-                        if responseData["message"] as! String == "expired_token" {
-                            self.forceLogOut()
-                            return
-                        }
                         completionHandler(nil,data!, nil)
                     }
+                    
                     break
                 case .failure(let error):
                     self.connectionCheck(error: error)
@@ -571,16 +621,21 @@ class ApiManager: NSObject {
                 case .success(_):
                     let data = JSON(response.result.value as AnyObject?)
                     let responseData = response.result.value as! NSDictionary
+                    
+                    if let type = responseData["type"] as? String {
+                        if type == "failed" {
+                            self.forceLogOut(status: responseData["status"] as! String)
+                            return
+                        }
+                    }
+                    
                     let status:Bool = (responseData["status"] as! String != "0")
                     if status {
                         completionHandler(data!,nil,nil)
                     }else{
-                        if responseData["message"] as! String == "expired_token" {
-                            self.forceLogOut()
-                            return
-                        }
                         completionHandler(nil,data!, nil)
                     }
+                    
                     break
                 case .failure(let error):
                     self.connectionCheck(error: error)
@@ -615,16 +670,21 @@ class ApiManager: NSObject {
                 case .success(_):
                     let data = JSON(response.result.value as AnyObject?)
                     let responseData = response.result.value as! NSDictionary
+                    
+                    if let type = responseData["type"] as? String {
+                        if type == "failed" {
+                            self.forceLogOut(status: responseData["status"] as! String)
+                            return
+                        }
+                    }
+                    
                     let status:Bool = (responseData["status"] as! String != "0")
                     if status {
                         completionHandler(data!,nil,nil)
                     }else{
-                        if responseData["message"] as! String == "expired_token" {
-                            self.forceLogOut()
-                            return
-                        }
                         completionHandler(nil,data!, nil)
                     }
+                    
                     break
                 case .failure(let error):
                     self.connectionCheck(error: error)
@@ -657,16 +717,21 @@ class ApiManager: NSObject {
                 case .success(_):
                     let data = JSON(response.result.value as AnyObject?)
                     let responseData = response.result.value as! NSDictionary
+                    
+                    if let type = responseData["type"] as? String {
+                        if type == "failed" {
+                            self.forceLogOut(status: responseData["status"] as! String)
+                            return
+                        }
+                    }
+                    
                     let status:Bool = (responseData["status"] as! String != "0")
                     if status {
                         completionHandler(data!,nil,nil)
                     }else{
-                        if responseData["message"] as! String == "expired_token" {
-                            self.forceLogOut()
-                            return
-                        }
                         completionHandler(nil,data!, nil)
                     }
+                    
                     break
                 case .failure(let error):
                     self.connectionCheck(error: error)
@@ -690,12 +755,21 @@ class ApiManager: NSObject {
                 case .success(_):
                     let data = JSON(response.result.value as AnyObject?)
                     let responseData = response.result.value as! NSDictionary
+                    
+                    if let type = responseData["type"] as? String {
+                        if type == "failed" {
+                            self.forceLogOut(status: responseData["status"] as! String)
+                            return
+                        }
+                    }
+                    
                     let status:Bool = (responseData["status"] as! String != "0")
                     if status {
                         completionHandler(data!,nil,nil)
                     }else{
                         completionHandler(nil,data!, nil)
                     }
+                    
                     break
                 case .failure(let error):
                     self.connectionCheck(error: error)
@@ -768,16 +842,21 @@ class ApiManager: NSObject {
 //                    print("response upload selfie \(response)")
                     let data = JSON(response.result.value as AnyObject?)
                     let responseData = response.result.value as! NSDictionary
+                    
+                    if let type = responseData["type"] as? String {
+                        if type == "failed" {
+                            self.forceLogOut(status: responseData["status"] as! String)
+                            return
+                        }
+                    }
+                    
                     let status:Bool = (responseData["status"] as! String != "0")
                     if status {
                         completionHandler(data!,nil,nil)
                     }else{
-                        if responseData["message"] as! String == "expired_token" {
-                            self.forceLogOut()
-                            return
-                        }
                         completionHandler(nil,data!, nil)
                     }
+                    
                 }
             case .failure(let encodingError):
                 print(encodingError)

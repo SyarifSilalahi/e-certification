@@ -94,13 +94,13 @@ struct Wording {
     static let DEACTIVATE_USER = "Maaf user anda tidak aktif. Silahkan hubungi administrator."
     
     //new wording
-    static let NEW_PASS_VALIDATION = "Harap konfirmasi kembali kata sandi baru anda."
+    static let NEW_PASS_VALIDATION = "Konfirmasi kata sandi baru anda tidak sesuai."
     static let OLD_PASS_VALIDATION = "Kata sandi anda sebelumnya tidak sesuai."
     static let OLD_SUCCESS_CHANGE_PASSWORD = "Kata sandi berhasil di ubah."
     static let ASSIGN_EXAM = "Sudah di assign"
-    static let FINISH_EXAM_CONFIRMATION = "Apakah anda yakin sudah menyelesaikan ujian dan ingin keluar?"
+    static let FINISH_EXAM_CONFIRMATION = "Apakah anda yakin untuk submit ujian?"
     static let REQ_EMAIL_FORGOT_PASS = "Silahkan masukkan email anda"
-    static let SUCCESS_REQ_FORGOT_PASS = "Permintaan lupa kata sandi anda sedang di proses. Untuk info lebih lanjut harap untuk menghubungi Administrasi"
+    static let SUCCESS_REQ_FORGOT_PASS = "Permintaan lupa kata sandi anda sedang di proses. Untuk info lebih lanjut harap untuk menghubungi Administrasi."
     
 }
 

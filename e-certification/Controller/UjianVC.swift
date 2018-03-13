@@ -402,6 +402,7 @@ extension UjianVC: UIImagePickerControllerDelegate,UINavigationControllerDelegat
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage{
+            HUD().show()
             ApiManager().getLisence { (response,failure, error) in
                 if error != nil{
                     print("error load Membership \(String(describing: error))")
@@ -455,7 +456,7 @@ extension UjianVC: UIImagePickerControllerDelegate,UINavigationControllerDelegat
                     var userSelfie:UserSelfie = UserSelfie()
                     userSelfie.deserialize(response!)
                     CustomAlert().Success(message: Wording.FINISH_EXAM_MESSAGE)
-                    
+                    HUD().hide()
                     self.dismiss(animated: true, completion: {
                         self.fotoAgain = false
                     })

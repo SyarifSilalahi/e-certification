@@ -129,8 +129,8 @@ class UjianListSoalVC: UIViewController {
             }
         }
         
-        //buat testing lulus
-        nilai = 80
+//        //buat testing lulus
+//        nilai = 80
         
         print("nilai \(nilai)")
         ApiManager().setScoreUjian(nilai: "\(nilai)") { (response,failure, error) in
@@ -315,6 +315,7 @@ extension UjianListSoalVC: UIImagePickerControllerDelegate,UINavigationControlle
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage{
 //            self.imgProfilePicture.image = pickedImage
+            HUD().show()
             ApiManager().getLisence { (response,failure, error) in
                 if error != nil{
                     print("error load Membership \(String(describing: error))")
@@ -369,6 +370,7 @@ extension UjianListSoalVC: UIImagePickerControllerDelegate,UINavigationControlle
                     var userSelfie:UserSelfie = UserSelfie()
                     userSelfie.deserialize(response!)
                     CustomAlert().Success(message: Wording.FINISH_EXAM_MESSAGE)
+                    HUD().hide()
                     self.dismiss(animated: true, completion: {
                         self.navigationController?.popViewController(animated: true)
                     })

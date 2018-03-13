@@ -38,7 +38,6 @@ class RSlideMenu: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.btnLogout.isUserInteractionEnabled = false
         ApiManager().getExamStatus(isHUD: false) { (response,failure, error) in
             if error != nil{
                 print("error getExamStatus \(String(describing: error))")
@@ -79,7 +78,6 @@ class RSlideMenu: UIViewController {
                     }
                     
                     self.tblMenu.reloadData()
-                    self.btnLogout.isUserInteractionEnabled = true
                 }
             }
         }
@@ -119,7 +117,7 @@ class RSlideMenu: UIViewController {
             Session.userChace.removeObject(forKey: Session.EMAIL)
             Session.userChace.removeObject(forKey: Session.KEY_AUTH)
             
-//            //buat test aja nanti di comment lagi
+//            //buat testing aja nanti di comment lagi
 //            Session.userChace.removeObject(forKey: Session.ID_NOTIF_READ)
 //            Session.userChace.removeObject(forKey: Session.CHECK_NEW_NOTIF)
             

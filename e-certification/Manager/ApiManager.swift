@@ -420,7 +420,9 @@ class ApiManager: NSObject {
             encoding: URLEncoding.httpBody,
             headers: header)
             .responseJSON { (response) in
-                HUD().hide()
+                if isHUD{
+                    HUD().hide()
+                }
                 switch response.result {
                 case .success(_):
                     let data = JSON(response.result.value as AnyObject?)
@@ -665,7 +667,9 @@ class ApiManager: NSObject {
             encoding: URLEncoding.httpBody,
             headers: header)
             .responseJSON { (response) in
-                HUD().hide()
+                if isHUD{
+                    HUD().hide()
+                }
                 switch response.result {
                 case .success(_):
                     let data = JSON(response.result.value as AnyObject?)
@@ -695,8 +699,10 @@ class ApiManager: NSObject {
     }
     
     //user Get Notification
-    func getLisence(completionHandler:@escaping (JSON?,JSON?, NSError?) -> ()) {
-//        HUD().show()
+    func getLisence(isHUD:Bool = false ,completionHandler:@escaping (JSON?,JSON?, NSError?) -> ()) {
+        if isHUD {
+            HUD().show()
+        }
         
         let data = JSON(Session.userChace.object(forKey: Session.KEY_AUTH) as AnyObject?)
         var dataUser = UserAuthData()
@@ -712,7 +718,9 @@ class ApiManager: NSObject {
             encoding: URLEncoding.httpBody,
             headers: header)
             .responseJSON { (response) in
-                HUD().hide()
+                if isHUD{
+                    HUD().hide()
+                }
                 switch response.result {
                 case .success(_):
                     let data = JSON(response.result.value as AnyObject?)
@@ -808,8 +816,12 @@ class ApiManager: NSObject {
         }
     }
     
-    func uploadImageSelfie(image:UIImage,imageLicense:UIImage,completionHandler:@escaping (JSON?,JSON?, NSError?) -> ()){
-//        HUD().show()
+    func uploadImageSelfie(isHUD:Bool = false ,image:UIImage,imageLicense:UIImage,completionHandler:@escaping (JSON?,JSON?, NSError?) -> ()){
+        
+        if isHUD {
+            HUD().show()
+        }
+        
         let data = JSON(Session.userChace.object(forKey: Session.KEY_AUTH) as AnyObject?)
         var dataUser = UserAuthData()
         dataUser.deserialize(data!)
@@ -835,7 +847,9 @@ class ApiManager: NSObject {
          method:.post,
          headers:header,
          encodingCompletion: { encodingResult in
-            HUD().hide()
+            if isHUD{
+                HUD().hide()
+            }
             switch encodingResult {
             case .success(let upload, _, _):
                 upload.responseJSON { response in

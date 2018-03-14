@@ -91,11 +91,12 @@ class DetailMateriVideoVC: UIViewController {
         player.pause()
         let arrGetFlags = getArrFlag(flags: videoTimeFlag)
         for i in 0..<arrGetFlags.count{
-            if (arrGetFlags[i] as NSString).doubleValue > self.player.currentDuration {
-                return (arrGetFlags[i] as NSString).doubleValue + 5
+            if (arrGetFlags[i] as NSString).doubleValue > self.player.currentDuration  {
+//                return (arrGetFlags[i] as NSString).doubleValue + 5.1
+                return (arrGetFlags[i] as NSString).doubleValue + self.player.bufferInterval
             }
         }
-        return self.player.currentDuration
+        return self.player.totalDuration
     }
     
     func getPrevFlag()->Double{
@@ -103,7 +104,8 @@ class DetailMateriVideoVC: UIViewController {
         let arrGetFlags = getArrFlag(flags: videoTimeFlag)
         for i in stride(from: arrGetFlags.count - 1, to: -1, by: -1){
             if (arrGetFlags[i] as NSString).doubleValue < self.player.currentDuration {
-                return (arrGetFlags[i] as NSString).doubleValue - 5
+//                return (arrGetFlags[i] as NSString).doubleValue - 5.1
+                return (arrGetFlags[i] as NSString).doubleValue - self.player.bufferInterval
             }
         }
         return 0
@@ -111,20 +113,22 @@ class DetailMateriVideoVC: UIViewController {
     
     @IBAction func forward(_ sender: AnyObject) {
         player.pause()
-        self.player.seekTime(self.getNextFlag())
-//        let when = DispatchTime.now() + 1 // change 2 to desired number of seconds
-//        DispatchQueue.main.asyncAfter(deadline: when) {
-//            // Your code with delay
-//        }
+        player.delegate = nil
+        let when = DispatchTime.now() + 1.5 // change 2 to desired number of seconds
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            // Your code with delay
+            self.player.seekTime(self.getNextFlag())
+        }
     }
     
     @IBAction func backward(_ sender: AnyObject) {
         player.pause()
-        self.player.seekTime(self.getPrevFlag())
-//        let when = DispatchTime.now() + 1 // change 2 to desired number of seconds
-//        DispatchQueue.main.asyncAfter(deadline: when) {
-//            // Your code with delay
-//        }
+        player.delegate = nil
+        let when = DispatchTime.now() + 1.5 // change 2 to desired number of seconds
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            // Your code with delay
+            self.player.seekTime(self.getPrevFlag())
+        }
     }
     
     @IBAction func back(_ sender: AnyObject) {

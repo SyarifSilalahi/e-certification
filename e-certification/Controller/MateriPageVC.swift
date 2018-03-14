@@ -175,8 +175,8 @@ extension MateriPageVC:UITableViewDelegate,UITableViewDataSource{
         cell.setTitle(text: "\(dataMateri.data[indexPath.row].title)", isNew: false)
         cell.lblDetail.text = dataMateri.data[indexPath.row].description
         cell.description_ = dataMateri.data[indexPath.row].description
-        
-        cell.setActions(urlPdf: "\(dataMateri.data[indexPath.row].host_file)\(dataMateri.data[indexPath.row].document)", urlVideo: "\(dataMateri.data[indexPath.row].host_file)\(dataMateri.data[indexPath.row].video)")
+        //data url nya dari api suka berubah2 jadi harus sering2 di cek buat mastiin
+        cell.setActions(urlPdf: "\(dataMateri.data[indexPath.row].host_file)/\(dataMateri.data[indexPath.row].document)", urlVideo: "\(dataMateri.data[indexPath.row].host_file)/\(dataMateri.data[indexPath.row].video)")
         cell.videoTimeFlag = dataMateri.data[indexPath.row].video_next
         cell.update = dataMateri.data[indexPath.row].updated_at
         cell.delegate = self

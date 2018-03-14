@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 //exam atatus
 //1 sudah diassign
@@ -44,12 +45,9 @@ class UjianVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.hideComponentFirst()
-        self.imagePicker.delegate = self
-        
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        
         self.getStatus()
     }
     
@@ -195,7 +193,30 @@ class UjianVC: UIViewController {
         self.imagePicker.allowsEditing = true
         self.imagePicker.sourceType = .camera
         self.imagePicker.cameraDevice = .front
-        self.present(self.imagePicker, animated: true, completion: nil)
+        self.imagePicker.delegate = self
+        if AVCaptureDevice.authorizationStatus(for: .video) ==  .authorized {
+            //already authorized
+            self.present(self.imagePicker, animated: true, completion: nil)
+        } else {
+            AVCaptureDevice.requestAccess(for: .video, completionHandler: { (granted: Bool) in
+                if granted {
+                    //access allowed
+                    self.present(self.imagePicker, animated: true, completion: nil)
+                } else {
+                    //access denied
+                    let alert = UIAlertController(
+                        title: "IMPORTANT",
+                        message: "Camera access required for capturing photos!",
+                        preferredStyle: UIAlertControllerStyle.alert
+                    )
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+                    alert.addAction(UIAlertAction(title: "Allow Camera", style: .cancel, handler: { (alert) -> Void in
+                        UIApplication.shared.openURL(URL(string: UIApplicationOpenSettingsURLString)!)
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            })
+        }
     }
     
     func getStatus(){

@@ -32,10 +32,10 @@ enum UploadFotoExam : String {
 struct Domain {
     
     // BASE URL PRODUCTION
-    //        static let URL_BASE = "http://a64f6017.ngrok.io/api" //for chat
+    static let URL_BASE = "http://156.67.218.83:8080"
     
     // BASE URL DEVELOPMENT
-    static let URL_BASE = "http://159.89.195.22:8080" //dev
+//    static let URL_BASE = "http://159.89.195.22:8080"
     
     //url product status
 //    static let URL_STATUS_APPS = "http://api.invoker.pistarlabs.id/product-status"

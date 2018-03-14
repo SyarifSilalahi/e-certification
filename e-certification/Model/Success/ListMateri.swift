@@ -39,7 +39,7 @@ struct Materi : ArrowParsable {
     
     mutating func deserialize(_ json: JSON) {
         material_id <-- json["material_id"]
-        sub_module_id <-- json["sub_module_id"]
+        sub_module_id <-- json["module_id"]
         title <-- json["title"]
         description <-- json["description"]
         video <-- json["video"]
